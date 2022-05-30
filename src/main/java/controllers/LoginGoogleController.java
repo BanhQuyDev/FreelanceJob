@@ -24,7 +24,6 @@ import users.UserDTO;
 @WebServlet(name = "LoginGoogleController", urlPatterns = {"/LoginGoogleController"})
 public class LoginGoogleController extends HttpServlet {
 
-
     private static final String ERROR = "index.jsp";
     private static final String INDEX_PAGE = "ChangeModeController";
     private static final String ADMIN_PAGE = "GetAllJob";
@@ -35,42 +34,52 @@ public class LoginGoogleController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String code = request.getParameter("code");
-            String accessToken = GoogleUtils.getToken(code);
-            GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
-            UserDTO user = new UserDTO(googleUser.getName(), googleUser.getEmail(), googleUser.getPicture());
-            UserDAO dao = new UserDAO();
             HttpSession session = request.getSession();
-            String[] email = user.getEmail().split("@");
-            if (email[1].equals("fpt.edu.vn")) {
-                boolean check = dao.checkDuplicate(user.getEmail());
-                if (check) {
-                    user = dao.getUserByEmail(user.getEmail());
-                    if (user != null) {
-                        boolean checkRole = dao.checkRole(user.getId());
-                        if (checkRole) {
-                            session.setAttribute("LOGIN_USER", user);
-                            session.setAttribute("TYPE", "admin");
-                            url = ADMIN_PAGE;
-                        } else {
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            if (loginUser != null) {
+                String type = (String) session.getAttribute("TYPE");
+                if (type.equals("admin")) {
+                    url = ADMIN_PAGE;
+                } else {
+                    url = INDEX_PAGE;
+                }
+            } else {
+                String code = request.getParameter("code");
+                String accessToken = GoogleUtils.getToken(code);
+                GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
+                UserDTO user = new UserDTO(googleUser.getName(), googleUser.getEmail(), googleUser.getPicture());
+                UserDAO dao = new UserDAO();
+                String[] email = user.getEmail().split("@");
+                if (email[1].equals("fpt.edu.vn")) {
+                    boolean check = dao.checkDuplicate(user.getEmail());
+                    if (check) {
+                        user = dao.getUserByEmail(user.getEmail());
+                        if (user != null) {
+                            boolean checkRole = dao.checkRole(user.getId());
+                            if (checkRole) {
+                                session.setAttribute("LOGIN_USER", user);
+                                session.setAttribute("TYPE", "admin");
+                                url = ADMIN_PAGE;
+                            } else {
+                                session.setAttribute("LOGIN_USER", user);
+                                session.setAttribute("TYPE", "user");
+                                session.setAttribute("MODE", "FREELANCER");
+                                url = INDEX_PAGE;
+                            }
+                        }
+                    } else {
+                        user = new UserDTO(user.getName(), user.getEmail(), user.getPicture());
+                        boolean checkCreate = dao.createUser(user);
+                        if (checkCreate) {
                             session.setAttribute("LOGIN_USER", user);
                             session.setAttribute("TYPE", "user");
-                            session.setAttribute("MODE", "FREELANCER");
                             url = INDEX_PAGE;
                         }
                     }
                 } else {
-                    user = new UserDTO(user.getName(), user.getEmail(), user.getPicture());
-                    boolean checkCreate = dao.createUser(user);
-                    if (checkCreate) {
-                        session.setAttribute("LOGIN_USER", user);
-                        session.setAttribute("TYPE", "user");
-                        url = INDEX_PAGE;
-                    }
+                    request.setAttribute("ERROR_MESSAGE", "Email must have the extension fpt.edu.vn");
+                    url = ERROR;
                 }
-            } else {
-                request.setAttribute("ERROR_MESSAGE", "Email must have the extension fpt.edu.vn");
-                url = ERROR;
             }
         } catch (Exception e) {
             log("Error at LoginGoogleController: " + e.toString());

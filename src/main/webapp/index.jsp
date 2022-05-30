@@ -50,7 +50,7 @@
                             background-position: initial;
                             background-repeat: no-repeat;
                             background-size: cover;
-                            min-height: 700px;
+                            min-height: 500px;
                             "
                             ></div>
                     </div>
