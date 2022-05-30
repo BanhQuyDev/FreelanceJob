@@ -25,6 +25,7 @@ public class JobDAO {
                                                         +"  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n" 
                                                         +"  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2";
     public static final String UPDATE_STATUS_JOB = "UPDATE tblJob SET id_status = 2 WHERE id_job = ?";
+    public static final String DELETE_JOB = "DELETE tblJob WHERE id_job = ?";
        public List<JobDTO> getAllJobProcessing() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -113,6 +114,30 @@ public class JobDAO {
                 ptm.setInt(1, idJob);
                 int value = ptm.executeUpdate();
                 result = value > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
+    }
+     public boolean deleteJob(int idJob) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_JOB);
+                ptm.setInt(1, idJob);
+                int value = ptm.executeUpdate();
+                result = value > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

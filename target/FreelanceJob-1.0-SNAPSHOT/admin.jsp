@@ -149,6 +149,20 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">To-do list to accept</h4>
+                                    <c:if test="${requestScope.SUCCESS != null}">
+                                        <div " class="alert alert-success">
+                                            <center>
+                                                <strong>Alert!</strong> ${requestScope.SUCCESS}
+                                            </center>
+                                        </div>
+                                    </c:if>
+                                     <c:if test="${requestScope.FAIL != null}">
+                                        <div " class="alert alert-danger">
+                                            <center>
+                                                <strong>Alert!</strong> ${requestScope.FAIL}
+                                            </center>
+                                        </div>
+                                    </c:if>
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
@@ -194,7 +208,7 @@
                                                                 <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Accept</button></a>
                                                             </th>
                                                             <th>
-                                                                <a><button class="btn btn-danger">Deny</button></a>
+                                                                <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Deny</button></a>
                                                             </th>
                                                         </tr>       
                                                     </c:forEach>                                                                 
@@ -282,6 +296,13 @@
                 </ul>
             </div>
         </footer>
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+        </script>
         <script src="theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
         <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
         <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>

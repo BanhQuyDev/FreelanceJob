@@ -6,7 +6,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +32,10 @@ public class AcceptJobController extends HttpServlet {
             JobDAO dao = new JobDAO();
             boolean checkAccept = dao.acceptJob(idJob); 
             if(checkAccept){
+                request.setAttribute("SUCCESS", "Acccept Successfully!!");
+                url = SUCCESS;
+            }else{
+                request.setAttribute("FAIL", "Acccept Failed!!");
                 url = SUCCESS;
             }
         } catch (Exception e) {
