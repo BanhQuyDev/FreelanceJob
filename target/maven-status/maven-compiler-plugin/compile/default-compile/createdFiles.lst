@@ -1,0 +1,13 @@
+controllers\AcceptJobController.class
+controllers\GetAllJob.class
+users\UserDTO.class
+users\UserDAO.class
+jobs\JobDAO.class
+controllers\ChangeModeController.class
+utils\DBUtils.class
+controllers\LogoutController.class
+common\Key.class
+utils\GoogleUtils.class
+controllers\LoginGoogleController.class
+users\GoogleUserDTO.class
+jobs\JobDTO.class
