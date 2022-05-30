@@ -31,13 +31,18 @@ public class ChangeModeController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             String type = request.getParameter("type");
-            if(type.equals("freelancer")){
-                session.setAttribute("MODE", "FREELANCER");
+            if (type == null) {
                 url = SUCCESS;
-            }else{
-                session.setAttribute("MODE", "EMPLOYER");
-                url = SUCCESS;
+            } else {
+                if (type.equals("freelancer")) {
+                    session.setAttribute("MODE", "FREELANCER");
+                    url = SUCCESS;
+                } else {
+                    session.setAttribute("MODE", "EMPLOYER");
+                    url = SUCCESS;
+                }
             }
+
         } catch (Exception e) {
             log("Error at ChangeModeController: " + e.toString());
         } finally {

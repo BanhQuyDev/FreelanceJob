@@ -26,7 +26,7 @@ public class LoginGoogleController extends HttpServlet {
 
 
     private static final String ERROR = "index.jsp";
-    private static final String INDEX_PAGE = "index.jsp";
+    private static final String INDEX_PAGE = "ChangeModeController";
     private static final String ADMIN_PAGE = "GetAllJob";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +35,6 @@ public class LoginGoogleController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            
             String code = request.getParameter("code");
             String accessToken = GoogleUtils.getToken(code);
             GoogleUserDTO googleUser = GoogleUtils.getUserInfo(accessToken);
@@ -56,6 +55,7 @@ public class LoginGoogleController extends HttpServlet {
                         } else {
                             session.setAttribute("LOGIN_USER", user);
                             session.setAttribute("TYPE", "user");
+                            session.setAttribute("MODE", "FREELANCER");
                             url = INDEX_PAGE;
                         }
                     }
