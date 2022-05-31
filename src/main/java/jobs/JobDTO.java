@@ -17,12 +17,30 @@ public class JobDTO {
     private double duration;
     private String startDate;
     private String status;
+    private int idEmployer;
     private String nameEmployer;
     private String idMajor;
+    private String createDate;
 
     public JobDTO() {
+        
     }
 
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String nameEmployer, String idMajor, String createDate) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.idEmployer = idEmployer;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = idMajor;
+        this.createDate = createDate;
+    }
+    
+    
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor) {
         this.idJob = idJob;
         this.title = title;
@@ -35,6 +53,30 @@ public class JobDTO {
         this.idMajor = idMajor;
     }
 
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = idMajor;
+        this.createDate = createDate;
+    }
+
+    public JobDTO(String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String idMajor) {
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.idEmployer = idEmployer;
+        this.idMajor = idMajor;
+    }
+    
     public int getIdJob() {
         return idJob;
     }
@@ -105,6 +147,22 @@ public class JobDTO {
 
     public void setIdMajor(String idMajor) {
         this.idMajor = idMajor;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public int getIdEmployer() {
+        return idEmployer;
+    }
+
+    public void setIdEmployer(int idEmployer) {
+        this.idEmployer = idEmployer;
     }
     
     

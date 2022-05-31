@@ -10,5 +10,8 @@ common\Key.class
 controllers\DenyJobController.class
 utils\GoogleUtils.class
 controllers\LoginGoogleController.class
+controllers\PostJobController.class
+majors\MajorDTO.class
 users\GoogleUserDTO.class
+majors\MajorDAO.class
 jobs\JobDTO.class

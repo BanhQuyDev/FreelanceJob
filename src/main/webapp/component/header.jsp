@@ -50,10 +50,10 @@
                                         <li><a href="index.jsp">Home</a></li>
                                             <c:choose>
                                                 <c:when test="${sessionScope.MODE == 'FREELANCER'}">
-                                                <li><a href="job_listing.jsp">Find a Jobs </a></li>
+                                                <li><a href="job_listing.jsp">Find a Jobs</a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                <li><a href="post_job.jsp">Post a Jobs </a></li>
+                                                <li><a href="PostJobController">Post a Jobs </a></li>
                                                 </c:when>
                                                 <c:otherwise>
                                                 <li><a href="job_listing.jsp">Find a Jobs </a></li>
@@ -142,9 +142,16 @@
                 </div>
             </div>
             <c:if test="${requestScope.ERROR_MESSAGE != null}">
-                <div " class="alert alert-danger">
+                <div class="alert alert-danger">
                     <center>
                         <strong>Alert!</strong> ${requestScope.ERROR_MESSAGE}
+                    </center>
+                </div>
+            </c:if>
+            <c:if test="${requestScope.SUCCESS_MESSAGE != null}">
+                <div class="alert alert-success">
+                    <center>
+                        <strong>Success!</strong> ${requestScope.SUCCESS_MESSAGE}
                     </center>
                 </div>
             </c:if>
