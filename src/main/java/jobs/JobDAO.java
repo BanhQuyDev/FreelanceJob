@@ -21,7 +21,7 @@ import utils.DBUtils;
  */
 public class JobDAO {
 
-    private static final String GET_ALL_JOB_PROCESSING = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major\n"
+    private static final String GET_ALL_JOB_PROCESSING = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major, j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1";
     private static final String GET_ALL_JOB_ACCEPTED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major\n"
@@ -56,7 +56,8 @@ public class JobDAO {
                     String status = rs.getString("status_name");
                     String fullName = rs.getString("fullname");
                     String major = rs.getString("id_major");
-                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major));
+                    String create_date = rs.getString("create_date");
+                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major, create_date));
                 }
             }
         } catch (Exception e) {
