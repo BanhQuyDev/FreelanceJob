@@ -23,49 +23,42 @@ import users.UserDTO;
  * @author Tung Nguyen
  */
 public class PostJobController extends HttpServlet {
-    private final String POST_PAGE = "post_job.jsp";
+
     private final String SUCCESS = "index.jsp";
     private final String ERROR = "index.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         HttpSession session = request.getSession();
         try {
-            List<MajorDTO> listMajor = (List<MajorDTO>) session.getAttribute("MAJOR");
-            if (listMajor == null) {
-                MajorDAO mDao = new MajorDAO();
-                listMajor = mDao.getAllMajor();
-                session.setAttribute("MAJOR", listMajor);
-                url = POST_PAGE;
+            String title = request.getParameter("title");
+            double salary = Double.parseDouble(request.getParameter("salary"));
+            double duration = Double.parseDouble(request.getParameter("duration"));
+            String major = request.getParameter("cmbMajor");
+            String description = request.getParameter("description");
+            String startDate = request.getParameter("startDate");
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            int idEmployer = user.getId();
+            JobDTO job = new JobDTO(title, salary, description, duration, startDate, "1", idEmployer, major);
+            JobDAO jDao = new JobDAO();
+            boolean check = jDao.createJob(job);
+            if (check) {
+                request.setAttribute("SUCCESS_MESSAGE", "Your post is waiting to be moderated by an administrator");
+                url = SUCCESS;
+//                session.removeAttribute("MAJOR");
             } else {
-                String title = request.getParameter("title");
-                double salary = Double.parseDouble(request.getParameter("salary"));
-                double duration = Double.parseDouble(request.getParameter("duration"));
-                String major = request.getParameter("cmbMajor");
-                String description = request.getParameter("description");
-                String startDate = request.getParameter("startDate");
-                UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-                int idEmployer = user.getId();
-                JobDTO job = new JobDTO(title, salary, description, duration, startDate, "1", idEmployer, major);
-                JobDAO jDao= new JobDAO();
-                boolean check = jDao.createJob(job);
-                if(check) {
-                    request.setAttribute("SUCCESS_MESSAGE", "Your post is waiting to be moderated by an administrator");
-                    url = SUCCESS;
-                    session.removeAttribute("MAJOR");
-                } else {
-                    request.setAttribute("ERROR_MESSAGE", "An unknown error");
-                    session.removeAttribute("MAJOR");
-                }
+                request.setAttribute("ERROR_MESSAGE", "An unknown error");
+//                session.removeAttribute("MAJOR");
             }
+
         } catch (Exception e) {
             log("Error at PostJobController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

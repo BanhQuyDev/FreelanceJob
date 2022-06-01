@@ -50,19 +50,19 @@
                                         <li><a href="index.jsp">Home</a></li>
                                             <c:choose>
                                                 <c:when test="${sessionScope.MODE == 'FREELANCER'}">
-                                                <li><a href="job_listing.jsp">Find a Jobs</a></li>
+                                                <li><a href="job_listing.jsp">Find Jobs</a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                <li><a href="PostJobController">Post a Jobs </a></li>
+                                                <li><a href="post_job.jsp">Post a Job</a></li>
                                                 </c:when>
                                                 <c:otherwise>
-                                                <li><a href="job_listing.jsp">Find a Jobs </a></li>
+                                                <li><a href="job_listing.jsp">Find Jobs</a></li>
                                                 </c:otherwise>
                                             </c:choose>
                                         <li>
                                             <a href="#">Page</a>
                                             <ul class="submenu">
-                                                <li><a href="job_details.jsp">job Details</a></li>
+                                                <li><a href="job_details.jsp">Job Details</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#">Contact</a></li>

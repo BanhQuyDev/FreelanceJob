@@ -17,23 +17,23 @@ import utils.DBUtils;
  * @author Tung Nguyen
  */
 public class MajorDAO {
-    
+
     private final String GET_ALL_MAJOR = "SELECT id_major, major_name FROM tblMajor";
-    
-    
+    private static final String GET_MAJOR_NAME = "SELECT major_name FROM tblMajor WHERE id_major = ?";
+
     public List<MajorDTO> getAllMajor() throws SQLException {
         List<MajorDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        
+
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_MAJOR);
                 rs = ptm.executeQuery();
-                while(rs.next()) {
-                    String id_major = rs.getString("id_major");
+                while (rs.next()) {
+                    String id_major = rs.getString("id_major").trim();
                     String major_name = rs.getString("major_name");
                     list.add(new MajorDTO(id_major, major_name));
                 }
@@ -45,5 +45,30 @@ public class MajorDAO {
         }
         return list;
     }
-    
+
+    public static String convertMajorName(String id) throws SQLException {
+        String major_name = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_MAJOR_NAME);
+                ptm.setString(1, id);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    major_name = rs.getString("major_name");
+                    return major_name;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        
+        return major_name;   
+    }
+
 }
