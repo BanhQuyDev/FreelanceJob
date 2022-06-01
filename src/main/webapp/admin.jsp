@@ -148,67 +148,52 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">To-do list to accept</h4>
+                                    <h4 class="card-title">List of job postings in progress</h4>
                                     <c:if test="${requestScope.SUCCESS != null}">
-                                        <div " class="alert alert-success">
+                                        <div style="margin-top: 20px" class="alert alert-success">
                                             <center>
-                                                <strong>Alert!</strong> ${requestScope.SUCCESS}
+                                                <strong>Success! </strong> ${requestScope.SUCCESS}
                                             </center>
                                         </div>
                                     </c:if>
-                                     <c:if test="${requestScope.FAIL != null}">
-                                        <div " class="alert alert-danger">
+                                    <c:if test="${requestScope.FAIL != null}">
+                                        <div style="margin-top: 20px" class="alert alert-danger">
                                             <center>
-                                                <strong>Alert!</strong> ${requestScope.FAIL}
+                                                <strong>Alert! </strong> ${requestScope.FAIL}
                                             </center>
                                         </div>
                                     </c:if>
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <p class="card-text">
-                                            Writing st here <code>.table</code>-based tables look in
-                                            Bootstrap. You can use any example of below table for your
-                                            table and it can be use with any type of bootstrap tables.
-                                        </p>
                                         <div class="table-responsive">
                                             <table class="table">
-                                                <thead>
+                                                <thead style="text-align: center">
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Title</th>
-                                                        <th>Salary</th>
-                                                        <th>Description</th>
-                                                        <th>Duration</th>
                                                         <th>Start Date</th>
-                                                        <th>Status</th>
                                                         <th>Employer</th>
-                                                        <th>Major</th>
-                                                        <th>
-                                                            Accept
-                                                        </th>
-                                                        <th>
-                                                            Deny
-                                                        </th>
+                                                        <th>Status</th>
+                                                        <th>Details</th>
+                                                        <th>Accept</th>
+                                                        <th>Deny</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody style="text-align: center">
                                                     <c:forEach var="job" items="${requestScope.LIST_JOB_PROCESSING}" varStatus="counter">
                                                         <tr>
                                                             <th scope="row">${counter.count}</th>
                                                             <th>${job.title}</th>
-                                                            <th>${job.salary}</th>
-                                                            <th>${job.description}</th>
-                                                            <th>${job.duration}</th>
                                                             <th>${job.startDate}</th>
-                                                            <th>${job.status}</th>
                                                             <th>${job.nameEmployer}</th>
-                                                            <th>${job.idMajor}</th>
+                                                            <th>${job.status}</th>
+                                                            <th><a href="RenderJobDetail?idJob=${job.idJob}">Details</a></th>
                                                             <th>
-                                                                <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Accept</button></a>
+                                                                <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success" style="margin-left: 15px">Accept</button></a>
                                                             </th>
                                                             <th>
-                                                                <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Deny</button></a>
+                                                                <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger" style="margin-left: 15px">Deny</button></a>
                                                             </th>
                                                         </tr>       
                                                     </c:forEach>                                                                 
@@ -227,16 +212,9 @@
                                     <h4 class="card-title">Available Job</h4>
                                 </div>
                                 <div class="card-content collapse show">
-                                    <div class="card-body">
-                                        <p>Similar to default and inverse tables, use one of two modifier classes <code
-                                                class="highlighter-rouge">.thead-default</code> or <code
-                                                class="highlighter-rouge">.thead-inverse</code> to make <code
-                                                class="highlighter-rouge">&lt;thead&gt;</code>s appear light or dark gray.
-                                        </p>
-                                    </div>
                                     <div class="table-responsive">
                                         <table class="table">
-                                            <thead class="thead-dark">
+                                            <thead style="text-align: center" class="thead-dark">
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Title</th>
@@ -251,7 +229,7 @@
                                             </thead>
                                             <tbody>
                                                 <c:forEach var="job" items="${requestScope.LIST_JOB_ACCEPTED}" varStatus="counter">
-                                                    <tr>
+                                                    <tr style="text-align: center">
                                                         <th scope="row">${counter.count}</th>
                                                         <th>${job.title}</th>
                                                         <th>${job.salary}</th>
