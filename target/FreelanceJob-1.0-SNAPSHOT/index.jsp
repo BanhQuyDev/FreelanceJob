@@ -4,6 +4,7 @@
     Author     : QUANG HUY
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -50,7 +51,7 @@
                             background-position: initial;
                             background-repeat: no-repeat;
                             background-size: cover;
-                            min-height: 700px;
+                            min-height: 500px;
                             "
                             ></div>
                     </div>
@@ -69,217 +70,207 @@
                             </div>
                         </div>
                         <div class="row d-flex justify-contnet-center">
+                        <c:forEach var="major" items="${requestScope.LIST_MAJOR}">
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-tour"></span>
-                                    </div>
+                                    <c:choose>
+                                        <c:when test="${major.id == 'AI'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-microchip-ai"></i></span>
+                                            </div>
+                                        </c:when>
+
+                                        <c:when test="${major.id == 'EN'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-microchip-ai"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${major.id == 'GD'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-microchip-ai"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${major.id == 'IA'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-house-lock"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${major.id == 'IB'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-microchip-ai"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${major.id == 'JP'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-microchip-ai"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${major.id == 'MC'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-users"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${major.id == 'MK'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-microchip-ai"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${major.id == 'SE'}"> 
+                                            <div class="services-ion">
+                                                <span><i class="fa-solid fa-computer"></i></span>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="services-ion">
+                                                <!--<span><i class="fa-solid fa-computer"></i></span>-->
+                                                <span class="flaticon-cms"></span>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                     <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Design & Creative</a></h5>
-                                        <span>(653)</span>
+                                        <h5><a href="job_listing.jsp">${major.id}</a></h5>
+                                        <span>${major.name}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-cms"></span>
-                                    </div>
-                                    <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Design & Development</a></h5>
-                                        <span>(658)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-report"></span>
-                                    </div>
-                                    <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Sales & Marketing</a></h5>
-                                        <span>(658)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-app"></span>
-                                    </div>
-                                    <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Mobile Application</a></h5>
-                                        <span>(658)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-helmet"></span>
-                                    </div>
-                                    <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Construction</a></h5>
-                                        <span>(658)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-high-tech"></span>
-                                    </div>
-                                    <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Information Technology</a></h5>
-                                        <span>(658)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-real-estate"></span>
-                                    </div>
-                                    <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Real Estate</a></h5>
-                                        <span>(658)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                                <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                        <span class="flaticon-content"></span>
-                                    </div>
-                                    <div class="services-cap">
-                                        <h5><a href="job_listing.jsp">Content Writer</a></h5>
-                                        <span>(658)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- More Btn -->
-                        <!-- Section Button -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="browse-btn2 text-center mt-50">
-                                    <a href="job_listing.jsp" class="border-btn2"
-                                       >Browse All Sectors</a
-                                    >
-                                </div>
+                        </c:forEach>
+                        <!--                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="single-services text-center mb-30">
+                                                            <div class="services-ion">
+                                                                <span class="flaticon-cms"></span>
+                                                            </div>
+                                                            <div class="services-cap">
+                                                                <h5><a href="job_listing.jsp">Design & Development</a></h5>
+                                                                <span>(658)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="single-services text-center mb-30">
+                                                            <div class="services-ion">
+                                                                <span class="flaticon-report"></span>
+                                                            </div>
+                                                            <div class="services-cap">
+                                                                <h5><a href="job_listing.jsp">Sales & Marketing</a></h5>
+                                                                <span>(658)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="single-services text-center mb-30">
+                                                            <div class="services-ion">
+                                                                <span class="flaticon-app"></span>
+                                                            </div>
+                                                            <div class="services-cap">
+                                                                <h5><a href="job_listing.jsp">Mobile Application</a></h5>
+                                                                <span>(658)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="single-services text-center mb-30">
+                                                            <div class="services-ion">
+                                                                <span class="flaticon-helmet"></span>
+                                                            </div>
+                                                            <div class="services-cap">
+                                                                <h5><a href="job_listing.jsp">Construction</a></h5>
+                                                                <span>(658)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="single-services text-center mb-30">
+                                                            <div class="services-ion">
+                                                                <span class="flaticon-high-tech"></span>
+                                                            </div>
+                                                            <div class="services-cap">
+                                                                <h5><a href="job_listing.jsp">Information Technology</a></h5>
+                                                                <span>(658)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="single-services text-center mb-30">
+                                                            <div class="services-ion">
+                                                                <span class="flaticon-real-estate"></span>
+                                                            </div>
+                                                            <div class="services-cap">
+                                                                <h5><a href="job_listing.jsp">Real Estate</a></h5>
+                                                                <span>(658)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="single-services text-center mb-30">
+                                                            <div class="services-ion">
+                                                                <span class="flaticon-content"></span>
+                                                            </div>
+                                                            <div class="services-cap">
+                                                                <h5><a href="job_listing.jsp">Content Writer</a></h5>
+                                                                <span>(658)</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
+                    </div>
+                    <!-- More Btn -->
+                    <!-- Section Button -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="browse-btn2 text-center mt-50">
+                                <a href="job_listing.jsp" class="border-btn2"
+                                   >Browse All Sectors</a
+                                >
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Our Services End -->
-                <!-- Featured_job_start -->
-                <section class="featured-job-area feature-padding">
-                    <div class="container">
-                        <!-- Section Tittle -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-tittle text-center">
-                                    <span>Recent Job</span>
-                                    <h2>Featured Jobs</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-xl-10">
-                                <!-- single-job-content -->
-                                <div class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="company-img">
-                                            <a href="job_details.jsp"
-                                               ><img src="assets/img/icon/job-list1.png" alt=""
-                                                  /></a>
-                                        </div>
-                                        <div class="job-tittle">
-                                            <a href="job_details.jsp"><h4>Name Job</h4></a>
-                                            <ul>
-                                                <li>Name Employer</li>
-                                                <li><i class="fa-solid fa-business-time"></i>Duration</li>
-                                                <li>$4000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="items-link f-right">
-                                        <a href="job_details.jsp">Apply</a>
-                                        <span>7 hours ago</span>
-                                    </div>
-                                </div>
-                                <!-- single-job-content -->
-                                <div class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="company-img">
-                                            <a href="job_details.jsp"
-                                               ><img src="assets/img/icon/job-list2.png" alt=""
-                                                  /></a>
-                                        </div>
-                                        <div class="job-tittle">
-                                            <a href="job_details.jsp"><h4>Name Job</h4></a>
-                                            <ul>
-                                                <li>Name Employer</li>
-                                                <li><i class="fa-solid fa-business-time"></i>Duration</li>
-                                                <li>$4000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="items-link f-right">
-                                        <a href="job_details.jsp">Apply</a>
-                                        <span>7 hours ago</span>
-                                    </div>
-                                </div>
-                                <!-- single-job-content -->
-                                <div class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="company-img">
-                                            <a href="job_details.jsp"
-                                               ><img src="assets/img/icon/job-list3.png" alt=""
-                                                  /></a>
-                                        </div>
-                                        <div class="job-tittle">
-                                            <a href="job_details.jsp"><h4>Name Job</h4></a>
-                                            <ul>
-                                                <li>Name Employer</li>
-                                                <li><i class="fa-solid fa-business-time"></i>Duration</li>
-                                                <li>$4000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="items-link f-right">
-                                        <a href="job_details.jsp">Apply</a>
-                                        <span>7 hours ago</span>
-                                    </div>
-                                </div>
-                                <!-- single-job-content -->
-                                <div class="single-job-items mb-30">
-                                    <div class="job-items">
-                                        <div class="company-img">
-                                            <a href="job_details.jsp"
-                                               ><img src="assets/img/icon/job-list4.png" alt=""
-                                                  /></a>
-                                        </div>
-                                        <div class="job-tittle">
-                                            <a href="job_details.jsp"><h4>Name Job</h4></a>
-                                            <ul>
-                                                <li>Name Employer</li>
-                                                <li><i class="fa-solid fa-business-time"></i>Duration</li>
-                                                <li>$4000</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="items-link f-right">
-                                        <a href="job_details.jsp">Apply</a>
-                                        <span>7 hours ago</span>
-                                    </div>
-                                </div>
+            </div>
+            <!-- Our Services End -->
+            <!-- Featured_job_start -->
+            <section class="featured-job-area feature-padding">
+                <div class="container">
+                    <!-- Section Tittle -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-tittle text-center">
+                                <span>Recent Job</span>
+                                <h2>Featured Jobs</h2>
                             </div>
                         </div>
                     </div>
-                </section>
-                <!-- Featured_job_end -->
-            </main>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-10">
+                            <!-- single-job-content -->
+                            <c:forEach var="job" items="${requestScope.LIST_TOP_4_LATEST_JOB}">                    
+                                <div class="single-job-items mb-30">
+                                    <div class="job-items">
+                                        <div class="company-img">
+                                            <a href="job_details.jsp"
+                                               ><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""
+                                                  /></a>
+                                        </div>
+                                        <div class="job-tittle">
+                                            <a href="job_details.jsp"><h4>${job.title}</h4></a>
+                                            <ul>
+                                                <li>${job.nameEmployer}</li>
+                                                <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
+                                                <li>${job.salary}$</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="items-link f-right">
+                                        <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                        <span>CREATE DATE : ${job.createDate}</span>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Featured_job_end -->
+        </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->

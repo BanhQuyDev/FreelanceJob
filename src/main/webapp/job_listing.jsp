@@ -4,6 +4,7 @@
     Author     : QUANG HUY
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -74,235 +75,233 @@
                                 <!-- Job Category Listing start -->
                                 <div class="job-category-listing mb-50">
                                     <!-- single one -->
-                                    <div class="single-listing">
-                                        <div class="small-section-tittle2">
-                                            <h4>Job Category</h4>
-                                        </div>
-                                        <!-- Select job items start -->
-                                        <div class="select-job-items2">
-                                            <select name="select">
-                                                <option value="">All Category</option>
-                                                <option value="">Category 1</option>
-                                                <option value="">Category 2</option>
-                                                <option value="">Category 3</option>
-                                                <option value="">Category 4</option>
-                                            </select>
-                                        </div>
+                                    <form action="JobListingController" method="GET">
+                                        <div class="single-listing">
+                                            <div class="small-section-tittle2">
+                                                <!--                                                <button style="padding: 20px; margin-left: 60%; border-radius: 8px" class="btn btn-info" type="submit">Filter</button>-->
+                                                <h4>By Major</h4>
+                                            </div>
+                                            <!-- Select job items start -->
+                                            <select name="selectedMajor" onchange="this.form.submit()">
+                                            <%--<c:choose>--%>
+                                                <%--<c:when test="${!empty requestScope.SELECTED_MAJOR}">--%>
+                                                    <option value="All">All Major</option>
+                                                <%--</c:when>--%>
+                                                <%--<c:otherwise>--%>
+                                                    <!--<option value="${requestScope.SELECTED_MAJOR}">${requestScope.SELECTED_MAJOR}</option>-->
+                                                <%--</c:otherwise>--%>
+                                            <%--</c:choose>--%>
+                                            <c:forEach var="major" items="${requestScope.LIST_MAJOR}">
+                                                <option value="${major.id.trim()}">${major.id}</option>
+                                            </c:forEach>
+                                        </select>
+
                                         <!--  Select job items End-->   
                                     </div>
-                                    <!-- single three -->
-                                </div>
-                                <!-- Job Category Listing End -->
+                                </form>
                             </div>
-                            <!-- Right content -->
-                            <div class="col-xl-9 col-lg-9 col-md-8">
-                                <!-- Featured_job_start -->
-                                <section class="featured-job-area">
-                                    <div class="container">
-                                        <!-- Count of Job list Start -->
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="count-job mb-35">
-                                                    <span>39, 782 Jobs found</span>
-                                                    <!-- Select job items start -->
-                                                    <div class="select-job-items">
-                                                        <span>Sort by</span>
-                                                        <select name="select">
-                                                            <option value="">None</option>
-                                                            <option value="">job list</option>
-                                                            <option value="">job list</option>
-                                                            <option value="">job list</option>
-                                                        </select>
-                                                    </div>
-                                                    <!--  Select job items End-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Count of Job list End -->
-                                        <!-- single-job-content -->
-                                        <div class="single-job-items mb-30">
-                                            <div class="job-items">
-                                                <div class="company-img">
-                                                    <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
-                                                </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="#">
-                                                        <h4>Digital Marketer</h4>
-                                                    </a>
-                                                    <ul>
-                                                        <li>Creative Agency</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                        <li>$3500 - $4000</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="job_details.jsp">Apply</a>
-                                                <span>7 hours ago</span>
-                                            </div>
-                                        </div>
-                                        <!-- single-job-content -->
-                                        <div class="single-job-items mb-30">
-                                            <div class="job-items">
-                                                <div class="company-img">
-                                                    <a href="#"><img src="assets/img/icon/job-list2.png" alt=""></a>
-                                                </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="#">
-                                                        <h4>Digital Marketer</h4>
-                                                    </a>
-                                                    <ul>
-                                                        <li>Creative Agency</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                        <li>$3500 - $4000</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="job_details.jsp">Apply</a>
-                                                <span>7 hours ago</span>
-                                            </div>
-                                        </div>
-                                        <!-- single-job-content -->
-                                        <div class="single-job-items mb-30">
-                                            <div class="job-items">
-                                                <div class="company-img">
-                                                    <a href="#"><img src="assets/img/icon/job-list3.png" alt=""></a>
-                                                </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="#">
-                                                        <h4>Digital Marketer</h4>
-                                                    </a>
-                                                    <ul>
-                                                        <li>Creative Agency</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                        <li>$3500 - $4000</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="job_details.jsp">Apply</a>
-                                                <span>7 hours ago</span>
-                                            </div>
-                                        </div>
-                                        <!-- single-job-content -->
-                                        <div class="single-job-items mb-30">
-                                            <div class="job-items">
-                                                <div class="company-img">
-                                                    <a href="#"><img src="assets/img/icon/job-list4.png" alt=""></a>
-                                                </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="#">
-                                                        <h4>Digital Marketer</h4>
-                                                    </a>
-                                                    <ul>
-                                                        <li>Creative Agency</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                        <li>$3500 - $4000</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="job_details.jsp">Apply</a>
-                                                <span>7 hours ago</span>
-                                            </div>
-                                        </div>
-                                        <!-- single-job-content -->
-                                        <div class="single-job-items mb-30">
-                                            <div class="job-items">
-                                                <div class="company-img">
-                                                    <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
-                                                </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="#">
-                                                        <h4>Digital Marketer</h4>
-                                                    </a>
-                                                    <ul>
-                                                        <li>Creative Agency</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                        <li>$3500 - $4000</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="job_details.jsp">Apply</a>
-                                                <span>7 hours ago</span>
-                                            </div>
-                                        </div>
-                                        <!-- single-job-content -->
-                                        <div class="single-job-items mb-30">
-                                            <div class="job-items">
-                                                <div class="company-img">
-                                                    <a href="#"><img src="assets/img/icon/job-list3.png" alt=""></a>
-                                                </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="#">
-                                                        <h4>Digital Marketer</h4>
-                                                    </a>
-                                                    <ul>
-                                                        <li>Creative Agency</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                        <li>$3500 - $4000</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="job_details.jsp">Apply</a>
-                                                <span>7 hours ago</span>
-                                            </div>
-                                        </div>
-                                        <!-- single-job-content -->
-                                        <div class="single-job-items mb-30">
-                                            <div class="job-items">
-                                                <div class="company-img">
-                                                    <a href="#"><img src="assets/img/icon/job-list4.png" alt=""></a>
-                                                </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="#">
-                                                        <h4>Digital Marketer</h4>
-                                                    </a>
-                                                    <ul>
-                                                        <li>Creative Agency</li>
-                                                        <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                        <li>$3500 - $4000</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="items-link items-link2 f-right">
-                                                <a href="job_details.jsp">Apply</a>
-                                                <span>7 hours ago</span>
+                            <!-- Job Category Listing End -->
+                        </div>
+                        <!-- Right content -->
+                        <div class="col-xl-9 col-lg-9 col-md-8">
+                            <!-- Featured_job_start -->
+                            <section class="featured-job-area">
+                                <div class="container">
+                                    <!-- Count of Job list Start -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="count-job mb-35 font-weight-bold text-monospace">
+                                                <span>${requestScope.LIST_JOB.size()} Job(s) found</span>
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                                <!-- Featured_job_end -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Job List Area End -->
-                <!--Pagination Start  -->
-                <div class="pagination-area pb-115 text-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="single-wrap d-flex justify-content-center">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-start">
-                                            <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
-                                        </ul>
-                                    </nav>
+                                    <!-- Count of Job list End -->
+                                    <!-- single-job-content -->
+                                    <c:forEach var="job" items="${requestScope.LIST_JOB}">
+                                        <div class="single-job-items mb-30">
+                                            <div class="job-items">
+                                                <div class="company-img">
+                                                    <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""/></a>
+                                                </div>
+                                                <div class="job-tittle job-tittle2">
+                                                    <a href="#">
+                                                        <h4>${job.title}</h4>
+                                                    </a>
+                                                    <ul>
+                                                        <li>${job.nameEmployer}</li>
+                                                        <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
+                                                        <li>${job.salary}$</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="items-link items-link2 f-right">
+                                                <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                                <span>CREATE DATE : ${job.createDate}</span>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                    <!--                                         single-job-content 
+                                                                            <div class="single-job-items mb-30">
+                                                                                <div class="job-items">
+                                                                                    <div class="company-img">
+                                                                                        <a href="#"><img src="assets/img/icon/job-list2.png" alt=""></a>
+                                                                                    </div>
+                                                                                    <div class="job-tittle job-tittle2">
+                                                                                        <a href="#">
+                                                                                            <h4>Digital Marketer</h4>
+                                                                                        </a>
+                                                                                        <ul>
+                                                                                            <li>Creative Agency</li>
+                                                                                            <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
+                                                                                            <li>$3500 - $4000</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="items-link items-link2 f-right">
+                                                                                    <a href="job_details.jsp">Apply</a>
+                                                                                    <span>7 hours ago</span>
+                                                                                </div>
+                                                                            </div>
+                                                                             single-job-content 
+                                                                            <div class="single-job-items mb-30">
+                                                                                <div class="job-items">
+                                                                                    <div class="company-img">
+                                                                                        <a href="#"><img src="assets/img/icon/job-list3.png" alt=""></a>
+                                                                                    </div>
+                                                                                    <div class="job-tittle job-tittle2">
+                                                                                        <a href="#">
+                                                                                            <h4>Digital Marketer</h4>
+                                                                                        </a>
+                                                                                        <ul>
+                                                                                            <li>Creative Agency</li>
+                                                                                            <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
+                                                                                            <li>$3500 - $4000</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="items-link items-link2 f-right">
+                                                                                    <a href="job_details.jsp">Apply</a>
+                                                                                    <span>7 hours ago</span>
+                                                                                </div>
+                                                                            </div>
+                                                                             single-job-content 
+                                                                            <div class="single-job-items mb-30">
+                                                                                <div class="job-items">
+                                                                                    <div class="company-img">
+                                                                                        <a href="#"><img src="assets/img/icon/job-list4.png" alt=""></a>
+                                                                                    </div>
+                                                                                    <div class="job-tittle job-tittle2">
+                                                                                        <a href="#">
+                                                                                            <h4>Digital Marketer</h4>
+                                                                                        </a>
+                                                                                        <ul>
+                                                                                            <li>Creative Agency</li>
+                                                                                            <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
+                                                                                            <li>$3500 - $4000</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="items-link items-link2 f-right">
+                                                                                    <a href="job_details.jsp">Apply</a>
+                                                                                    <span>7 hours ago</span>
+                                                                                </div>
+                                                                            </div>
+                                                                             single-job-content 
+                                                                            <div class="single-job-items mb-30">
+                                                                                <div class="job-items">
+                                                                                    <div class="company-img">
+                                                                                        <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
+                                                                                    </div>
+                                                                                    <div class="job-tittle job-tittle2">
+                                                                                        <a href="#">
+                                                                                            <h4>Digital Marketer</h4>
+                                                                                        </a>
+                                                                                        <ul>
+                                                                                            <li>Creative Agency</li>
+                                                                                            <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
+                                                                                            <li>$3500 - $4000</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="items-link items-link2 f-right">
+                                                                                    <a href="job_details.jsp">Apply</a>
+                                                                                    <span>7 hours ago</span>
+                                                                                </div>
+                                                                            </div>
+                                                                             single-job-content 
+                                                                            <div class="single-job-items mb-30">
+                                                                                <div class="job-items">
+                                                                                    <div class="company-img">
+                                                                                        <a href="#"><img src="assets/img/icon/job-list3.png" alt=""></a>
+                                                                                    </div>
+                                                                                    <div class="job-tittle job-tittle2">
+                                                                                        <a href="#">
+                                                                                            <h4>Digital Marketer</h4>
+                                                                                        </a>
+                                                                                        <ul>
+                                                                                            <li>Creative Agency</li>
+                                                                                            <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
+                                                                                            <li>$3500 - $4000</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="items-link items-link2 f-right">
+                                                                                    <a href="job_details.jsp">Apply</a>
+                                                                                    <span>7 hours ago</span>
+                                                                                </div>
+                                                                            </div>
+                                                                             single-job-content 
+                                                                            <div class="single-job-items mb-30">
+                                                                                <div class="job-items">
+                                                                                    <div class="company-img">
+                                                                                        <a href="#"><img src="assets/img/icon/job-list4.png" alt=""></a>
+                                                                                    </div>
+                                                                                    <div class="job-tittle job-tittle2">
+                                                                                        <a href="#">
+                                                                                            <h4>Digital Marketer</h4>
+                                                                                        </a>
+                                                                                        <ul>
+                                                                                            <li>Creative Agency</li>
+                                                                                            <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
+                                                                                            <li>$3500 - $4000</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="items-link items-link2 f-right">
+                                                                                    <a href="job_details.jsp">Apply</a>
+                                                                                    <span>7 hours ago</span>
+                                                                                </div>
+                                                                            </div>-->
                                 </div>
+                            </section>
+                            <!-- Featured_job_end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Job List Area End -->
+            <!--Pagination Start  -->
+            <div class="pagination-area pb-115 text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="single-wrap d-flex justify-content-center">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-start">
+                                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                        <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--Pagination End  -->
+            </div>
+            <!--Pagination End  -->
 
-            </main>
+        </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
