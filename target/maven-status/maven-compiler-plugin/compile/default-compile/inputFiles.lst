@@ -11,7 +11,10 @@ D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\users\GoogleUserDTO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\utils\GoogleUtils.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\jobs\JobDAO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\majors\MajorDAO.java
+D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\home\HomeController.java
+D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\home\JobDetailController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\utils\DBUtils.java
+D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\home\JobListingController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\GetAllJob.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\LoginGoogleController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\ChangeModeController.java

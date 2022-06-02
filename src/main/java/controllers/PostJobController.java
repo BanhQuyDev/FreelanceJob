@@ -24,8 +24,8 @@ import users.UserDTO;
  */
 public class PostJobController extends HttpServlet {
 
-    private final String SUCCESS = "index.jsp";
-    private final String ERROR = "index.jsp";
+    private final String SUCCESS = "HomeController";
+    private final String ERROR = "HomeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

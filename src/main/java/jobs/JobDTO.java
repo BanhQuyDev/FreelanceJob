@@ -10,6 +10,7 @@ package jobs;
  * @author QUANG HUY
  */
 public class JobDTO {
+
     private int idJob;
     private String title;
     private double salary;
@@ -25,7 +26,7 @@ public class JobDTO {
     public JobDTO() {
         
     }
-
+   
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String nameEmployer, String idMajor, String createDate) {
         this.idJob = idJob;
         this.title = title;
@@ -40,7 +41,7 @@ public class JobDTO {
         this.createDate = createDate;
     }
     
-    
+
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor) {
         this.idJob = idJob;
         this.title = title;
@@ -52,7 +53,6 @@ public class JobDTO {
         this.nameEmployer = nameEmployer;
         this.idMajor = idMajor;
     }
-
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate) {
         this.idJob = idJob;
         this.title = title;
@@ -164,7 +164,4 @@ public class JobDTO {
     public void setIdEmployer(int idEmployer) {
         this.idEmployer = idEmployer;
     }
-    
-    
-    
 }

@@ -14,20 +14,23 @@ import utils.DBUtils;
 
 /**
  *
- * @author Tung Nguyen
+ * <<<<<<< HEAD @a
+ *
+ *
+ * uthor Tung Nguyen
  */
 public class MajorDAO {
 
     private final String GET_ALL_MAJOR = "SELECT id_major, major_name FROM tblMajor";
     private static final String GET_MAJOR_NAME = "SELECT major_name FROM tblMajor WHERE id_major = ?";
 
-    public List<MajorDTO> getAllMajor() throws SQLException {
+       public List<MajorDTO> getAllMajor() throws SQLException {
         List<MajorDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
 
-        try {
+           try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_MAJOR);
@@ -44,6 +47,29 @@ public class MajorDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
+    }
+    public List<MajorDTO> getAllMajorList() throws SQLException {
+        List<MajorDTO> majorList = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_MAJOR);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String majorId = rs.getString("id_major");
+                    String majorName = rs.getString("major_name");
+                    majorList.add(new MajorDTO(majorId, majorName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return majorList;
     }
 
     public static String convertMajorName(String id) throws SQLException {
@@ -67,8 +93,8 @@ public class MajorDAO {
         } finally {
             DBUtils.closeConnection(conn, ptm, rs);
         }
-        
-        return major_name;   
+
+        return major_name;
     }
 
 }

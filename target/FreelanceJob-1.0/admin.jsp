@@ -185,7 +185,7 @@
                                                     <c:forEach var="job" items="${requestScope.LIST_JOB_PROCESSING}" varStatus="counter">
                                                         <tr>
                                                             <th scope="row">${counter.count}</th>
-                                                            <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</th>
+                                                            <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a></th>
                                                             <th>${job.nameEmployer}</th>
                                                             <th>${job.startDate}</th>
                                                             <th>${job.createDate}</th>

@@ -24,7 +24,7 @@ import users.UserDTO;
 @WebServlet(name = "LoginGoogleController", urlPatterns = {"/LoginGoogleController"})
 public class LoginGoogleController extends HttpServlet {
 
-    private static final String ERROR = "index.jsp";
+    private static final String ERROR = "HomeController";
     private static final String INDEX_PAGE = "ChangeModeController";
     private static final String ADMIN_PAGE = "GetAllJob";
 

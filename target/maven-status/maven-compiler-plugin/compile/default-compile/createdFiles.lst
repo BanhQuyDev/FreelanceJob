@@ -1,5 +1,8 @@
 controllers\AcceptJobController.class
 controllers\GetAllJob.class
+home\JobListingController.class
+home\JobDetailController.class
+home\HomeController.class
 controllers\RenderJobDetail.class
 users\UserDTO.class
 users\UserDAO.class
