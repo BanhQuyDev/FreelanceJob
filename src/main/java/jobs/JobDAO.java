@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import majors.MajorDAO;
-import org.apache.http.client.utils.DateUtils;
 import utils.DBUtils;
 
 /**
@@ -63,15 +62,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return listJob;
     }
@@ -102,15 +93,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return listJob;
     }
@@ -143,15 +126,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return job;
     }
@@ -171,12 +146,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+           DBUtils.closeConnection(conn, ptm);
         }
         return result;
     }
@@ -196,12 +166,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+           DBUtils.closeConnection(conn, ptm);
         }
         return result;
     }
