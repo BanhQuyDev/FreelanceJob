@@ -4,10 +4,7 @@
  */
 package majors;
 
-/**
- *
- * @author Tung Nguyen
- */
+
 public class MajorDTO {
     
     private String id_major;
@@ -36,6 +33,4 @@ public class MajorDTO {
     public void setMajor_name(String major_name) {
         this.major_name = major_name;
     }
-    
-    
 }

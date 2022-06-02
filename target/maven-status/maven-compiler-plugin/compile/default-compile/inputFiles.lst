@@ -1,7 +1,10 @@
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\majors\MajorDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\GoogleUserDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\RenderJobDetail.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobDetailController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobListingController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\majors\MajorDTO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\HomeController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\DenyJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LogoutController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\PostJobController.java
