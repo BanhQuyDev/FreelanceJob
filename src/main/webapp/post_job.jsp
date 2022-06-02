@@ -1,17 +1,18 @@
-<%-- 
-    Document   : post_job
-    Created on : May 28, 2022, 10:43:04 AM
-    Author     : QUANG HUY
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Freelance Job</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Post Job</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="site.webmanifest" />
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/favicon.ico"
+            />
 
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -27,145 +28,118 @@
         <link rel="stylesheet" href="assets/css/nice-select.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
         <!--<link rel="stylesheet" href="assets/css/editlogin.css" />-->
+
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
             <section class="site-section">
                 <div class="container">
-                    <div class="row align-items-center mb-5">
-                        <div class="col-lg-8 mb-4 mb-lg-0">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h2>Post A Job</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="#" class="btn btn-block btn-light btn-md"
-                                       ><span class="icon-open_in_new mr-2"></span>Preview</a
-                                    >
-                                </div>
-                                <div class="col-6">
-                                    <a href="#" class="btn btn-block btn-primary btn-md"
-                                       >Save Job</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row mb-5">
                         <div class="col-lg-12">
-                            <form class="p-4 p-md-5 border rounded" method="post">
-                                <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
-
-                                <div class="form-group">
-                                    <label for="company-website-tw d-block"
-                                           >Upload Featured Image</label
-                                    >
-                                    <br />
-                                    <label class="btn btn-primary btn-md btn-file">
-                                        Browse File<input type="file" hidden />
-                                    </label>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="email"
-                                        placeholder="you@yourdomain.com"
-                                        />
-                                </div>
+                            <form action="PostJobController" class="p-4 p-md-5 border rounded" method="post" >
+                                <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">POST JOB FORM</h3>
                                 <div class="form-group">
                                     <label for="job-title">Job Title</label>
                                     <input
                                         type="text"
+                                        name="title"
+                                        class="form-control"
+                                        id="tile"
+                                        placeholder="Title"
+                                        required=""
+                                        />
+                                </div>
+                                <div class="form-group">
+                                    <label for="job-title">Price</label>
+                                    <input
+                                        type="number"
+                                        name="salary"
                                         class="form-control"
                                         id="job-title"
-                                        placeholder="Product Designer"
+                                        placeholder="1.000.000"
+                                        min="100000"
+                                        title="The price of project must be greater than 100.000 VN?"
+                                        required=""
                                         />
                                 </div>
                                 <div class="form-group">
-                                    <label for="job-location">Location</label>
+                                    <label for="job-location">Duration (by day)</label>
                                     <input
-                                        type="text"
+                                        type="number"
+                                        name="duration"
                                         class="form-control"
                                         id="job-location"
-                                        placeholder="e.g. New York"
+                                        placeholder="Duration"
+                                        required="Duration must be greater than 1 day"
+                                        min="1"
                                         />
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="job-region">Job Region</label>
-                                    <select
-                                        class="selectpicker border rounded"
-                                        id="job-region"
-                                        data-style="btn-black"
-                                        data-width="100%"
-                                        data-live-search="true"
-                                        title="Select Region"
-                                        >
-                                        <option>Anywhere</option>
-                                        <option>San Francisco</option>
-                                        <option>Palo Alto</option>
-                                        <option>New York</option>
-                                        <option>Manhattan</option>
-                                        <option>Ontario</option>
-                                        <option>Toronto</option>
-                                        <option>Kansas</option>
-                                        <option>Mountain View</option>
-                                    </select>
-                                </div>
+                                    <label for="job-region">Major</label>
+                                <c:set var="major" value="${sessionScope.MAJOR}"/>
+                                <select
+                                    class="form-select border rounded"
+                                    name="cmbMajor";
+                                    id="job-region"
+                                    data-style="btn-black"
+                                    data-width="100%"
+                                    data-live-search="true"
+                                    >
+                                    <c:forEach var="item" items="${major}">
+                                        <option value="${item.id_major}">${item.major_name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="job-type">Job Type</label>
-                                    <select
-                                        class="selectpicker border rounded"
-                                        id="job-type"
-                                        data-style="btn-black"
-                                        data-width="100%"
-                                        data-live-search="true"
-                                        title="Select Job Type"
-                                        >
-                                        <option>Part Time</option>
-                                        <option>Full Time</option>
-                                    </select>
-                                </div>
+                            <div style="margin-top: 6%" class="form-group">
+                                <label for="description">Job Description</label>
+                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="job-description">Job Description</label>
-                                    <div class="editor" id="editor-1">
-                                        <p>Write Job Description!</p>
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input type="date" name="startDate" class="form-control" id="date_picker" placeholder="Start Date" required="">
+                            </div>
+
+                            <div style="margin-top: 20px" class="row align-items-center mb-5">
+                                <div class="col-lg-4 ml-auto">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="index.jsp" class="btn btn-block btn-light btn-md"
+                                               ><span class="icon-open_in_new mr-2"></span>Back</a
+                                            >
+                                        </div>
+                                        <div class="col-6">
+                                            <input 
+                                                type="submit" 
+                                                class="btn btn-block btn-primary btn-md" 
+                                                value="Save Job"
+                                                />
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-lg-4 ml-auto">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="#" class="btn btn-block btn-light btn-md"
-                                       ><span class="icon-open_in_new mr-2"></span>Preview</a
-                                    >
-                                </div>
-                                <div class="col-6">
-                                    <a href="#" class="btn btn-block btn-primary btn-md"
-                                       >Save Job</a
-                                    >
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
         <jsp:include page="component/footer.jsp"></jsp:include>
 
-               <script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+        <script language="javascript">
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
+            $('#date_picker').attr('min', today);
+        </script>
+        <script>
             window.setTimeout(function () {
                 $(".alert").fadeTo(400, 0).slideUp(400, function () {
                     $(this).remove();

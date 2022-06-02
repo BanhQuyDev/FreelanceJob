@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import majors.MajorDAO;
+import org.apache.http.client.utils.DateUtils;
 import utils.DBUtils;
 
 /**
@@ -18,15 +20,23 @@ import utils.DBUtils;
  * @author QUANG HUY
  */
 public class JobDAO {
-    public static final String GET_ALL_JOB_PROCESSING = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major\n" 
-                                                        +"  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n" 
-                                                        +"  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1";
-     public static final String GET_ALL_JOB_ACCEPTED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major\n" 
-                                                        +"  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n" 
-                                                        +"  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2";
-    public static final String UPDATE_STATUS_JOB = "UPDATE tblJob SET id_status = 2 WHERE id_job = ?";
-    public static final String DELETE_JOB = "DELETE tblJob WHERE id_job = ?";
-       public List<JobDTO> getAllJobProcessing() throws SQLException {
+
+    private static final String GET_ALL_JOB_PROCESSING = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major, j.create_date\n"
+            + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
+            + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1";
+    private static final String GET_ALL_JOB_ACCEPTED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major\n"
+            + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
+            + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2";
+    private static final String GET_A_JOB_BY_ID = "SELECT j.id_job, j.title, j.salary, j.description, j.duration, j.start_date, s.status_name, u.fullname, j.id_major, j.create_date\n"
+            + "FROM tblJob j, tblJobStatus s, tblEmployer e, tblUser u\n"
+            + "WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_job = ?";
+    private static final String UPDATE_STATUS_JOB = "UPDATE tblJob SET id_status = 2 WHERE id_job = ?";
+    private static final String DELETE_JOB = "DELETE tblJob WHERE id_job = ?";
+
+    private static final String INSERT_JOB = "INSERT INTO tblJob(title, salary, description, duration, start_date, id_status, id_employer, id_major)\n"
+            + "VALUES (?,?,?,?,?,?,?,?)";
+
+    public List<JobDTO> getAllJobProcessing() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -46,7 +56,8 @@ public class JobDAO {
                     String status = rs.getString("status_name");
                     String fullName = rs.getString("fullname");
                     String major = rs.getString("id_major");
-                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major));
+                    String create_date = rs.getString("create_date");
+                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major, create_date));
                 }
             }
         } catch (Exception e) {
@@ -64,7 +75,8 @@ public class JobDAO {
         }
         return listJob;
     }
-       public List<JobDTO> getAllJobAccepted() throws SQLException {
+
+    public List<JobDTO> getAllJobAccepted() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -102,8 +114,49 @@ public class JobDAO {
         }
         return listJob;
     }
-       
-     public boolean acceptJob(int idJob) throws SQLException {
+
+    public JobDTO getAJobByID(int id) throws SQLException {
+        JobDTO job = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_A_JOB_BY_ID);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                if(rs.next()) {
+                    int idJob = rs.getInt("id_job");
+                    String title = rs.getString("title");
+                    double salary = rs.getDouble("salary");
+                    String description = rs.getString("description");
+                    double duration = rs.getDouble("duration");
+                    String startDate = rs.getString("start_date");
+                    String status = rs.getString("status_name");
+                    String nameEmployer = rs.getString("fullname");
+                    String major_name = MajorDAO.convertMajorName(rs.getString("id_major"));
+                    String create_date = rs.getString("create_date");
+                    job = new JobDTO(idJob, title, salary, description, duration, startDate, status, nameEmployer, major_name, create_date);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return job;
+    }
+
+    public boolean acceptJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -127,7 +180,8 @@ public class JobDAO {
         }
         return result;
     }
-     public boolean deleteJob(int idJob) throws SQLException {
+
+    public boolean deleteJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -151,4 +205,39 @@ public class JobDAO {
         }
         return result;
     }
+
+    public boolean createJob(JobDTO job) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String title = job.getTitle();
+                double salary = job.getSalary();
+                double duration = job.getDuration();
+                String major = job.getIdMajor().trim();
+                String description = job.getDescription();
+                String startDate = job.getStartDate();
+                String status = "1";
+                int idEmployer = job.getIdEmployer();
+                ptm = conn.prepareStatement(INSERT_JOB);
+                ptm.setString(1, title);
+                ptm.setDouble(2, salary);
+                ptm.setString(3, description);
+                ptm.setDouble(4, duration);
+                ptm.setString(5, startDate);
+                ptm.setString(6, status);
+                ptm.setInt(7, idEmployer);
+                ptm.setString(8, major);
+                result = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return result;
+    }
+
 }
