@@ -1,14 +1,21 @@
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\GoogleUserDTO.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\DenyJobController.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LogoutController.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllJob.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\UserDAO.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\common\Key.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\ChangeModeController.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\AcceptJobController.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobDTO.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\GoogleUtils.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobDAO.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\UserDTO.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\DBUtils.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LoginGoogleController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\skills\SkillDTO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\major\MajorDAO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\skills\SkillDAO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\AcceptJobController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\FilterMajorController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\jobs\JobDAO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\utils\GoogleUtils.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\common\Key.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\DenyJobController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\LogoutController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\UpdateProfileUserController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\users\GoogleUserDTO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\jobs\JobDTO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\users\UserDTO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\utils\DBUtils.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\LoginGoogleController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\major\MajorDTO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\GetAllJob.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\UpdateUserSkillController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\ChangeModeController.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\users\UserDAO.java

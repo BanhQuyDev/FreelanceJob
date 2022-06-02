@@ -1,5 +1,11 @@
+major\MajorDAO.class
+controllers\FilterMajorController.class
 controllers\AcceptJobController.class
 controllers\GetAllJob.class
+skills\SkillDTO.class
+controllers\UpdateUserSkillController.class
+controllers\UpdateProfileUserController.class
+major\MajorDTO.class
 users\UserDTO.class
 users\UserDAO.class
 jobs\JobDAO.class
@@ -8,6 +14,7 @@ utils\DBUtils.class
 controllers\LogoutController.class
 common\Key.class
 controllers\DenyJobController.class
+skills\SkillDAO.class
 utils\GoogleUtils.class
 controllers\LoginGoogleController.class
 users\GoogleUserDTO.class
