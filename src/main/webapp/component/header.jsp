@@ -61,9 +61,6 @@
                                             </c:choose>
                                         <li>
                                             <a href="#">Page</a>
-                                            <ul class="submenu">
-                                                <li><a href="job_details.jsp">Job Details</a></li>
-                                            </ul>
                                         </li>
                                         <li><a href="#">Contact</a></li>
                                     </ul>

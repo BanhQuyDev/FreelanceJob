@@ -105,8 +105,15 @@
                                 <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.createDate}" readonly="">
                             </div>
                             <a href="GetAllJob" class="btn btn-block btn-primary btn-md" style="border-radius: 20px; margin: 10px 0px">Back</a>
-                            <a href="AcceptJobController?idJob=${job.idJob}" class="btn btn-success" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Accept</a>
-                            <a href="DenyJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Deny</a>
+                            <c:choose>
+                                <c:when test="${job.status == 'Unappropriated'}">
+                                    <a href="AcceptJobController?idJob=${job.idJob}" class="btn btn-success" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Recovery</a>
+                                    <a href="DenyJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Delete</a>
+                                </c:when>                         
+                                <c:otherwise>
+                                    <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Unappropriated</button></a>
+                                </c:otherwise>
+                            </c:choose>
                         </form>
                     </div>
                 </div>

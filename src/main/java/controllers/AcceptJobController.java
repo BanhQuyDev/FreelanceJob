@@ -30,12 +30,12 @@ public class AcceptJobController extends HttpServlet {
         try {
             int idJob = Integer.parseInt(request.getParameter("idJob"));
             JobDAO dao = new JobDAO();
-            boolean checkAccept = dao.acceptJob(idJob); 
+            boolean checkAccept = dao.recoverJob(idJob); 
             if(checkAccept){
-                request.setAttribute("SUCCESS", "Acccept Successfully!!");
+                request.setAttribute("SUCCESS", "Recover Successfully!!");
                 url = SUCCESS;
             }else{
-                request.setAttribute("FAIL", "Acccept Failed!!");
+                request.setAttribute("FAIL", "Recover Failed!!");
                 url = SUCCESS;
             }
         } catch (Exception e) {

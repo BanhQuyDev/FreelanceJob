@@ -180,7 +180,7 @@
                                             <ul>
                                                 <li>${job.nameEmployer}</li>
                                                 <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                                <li>${job.salary}$</li>
+                                                <li>${job.salary}VNĐ</li>
                                             </ul>
                                         </div>
                                     </div>

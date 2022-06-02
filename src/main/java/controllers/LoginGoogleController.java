@@ -64,8 +64,11 @@ public class LoginGoogleController extends HttpServlet {
                                 session.setAttribute("LOGIN_USER", user);
                                 session.setAttribute("TYPE", "user");
                                 session.setAttribute("MODE", "FREELANCER");
+                                request.setAttribute("SUCCESS_MESSAGE", "Login Successfully !!!");
                                 url = INDEX_PAGE;
                             }
+                        }else{
+                            request.setAttribute("ERROR_MESSAGE", "Your account has been banned!!!");
                         }
                     } else {
                         user = new UserDTO(user.getName(), user.getEmail(), user.getPicture());
@@ -73,6 +76,7 @@ public class LoginGoogleController extends HttpServlet {
                         if (checkCreate) {
                             session.setAttribute("LOGIN_USER", user);
                             session.setAttribute("TYPE", "user");
+                            request.setAttribute("SUCCESS_MESSAGE", "Login Successfully !!!");
                             url = INDEX_PAGE;
                         }
                     }
