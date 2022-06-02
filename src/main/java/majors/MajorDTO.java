@@ -32,5 +32,9 @@ public class MajorDTO {
 
     public void setMajor_name(String major_name) {
         this.major_name = major_name;
+    }      
+    @Override
+    public String toString() {
+        return "MajorDTO{" + "id=" + id_major + ", name=" + major_name + '}';
     }
 }

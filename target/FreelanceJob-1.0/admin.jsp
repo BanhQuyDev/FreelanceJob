@@ -45,7 +45,7 @@
           data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
 
         <c:if test="${sessionScope.TYPE != 'admin'}">
-            <c:redirect url="index.jsp"></c:redirect>
+            <c:redirect url="HomeController"></c:redirect>
         </c:if>
         <nav
             class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">

@@ -170,4 +170,42 @@ public class UserDAO {
         }
         return check;
     }
+
+    public boolean updateProduct(int id, String fullName, String email, String phone, String bio, String dob, String address) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        String sql = "UPDATE [dbo].[tblUser]\n"
+                + "   SET [fullname] = ?\n"
+                + "      ,[email] = ?\n"
+                + "      ,[dob] = ?\n"
+                + "      ,[address] = ?\n"
+                + "      ,[bio] = ?\n"
+                + "      ,[phone] = ?\n"
+                + " WHERE [tblUser].[id_user] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, fullName);
+                ptm.setString(2, email);
+                ptm.setString(3, dob);
+                ptm.setString(4, address);
+                ptm.setString(5, bio);
+                ptm.setString(6, phone);
+                ptm.setInt(7, id);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }
