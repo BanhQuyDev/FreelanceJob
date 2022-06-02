@@ -50,19 +50,19 @@
                                         <li><a href="index.jsp">Home</a></li>
                                             <c:choose>
                                                 <c:when test="${sessionScope.MODE == 'FREELANCER'}">
-                                                <li><a href="job_listing.jsp">Find a Jobs </a></li>
+                                                <li><a href="job_listing.jsp">Find Jobs</a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                <li><a href="post_job.jsp">Post a Jobs </a></li>
+                                                <li><a href="post_job.jsp">Post a Job</a></li>
                                                 </c:when>
                                                 <c:otherwise>
-                                                <li><a href="job_listing.jsp">Find a Jobs </a></li>
+                                                <li><a href="job_listing.jsp">Find Jobs</a></li>
                                                 </c:otherwise>
                                             </c:choose>
                                         <li>
                                             <a href="#">Page</a>
                                             <ul class="submenu">
-                                                <li><a href="job_details.jsp">job Details</a></li>
+                                                <li><a href="job_details.jsp">Job Details</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#">Contact</a></li>
@@ -142,9 +142,16 @@
                 </div>
             </div>
             <c:if test="${requestScope.ERROR_MESSAGE != null}">
-                <div " class="alert alert-danger">
+                <div class="alert alert-danger">
                     <center>
                         <strong>Alert!</strong> ${requestScope.ERROR_MESSAGE}
+                    </center>
+                </div>
+            </c:if>
+            <c:if test="${requestScope.SUCCESS_MESSAGE != null}">
+                <div class="alert alert-success">
+                    <center>
+                        <strong>Success!</strong> ${requestScope.SUCCESS_MESSAGE}
                     </center>
                 </div>
             </c:if>

@@ -6,13 +6,15 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import majors.MajorDAO;
+import majors.MajorDTO;
 
 /**
  *
@@ -27,6 +29,8 @@ public class ChangeModeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         HttpSession session = request.getSession();
         try {
@@ -39,6 +43,9 @@ public class ChangeModeController extends HttpServlet {
                     url = SUCCESS;
                 } else {
                     session.setAttribute("MODE", "EMPLOYER");
+                    MajorDAO mDao = new MajorDAO();
+                    List<MajorDTO> listMajor = mDao.getAllMajor();
+                    session.setAttribute("MAJOR", listMajor);
                     url = SUCCESS;
                 }
             }

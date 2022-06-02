@@ -45,12 +45,7 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+           DBUtils.closeConnection(conn, ptm);
         }
 
         return check;
@@ -81,15 +76,7 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm,rs);
         }
         return user;
     }
@@ -119,15 +106,7 @@ public class UserDAO {
                 }
             }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+           DBUtils.closeConnection(conn, ptm,rs);
         }
         return check;
     }
@@ -151,15 +130,7 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm,rs);
         }
         return check;
     }
@@ -177,12 +148,7 @@ public class UserDAO {
                 check = ptm.executeUpdate() > 0;
             }
         } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+          DBUtils.closeConnection(conn, ptm);
         }
         return check;
     }
@@ -200,12 +166,7 @@ public class UserDAO {
                 check = ptm.executeUpdate() > 0;
             }
         } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+           DBUtils.closeConnection(conn, ptm);
         }
         return check;
     }
