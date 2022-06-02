@@ -33,7 +33,7 @@
                     <div class="col-lg-3 col-md-2">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.jsp"
+                            <a href="HomeController"
                                ><img
                                     src="assets/img/logo/logo_freelancer.png"
                                     style="max-width: 90%"
@@ -47,16 +47,16 @@
                             <div class="main-menu">
                                 <nav class="d-none d-lg-block">
                                     <ul id="navigation">
-                                        <li><a href="index.jsp">Home</a></li>
+                                        <li><a href="HomeController">Home</a></li>
                                             <c:choose>
                                                 <c:when test="${sessionScope.MODE == 'FREELANCER'}">
-                                                <li><a href="job_listing.jsp">Find Jobs</a></li>
+                                                 <li><a href="JobListingController">Find Jobs </a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                <li><a href="post_job.jsp">Post a Job</a></li>
+                                                <li><a href="post_job.jsp">Post Jobs </a></li>
                                                 </c:when>
                                                 <c:otherwise>
-                                                <li><a href="job_listing.jsp">Find Jobs</a></li>
+                                                <li><a href="JobListingController">Find Jobs </a></li>
                                                 </c:otherwise>
                                             </c:choose>
                                         <li>

@@ -23,8 +23,8 @@ import majors.MajorDTO;
 @WebServlet(name = "ChangeModeController", urlPatterns = {"/ChangeModeController"})
 public class ChangeModeController extends HttpServlet {
 
-    private static final String ERROR = "index.jsp";
-    private static final String SUCCESS = "index.jsp";
+    private static final String ERROR = "HomeController";
+    private static final String SUCCESS = "HomeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,7 +49,6 @@ public class ChangeModeController extends HttpServlet {
                     url = SUCCESS;
                 }
             }
-
         } catch (Exception e) {
             log("Error at ChangeModeController: " + e.toString());
         } finally {
