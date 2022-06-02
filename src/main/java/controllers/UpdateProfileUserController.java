@@ -22,15 +22,6 @@ import users.UserDTO;
 @WebServlet(name = "UpdateProfileUserController", urlPatterns = {"/UpdateProfileUserController"})
 public class UpdateProfileUserController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private static final String ERROR = "freelancer_update_profile.jsp";
     private static final String SUCCESS = "freelancer_detail.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,7 +39,7 @@ public class UpdateProfileUserController extends HttpServlet {
             String bio = request.getParameter("bio");
             String dob = request.getParameter("dob");
             String address = request.getParameter("address");
-            boolean checkUpdate = new UserDAO().updateProduct(user.getId(),
+            boolean checkUpdate = new UserDAO().updateUser(user.getId(),
                     fullName, email,phone, bio, dob, address);
             if (checkUpdate) {
                 user.setName(fullName);
@@ -58,6 +49,7 @@ public class UpdateProfileUserController extends HttpServlet {
                 user.setDob(dob);
                 user.setAddress(address);
                 session.setAttribute("LOGIN_USER", user);
+                request.setAttribute("SUCCESS_MESSAGE", "Update Successfully!!!");
                 url = SUCCESS;
             }
         } catch (Exception e) {
