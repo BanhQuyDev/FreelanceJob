@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import majors.MajorDAO;
 import majors.MajorDTO;
+import skills.SkillDAO;
+import skills.SkillDTO;
+import users.UserDTO;
 
 /**
  *
@@ -35,6 +38,15 @@ public class ChangeModeController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             String type = request.getParameter("type");
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            SkillDAO dao = new SkillDAO();
+            MajorDAO majorDao = new MajorDAO();
+            List<SkillDTO> listSkillByUser = dao.getAllSkillByUser(user.getId());
+            session.setAttribute("SKILL", listSkillByUser);
+            List<SkillDTO> listSkill = dao.getListSkillDifference(user.getId());
+            session.setAttribute("LIST_SKILL", listSkill);
+            List<MajorDTO> listMajor = majorDao.getAllMajor();
+            session.setAttribute("LIST_MAJOR", listMajor);
             if (type == null) {
                 url = SUCCESS;
             } else {
@@ -44,8 +56,8 @@ public class ChangeModeController extends HttpServlet {
                 } else {
                     session.setAttribute("MODE", "EMPLOYER");
                     MajorDAO mDao = new MajorDAO();
-                    List<MajorDTO> listMajor = mDao.getAllMajor();
-                    session.setAttribute("MAJOR", listMajor);
+                    List<MajorDTO> listMajorUser = mDao.getAllMajor();
+                    session.setAttribute("MAJOR", listMajorUser);
                     url = SUCCESS;
                 }
             }
