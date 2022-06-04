@@ -16,6 +16,7 @@ import jobs.JobDAO;
 import jobs.JobDTO;
 import majors.MajorDAO;
 import majors.MajorDTO;
+import skills.SkillDTO;
 import users.UserDTO;
 
 /**
@@ -30,6 +31,8 @@ public class PostJobController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         HttpSession session = request.getSession();
         try {
@@ -39,13 +42,14 @@ public class PostJobController extends HttpServlet {
             String major = request.getParameter("cmbMajor");
             String description = request.getParameter("description");
             String startDate = request.getParameter("startDate");
+            String[] skillList = request.getParameterValues("skillJob");
             UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
             int idEmployer = user.getId();
-            JobDTO job = new JobDTO(title, salary, description, duration, startDate, "2", idEmployer, major);
+            JobDTO job = new JobDTO(title, salary, description, duration, startDate, "2", idEmployer, major, skillList);
             JobDAO jDao = new JobDAO();
             boolean check = jDao.createJob(job);
             if (check) {
-                request.setAttribute("SUCCESS_MESSAGE", "Your post is waiting to be moderated by an administrator");
+                request.setAttribute("SUCCESS_MESSAGE", "Your post has been successfully posted");
                 url = SUCCESS;
 //                session.removeAttribute("MAJOR");
             } else {

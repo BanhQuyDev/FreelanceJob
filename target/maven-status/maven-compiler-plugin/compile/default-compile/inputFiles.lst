@@ -6,7 +6,9 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\HomeController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\DenyJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LogoutController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\PostJobController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\RenderSkillPostJob.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UnappropriatedJobController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillJobDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\UserDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\DBUtils.java
