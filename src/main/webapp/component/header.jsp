@@ -51,10 +51,12 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.MODE == 'FREELANCER'}">
                                                 <li><a href="JobListingController">Find Jobs </a></li>
-                                                <a style="color: black" href="#">Job Management</a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">List Job Apply</a></li>
-                                                </ul>
+                                                <li>
+                                                    <a style="color: black" href="#">Job Management</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="#">List Job Apply</a></li>
+                                                    </ul>
+                                                </li>
                                                 <li><a href="#">History</a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
