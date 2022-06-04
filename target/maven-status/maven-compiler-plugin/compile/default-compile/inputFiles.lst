@@ -1,6 +1,8 @@
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\DenyJobController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\PostJobController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\LogoutController.java
+D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\skills\SkillJobDTO.java
+D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\RenderSkillPostJob.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\FilterMajorController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\skills\SkillDTO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\common\Key.java
@@ -11,6 +13,7 @@ D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\jobs\JobDAO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\majors\MajorDAO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\home\JobListingController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\ChangeModeController.java
+D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\utils\Utils.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\users\UserDTO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\jobs\JobDTO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\majors\MajorDTO.java

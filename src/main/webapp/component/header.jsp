@@ -50,19 +50,34 @@
                                         <li><a href="HomeController">Home</a></li>
                                             <c:choose>
                                                 <c:when test="${sessionScope.MODE == 'FREELANCER'}">
-                                                 <li><a href="JobListingController">Find Jobs </a></li>
+                                                <li><a href="JobListingController">Find Jobs </a></li>
+                                                <li>
+                                                    <a style="color: black" href="#">Job Management</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="#">List Job Apply</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">History</a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                <li><a href="post_job.jsp">Post Jobs </a></li>
+                                                <li><a href="RenderSkillPostJob">Post a Job </a></li>
+                                                <li>
+                                                    <a href="#">Job Management</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="#">Your Post</a></li>
+                                                        <li><a href="#">List Freelancer Apply</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">History</a></li>
                                                 </c:when>
                                                 <c:otherwise>
                                                 <li><a href="JobListingController">Find Jobs </a></li>
+                                                <li>
+                                                    <a href="#">About</a>
+                                                </li>
+                                                <li><a href="#">Contact</a></li>
                                                 </c:otherwise>
                                             </c:choose>
-                                        <li>
-                                            <a href="#">Page</a>
-                                        </li>
-                                        <li><a href="#">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>

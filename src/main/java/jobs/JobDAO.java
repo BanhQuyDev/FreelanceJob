@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import majors.MajorDAO;
+import skills.SkillJobDTO;
 import utils.DBUtils;
 
 /**
@@ -23,28 +25,41 @@ public class JobDAO {
     private static final String GET_ALL_JOB_UNAPPROPRIATED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major, j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1";
+    
     private static final String GET_ALL_JOB_ACCEPTED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2";
+    
     private static final String GET_A_JOB_BY_ID = "SELECT j.id_job, j.title, j.salary, j.description, j.duration, j.start_date, s.status_name, u.fullname, j.id_major, j.create_date\n"
             + "FROM tblJob j, tblJobStatus s, tblEmployer e, tblUser u\n"
             + "WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_job = ?";
+    
     private static final String UPDATE_STATUS_JOB = "UPDATE tblJob SET id_status = 2 WHERE id_job = ?";
-    private static final String UPDATE_STATUS_JOB_UNAPPROPRIATED= "UPDATE tblJob SET id_status = 1 WHERE id_job = ?";
-   ///////////////Delete Job
+    
+    private static final String UPDATE_STATUS_JOB_UNAPPROPRIATED = "UPDATE tblJob SET id_status = 1 WHERE id_job = ?";
+    
+    ///////////////Delete Job
     private static final String DELETE_JOB = "DELETE tblJob WHERE id_job = ?";
+    
     private static final String DELETE_CONTRACT_JOB = "DELETE tblContract WHERE id_job = ?";
+    
     private static final String DELETE_JOB_SKILL = "DELETE tblJobSkill WHERE id_job = ?";
+    
     private static final String DELETE_JOB_APPLICATION = "DELETE tblJobApplication WHERE id_job = ?";
-   /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    
     private static final String INSERT_JOB = "INSERT INTO tblJob(title, salary, description, duration, start_date, id_status, id_employer, id_major)\n"
             + "VALUES (?,?,?,?,?,?,?,?)";
+    
     private static final String GET_TOP_4_LATEST_JOB = "SELECT TOP 4 J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date FROM tblJob J, tblEmployer E, tblUser U \n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND id_status = 2 ORDER BY create_date DESC";
+    
     private static final String GET_ALL_JOB = "SELECT J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date FROM tblJob J, tblEmployer E, tblUser U \n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND id_status = 2";
-    private static final String GET_JOB_BY_MAJOR = "SELECT J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date FROM tblJob J, tblEmployer E, tblUser U, tblMajor M\n"
-            + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_major = M.id_major AND id_status = 2 AND M.id_major = ?";
+    
+    private static final String GET_JOB_BY_MAJOR = "SELECT J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date \n"
+            + "FROM tblJob J, tblEmployer E, tblUser U, tblMajor M\n"
+            + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_major = M.id_major AND id_status = 2 AND M.id_major = (SELECT id_major FROM tblMajor WHERE major_name = ?)";
     private static final String GET_JOB_DETAIL = "SELECT J.id_job, J.title, J.salary, J.description, J.duration, J.start_date, J.create_date, U.fullname FROM tblJob J, tblEmployer E, tblUser U\n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_status = 2 AND J.id_job = ?";
 
@@ -69,7 +84,8 @@ public class JobDAO {
                     String fullName = rs.getString("fullname");
                     String major = rs.getString("id_major");
                     String create_date = rs.getString("create_date");
-                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major, create_date));
+                    String[] createDate = create_date.split("\\s");
+                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major, createDate[0]));
                 }
             }
         } catch (Exception e) {
@@ -101,7 +117,8 @@ public class JobDAO {
                     String fullName = rs.getString("fullname");
                     String major = rs.getString("id_major");
                     String create_date = rs.getString("create_date");
-                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major,create_date));
+                    String[] createDate = create_date.split("\\s");
+                    listJob.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major, createDate[0]));
                 }
             }
         } catch (Exception e) {
@@ -134,7 +151,8 @@ public class JobDAO {
                     String nameEmployer = rs.getString("fullname");
                     String major_name = MajorDAO.convertMajorName(rs.getString("id_major"));
                     String create_date = rs.getString("create_date");
-                    job = new JobDTO(idJob, title, salary, description, duration, startDate, status, nameEmployer, major_name, create_date);
+                    String[] createDate = create_date.split("\\s");
+                    job = new JobDTO(idJob, title, salary, description, duration, startDate, status, nameEmployer, major_name, createDate[0]);
                 }
             }
         } catch (Exception e) {
@@ -164,7 +182,8 @@ public class JobDAO {
         }
         return result;
     }
-     public boolean unappropriatedJob(int idJob) throws SQLException {
+
+    public boolean unappropriatedJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -203,6 +222,7 @@ public class JobDAO {
         }
         return result;
     }
+
     public boolean deleteContractJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -222,7 +242,8 @@ public class JobDAO {
         }
         return result;
     }
-     public boolean deleteJobSkill(int idJob) throws SQLException {
+
+    public boolean deleteJobSkill(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -241,7 +262,8 @@ public class JobDAO {
         }
         return result;
     }
-     public boolean deleteJobApplication(int idJob) throws SQLException {
+
+    public boolean deleteJobApplication(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -265,6 +287,8 @@ public class JobDAO {
         boolean result = false;
         Connection conn = null;
         PreparedStatement ptm = null;
+        ResultSet rs = null;
+        int idJob = 0;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -276,7 +300,7 @@ public class JobDAO {
                 String startDate = job.getStartDate();
                 String status = "2";
                 int idEmployer = job.getIdEmployer();
-                ptm = conn.prepareStatement(INSERT_JOB);
+                ptm = conn.prepareStatement(INSERT_JOB, Statement.RETURN_GENERATED_KEYS);
                 ptm.setString(1, title);
                 ptm.setDouble(2, salary);
                 ptm.setString(3, description);
@@ -285,7 +309,15 @@ public class JobDAO {
                 ptm.setString(6, status);
                 ptm.setInt(7, idEmployer);
                 ptm.setString(8, major);
-                result = ptm.executeUpdate() > 0 ? true : false;
+                if (ptm.executeUpdate() > 0) {
+                    rs = ptm.getGeneratedKeys();
+                    if (rs.next()) {
+                        idJob = rs.getInt(1);
+                    }
+                    if (createSkillJob(job.getSkillJob(), idJob)) {
+                        return result = true;
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -293,6 +325,42 @@ public class JobDAO {
             DBUtils.closeConnection(conn, ptm);
         }
         return result;
+    }
+
+    public boolean createSkillJob(String[] skillJob, int idJob) throws SQLException {
+        int effectedRow = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean check = false;
+        String sql = "INSERT INTO tblJobSkill(id_skill, id_job) VALUES (?,?)";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                SkillJobDTO skill = new SkillJobDTO();
+                for (int i = 0; i < skillJob.length; i++) {
+                    skill.setIdSkill(Integer.parseInt(skillJob[i]));
+                    ptm.setInt(1, skill.getIdSkill());
+                    ptm.setInt(2, idJob);
+                    if (ptm.executeUpdate() > 0) {
+                        effectedRow++;
+                    }
+                }
+                if (effectedRow == skillJob.length) {
+                    return check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 
     public List<JobDTO> getTop4LatestJob() throws SQLException {
@@ -312,7 +380,8 @@ public class JobDAO {
                     Double salary = rs.getDouble("salary");
                     String fullname = rs.getString("fullname");
                     String create_date = rs.getString("create_date");
-                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", create_date));
+                    String[] createDate = create_date.split("\\s");
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0]));
                 }
             }
         } catch (Exception e) {
@@ -340,7 +409,8 @@ public class JobDAO {
                     Double salary = rs.getDouble("salary");
                     String fullname = rs.getString("fullname");
                     String create_date = rs.getString("create_date");
-                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", create_date));
+                    String[] createDate = create_date.split("\\s");
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0]));
                 }
             }
         } catch (Exception e) {
@@ -351,7 +421,7 @@ public class JobDAO {
         return listJob;
     }
 
-    public List<JobDTO> getJobByMajor(String idMajor) throws SQLException {
+    public List<JobDTO> getJobByMajor(String major_name) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -360,7 +430,7 @@ public class JobDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_JOB_BY_MAJOR);
-                ptm.setString(1, idMajor);
+                ptm.setString(1, major_name);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int id_job = rs.getInt("id_job");
@@ -369,7 +439,8 @@ public class JobDAO {
                     Double salary = rs.getDouble("salary");
                     String fullname = rs.getString("fullname");
                     String create_date = rs.getString("create_date");
-                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", create_date));
+                    String[] createDate = create_date.split("\\s");
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0]));
                 }
             }
         } catch (Exception e) {
@@ -400,14 +471,41 @@ public class JobDAO {
                     String start_date = rs.getString("start_date");
                     String create_date = rs.getString("create_date");
                     String fullname = rs.getString("fullname");
-                    job = new JobDTO(id_job, title, salary, description, duration, start_date, "", fullname, "", create_date);
+                    String[] createDate = create_date.split("\\s");
+                    job = new JobDTO(id_job, title, salary, description, duration, start_date, "", fullname, "", createDate[0]);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-           DBUtils.closeConnection(conn, ptm, rs);
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return job;
+    }
+
+    public List<String> getSkillJob(int idJob) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<String> list = new ArrayList<>();
+        String sql = "SELECT S.skill_name FROM tblJob J , tblJobSkill JS, tblSkill S WHERE J.id_job = JS.id_job AND JS.id_skill = S.id_skill AND J.id_job = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, idJob);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String nameSkill = rs.getString("skill_name");
+                    list.add(nameSkill);
+                }
+                return list;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return list;
     }
 }

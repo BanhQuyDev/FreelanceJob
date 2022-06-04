@@ -75,25 +75,34 @@
                                 <!-- Job Category Listing start -->
                                 <div class="job-category-listing mb-50">
                                     <!-- single one -->
-                                    <form action="JobListingController" method="GET">
+                                    <form action="JobListingController" method="POST">
                                         <div class="single-listing">
                                             <div class="small-section-tittle2">
-                                                <!--                                                <button style="padding: 20px; margin-left: 60%; border-radius: 8px" class="btn btn-info" type="submit">Filter</button>-->
                                                 <h4>By Major</h4>
                                             </div>
                                             <!-- Select job items start -->
+                                            <c:set var="selectedMajor" value="${param.selectedMajor}"/>
                                             <select name="selectedMajor" onchange="this.form.submit()">
-                                            <%--<c:choose>--%>
-                                                <%--<c:when test="${!empty requestScope.SELECTED_MAJOR}">--%>
-                                                    <option value="All">All Major</option>
-                                                <%--</c:when>--%>
-                                                <%--<c:otherwise>--%>
-                                                    <!--<option value="${requestScope.SELECTED_MAJOR}">${requestScope.SELECTED_MAJOR}</option>-->
-                                                <%--</c:otherwise>--%>
-                                            <%--</c:choose>--%>
-                                            <c:forEach var="major" items="${requestScope.LIST_MAJOR}">
-                                                <option value="${major.id_major.trim()}">${major.id_major}</option>
-                                            </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${empty selectedMajor}">
+                                                        <option value="All Major">All Major</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:set var="all" value="All Major"/>
+                                                        <c:if test="${selectedMajor ne all}">
+                                                            <option value="${selectedMajor}">${selectedMajor}</option>
+                                                            <option  value="All Major">All Major</option>
+                                                        </c:if>
+                                                        <c:if test="${selectedMajor eq all}">
+                                                            <option value="${selectedMajor}">${selectedMajor}</option>
+                                                        </c:if>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:forEach items="${requestScope.LIST_MAJOR}" var="c">
+                                                    <c:if test="${c.major_name ne selectedMajor}">
+                                                        <option value="${c.major_name}">${c.major_name}</option>
+                                                    </c:if>
+                                                </c:forEach>
                                         </select>
 
                                         <!--  Select job items End-->   
@@ -121,16 +130,17 @@
                                         <div class="single-job-items mb-30">
                                             <div class="job-items">
                                                 <div class="company-img">
-                                                    <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""/></a>
+                                                    <a href="JobDetailController?jobId=${job.idJob}"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""/></a>
                                                 </div>
                                                 <div class="job-tittle job-tittle2">
-                                                    <a href="#">
+                                                    <a href="JobDetailController?jobId=${job.idJob}">
                                                         <h4>${job.title}</h4>
                                                     </a>
                                                     <ul>
                                                         <li>${job.nameEmployer}</li>
                                                         <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                                        <li>${job.salary}VNĐ</li>
+                                                        <c:set var="salary" value="${job.salary}"/>
+                                                        <li>${job.showPrice(salary)} VNĐ</li>
                                                     </ul>
                                                 </div>
                                             </div>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,7 +28,12 @@
         <link rel="stylesheet" href="assets/css/slick.css" />
         <link rel="stylesheet" href="assets/css/nice-select.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
-        <!--<link rel="stylesheet" href="assets/css/editlogin.css" />-->
+        <link rel="stylesheet" href="choosen/chosen.min.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="mutile/css/style.css">
+        <link rel="stylesheet" href="assets/css/editlogin.css" />
 
     </head>
     <body>
@@ -101,12 +107,21 @@
                                 <label>Start Date</label>
                                 <input type="date" name="startDate" class="form-control" id="date_picker" placeholder="Start Date" required="">
                             </div>
-
+                            <div class="form-group">
+                                <label for="description">Skill-Job:</label>
+                                <div>
+                                    <select style="width: 100%" class="js-select2" multiple="multiple" name="skillJob">
+                                        <c:forEach var="s" items="${requestScope.LIST_SKILL_POST}">
+                                            <option  value="${s.skillId}" data-badge="">${s.name}</option>
+                                        </c:forEach>                                      
+                                    </select>
+                                </div>
+                            </div>                                                    
                             <div style="margin-top: 20px" class="row align-items-center mb-5">
                                 <div class="col-lg-4 ml-auto">
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="index.jsp" class="btn btn-block btn-light btn-md"
+                                            <a href="HomeController" class="btn btn-block btn-light btn-md"
                                                ><span class="icon-open_in_new mr-2"></span>Back</a
                                             >
                                         </div>
@@ -119,69 +134,75 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                 
                         </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <jsp:include page="component/footer.jsp"></jsp:include>
+    <jsp:include page="component/footer.jsp"></jsp:include>
 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 
-        <script language="javascript">
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
+    <script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
 
-            today = yyyy + '-' + mm + '-' + dd;
-            $('#date_picker').attr('min', today);
-        </script>
-        <script>
-            window.setTimeout(function () {
-                $(".alert").fadeTo(400, 0).slideUp(400, function () {
-                    $(this).remove();
-                });
-            }, 3000);
-        </script>
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-        <!-- Jquery, Popper, Bootstrap -->
-        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
-        <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#date_picker').attr('min', today);
+    </script>
+    <script>
+        window.setTimeout(function () {
+            $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+    <!--<script src="mutile/js/bootstrap.min.js"></script>-->
+    <script src="mutile/js/popper.js"></script>
+    <!--<script src="mutile/js/bootstrap.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <script src="mutile/js/main.js"></script>
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
 
-        <!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-        <script src="./assets/js/slick.min.js"></script>
-        <script src="./assets/js/price_rangs.js"></script>
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
 
-        <!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-        <script src="./assets/js/animated.headline.js"></script>
-        <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
 
-        <!-- Scrollup, nice-select, sticky -->
-        <script src="./assets/js/jquery.scrollUp.min.js"></script>
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-        <script src="./assets/js/jquery.sticky.js"></script>
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
 
-        <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
 
-        <!-- Jquery Plugins, main Jquery -->
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
-        <script
-            src="https://kit.fontawesome.com/b36bcbb61e.js"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script
+        src="https://kit.fontawesome.com/b36bcbb61e.js"
+        crossorigin="anonymous"
+    ></script>
+</body>
 </html>

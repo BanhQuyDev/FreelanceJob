@@ -47,6 +47,7 @@
         <c:if test="${sessionScope.TYPE != 'admin'}">
             <c:redirect url="HomeController"></c:redirect>
         </c:if>
+        
         <nav
             class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
             <div class="navbar-wrapper">
@@ -120,7 +121,7 @@
                 </ul>
             </div>
             <div class="main-menu-content">
-                <ul class="navigation navigation-main pt-5" id="main-menu-navigation" data-menu="menu-navigation">
+                <ul class="navigation navigation-main pt-5" id="" data-menu="menu-navigation">
                     <li onclick="active()" class="option-list active" id="option-list-1">
                         <a href="GetAllJob"><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
                                 management</span></a>
@@ -129,6 +130,31 @@
                         <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
                                 management</span></a>
                     </li>
+                </ul>
+                <ul class="navigation navigation-main pt-5" id="main-menu-navigation" data-menu="menu-navigation">                    
+                    <c:choose>
+                        <c:when test="${requestScope.LIST_JOB_ACCEPTED != null && requestScope.LIST_JOB_UNAPPROPRIATED != null}">
+                            <li id="job_management" class="active">
+                                <a href="GetAllJob" ><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
+                                        management</span></a>
+                            </li>
+                            <li id="user_management" class="mt-2">
+                                <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
+                                        management</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li id="job_management">
+                                <a href="GetAllJob" ><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
+                                        management</span></a>
+                            </li>
+                            <li id="user_management" class="mt-2 active">
+                                <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
+                                        management</span></a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+>>>>>>> fc2d2ff41231b73c4f9059b1e524cc307b70f4b9
                 </ul>
             </div>
             <div class="navigation-background"></div>
@@ -178,7 +204,7 @@
                                                                 <th>Created date</th>
                                                                 <th>Major</th>
                                                                 <th>Status</th>
-                                                                <th>Unappropriated</th>
+                                                                <th>Spam</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody style="text-align: center">
@@ -192,7 +218,7 @@
                                                                     <th>${job.idMajor}</th>
                                                                     <th style="color: green">${job.status}</th>                     
                                                                     <th>
-                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger">Unappropriated</button></a>
+                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger">Spam</button></a>
                                                                     </th>
                                                                 </tr>       
                                                             </c:forEach>                                                                 
@@ -213,7 +239,7 @@
                                         <div class="card-content collapse show">
                                             <div class="table-responsive">
                                                 <table class="table">
-                                                    <thead class="thead-dark">
+                                                    <thead style="text-align: center" class="thead-dark">
                                                     <th>No</th>
                                                     <th>Title</th>
                                                     <th>Posted by</th>

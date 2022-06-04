@@ -71,7 +71,8 @@
                                         <ul>
                                             <li>${job.nameEmployer}</li>
                                             <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                            <li>${job.salary}VNĐ</li>
+                                            <c:set var="salary" value="${job.salary}"/>
+                                            <li>${job.showPrice(salary)} VNĐ</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -92,13 +93,9 @@
                                         <h4 class="text-monospace">Skill Needed</h4>
                                     </div>
                                     <div style="column-gap: 10%; row-gap: 28px" class="row justify-content-between text-center p-4">
-                                        <p class="col-3 shadow-lg rounded text-success font-weight-bold">java</p>
-                                        <p class="col-3 shadow-lg rounded text-success font-weight-bold">C++</p>
-                                        <p class="col-3">Python</p>
-                                        <p class="col-3 shadow-lg rounded text-success font-weight-bold">Photo</p>
-                                        <p class="col-3 ">C#</p>
-                                        <p class="col-3 ">p</p>
-                                        <p class="col-3 shadow-lg rounded text-success font-weight-bold">main daxua</p>
+                                        <c:forEach var="skillName" items="${requestScope.SKILL_JOB}">
+                                            <button type="button" class="btn col-3">${skillName}</button>
+                                        </c:forEach>                                      
                                     </div>
                                 </div>
                             </div>

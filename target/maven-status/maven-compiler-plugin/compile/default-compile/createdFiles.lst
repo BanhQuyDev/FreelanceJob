@@ -18,13 +18,16 @@ majors\MajorDTO.class
 users\GoogleUserDTO.class
 majors\MajorDAO.class
 controllers\GetAllJob.class
+utils\Utils.class
 controllers\UpdateUserSkillController.class
 controllers\GetAllUser.class
 home\HomeController.class
 controllers\UpdateProfileUserController.class
+skills\SkillJobDTO.class
 users\UserDAO.class
 jobs\JobDAO.class
 controllers\ChangeModeController.class
 controllers\UnappropriatedJobController.class
 controllers\LoginGoogleController.class
+controllers\RenderSkillPostJob.class
 jobs\JobDTO.class
