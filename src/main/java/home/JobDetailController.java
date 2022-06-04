@@ -6,6 +6,7 @@ package home;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +34,10 @@ public class JobDetailController extends HttpServlet {
 
             JobDAO jobDao = new JobDAO();
             JobDTO jobDetail = jobDao.getDetailJob(jobId);
+            List<String>listSkill=jobDao.getSkillJob(jobId);
             request.setAttribute("JOB_DETAIL", jobDetail);
-
+            request.setAttribute("SKILL_JOB", listSkill);
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at JobDetailController : " + e.toString());
         } finally {

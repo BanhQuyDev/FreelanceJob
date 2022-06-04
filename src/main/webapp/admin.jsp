@@ -120,7 +120,7 @@
                 </ul>
             </div>
             <div class="main-menu-content">
-                <ul class="navigation navigation-main pt-5" id="main-menu-navigation" data-menu="menu-navigation">
+                <ul class="navigation navigation-main pt-5" id="main-menu-navigation" data-menu="menu-navigation">                    
                     <li class="active">
                         <a href="GetAllJob"><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
                                 management</span></a>

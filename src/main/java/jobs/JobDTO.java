@@ -5,6 +5,9 @@
  */
 package jobs;
 
+import java.util.List;
+import skills.SkillJobDTO;
+
 /**
  *
  * @author QUANG HUY
@@ -22,7 +25,7 @@ public class JobDTO {
     private String nameEmployer;
     private String idMajor;
     private String createDate;
-
+    private String[]skillJob;
     public JobDTO() {
         
     }
@@ -66,7 +69,7 @@ public class JobDTO {
         this.createDate = createDate;
     }
 
-    public JobDTO(String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String idMajor) {
+    public JobDTO(String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String idMajor,String[]skillJob) {
         this.title = title;
         this.salary = salary;
         this.description = description;
@@ -75,6 +78,7 @@ public class JobDTO {
         this.status = status;
         this.idEmployer = idEmployer;
         this.idMajor = idMajor;
+        this.skillJob = skillJob;
     }
     
     public int getIdJob() {
@@ -164,4 +168,13 @@ public class JobDTO {
     public void setIdEmployer(int idEmployer) {
         this.idEmployer = idEmployer;
     }
+
+    public String[]getSkillJob() {
+        return skillJob;
+    }
+
+    public void setSkillJob(String[] skillJob) {
+        this.skillJob = skillJob;
+    }
+    
 }

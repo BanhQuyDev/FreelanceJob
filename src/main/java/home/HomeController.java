@@ -35,7 +35,6 @@ public class HomeController extends HttpServlet {
             MajorDAO majorDao = new MajorDAO();
             List<MajorDTO> listMajor = majorDao.getAllMajorList();
             request.setAttribute("LIST_MAJOR", listMajor);
-
             JobDAO jobDao = new JobDAO();
             List<JobDTO> listJob = jobDao.getTop4LatestJob();
             request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);

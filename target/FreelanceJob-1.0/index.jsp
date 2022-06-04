@@ -171,7 +171,7 @@
                                 <div class="single-job-items mb-30">
                                     <div class="job-items">
                                         <div class="company-img">
-                                            <a href="job_details.jsp"
+                                            <a href="JobDetailController?jobId=${job.idJob}"
                                                ><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""
                                                   /></a>
                                         </div>
