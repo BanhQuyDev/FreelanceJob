@@ -45,7 +45,7 @@
           data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="2-columns">
 
         <c:if test="${sessionScope.TYPE != 'admin'}">
-            <c:redirect url="index.jsp"></c:redirect>
+            <c:redirect url="HomeController"></c:redirect>
         </c:if>
         <nav
             class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
@@ -85,7 +85,7 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div class="arrow_box_right">
                                         <a class="dropdown-item" href="#">
-                                            <img src="${sessionScope.LOGIN_USER.picture}" alt="avatar"/>
+                                            <img style="border-radius:50%;margin:auto;width: 100%" src="${sessionScope.LOGIN_USER.picture}" alt="avatar"/>
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="LogoutController"><i class="ft-power"></i> Logout</a>
@@ -121,68 +121,113 @@
             </div>
             <div class="main-menu-content">
                 <ul class="navigation navigation-main pt-5" id="main-menu-navigation" data-menu="menu-navigation">
-                    <li class="active">
+                    <li onclick="active()" class="option-list active" id="option-list-1">
                         <a href="GetAllJob"><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
                                 management</span></a>
                     </li>
-                    <li class="mt-2">
-                        <a href="#"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
+                    <li onclick="active()" class="option-list" id="option-list-2">
+                        <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
                                 management</span></a>
                     </li>
                 </ul>
             </div>
             <div class="navigation-background"></div>
         </div>
-
-        <div class="app-content content">
-            <div class="content-wrapper">
-                <div class="content-wrapper-before"></div>
-                <div class="content-header row">
-                    <div class="content-header-left col-md-4 col-12 mb-2">
-                        <h3 class="content-header-title">Job management</h3>
-                    </div>
-                </div>
-                <div class="content-body">
-                    <!-- Basic Tables start -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">List of jobs posting in process</h4>
-                                    <c:if test="${requestScope.SUCCESS != null}">
-                                        <div style="margin-top: 20px" class="alert alert-success">
-                                            <center>
-                                                <strong>Success! </strong> ${requestScope.SUCCESS}
-                                            </center>
+        <c:choose>
+            <c:when test="${requestScope.LIST_JOB_ACCEPTED != null && requestScope.LIST_JOB_UNAPPROPRIATED != null}">
+                <div class="app-content content">
+                    <div class="content-wrapper">
+                        <div class="content-wrapper-before"></div>
+                        <div class="content-header row">
+                            <div class="content-header-left col-md-4 col-12 mb-2">
+                                <h3 class="content-header-title">Job management</h3>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <!-- Basic Tables start -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">List of jobs</h4>
+                                            <c:if test="${requestScope.SUCCESS != null}">
+                                                <div style="margin-top: 20px" class="alert alert-success">
+                                                    <center>
+                                                        <strong>Success! </strong> ${requestScope.SUCCESS}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${requestScope.FAIL != null}">
+                                                <div style="margin-top: 20px" class="alert alert-danger">
+                                                    <center>
+                                                        <strong>Alert! </strong> ${requestScope.FAIL}
+                                                    </center>
+                                                </div>
+                                            </c:if>
                                         </div>
-                                    </c:if>
-                                    <c:if test="${requestScope.FAIL != null}">
-                                        <div style="margin-top: 20px" class="alert alert-danger">
-                                            <center>
-                                                <strong>Alert! </strong> ${requestScope.FAIL}
-                                            </center>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead style="text-align: center">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Title</th>
+                                                                <th>Posted by</th>
+                                                                <th>Start Date</th>
+                                                                <th>Created date</th>
+                                                                <th>Major</th>
+                                                                <th>Status</th>
+                                                                <th>Unappropriated</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody style="text-align: center">
+                                                            <c:forEach var="job" items="${requestScope.LIST_JOB_ACCEPTED}" varStatus="counter">
+                                                                <tr>
+                                                                    <th scope="row">${counter.count}</th>
+                                                                    <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a></th>
+                                                                    <th>${job.nameEmployer}</th>
+                                                                    <th>${job.startDate}</th>
+                                                                    <th>${job.createDate}</th>
+                                                                    <th>${job.idMajor}</th>
+                                                                    <th style="color: green">${job.status}</th>                     
+                                                                    <th>
+                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger">Unappropriated</button></a>
+                                                                    </th>
+                                                                </tr>       
+                                                            </c:forEach>                                                                 
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </c:if>
+                                    </div>
                                 </div>
-                                <div class="card-content collapse show">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead style="text-align: center">
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Title</th>
-                                                        <th>Posted by</th>
-                                                        <th>Start Date</th>
-                                                        <th>Created date</th>
-                                                        <th>Major</th>
-                                                        <th>Status</th>
-                                                        <th>Accept</th>
-                                                        <th>Deny</th>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Spam Job</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="thead-dark">
+                                                    <th>No</th>
+                                                    <th>Title</th>
+                                                    <th>Posted by</th>
+                                                    <th>Start Date</th>
+                                                    <th>Created date</th>
+                                                    <th>Major</th>
+                                                    <th>Status</th>
+                                                    <th>Recovery</th>
+                                                    <th>Delete</th>
                                                     </tr>
-                                                </thead>
-                                                <tbody style="text-align: center">
-                                                    <c:forEach var="job" items="${requestScope.LIST_JOB_PROCESSING}" varStatus="counter">
+                                                    </thead>
+
+                                                <tbody>
+                                                    <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}" varStatus="counter">
                                                         <tr>
                                                             <th scope="row">${counter.count}</th>
                                                             <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a></th>
@@ -190,74 +235,148 @@
                                                             <th>${job.startDate}</th>
                                                             <th>${job.createDate}</th>
                                                             <th>${job.idMajor}</th>
-                                                            <th>${job.status}</th>
+                                                            <th style="color: red">${job.status}</th>                                                                                                             
                                                             <th>
-                                                                <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Accept</button></a>
+                                                                <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Recovery</button></a>
                                                             </th>
                                                             <th>
-                                                                <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Deny</button></a>
+                                                                <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Delete</button></a>
                                                             </th>
-                                                        </tr>       
-                                                    </c:forEach>                                                                 
+                                                        </tr>  
+                                                    </c:forEach>                                              
                                                 </tbody>
-                                            </table>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Available Job</h4>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="app-content content">
+                    <div class="content-wrapper">
+                        <div class="content-wrapper-before"></div>
+                        <div class="content-header row">
+                            <div class="content-header-left col-md-4 col-12 mb-2">
+                                <h3 class="content-header-title">User management</h3>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <!-- Basic Tables start -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">List of users</h4>
+                                            <c:if test="${requestScope.SUCCESS != null}">
+                                                <div style="margin-top: 20px" class="alert alert-success">
+                                                    <center>
+                                                        <strong>Success! </strong> ${requestScope.SUCCESS}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${requestScope.FAIL != null}">
+                                                <div style="margin-top: 20px" class="alert alert-danger">
+                                                    <center>
+                                                        <strong>Alert! </strong> ${requestScope.FAIL}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead style="text-align: center">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Full Name</th>
+                                                                <th>Email</th>
+                                                                <th>Day Of Birth</th>
+                                                                <th>Phone</th>
+                                                                <th>Num Of Spam</th>
+                                                                <th>Ban</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody style="text-align: center">
+                                                            <c:forEach var="user" items="${requestScope.LIST_USER}" varStatus="counter">
+                                                                <tr>
+                                                                    <th scope="row">${counter.count}</th>
+                                                                    <th>${user.name}</th>
+                                                                    <th>${user.email}</th>
+                                                                    <th>${user.dob}</th>
+                                                                    <th>${user.phone}</th>
+                                                                    <th>${user.numOfSpam}</th>  
+                                                                    <th>
+                                                                        <a href="BanUserController?idUser=${user.id}"><button class="btn btn-danger">Ban</button></a>
+                                                                    </th>
+                                                                </tr>       
+                                                            </c:forEach>                                                                 
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-content collapse show">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Title</th>
-                                                    <th>Salary</th>
-                                                    <th>Description</th>
-                                                    <th>Duration</th>
-                                                    <th>Start Date</th>
-                                                    <th>Status</th>
-                                                    <th>Employer</th>
-                                                    <th>Major</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="job" items="${requestScope.LIST_JOB_ACCEPTED}" varStatus="counter">
-                                                    <tr>
-                                                        <th scope="row">${counter.count}</th>
-                                                        <th>${job.title}</th>
-                                                        <th>${job.salary}</th>
-                                                        <th>${job.description}</th>
-                                                        <th>${job.duration}</th>
-                                                        <th>${job.startDate}</th>
-                                                        <th>${job.status}</th>
-                                                        <th>${job.nameEmployer}</th>
-                                                        <th>${job.idMajor}</th>
-                                                    </tr>  
-                                                </c:forEach>                                              
-                                            </tbody>
-                                        </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">List of banned users</h4>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Full Name</th>
+                                                            <th>Email</th>
+                                                            <th>Day Of Birth</th>
+                                                            <th>Phone</th>
+                                                            <th>Num Of Spam</th>
+                                                            <th>Unban</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var="user" items="${requestScope.LIST_USER_BAN}" varStatus="counter">
+                                                            <tr>
+                                                                <th scope="row">${counter.count}</th>
+                                                                <th>${user.name}</th>
+                                                                <th>${user.email}</th>
+                                                                <th>${user.dob}</th>
+                                                                <th>${user.phone}</th>                    
+                                                                <th>${user.numOfSpam}</th>                    
+                                                                <th>
+                                                                    <a href="UnbanUserController?idUser=${user.id}"><button class="btn btn-success">Unban</button></a>
+                                                                </th>
+                                                            </tr>  
+                                                        </c:forEach>                                              
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </c:otherwise>
+        </c:choose>
+
         <!-- ////////////////////////////////////////////////////////////////////////////-->
 
         <footer class="footer footer-static footer-light navbar-border navbar-shadow">
             <div class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
-                <span class="float-md-left d-block d-md-inline-block">2018 &copy; Copyright
+                <span class="float-md-left d-block d-md-inline-block">  <script>
+                    document.write(new Date().getFullYear());
+                    </script> &copy; Copyright
                     <a class="text-bold-800 grey darken-2" href="https://themeselection.com"
                        target="_blank">Group 4</a></span>
                 <ul class="list-inline float-md-right d-block d-md-inline-blockd-none d-lg-block mb-0">
@@ -282,6 +401,17 @@
                     $(this).remove();
                 });
             }, 3000);
+        </script>
+        <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+        <script>
+            function active() {
+                var list_1 = document.getElementById("option-list-1");
+                var list_2 = document.getElementById("option-list-2");
+                if(list_2.className == null) {
+                    list_2.classList.add("active");
+                    list_1.classList.remove("active");
+                }
+            }
         </script>
         <script src="theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
         <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>

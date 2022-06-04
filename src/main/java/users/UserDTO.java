@@ -10,6 +10,7 @@ package users;
  * @author QUANG HUY
  */
 public class UserDTO {
+
     private int id;
     private String name;
     private String email;
@@ -18,6 +19,7 @@ public class UserDTO {
     private String bio;
     private String phone;
     private String picture;
+    private int numOfSpam;
 
     public UserDTO() {
     }
@@ -31,6 +33,18 @@ public class UserDTO {
         this.bio = bio;
         this.phone = phone;
         this.picture = picture;
+    }
+
+    public UserDTO(int id, String name, String email, String dob, String address, String bio, String phone, String picture, int numOfSpam) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.address = address;
+        this.bio = bio;
+        this.phone = phone;
+        this.picture = picture;
+        this.numOfSpam = numOfSpam;
     }
 
     public UserDTO(String name, String email, String picture) {
@@ -103,7 +117,12 @@ public class UserDTO {
         this.picture = picture;
     }
 
-    
+    public int getNumOfSpam() {
+        return numOfSpam;
+    }
 
-   
+    public void setNumOfSpam(int numOfSpam) {
+        this.numOfSpam = numOfSpam;
+    }
+
 }

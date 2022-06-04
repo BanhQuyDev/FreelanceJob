@@ -6,7 +6,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,12 +30,15 @@ public class DenyJobController extends HttpServlet {
         try {
             int idJob = Integer.parseInt(request.getParameter("idJob"));
             JobDAO dao = new JobDAO();
-            boolean checkAccept = dao.deleteJob(idJob);
-            if (checkAccept) {
-                request.setAttribute("SUCCESS", "Deny Successfully!!");
+             dao.deleteContractJob(idJob);
+             dao.deleteJobSkill(idJob);
+             dao.deleteJobApplication(idJob);
+            boolean checkDeleteJob = dao.deleteJob(idJob);
+            if (checkDeleteJob) {
+                request.setAttribute("SUCCESS", "Delete Successfully!!");
                 url = SUCCESS;
             }else{
-                request.setAttribute("FAIL", "Deny Failed!!");
+                request.setAttribute("FAIL", "Delete Failed!!");
                 url = SUCCESS;
             }
         } catch (Exception e) {

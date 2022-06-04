@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
 
@@ -32,9 +31,9 @@ public class GetAllJob extends HttpServlet {
         String url = ERROR;
         try {
             JobDAO dao = new JobDAO();
-            List<JobDTO> listJobProcessing = dao.getAllJobProcessing();
+            List<JobDTO> listJoblistJobProcessing = dao.getAllJobUnappropriated();
             List<JobDTO> listJobAccepted = dao.getAllJobAccepted();
-            request.setAttribute("LIST_JOB_PROCESSING", listJobProcessing);
+            request.setAttribute("LIST_JOB_UNAPPROPRIATED", listJoblistJobProcessing);
             request.setAttribute("LIST_JOB_ACCEPTED", listJobAccepted);
             url = SUCCESS;
         } catch (Exception e) {

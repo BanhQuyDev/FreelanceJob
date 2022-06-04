@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
 
 /**
@@ -18,14 +20,22 @@ import utils.DBUtils;
  */
 public class UserDAO {
 
-    public static final String CHECK_DUPLICATE = "SELECT email FROM tblUser WHERE email=? AND status = 1";
+    private static final String CHECK_DUPLICATE = "SELECT email FROM tblUser WHERE email=?";
     private static final String CHECK_EMAIL_LOGIN = "SELECT id_user, email, fullname, address, dob, bio, phone, avatar "
             + "FROM tblUser "
             + "WHERE email = ? AND status = 1";
-    public static final String CREATE_USER = "INSERT INTO tblUser(fullname,email,avatar,status) VALUES(?,?,?,?)";
-    public static final String CREATE_FREELANCER = "INSERT INTO tblFreelancer(id_freelancer,type) VALUES(?,?)";
-    public static final String CREATE_EMPLOYER = "INSERT INTO tblEmployer(id_employer,type) VALUES(?,?)";
-    public static final String CHECK_ROLE_ADMIN = "SELECT type FROM tblAdmin WHERE id_admin = ?";
+    private static final String CREATE_USER = "INSERT INTO tblUser(fullname,email,avatar,status) VALUES(?,?,?,?)";
+    private static final String CREATE_FREELANCER = "INSERT INTO tblFreelancer(id_freelancer,type) VALUES(?,?)";
+    private static final String CREATE_EMPLOYER = "INSERT INTO tblEmployer(id_employer,type) VALUES(?,?)";
+    private static final String CHECK_ROLE_ADMIN = "SELECT type FROM tblAdmin WHERE id_admin = ?";
+    private static final String GET_ALL_USER = "  SELECT U.id_user, U.fullname,U.email,U.dob, U.address,U.phone FROM tblUser U , tblEmployer E, tblFreelancer F "
+            + "WHERE  E.id_employer = U.id_user AND F.id_freelancer = U.id_user AND U.status = 1";
+    private static final String GET_ALL_USER_BAN = "  SELECT U.id_user, U.fullname,U.email,U.dob, U.address,U.phone FROM tblUser U , tblEmployer E, tblFreelancer F "
+            + "WHERE  E.id_employer = U.id_user AND F.id_freelancer = U.id_user AND U.status = 0";
+    private static final String BAN_USER = "UPDATE tblUser SET status = 0 WHERE id_user = ? ";
+    private static final String UNBAN_USER = "UPDATE tblUser SET status = 1 WHERE id_user = ? ";
+    private static final String NUM_OF_SPAM = "  SELECT COUNT(id_employer) as NumOfSpam\n"
+            + "  FROM tblJob WHERE id_status = 1 AND id_employer = ? GROUP BY id_employer";
 
     public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
@@ -45,7 +55,7 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-           DBUtils.closeConnection(conn, ptm);
+            DBUtils.closeConnection(conn, ptm);
         }
 
         return check;
@@ -76,9 +86,125 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DBUtils.closeConnection(conn, ptm,rs);
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return user;
+    }
+
+    public List<UserDTO> getAllUser() throws SQLException {
+        List<UserDTO> listUser = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_USER);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id_user");
+                    String fullName = rs.getString("fullname");
+                    String email = rs.getString("email");
+                    String dob = rs.getString("dob");
+                    String phone = rs.getString("phone");
+                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "",numOfSpam(id)));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listUser;
+    }
+    public int numOfSpam(int idUser)throws SQLException{
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        int numOfSpam = 0;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(NUM_OF_SPAM);
+                ptm.setInt(1, idUser);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                     numOfSpam = rs.getInt("NumOfSpam");
+                     return numOfSpam;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return numOfSpam;
+    }
+    public List<UserDTO> getAllUserBan() throws SQLException {
+        List<UserDTO> listUser = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_USER_BAN);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id_user");
+                    String fullName = rs.getString("fullname");
+                    String email = rs.getString("email");
+                    String dob = rs.getString("dob");
+                    String phone = rs.getString("phone");
+                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "",numOfSpam(id)));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listUser;
+    }
+
+    public boolean banUser(int idUser) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(BAN_USER);
+                ptm.setInt(1, idUser);
+                int value = ptm.executeUpdate();
+                result = value > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return result;
+    }
+
+    public boolean unbanUser(int idUser) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UNBAN_USER);
+                ptm.setInt(1, idUser);
+                int value = ptm.executeUpdate();
+                result = value > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return result;
     }
 
     public boolean createUser(UserDTO user) throws SQLException, ClassNotFoundException {
@@ -106,7 +232,7 @@ public class UserDAO {
                 }
             }
         } finally {
-           DBUtils.closeConnection(conn, ptm,rs);
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return check;
     }
@@ -130,7 +256,7 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DBUtils.closeConnection(conn, ptm,rs);
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return check;
     }
@@ -148,7 +274,7 @@ public class UserDAO {
                 check = ptm.executeUpdate() > 0;
             }
         } finally {
-          DBUtils.closeConnection(conn, ptm);
+            DBUtils.closeConnection(conn, ptm);
         }
         return check;
     }
@@ -166,7 +292,40 @@ public class UserDAO {
                 check = ptm.executeUpdate() > 0;
             }
         } finally {
-           DBUtils.closeConnection(conn, ptm);
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return check;
+    }
+
+    public boolean updateUser(int id, String fullName, String email, String phone, String bio, String dob, String address) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        String sql = "UPDATE [dbo].[tblUser]\n"
+                + "   SET [fullname] = ?\n"
+                + "      ,[email] = ?\n"
+                + "      ,[dob] = ?\n"
+                + "      ,[address] = ?\n"
+                + "      ,[bio] = ?\n"
+                + "      ,[phone] = ?\n"
+                + " WHERE [tblUser].[id_user] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, fullName);
+                ptm.setString(2, email);
+                ptm.setString(3, dob);
+                ptm.setString(4, address);
+                ptm.setString(5, bio);
+                ptm.setString(6, phone);
+                ptm.setInt(7, id);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
         }
         return check;
     }

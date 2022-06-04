@@ -41,7 +41,7 @@ public class PostJobController extends HttpServlet {
             String startDate = request.getParameter("startDate");
             UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
             int idEmployer = user.getId();
-            JobDTO job = new JobDTO(title, salary, description, duration, startDate, "1", idEmployer, major);
+            JobDTO job = new JobDTO(title, salary, description, duration, startDate, "2", idEmployer, major);
             JobDAO jDao = new JobDAO();
             boolean check = jDao.createJob(job);
             if (check) {
