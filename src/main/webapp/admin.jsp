@@ -121,14 +121,28 @@
             </div>
             <div class="main-menu-content">
                 <ul class="navigation navigation-main pt-5" id="main-menu-navigation" data-menu="menu-navigation">                    
-                    <li class="active">
-                        <a href="GetAllJob"><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
-                                management</span></a>
-                    </li>
-                    <li class="mt-2">
-                        <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
-                                management</span></a>
-                    </li>
+                    <c:choose>
+                        <c:when test="${requestScope.LIST_JOB_ACCEPTED != null && requestScope.LIST_JOB_UNAPPROPRIATED != null}">
+                            <li id="job_management" class="active">
+                                <a href="GetAllJob" ><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
+                                        management</span></a>
+                            </li>
+                            <li id="user_management" class="mt-2">
+                                <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
+                                        management</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li id="job_management">
+                                <a href="GetAllJob" ><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
+                                        management</span></a>
+                            </li>
+                            <li id="user_management" class="mt-2 active">
+                                <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
+                                        management</span></a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
             <div class="navigation-background"></div>
@@ -178,7 +192,7 @@
                                                                 <th>Created date</th>
                                                                 <th>Major</th>
                                                                 <th>Status</th>
-                                                                <th>Unappropriated</th>
+                                                                <th>Spam</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody style="text-align: center">
@@ -192,7 +206,7 @@
                                                                     <th>${job.idMajor}</th>
                                                                     <th style="color: green">${job.status}</th>                     
                                                                     <th>
-                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger">Unappropriated</button></a>
+                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger">Spam</button></a>
                                                                     </th>
                                                                 </tr>       
                                                             </c:forEach>                                                                 
@@ -208,7 +222,7 @@
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Unappropriated Job</h4>
+                                            <h4 class="card-title">Spam Job</h4>
                                         </div>
                                         <div class="card-content collapse show">
                                             <div class="table-responsive">
