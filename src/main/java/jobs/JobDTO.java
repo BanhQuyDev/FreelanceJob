@@ -7,6 +7,7 @@ package jobs;
 
 import java.util.List;
 import skills.SkillJobDTO;
+import utils.Utils;
 
 /**
  *
@@ -175,6 +176,10 @@ public class JobDTO {
 
     public void setSkillJob(String[] skillJob) {
         this.skillJob = skillJob;
+    }
+    
+    public String showPrice(double price) {
+        return Utils.convertPrice(price);
     }
     
 }

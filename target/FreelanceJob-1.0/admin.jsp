@@ -47,6 +47,7 @@
         <c:if test="${sessionScope.TYPE != 'admin'}">
             <c:redirect url="HomeController"></c:redirect>
         </c:if>
+        
         <nav
             class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
             <div class="navbar-wrapper">
@@ -199,7 +200,7 @@
                                                             <c:forEach var="job" items="${requestScope.LIST_JOB_ACCEPTED}" varStatus="counter">
                                                                 <tr>
                                                                     <th scope="row">${counter.count}</th>
-                                                                    <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</th>
+                                                                    <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a></th>
                                                                     <th>${job.nameEmployer}</th>
                                                                     <th>${job.startDate}</th>
                                                                     <th>${job.createDate}</th>
@@ -227,38 +228,38 @@
                                         <div class="card-content collapse show">
                                             <div class="table-responsive">
                                                 <table class="table">
-                                                    <thead class="thead-dark">
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Title</th>
-                                                            <th>Posted by</th>
-                                                            <th>Start Date</th>
-                                                            <th>Created date</th>
-                                                            <th>Major</th>
-                                                            <th>Status</th>
-                                                            <th>Recovery</th>
-                                                            <th>Delete</th>
-                                                        </tr>
+                                                    <thead style="text-align: center" class="thead-dark">
+                                                    <th>No</th>
+                                                    <th>Title</th>
+                                                    <th>Posted by</th>
+                                                    <th>Start Date</th>
+                                                    <th>Created date</th>
+                                                    <th>Major</th>
+                                                    <th>Status</th>
+                                                    <th>Recovery</th>
+                                                    <th>Delete</th>
+                                                    </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}" varStatus="counter">
-                                                            <tr>
-                                                                <th scope="row">${counter.count}</th>
-                                                                <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</th>
-                                                                <th>${job.nameEmployer}</th>
-                                                                <th>${job.startDate}</th>
-                                                                <th>${job.createDate}</th>
-                                                                <th>${job.idMajor}</th>
-                                                                <th style="color: red">${job.status}</th>                                                                                                             
-                                                                <th>
-                                                                    <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Recovery</button></a>
-                                                                </th>
-                                                                <th>
-                                                                    <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Delete</button></a>
-                                                                </th>
-                                                            </tr>  
-                                                        </c:forEach>                                              
-                                                    </tbody>
+
+                                                <tbody>
+                                                    <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}" varStatus="counter">
+                                                        <tr>
+                                                            <th scope="row">${counter.count}</th>
+                                                            <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a></th>
+                                                            <th>${job.nameEmployer}</th>
+                                                            <th>${job.startDate}</th>
+                                                            <th>${job.createDate}</th>
+                                                            <th>${job.idMajor}</th>
+                                                            <th style="color: red">${job.status}</th>                                                                                                             
+                                                            <th>
+                                                                <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Recovery</button></a>
+                                                            </th>
+                                                            <th>
+                                                                <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Delete</button></a>
+                                                            </th>
+                                                        </tr>  
+                                                    </c:forEach>                                              
+                                                </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -416,6 +417,7 @@
                 });
             }, 3000);
         </script>
+        <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
         <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
         <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>

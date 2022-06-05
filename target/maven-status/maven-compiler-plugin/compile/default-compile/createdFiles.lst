@@ -18,6 +18,7 @@ majors\MajorDTO.class
 users\GoogleUserDTO.class
 majors\MajorDAO.class
 controllers\GetAllJob.class
+utils\Utils.class
 controllers\UpdateUserSkillController.class
 controllers\GetAllUser.class
 home\HomeController.class
