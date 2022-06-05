@@ -110,7 +110,7 @@
                                 </div>
                                 <ul>
                                     <li>Start Date : <span>${job.startDate}</span></li>
-                                    <li>Price :  <span>${job.salary}VNĐ</span></li>
+                                    <li>Price :  <span>${job.showPrice(salary)}VNĐ</span></li>
                                     <li>Create date : <span>${job.createDate}</span></li>
                                 </ul>
                                 <div class="apply-btn2">

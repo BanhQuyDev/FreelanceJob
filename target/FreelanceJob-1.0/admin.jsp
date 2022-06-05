@@ -121,16 +121,6 @@
                 </ul>
             </div>
             <div class="main-menu-content">
-                <ul class="navigation navigation-main pt-5" id="" data-menu="menu-navigation">
-                    <li onclick="active()" class="option-list active" id="option-list-1">
-                        <a href="GetAllJob"><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
-                                management</span></a>
-                    </li>
-                    <li onclick="active()" class="option-list" id="option-list-2">
-                        <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
-                                management</span></a>
-                    </li>
-                </ul>
                 <ul class="navigation navigation-main pt-5" id="main-menu-navigation" data-menu="menu-navigation">                    
                     <c:choose>
                         <c:when test="${requestScope.LIST_JOB_ACCEPTED != null && requestScope.LIST_JOB_UNAPPROPRIATED != null}">
@@ -154,7 +144,6 @@
                             </li>
                         </c:otherwise>
                     </c:choose>
->>>>>>> fc2d2ff41231b73c4f9059b1e524cc307b70f4b9
                 </ul>
             </div>
             <div class="navigation-background"></div>
@@ -429,16 +418,6 @@
             }, 3000);
         </script>
         <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
-        <script>
-            function active() {
-                var list_1 = document.getElementById("option-list-1");
-                var list_2 = document.getElementById("option-list-2");
-                if(list_2.className == null) {
-                    list_2.classList.add("active");
-                    list_1.classList.remove("active");
-                }
-            }
-        </script>
         <script src="theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
         <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
         <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>
