@@ -107,7 +107,7 @@ public class UserDAO {
                     String email = rs.getString("email");
                     String dob = rs.getString("dob");
                     String phone = rs.getString("phone");
-                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "",numOfSpam(id)));
+                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "", numOfSpam(id)));
                 }
             }
         } catch (Exception e) {
@@ -117,7 +117,8 @@ public class UserDAO {
         }
         return listUser;
     }
-    public int numOfSpam(int idUser)throws SQLException{
+
+    public int numOfSpam(int idUser) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -129,8 +130,8 @@ public class UserDAO {
                 ptm.setInt(1, idUser);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                     numOfSpam = rs.getInt("NumOfSpam");
-                     return numOfSpam;
+                    numOfSpam = rs.getInt("NumOfSpam");
+                    return numOfSpam;
                 }
             }
         } catch (Exception e) {
@@ -140,6 +141,7 @@ public class UserDAO {
         }
         return numOfSpam;
     }
+
     public List<UserDTO> getAllUserBan() throws SQLException {
         List<UserDTO> listUser = new ArrayList<>();
         Connection conn = null;
@@ -156,7 +158,7 @@ public class UserDAO {
                     String email = rs.getString("email");
                     String dob = rs.getString("dob");
                     String phone = rs.getString("phone");
-                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "",numOfSpam(id)));
+                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "", numOfSpam(id)));
                 }
             }
         } catch (Exception e) {
@@ -328,5 +330,46 @@ public class UserDAO {
             DBUtils.closeConnection(conn, ptm);
         }
         return check;
+    }
+
+    public UserDTO getUserByID(int id_freelancer) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [id_user]\n"
+                + "      ,[fullname]\n"
+                + "      ,[email]\n"
+                + "      ,[dob]\n"
+                + "      ,[address]\n"
+                + "      ,[bio]\n"
+                + "      ,[phone]\n"
+                + "      ,[avatar]\n"
+                + "      ,[status]\n"
+                + "  FROM [dbo].[tblUser] WHERE [id_user] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id_freelancer);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id_user");
+                    String fullName = rs.getString("fullname");
+                    String email = rs.getString("email");
+                    String address = rs.getString("dob");
+                    String dob = rs.getString("address");
+                    String bio = rs.getString("bio");
+                    String phone = rs.getString("phone");
+                    String avatar = rs.getString("avatar");
+                    user = new UserDTO(id, fullName, email, dob, address, bio, phone, avatar);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return user;
     }
 }

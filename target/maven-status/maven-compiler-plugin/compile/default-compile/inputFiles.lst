@@ -17,6 +17,7 @@ E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\m
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\PostJobController.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\FilterMajorController.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\jobs\JobDAO.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\RenderSkillPostJob.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\DenyJobController.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\LogoutController.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\users\GoogleUserDTO.java
@@ -26,5 +27,6 @@ E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\u
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\home\JobDetailController.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\LoginGoogleController.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\GetAllJob.java
+E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\skills\SkillJobDTO.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\UpdateUserSkillController.java
 E:\FPTUniversity\FPT_Course\2022, Semester 5\SWP391\FreelanceJob\src\main\java\controllers\RenderJobDetail.java

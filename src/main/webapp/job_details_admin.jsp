@@ -106,12 +106,12 @@
                             </div>
                             <a href="GetAllJob" class="btn btn-block btn-primary btn-md" style="border-radius: 20px; margin: 10px 0px">Back</a>
                             <c:choose>
-                                <c:when test="${job.status == 'Unappropriated'}">
+                                <c:when test="${job.status == 'Spam'}">
                                     <a href="AcceptJobController?idJob=${job.idJob}" class="btn btn-success" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Recovery</a>
                                     <a href="DenyJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Delete</a>
                                 </c:when>                         
                                 <c:otherwise>
-                                    <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Unappropriated</button></a>
+                                    <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Spam</button></a>
                                 </c:otherwise>
                             </c:choose>
                         </form>

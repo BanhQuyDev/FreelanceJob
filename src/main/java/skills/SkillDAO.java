@@ -57,6 +57,43 @@ public class SkillDAO {
         return listSkill;
     }
 
+    public List<SkillFreelancerDTO> getAllSkill() throws SQLException {
+        List<SkillFreelancerDTO> listSkill = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [tblFreelancerSkill].[id_freelancer]\n"
+                + "      ,[tblSkill].[skill_name]\n"
+                + "  FROM [tblFreelancerSkill] INNER JOIN [tblSkill] "
+                + "  ON  [tblSkill].[id_skill] = [tblFreelancerSkill].[id_skill]";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_freelancer = rs.getInt("id_freelancer");
+                    String skillName = rs.getString("skill_name");
+                    listSkill.add(new SkillFreelancerDTO(id_freelancer, skillName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listSkill;
+    }
+
+
     public List<SkillDTO> getAllSkillByUser() throws SQLException {
         List<SkillDTO> listSkill = new ArrayList<>();
         Connection conn = null;
