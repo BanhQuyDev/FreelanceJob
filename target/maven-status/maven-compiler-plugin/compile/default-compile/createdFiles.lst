@@ -1,3 +1,4 @@
+contracts\ContractDTO.class
 controllers\FilterMajorController.class
 controllers\AcceptJobController.class
 home\JobListingController.class
@@ -19,10 +20,12 @@ users\GoogleUserDTO.class
 majors\MajorDAO.class
 controllers\GetAllJob.class
 controllers\UpdateUserSkillController.class
+contracts\ContractDAO.class
 controllers\GetAllUser.class
 home\HomeController.class
 controllers\UpdateProfileUserController.class
 skills\SkillJobDTO.class
+home\HistoryController.class
 users\UserDAO.class
 jobs\JobDAO.class
 controllers\ChangeModeController.class

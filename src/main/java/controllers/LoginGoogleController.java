@@ -54,6 +54,7 @@ public class LoginGoogleController extends HttpServlet {
                     boolean check = dao.checkDuplicate(user.getEmail());
                     if (check) {
                         user = dao.getUserByEmail(user.getEmail());
+                        user.setPicture(googleUser.getPicture());
                         if (user != null) {
                             boolean checkRole = dao.checkRole(user.getId());
                             if (checkRole) {
