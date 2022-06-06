@@ -53,16 +53,15 @@
                 </div>
             </div>
 
-        <%--<c:set var="count" value="${1}"/>--%>
         <div class="timeline">
             <c:forEach var="contract" items="${requestScope.LIST_CONTRACT}" varStatus="counting">
                 <c:if test="${counting.count % 2 != 0}">
                     <c:if test="${contract.contract_status == 1}">                
                         <div class="item item_done left">
-                            <div class="date">${contract.contract_create_date}</div>
+                            <div class="date">Start at : ${contract.contract_create_date}</div>
                             <i class="icon fa fa-award"></i>
                             <div class="content">
-                                <h2><strong>${contract.contract_job_tittle} <i class="fa-regular fa-bookmark ml-1"></i></strong></h2>
+                                <h2><strong>${contract.contract_job_tittle} <i class="fa-solid fa-bookmark i-done" style="color: #006E51"></i></strong></h2>
                                 <p>
                                     From <b>${contract.contract_employer_name}</b> To <b>${contract.contract_freelancer_name}</b>
                                 </p>
@@ -74,7 +73,7 @@
                     </c:if>
                     <c:if test="${contract.contract_status == 0}">                
                         <div class="item item_doing left">
-                            <div class="date">${contract.contract_create_date}</div>
+                            <div class="date">Start at : ${contract.contract_create_date}</div>
                             <i class="icon fa fa-award"></i>
                             <div class="content">
                                 <h2><strong>${contract.contract_job_tittle} <i class="fa-regular fa-bookmark ml-1"></i></strong></h2>
@@ -91,7 +90,7 @@
                 <c:if test="${counting.count % 2 == 0}">
                     <c:if test="${contract.contract_status == 0}">
                         <div class="item item_doing right">
-                            <div class="date">${contract.contract_create_date}</div>
+                            <div class="date">Start at : ${contract.contract_create_date}</div>
                             <i class="icon fa fa-gauge-high"></i>
                             <div class="content">
                                 <h2><strong>${contract.contract_job_tittle} <i class="fa-regular fa-bookmark ml-1"></i></strong></h2>
@@ -106,10 +105,10 @@
                     </c:if>
                     <c:if test="${contract.contract_status == 1}">
                         <div class="item item_done right">
-                            <div class="date">${contract.contract_create_date}</div>
+                            <div class="date">Start at : ${contract.contract_create_date}</div>
                             <i class="icon fa fa-gauge-high"></i>
                             <div class="content">
-                                <h2><strong>${contract.contract_job_tittle} <i class="fa-regular fa-bookmark ml-1"></i></strong></h2>
+                                <h2><strong>${contract.contract_job_tittle} <i class="fa-solid fa-bookmark i-done" style="color: #006E51"></i></strong></h2>
                                 <p>
                                     From <b>${contract.contract_employer_name}</b> To <b>${contract.contract_freelancer_name}</b>
                                 </p>
@@ -125,23 +124,21 @@
             <c:forEach var="contractDetail" items="${requestScope.CONTRACT_DETAIL}" varStatus="counting">    
                 <div class="modal fade" id="job_detail${counting.count}">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="card rounded-2">
+                        <div class="modal-content ">
+                            <div class="">
                                 <div class="card-img">
                                     <img class="rounded-circle" src="./assets/img/hero/detail_avar.jpg">
+                                    <p><strong>${contractDetail.contract_job_tittle}</strong></p>
                                 </div>
-                                <div class="card-title mt-2">
-                                    <p>${contractDetail.contract_job_tittle}</p>
-                                </div>
-                                <div class="card-text">
+                                <div class="card-text mt-4 mb-4">
                                     <p><strong>Start Date :</strong> ${contractDetail.contract_create_date}</p>
                                     <p><strong>Description :</strong> ${contractDetail.contract_job_description}</p>
                                     <div class="row justify-content-center">
-                                        <p class="col-4" style="margin: 0 53px"><strong>Salary :</strong><br/> ${contractDetail.contract_job_price} VND</p>
-                                        <p class="col-4" style="margin: 0 53px"><strong>Duration :</strong><br/> ${contractDetail.contract_job_duration} day(s)</p>
+                                        <p class="col-4" style="margin: 0 65px"><strong>Salary :</strong><br/> ${contractDetail.showPrice(contractDetail.contract_job_price)} VND</p>
+                                        <p class="col-4" style="margin: 0 65px"><strong>Duration :</strong><br/> ${contractDetail.showDuration(contractDetail.contract_job_duration)} day(s)</p>
                                     </div>
                                 </div>
-                                <button class="btn mt-4" data-dismiss="modal">Close</button>     
+                                <!--<button class="button-close" data-dismiss="modal"><i class="fa-thin fa-rectangle-xmark"></i></button>-->     
                             </div>
                         </div>
                     </div>
@@ -150,25 +147,6 @@
 
 
         </div>
-
-        <!--        <div class="modal fade" id="job_detail">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="card rounded-2">
-                                <div class="card-img">
-                                    <img class="rounded-circle" src="./assets/img/hero/detail_avar.jpg">
-                                </div>
-                                <div class="card-title mt-2">
-                                    <p></p>
-                                </div>
-                                <div class="card-text">
-                                    <p>Yay! It's a nice order! <br>It will arrive soon.</p>
-                                </div>
-                                <button class="btn mt-4" data-dismiss="modal">Close</button>     
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
 
 
 

@@ -128,11 +128,11 @@ body {
 }
 
 .item.left .date {
-    right: -110px;
+    right: -200px;
 }
 
 .item.right .date {
-    left: -110px;
+    left: -200px;
 }
 
 .item_done .icon {
@@ -262,6 +262,11 @@ body {
     }
 }
 
+.content .i-done{
+    margin-left: 1%;
+    text-shadow: 0px 0px 10px #006E51;
+}
+
 /*===== Addition =====*/
 .detail_button{
     transition: 0.3s linear;
@@ -302,24 +307,22 @@ body {
     }
 }
 .card-img{
-    /* padding: 20px 0;  */
+    padding: 20px 0 10px 0;
     text-align: center;
-    width: 20%;
+    background-color: #17a6f344;
+    font-family: Baskerville, Baskerville Old Face, Garamond, Times New Roman, serif;
 }
 
 .card-img img{
-    opacity: 0.8;
-    width: 25%;
+    width: 20%;
 }
-.card-title{
-    margin-bottom: unset;
-}
-.card-title p{
+
+.card-img p{
     text-align: center;
-    color: rgb(29, 226, 226);
+    color: #000000;
     font-weight: 700;
     font-size: 30px;
-    margin-bottom: unset;
+    margin: 15px 0;
 }
 .card-text p{
     color: grey;
@@ -333,25 +336,37 @@ body {
     color: #000000;
 }
 
-.btn{
-    margin: 0 40% !important;
+/*.btn{
+    text-align: center !important;
     background-color: #dc3545 !important;
     padding-right: 0.6em !important;
     padding-left: 0.6em !important;
     border-radius: 10rem !important;
     transition: 0.5s;
 }
-
-.btn:hover{
-    background-color: #c82333 !important;
-    transition: 0.5s;
+.button-close{
+    color: red;
+    background-color: red;
+    font-size: 20px;
 }
 
+.button-close:hover{
+    background-color: #c82333 !important;
+    transition: 0.5s;
+}*/
+
 /* == */
-/*body.modal-open {
+body.modal-open {
     overflow: auto !important;
 }
 
 body.modal-open[style] {
     padding-right: 0px !important;
-}*/
+}
+
+/* ==================================== */
+.modal-content{
+    border: 8px solid !important;
+    	border-width: 10px !important;
+	border-image: repeating-linear-gradient(45deg, turquoise, pink 4%) 1 !important;
+}

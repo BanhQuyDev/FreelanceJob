@@ -4,6 +4,8 @@
  */
 package contracts;
 
+import utils.Utils;
+
 /**
  *
  * @author Admin
@@ -41,8 +43,6 @@ public class ContractDTO {
         this.contract_job_description = contract_job_description;
         this.contract_job_duration = contract_job_duration;
     }
-
-    
 
     public int getId_contract() {
         return id_contract;
@@ -116,5 +116,12 @@ public class ContractDTO {
         this.contract_job_duration = contract_job_duration;
     }
 
+    public String showPrice(double price) {
+        return Utils.convertPrice(price);
+    }
+
+    public String showDuration(double duration) {
+        return Utils.convertPrice(duration);
+    }
 
 }

@@ -23,7 +23,7 @@ public class MajorDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
 
-        try {
+           try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_MAJOR);

@@ -19,6 +19,7 @@ majors\MajorDTO.class
 users\GoogleUserDTO.class
 majors\MajorDAO.class
 controllers\GetAllJob.class
+utils\Utils.class
 controllers\UpdateUserSkillController.class
 contracts\ContractDAO.class
 controllers\GetAllUser.class

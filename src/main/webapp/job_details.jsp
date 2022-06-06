@@ -71,7 +71,8 @@
                                         <ul>
                                             <li>${job.nameEmployer}</li>
                                             <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                            <li>${job.salary}VNĐ</li>
+                                            <c:set var="salary" value="${job.salary}"/>
+                                            <li>${job.showPrice(salary)} VNĐ</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -109,7 +110,7 @@
                                 </div>
                                 <ul>
                                     <li>Start Date : <span>${job.startDate}</span></li>
-                                    <li>Price :  <span>${job.salary}VNĐ</span></li>
+                                    <li>Price :  <span>${job.showPrice(salary)}VNĐ</span></li>
                                     <li>Create date : <span>${job.createDate}</span></li>
                                 </ul>
                                 <div class="apply-btn2">

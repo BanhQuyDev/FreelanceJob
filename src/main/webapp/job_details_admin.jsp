@@ -49,17 +49,18 @@
                                     />
                             </div>
                             <div class="form-group">
-                                <label for="job-title">Price</label>
+                                <label for="job-price">Price</label>
+                                <c:set var="salary" value="${job.salary}"/>
                                 <input
-                                    type="number"
+                                    type="text"
                                     name="salary"
                                     class="form-control"
                                     readonly=""
-                                    value="${job.salary}"
+                                    value="${job.showPrice(salary)} VND"
                                     />
                             </div>
                             <div class="form-group">
-                                <label for="job-location">Duration (by day)</label>
+                                <label for="job-duration">Duration (by day)</label>
                                 <input
                                     type="number"
                                     name="duration"
@@ -70,7 +71,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="job-location">Major</label>
+                                <label for="job-major">Major</label>
                                 <input
                                     type="text"
                                     name="major"
@@ -81,12 +82,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Job Description</label>
+                                <label for="job_description">Job Description</label>
                                 <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="job-location">Created By</label>
+                                <label for="job-created">Created By</label>
                                 <input
                                     type="text"
                                     name="employer"

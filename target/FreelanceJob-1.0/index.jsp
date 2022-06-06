@@ -38,6 +38,9 @@
     </head>
 
     <body>
+        <c:if test="${sessionScope.TYPE == 'admin'}">
+            <c:redirect url="LogoutController"></c:redirect>
+        </c:if>
         <jsp:include page="component/header.jsp"></jsp:include>
             <main>
                 <!-- slider Area Start-->
@@ -73,7 +76,7 @@
                         <c:forEach var="major" items="${requestScope.LIST_MAJOR}">
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-services text-center mb-30">
-                                    <a href="JobListingController?selectedMajor=${major.id_major}">
+                                    <a href="JobListingController?selectedMajor=${major.major_name}">
                                         <c:choose>
                                             <c:when test="${major.id_major == 'AI'}"> 
                                                 <div class="services-ion">
@@ -180,7 +183,8 @@
                                             <ul>
                                                 <li>${job.nameEmployer}</li>
                                                 <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                                <li>${job.salary}VNĐ</li>
+                                                <c:set var="salary" value="${job.salary}"/>
+                                                <li>${job.showPrice(salary)} VNĐ</li>
                                             </ul>
                                         </div>
                                     </div>
