@@ -35,7 +35,7 @@ public class SearchJob extends HttpServlet {
             String search = request.getParameter("search");
             JobDAO dao = new JobDAO();
             List<JobDTO> listJob = dao.getListJobByEmail(search);
-            List<JobDTO> listJobSpam = dao.getListJobByEmail(search);
+            List<JobDTO> listJobSpam = dao.getListJobSpamByEmail(search);
             request.setAttribute("LIST_JOB_ACCEPTED", listJob);
             request.setAttribute("LIST_JOB_UNAPPROPRIATED", listJobSpam);
             url = SUCCESS;

@@ -63,12 +63,12 @@ public class JobDAO {
     private static final String GET_JOB_DETAIL = "SELECT J.id_job, J.title, J.salary, J.description, J.duration, J.start_date, J.create_date, U.fullname FROM tblJob J, tblEmployer E, tblUser U\n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_status = 2 AND J.id_job = ?";
 
-    private static final String SEARCH_JOB = "SELECT J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date\n"
-            + "FROM tblUser U, tblEmployer E ,tblJob J\n"
-            + "WHERE U.id_user = E.id_employer AND E.id_employer = J.id_employer  AND U.email like ? AND J.id_status = 2";
-    private static final String SEARCH_JOB_SPAM = "SELECT J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date\n"
-            + "FROM tblUser U, tblEmployer E ,tblJob J\n"
-            + "WHERE U.id_user = E.id_employer AND E.id_employer = J.id_employer  AND U.email like ? AND J.id_status = 1";
+    private static final String SEARCH_JOB = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
+            + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
+            + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2 AND U.email like ?";
+    private static final String SEARCH_JOB_SPAM = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
+            + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
+            + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1 AND U.email like ?";
 
     public List<JobDTO> getAllJobUnappropriated() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
@@ -528,14 +528,18 @@ public class JobDAO {
                 ptm.setString(1, "%" + search + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    int id_job = rs.getInt("id_job");
+                    int jobId = rs.getInt("id_job");
                     String title = rs.getString("title");
-                    Double duration = rs.getDouble("duration");
-                    Double salary = rs.getDouble("salary");
-                    String fullname = rs.getString("fullname");
+                    double salary = rs.getDouble("salary");
+                    String description = rs.getString("description");
+                    double duration = rs.getDouble("duration");
+                    String startDate = rs.getString("start_date");
+                    String status = rs.getString("status_name");
+                    String fullName = rs.getString("fullname");
+                    String major = rs.getString("id_major");
                     String create_date = rs.getString("create_date");
                     String[] createDate = create_date.split("\\s");
-                    list.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0]));
+                    list.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major, createDate[0]));
                 }
             }
         } catch (Exception e) {
@@ -562,18 +566,22 @@ public class JobDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(SEARCH_JOB);
+                ptm = conn.prepareStatement(SEARCH_JOB_SPAM);
                 ptm.setString(1, "%" + search + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    int id_job = rs.getInt("id_job");
+                    int jobId = rs.getInt("id_job");
                     String title = rs.getString("title");
-                    Double duration = rs.getDouble("duration");
-                    Double salary = rs.getDouble("salary");
-                    String fullname = rs.getString("fullname");
+                    double salary = rs.getDouble("salary");
+                    String description = rs.getString("description");
+                    double duration = rs.getDouble("duration");
+                    String startDate = rs.getString("start_date");
+                    String status = rs.getString("status_name");
+                    String fullName = rs.getString("fullname");
+                    String major = rs.getString("id_major");
                     String create_date = rs.getString("create_date");
                     String[] createDate = create_date.split("\\s");
-                    list.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0]));
+                    list.add(new JobDTO(jobId, title, salary, description, duration, startDate, status, fullName, major, createDate[0]));
                 }
             }
         } catch (Exception e) {
