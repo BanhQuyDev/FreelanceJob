@@ -36,7 +36,12 @@ public class UserDAO {
     private static final String UNBAN_USER = "UPDATE tblUser SET status = 1 WHERE id_user = ? ";
     private static final String NUM_OF_SPAM = "  SELECT COUNT(id_employer) as NumOfSpam\n"
             + "  FROM tblJob WHERE id_status = 1 AND id_employer = ? GROUP BY id_employer";
-
+    private static final String SEARCH_USER = "SELECT U.id_user, U.fullname,U.email,U.dob, U.address,U.phone\n"
+            + "FROM tblUser U, tblEmployer E ,tblFreelancer F\n"
+            + "WHERE U.id_user = E.id_employer AND U.id_user = F.id_freelancer AND U.email like ? AND U.status = 1";
+        private static final String SEARCH_USER_BAN = "SELECT U.id_user, U.fullname,U.email,U.dob, U.address,U.phone\n"
+            + "FROM tblUser U, tblEmployer E ,tblFreelancer F\n"
+            + "WHERE U.id_user = E.id_employer AND U.id_user = F.id_freelancer AND U.email like ? AND U.status = 0";
     public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -107,7 +112,7 @@ public class UserDAO {
                     String email = rs.getString("email");
                     String dob = rs.getString("dob");
                     String phone = rs.getString("phone");
-                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "",numOfSpam(id)));
+                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "", numOfSpam(id)));
                 }
             }
         } catch (Exception e) {
@@ -117,7 +122,8 @@ public class UserDAO {
         }
         return listUser;
     }
-    public int numOfSpam(int idUser)throws SQLException{
+
+    public int numOfSpam(int idUser) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -129,8 +135,8 @@ public class UserDAO {
                 ptm.setInt(1, idUser);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                     numOfSpam = rs.getInt("NumOfSpam");
-                     return numOfSpam;
+                    numOfSpam = rs.getInt("NumOfSpam");
+                    return numOfSpam;
                 }
             }
         } catch (Exception e) {
@@ -140,6 +146,7 @@ public class UserDAO {
         }
         return numOfSpam;
     }
+
     public List<UserDTO> getAllUserBan() throws SQLException {
         List<UserDTO> listUser = new ArrayList<>();
         Connection conn = null;
@@ -156,7 +163,7 @@ public class UserDAO {
                     String email = rs.getString("email");
                     String dob = rs.getString("dob");
                     String phone = rs.getString("phone");
-                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "",numOfSpam(id)));
+                    listUser.add(new UserDTO(id, fullName, email, dob, "", "", phone, "", numOfSpam(id)));
                 }
             }
         } catch (Exception e) {
@@ -328,5 +335,77 @@ public class UserDAO {
             DBUtils.closeConnection(conn, ptm);
         }
         return check;
+    }
+    public List<UserDTO> getListUserByEmail(String search) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_USER);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int idUser = rs.getInt("id_user");
+                    String email = rs.getString("email");
+                    String fullName = rs.getString("fullname");
+                    String address = rs.getString("address");
+                    String birthday = rs.getString("dob");
+                    String phone = rs.getString("phone");
+                    list.add(new UserDTO(idUser, fullName, email, birthday, address, "", phone, ""));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    public List<UserDTO> getListUserBan(String search) throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_USER_BAN);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int idUser = rs.getInt("id_user");
+                    String email = rs.getString("email");
+                    String fullName = rs.getString("fullname");
+                    String address = rs.getString("address");
+                    String birthday = rs.getString("dob");
+                    String phone = rs.getString("phone");
+                    list.add(new UserDTO(idUser, fullName, email, birthday, address, "", phone, ""));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }
