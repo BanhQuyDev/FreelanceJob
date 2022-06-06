@@ -39,9 +39,10 @@ public class UserDAO {
     private static final String SEARCH_USER = "SELECT U.id_user, U.fullname,U.email,U.dob, U.address,U.phone\n"
             + "FROM tblUser U, tblEmployer E ,tblFreelancer F\n"
             + "WHERE U.id_user = E.id_employer AND U.id_user = F.id_freelancer AND U.email like ? AND U.status = 1";
-        private static final String SEARCH_USER_BAN = "SELECT U.id_user, U.fullname,U.email,U.dob, U.address,U.phone\n"
+    private static final String SEARCH_USER_BAN = "SELECT U.id_user, U.fullname,U.email,U.dob, U.address,U.phone\n"
             + "FROM tblUser U, tblEmployer E ,tblFreelancer F\n"
             + "WHERE U.id_user = E.id_employer AND U.id_user = F.id_freelancer AND U.email like ? AND U.status = 0";
+
     public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -336,6 +337,7 @@ public class UserDAO {
         }
         return check;
     }
+
     public List<UserDTO> getListUserByEmail(String search) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -360,18 +362,11 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
     }
+
     public List<UserDTO> getListUserBan(String search) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -396,16 +391,49 @@ public class UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
+    }
+
+    public UserDTO getUserByID(int id_freelancer) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [id_user]\n"
+                + "      ,[fullname]\n"
+                + "      ,[email]\n"
+                + "      ,[dob]\n"
+                + "      ,[address]\n"
+                + "      ,[bio]\n"
+                + "      ,[phone]\n"
+                + "      ,[avatar]\n"
+                + "      ,[status]\n"
+                + "  FROM [dbo].[tblUser] WHERE [id_user] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id_freelancer);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id_user");
+                    String fullName = rs.getString("fullname");
+                    String email = rs.getString("email");
+                    String address = rs.getString("dob");
+                    String dob = rs.getString("address");
+                    String bio = rs.getString("bio");
+                    String phone = rs.getString("phone");
+                    String avatar = rs.getString("avatar");
+                    user = new UserDTO(id, fullName, email, dob, address, bio, phone, avatar);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return user;
     }
 }

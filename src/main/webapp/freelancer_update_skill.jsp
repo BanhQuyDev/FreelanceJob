@@ -39,7 +39,7 @@
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
-        <c:if test="${sessionScope.LOGIN_USER == NULL}">
+        <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'EMPLOYER'}">
             <c:redirect url="index.jsp"></c:redirect>
         </c:if>
         <div class="container">
@@ -99,7 +99,7 @@
 
                                                 <c:if test="${sessionScope.SKILL != NULL && requestScope.SKILL_MAJOR == NULL}">
                                                     <c:forEach items="${sessionScope.SKILL}" var="S" >
-                                                        <div class="d-flex border justify-content-center align-items-center h-25"
+                                                        <div class="d-flex border justify-content-center align-items-center"
                                                              style="border-radius: 8px;
                                                              ">
                                                             <div class="w-50 m-2 text-center">
@@ -118,7 +118,7 @@
                                                 </c:if>
                                                 <c:if test="${requestScope.SKILL_MAJOR != NULL}">
                                                     <c:forEach items="${requestScope.SKILL_MAJOR}" var="S" >
-                                                        <div class="d-flex border justify-content-center align-items-center h-25"
+                                                        <div class="d-flex border justify-content-center align-items-center"
                                                              style="border-radius: 8px;
                                                              ">
                                                             <div class="w-50 m-2 text-center">
@@ -137,7 +137,7 @@
                                                 </c:if>
                                                 <c:if test="${sessionScope.LIST_SKILL != NULL && requestScope.LIST_SKILL_MAJOR == NULL}">
                                                     <c:forEach items="${sessionScope.LIST_SKILL}" var="LS"> 
-                                                        <div class="d-flex border justify-content-center align-items-center h-25"
+                                                        <div class="d-flex border justify-content-center align-items-center"
                                                              style="border-radius: 8px;
                                                              ">
                                                             <div class="w-50 m-2 text-center">
@@ -156,7 +156,7 @@
                                                 </c:if>
                                                 <c:if test="${requestScope.LIST_SKILL_MAJOR != NULL}">
                                                     <c:forEach items="${requestScope.LIST_SKILL_MAJOR}" var="LS"> 
-                                                        <div class="d-flex border justify-content-center align-items-center h-25"
+                                                        <div class="d-flex border justify-content-center align-items-center"
                                                              style="border-radius: 8px;
                                                              ">
                                                             <div class="w-50 m-2 text-center">

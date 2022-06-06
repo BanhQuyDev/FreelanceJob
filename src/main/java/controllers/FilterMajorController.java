@@ -44,7 +44,7 @@ public class FilterMajorController extends HttpServlet {
                 request.setAttribute("LIST_SKILL_MAJOR", listSkillByMajor);
                 List<SkillDTO> listSkillByUser = new SkillDAO().getAllSkillUserByMajor(user.getId(), majorId);
                 request.setAttribute("SKILL_MAJOR", listSkillByUser);
-                 MajorDTO major = new MajorDAO().getMajorName(majorId);
+                MajorDTO major = new MajorDAO().getMajorName(majorId);
                 request.setAttribute("MAJOR", major);
                 url = SUCCESS;
             }

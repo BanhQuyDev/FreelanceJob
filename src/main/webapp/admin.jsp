@@ -124,7 +124,7 @@
             <div class="navbar-header">
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item mr-auto">
-                        <a class="navbar-brand" href="admin.jsp">
+                        <a class="navbar-brand" href="GetAllJob">
                             <!-- <img class="brand-logo" style="width:100px" src="" /> -->
                             <!-- img logo -->
                             <h3 class="brand-text ">Admin Page</h3>
