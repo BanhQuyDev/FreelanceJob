@@ -19,6 +19,7 @@ D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\jobs\JobDTO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\majors\MajorDTO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\users\UserDAO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\AcceptJobController.java
+D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\sendemail\SendEmail.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\users\GoogleUserDTO.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\BanUserController.java
 D:\FPTU\Sem5\SWP391\Project\FreelanceJob\src\main\java\controllers\UpdateProfileUserController.java

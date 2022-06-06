@@ -4,6 +4,7 @@ home\JobListingController.class
 skills\SkillDTO.class
 controllers\BanUserController.class
 home\JobDetailController.class
+sendemail\SendEmail$1.class
 controllers\RenderJobDetail.class
 users\UserDTO.class
 controllers\UnbanUserController.class
@@ -27,6 +28,7 @@ skills\SkillJobDTO.class
 users\UserDAO.class
 jobs\JobDAO.class
 controllers\ChangeModeController.class
+sendemail\SendEmail.class
 controllers\UnappropriatedJobController.class
 controllers\LoginGoogleController.class
 controllers\RenderSkillPostJob.class

@@ -37,6 +37,10 @@ public class UserDAO {
     private static final String NUM_OF_SPAM = "  SELECT COUNT(id_employer) as NumOfSpam\n"
             + "  FROM tblJob WHERE id_status = 1 AND id_employer = ? GROUP BY id_employer";
 
+    private final String GET_USER_BY_ID_JOB = "SELECT U.email, U.fullname\n" +
+            "FROM tblUser U, tblEmployer E, tblJob J\n" +
+            "WHERE U.id_user = E.id_employer AND E.id_employer = J.id_employer AND J.id_job = ?";
+
     public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -328,5 +332,33 @@ public class UserDAO {
             DBUtils.closeConnection(conn, ptm);
         }
         return check;
+    }
+
+    public UserDTO getUserByIDJob(int idJob) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_USER_BY_ID_JOB);
+                ptm.setInt(1, idJob);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    String fullName = rs.getString("fullname");
+                    user = new UserDTO(fullName, email);
+                    return user;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return user;
+
     }
 }

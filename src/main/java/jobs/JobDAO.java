@@ -12,12 +12,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import majors.MajorDAO;
 import skills.SkillJobDTO;
 import utils.DBUtils;
 
 /**
- *
  * @author QUANG HUY
  */
 public class JobDAO {
@@ -25,38 +25,38 @@ public class JobDAO {
     private static final String GET_ALL_JOB_UNAPPROPRIATED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major, j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1";
-    
+
     private static final String GET_ALL_JOB_ACCEPTED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2";
-    
+
     private static final String GET_A_JOB_BY_ID = "SELECT j.id_job, j.title, j.salary, j.description, j.duration, j.start_date, s.status_name, u.fullname, j.id_major, j.create_date\n"
             + "FROM tblJob j, tblJobStatus s, tblEmployer e, tblUser u\n"
             + "WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_job = ?";
-    
+
     private static final String UPDATE_STATUS_JOB = "UPDATE tblJob SET id_status = 2 WHERE id_job = ?";
-    
+
     private static final String UPDATE_STATUS_JOB_UNAPPROPRIATED = "UPDATE tblJob SET id_status = 1 WHERE id_job = ?";
-    
+
     ///////////////Delete Job
     private static final String DELETE_JOB = "DELETE tblJob WHERE id_job = ?";
-    
+
     private static final String DELETE_CONTRACT_JOB = "DELETE tblContract WHERE id_job = ?";
-    
+
     private static final String DELETE_JOB_SKILL = "DELETE tblJobSkill WHERE id_job = ?";
-    
+
     private static final String DELETE_JOB_APPLICATION = "DELETE tblJobApplication WHERE id_job = ?";
     /////////////////////////////////////////////////
-    
+
     private static final String INSERT_JOB = "INSERT INTO tblJob(title, salary, description, duration, start_date, id_status, id_employer, id_major)\n"
             + "VALUES (?,?,?,?,?,?,?,?)";
-    
+
     private static final String GET_TOP_4_LATEST_JOB = "SELECT TOP 4 J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date FROM tblJob J, tblEmployer E, tblUser U \n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND id_status = 2 ORDER BY create_date DESC";
-    
+
     private static final String GET_ALL_JOB = "SELECT J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date FROM tblJob J, tblEmployer E, tblUser U \n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND id_status = 2";
-    
+
     private static final String GET_JOB_BY_MAJOR = "SELECT J.id_job, J.title, J.duration, J.salary, U.fullname, J.create_date \n"
             + "FROM tblJob J, tblEmployer E, tblUser U, tblMajor M\n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_major = M.id_major AND id_status = 2 AND M.id_major = (SELECT id_major FROM tblMajor WHERE major_name = ?)";
@@ -508,4 +508,5 @@ public class JobDAO {
         }
         return list;
     }
+
 }
