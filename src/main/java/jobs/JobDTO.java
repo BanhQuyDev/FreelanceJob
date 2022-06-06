@@ -5,8 +5,6 @@
  */
 package jobs;
 
-import java.util.List;
-import skills.SkillJobDTO;
 import utils.Utils;
 
 /**
@@ -27,10 +25,19 @@ public class JobDTO {
     private String idMajor;
     private String createDate;
     private String[]skillJob;
+
     public JobDTO() {
-        
+
     }
-   
+
+    public JobDTO(int idJob) {
+        this.idJob = idJob;
+    }
+    public JobDTO(int idJob, String title) {
+        this.idJob = idJob;
+        this.title = title;
+    }
+
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String nameEmployer, String idMajor, String createDate) {
         this.idJob = idJob;
         this.title = title;
@@ -44,7 +51,6 @@ public class JobDTO {
         this.idMajor = idMajor;
         this.createDate = createDate;
     }
-    
 
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor) {
         this.idJob = idJob;
@@ -57,6 +63,7 @@ public class JobDTO {
         this.nameEmployer = nameEmployer;
         this.idMajor = idMajor;
     }
+
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate) {
         this.idJob = idJob;
         this.title = title;
@@ -70,7 +77,7 @@ public class JobDTO {
         this.createDate = createDate;
     }
 
-    public JobDTO(String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String idMajor,String[]skillJob) {
+    public JobDTO(String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String idMajor, String[] skillJob) {
         this.title = title;
         this.salary = salary;
         this.description = description;
@@ -81,7 +88,7 @@ public class JobDTO {
         this.idMajor = idMajor;
         this.skillJob = skillJob;
     }
-    
+
     public int getIdJob() {
         return idJob;
     }
@@ -170,16 +177,17 @@ public class JobDTO {
         this.idEmployer = idEmployer;
     }
 
-    public String[]getSkillJob() {
+    public String[] getSkillJob() {
+
         return skillJob;
     }
 
     public void setSkillJob(String[] skillJob) {
         this.skillJob = skillJob;
     }
+
     
     public String showPrice(double price) {
         return Utils.convertPrice(price);
     }
-    
 }

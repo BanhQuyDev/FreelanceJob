@@ -1,3 +1,5 @@
+contract\ContractDAO.class
+controllers\FilterFreelancerApplyController.class
 controllers\FilterMajorController.class
 controllers\AcceptJobController.class
 home\JobListingController.class
@@ -18,6 +20,9 @@ controllers\PostJobController.class
 majors\MajorDTO.class
 users\GoogleUserDTO.class
 majors\MajorDAO.class
+controllers\ApproveFreelancerController.class
+jobs\JobApplicationDTO.class
+skills\SkillFreelancerDTO.class
 controllers\GetAllJob.class
 utils\Utils.class
 controllers\UpdateUserSkillController.class
@@ -27,9 +32,12 @@ home\HomeController.class
 controllers\UpdateProfileUserController.class
 skills\SkillJobDTO.class
 users\UserDAO.class
+controllers\FreeLancerDetailController.class
 jobs\JobDAO.class
 controllers\ChangeModeController.class
+contract\ContractDTO.class
 controllers\UnappropriatedJobController.class
+controllers\GetAllFreelancerApplyController.class
 controllers\LoginGoogleController.class
 controllers\RenderSkillPostJob.class
 jobs\JobDTO.class

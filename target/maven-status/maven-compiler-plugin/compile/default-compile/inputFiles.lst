@@ -1,5 +1,6 @@
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\RenderJobDetail.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillFreelancerDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobListingController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\HomeController.java
@@ -8,16 +9,21 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LogoutControlle
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\PostJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\RenderSkillPostJob.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\SearchUser.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\ApproveFreelancerController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\SearchJob.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UnappropriatedJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillJobDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\UserDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\DBUtils.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\FreeLancerDetailController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\FilterFreelancerApplyController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\BanUserController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LoginGoogleController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\contract\ContractDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllUser.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UpdateUserSkillController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllFreelancerApplyController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\majors\MajorDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\GoogleUserDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobDetailController.java
@@ -32,4 +38,6 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\Utils.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\AcceptJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\GoogleUtils.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\contract\ContractDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\FilterMajorController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobApplicationDTO.java

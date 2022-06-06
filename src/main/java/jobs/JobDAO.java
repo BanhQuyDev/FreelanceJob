@@ -360,12 +360,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm);
         }
         return check;
     }
@@ -516,6 +511,179 @@ public class JobDAO {
         return list;
     }
 
+    public List<JobApplicationDTO> getAllFreelancerApply(int id) throws SQLException {
+        List<JobApplicationDTO> listUser = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [tblJobApplication].[id_freelancer], [tblUser].[fullname], [tblUser].[email], [tblJob].[title], [tblUser].[avatar], [tblJob].[id_job]\n"
+                + "  FROM ([tblUser] INNER JOIN [tblFreelancer] ON [tblUser].id_user = [tblFreelancer].[id_freelancer]\n"
+                + "  INNER JOIN [tblJobApplication] ON [tblJobApplication].[id_freelancer] = [tblFreelancer].[id_freelancer] \n"
+                + "  INNER JOIN [tblJob] ON [tblJob].[id_job] = [tblJobApplication].[id_job]) WHERE [tblJob].[id_employer] = ? AND [tblJobApplication].[status] IS NULL";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_freelancer = rs.getInt("id_freelancer");
+                    String fullName = rs.getString("fullname");
+                    String email = rs.getString("email");
+                    String title_job = rs.getString("title");
+                    String picture = rs.getString("avatar");
+                    int id_job = rs.getInt("id_job");
+                    listUser.add(new JobApplicationDTO(id_freelancer, fullName, email, title_job, picture, id_job));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listUser;
+    }
+
+    public boolean updateFreelancerAppy(int id_job, int id_freelancer) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        String sql = "UPDATE [dbo].[tblJobApplication]\n"
+                + "   SET [status] = ?\n"
+                + " WHERE [id_freelancer] = ? AND [id_job] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setBoolean(1, true);
+                ptm.setInt(2, id_freelancer);
+                ptm.setInt(3, id_job);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return check;
+    }
+
+    public boolean updateFreelancerDeny(int id_job, int id_freelancer) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        String sql = "UPDATE [dbo].[tblJobApplication]\n"
+                + "   SET [status] = ?\n"
+                + " WHERE  [id_job] = ? AND [id_freelancer] NOT IN (?)";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setBoolean(1, false);
+                ptm.setInt(2, id_job);
+                ptm.setInt(3, id_freelancer);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return check;
+    }
+
+    public List<JobDTO> getAllJobByEmployeer(int id) throws SQLException {
+        List<JobDTO> listJob = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [id_job]\n"
+                + "      ,[title]\n"
+                + "  FROM [FPTFreelanceJob].[dbo].[tblJob] WHERE [id_employer] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_job = rs.getInt("id_job");
+                    String title_job = rs.getString("title");
+                    listJob.add(new JobDTO(id_job, title_job));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listJob;
+    }
+
+    public JobDTO getAllJobByEmployeer(int id, int id_job) throws SQLException {
+        JobDTO job = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [id_job]\n"
+                + "      ,[title]\n"
+                + "  FROM [FPTFreelanceJob].[dbo].[tblJob] WHERE [id_employer] = ? AND [id_job] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id);
+                ptm.setInt(2, id_job);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int idJob = rs.getInt("id_job");
+                    String title_job = rs.getString("title");
+                    job = new JobDTO(idJob, title_job);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return job;
+    }
+
+    public List<JobApplicationDTO> getFreelancerApplyByJob(int id, int id_job) throws SQLException {
+        List<JobApplicationDTO> listUser = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [tblJobApplication].[id_freelancer], [tblUser].[fullname], [tblUser].[email], [tblJob].[title], [tblUser].[avatar], [tblJob].[id_job]\n"
+                + "  FROM ([tblUser] INNER JOIN [tblFreelancer] ON [tblUser].id_user = [tblFreelancer].[id_freelancer]\n"
+                + "  INNER JOIN [tblJobApplication] ON [tblJobApplication].[id_freelancer] = [tblFreelancer].[id_freelancer] \n"
+                + "  INNER JOIN [tblJob] ON [tblJob].[id_job] = [tblJobApplication].[id_job]) WHERE [tblJob].[id_employer] = ? AND"
+                + "  [tblJob].[id_job] = ? AND [tblJobApplication].[status] IS NULL";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id);
+                ptm.setInt(2, id_job);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_freelancer = rs.getInt("id_freelancer");
+                    String fullName = rs.getString("fullname");
+                    String email = rs.getString("email");
+                    String title_job = rs.getString("title");
+                    String picture = rs.getString("avatar");
+                    int idJob = rs.getInt("id_job");
+                    listUser.add(new JobApplicationDTO(id_freelancer, fullName, email, title_job, picture, idJob));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listUser;
+    }
+
     public List<JobDTO> getListJobByEmail(String search) throws SQLException {
         List<JobDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -545,15 +713,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
     }
@@ -587,15 +747,7 @@ public class JobDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
     }
