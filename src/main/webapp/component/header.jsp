@@ -54,10 +54,10 @@
                                                 <li>
                                                     <a style="color: black" href="#">Job Management</a>
                                                     <ul class="submenu">
-                                                        <li><a href="#">List Job Apply</a></li>
+                                                        <li><a href="job_management.jsp">List Job Apply</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">History</a></li>
+                                                <li><a href="HistoryController">History</a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                                 <li><a href="RenderSkillPostJob">Post a Job </a></li>
@@ -68,7 +68,7 @@
                                                         <li><a href="GetAllFreelancerApplyController">List Freelancer Apply</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">History</a></li>
+                                                <li><a href="HistoryController">History</a></li>
                                                 </c:when>
                                                 <c:otherwise>
                                                 <li><a href="JobListingController">Find Jobs </a></li>

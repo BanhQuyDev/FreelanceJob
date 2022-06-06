@@ -1,12 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers;
+package home;
 
 import contracts.ContractDAO;
+import contracts.ContractDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,45 +16,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import jobs.JobApplicationDTO;
-import jobs.JobDAO;
 import users.UserDTO;
 
 /**
  *
- * @author Thiep Ngo
+ * @author Admin
  */
-@WebServlet(name = "ApproveFreelancerController", urlPatterns = {"/ApproveFreelancerController"})
-public class ApproveFreelancerController extends HttpServlet {
+@WebServlet(name = "HistoryController", urlPatterns = {"/HistoryController"})
+public class HistoryController extends HttpServlet {
 
-    private static final String ERROR = "index.jsp";
-    private static final String SUCCESS = "list_freelancer_apply.jsp";
+    private static final String ERROR = "history.jsp";
+    private static final String SUCCESS = "history.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        HttpSession session = request.getSession();
         try {
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-            int id_job = Integer.parseInt(request.getParameter("id_job"));
-            int id_freelancer = Integer.parseInt(request.getParameter("id_freelancer"));
-            boolean checkApprove = new JobDAO().updateFreelancerAppy(id_job, id_freelancer);
-            if (checkApprove) {
-                boolean checkDeny = new JobDAO().updateFreelancerDeny(id_job, id_freelancer);
-                if (checkDeny) {
-                    List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
-                    request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
-                    boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                    if (checkAddContract) {
-                        request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
-                        url = SUCCESS;
-                    }
-                }
-            }
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            ContractDAO contractDao = new ContractDAO();
+            List<ContractDTO> listContract = contractDao.getAllContractForHistory(loginUser.getId());
 
+            List<ContractDTO> listContractDetail = new ArrayList<>();
+            for (ContractDTO contractDTO : listContract) {
+                listContractDetail.add(contractDao.getContractById(contractDTO.getId_contract()));
+            }
+            request.setAttribute("CONTRACT_DETAIL", listContractDetail);
+
+            request.setAttribute("LIST_CONTRACT", listContract);
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at GetAllJob:" + e.toString());
+            log("Error at HistoryController : " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
