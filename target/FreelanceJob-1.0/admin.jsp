@@ -257,7 +257,6 @@
                                                     <th>Delete</th>
                                                     </tr>
                                                     </thead>
-
                                                     <tbody>
                                                         <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}" varStatus="counter">
                                                             <tr>
@@ -364,7 +363,7 @@
                                         <div class="card-content collapse show">
                                             <div class="table-responsive">
                                                 <table class="table">
-                                                    <thead class="thead-dark">
+                                                    <thead style="text-align: center" class="thead-dark">
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Full Name</th>
@@ -377,7 +376,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <c:forEach var="user" items="${requestScope.LIST_USER_BAN}" varStatus="counter">
-                                                            <tr>
+                                                            <tr style="text-align: center">
                                                                 <th scope="row">${counter.count}</th>
                                                                 <th>${user.name}</th>
                                                                 <th>${user.email}</th>

@@ -43,6 +43,10 @@ public class UserDAO {
             + "FROM tblUser U, tblEmployer E ,tblFreelancer F\n"
             + "WHERE U.id_user = E.id_employer AND U.id_user = F.id_freelancer AND U.email like ? AND U.status = 0";
 
+    private final String GET_USER_BY_ID_JOB = "SELECT U.email, U.fullname\n" +
+            "FROM tblUser U, tblEmployer E, tblJob J\n" +
+            "WHERE U.id_user = E.id_employer AND E.id_employer = J.id_employer AND J.id_job = ?";
+
     public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -305,39 +309,6 @@ public class UserDAO {
         return check;
     }
 
-    public boolean updateUser(int id, String fullName, String email, String phone, String bio, String dob, String address) throws SQLException {
-        boolean check = false;
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        String sql = "UPDATE [dbo].[tblUser]\n"
-                + "   SET [fullname] = ?\n"
-                + "      ,[email] = ?\n"
-                + "      ,[dob] = ?\n"
-                + "      ,[address] = ?\n"
-                + "      ,[bio] = ?\n"
-                + "      ,[phone] = ?\n"
-                + " WHERE [tblUser].[id_user] = ?";
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                ptm = conn.prepareStatement(sql);
-                ptm.setString(1, fullName);
-                ptm.setString(2, email);
-                ptm.setString(3, dob);
-                ptm.setString(4, address);
-                ptm.setString(5, bio);
-                ptm.setString(6, phone);
-                ptm.setInt(7, id);
-                check = ptm.executeUpdate() > 0 ? true : false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DBUtils.closeConnection(conn, ptm);
-        }
-        return check;
-    }
-
     public List<UserDTO> getListUserByEmail(String search) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -395,7 +366,6 @@ public class UserDAO {
         }
         return list;
     }
-
     public UserDTO getUserByID(int id_freelancer) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -435,5 +405,65 @@ public class UserDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return user;
+    }
+    public boolean updateUser(int id, String fullName, String email, String phone, String bio, String dob, String address) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        String sql = "UPDATE [dbo].[tblUser]\n"
+                + "   SET [fullname] = ?\n"
+                + "      ,[email] = ?\n"
+                + "      ,[dob] = ?\n"
+                + "      ,[address] = ?\n"
+                + "      ,[bio] = ?\n"
+                + "      ,[phone] = ?\n"
+                + " WHERE [tblUser].[id_user] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setString(1, fullName);
+                ptm.setString(2, email);
+                ptm.setString(3, dob);
+                ptm.setString(4, address);
+                ptm.setString(5, bio);
+                ptm.setString(6, phone);
+                ptm.setInt(7, id);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return check;
+    }
+
+    public UserDTO getUserByIDJob(int idJob) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_USER_BY_ID_JOB);
+                ptm.setInt(1, idJob);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    String fullName = rs.getString("fullname");
+                    user = new UserDTO(fullName, email);
+                    return user;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return user;
+
     }
 }

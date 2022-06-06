@@ -25,6 +25,7 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllUser.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UpdateUserSkillController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllFreelancerApplyController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\majors\MajorDAO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\sendemail\SendEmail.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\GoogleUserDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobDetailController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\majors\MajorDTO.java

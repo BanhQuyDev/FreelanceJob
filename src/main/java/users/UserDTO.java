@@ -10,7 +10,6 @@ package users;
  * @author QUANG HUY
  */
 public class UserDTO {
-
     private int id;
     private String name;
     private String email;
@@ -51,6 +50,10 @@ public class UserDTO {
         this.name = name;
         this.email = email;
         this.picture = picture;
+    }
+    public UserDTO(String name, String email) {
+        this.name = name;
+        this.email = email;
     }
 
     public int getId() {

@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jobs.JobDAO;
+import jobs.JobDTO;
+import sendemail.SendEmail;
+import users.UserDAO;
+import users.UserDTO;
 
 /**
  *
@@ -28,12 +32,18 @@ public class UnappropriatedJobController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
             int idJob = Integer.parseInt(request.getParameter("idJob"));
             JobDAO dao = new JobDAO();
-            boolean checkAccept = dao.unappropriatedJob(idJob); 
-            if(checkAccept){
+            UserDAO userDao = new UserDAO();
+            JobDTO job = dao.getAJobByID(idJob);
+            UserDTO user = userDao.getUserByIDJob(idJob);
+            boolean checkAccept = dao.unappropriatedJob(idJob);
+            boolean checkSendEmail = SendEmail.sendEmailSpam(job, user);
+            if(checkAccept == true && checkSendEmail == true){
                 request.setAttribute("SUCCESS", "Report Successfully!!");
                 url = SUCCESS;
             }else{

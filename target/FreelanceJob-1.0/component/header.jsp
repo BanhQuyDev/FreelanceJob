@@ -114,8 +114,8 @@
                                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i><button class="btn btn-primary">Employer</button></a>
-                                                                </c:when>
-                                                                <c:otherwise>
+                                                        </c:when>
+                                                        <c:otherwise>
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i> Employer</a>
                                                         </c:otherwise>
