@@ -112,7 +112,7 @@
                                     <a href="DenyJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Delete</a>
                                 </c:when>                         
                                 <c:otherwise>
-                                    <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Spam</button></a>
+                                    <a href="UnappropriatedJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Spam</a>
                                 </c:otherwise>
                             </c:choose>
                         </form>

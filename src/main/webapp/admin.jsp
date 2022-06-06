@@ -47,7 +47,7 @@
         <c:if test="${sessionScope.TYPE != 'admin'}">
             <c:redirect url="HomeController"></c:redirect>
         </c:if>
-        
+
         <nav
             class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
             <div class="navbar-wrapper">
@@ -62,17 +62,34 @@
                                         class="ficon ft-search"></i></a>
                                 <ul class="dropdown-menu">
                                     <li class="arrow_box">
-                                        <form>
-                                            <div class="input-group search-box">
-                                                <div class="position-relative has-icon-right full-width">
-                                                    <input class="form-control" id="search" type="text"
-                                                           placeholder="Search here..." />
-                                                    <div class="form-control-position navbar-search-close">
-                                                        <i class="ft-x"> </i>
+                                        <c:choose>
+                                            <c:when test="${requestScope.LIST_JOB_ACCEPTED != null && requestScope.LIST_JOB_UNAPPROPRIATED != null}">
+                                                <form action="SearchJob">
+                                                    <div class="input-group search-box">
+                                                        <div class="position-relative has-icon-right full-width">
+                                                            <input class="form-control" id="search" type="text" name="search"
+                                                                   placeholder="Search here..." />
+                                                            <div class="form-control-position navbar-search-close">
+                                                                <i class="ft-x"> </i>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </form>
+                                                </form>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <form action="SearchUser">
+                                                    <div class="input-group search-box">
+                                                        <div class="position-relative has-icon-right full-width">
+                                                            <input class="form-control" id="search" type="text" name="search"
+                                                                   placeholder="Search here..." />
+                                                            <div class="form-control-position navbar-search-close">
+                                                                <i class="ft-x"> </i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </li>
                                 </ul>
                             </li>
@@ -241,25 +258,25 @@
                                                     </tr>
                                                     </thead>
 
-                                                <tbody>
-                                                    <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}" varStatus="counter">
-                                                        <tr>
-                                                            <th scope="row">${counter.count}</th>
-                                                            <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a></th>
-                                                            <th>${job.nameEmployer}</th>
-                                                            <th>${job.startDate}</th>
-                                                            <th>${job.createDate}</th>
-                                                            <th>${job.idMajor}</th>
-                                                            <th style="color: red">${job.status}</th>                                                                                                             
-                                                            <th>
-                                                                <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Recovery</button></a>
-                                                            </th>
-                                                            <th>
-                                                                <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Delete</button></a>
-                                                            </th>
-                                                        </tr>  
-                                                    </c:forEach>                                              
-                                                </tbody>
+                                                    <tbody>
+                                                        <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}" varStatus="counter">
+                                                            <tr>
+                                                                <th scope="row">${counter.count}</th>
+                                                                <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a></th>
+                                                                <th>${job.nameEmployer}</th>
+                                                                <th>${job.startDate}</th>
+                                                                <th>${job.createDate}</th>
+                                                                <th>${job.idMajor}</th>
+                                                                <th style="color: red">${job.status}</th>                                                                                                             
+                                                                <th>
+                                                                    <a href="AcceptJobController?idJob=${job.idJob}"><button class="btn btn-success">Recovery</button></a>
+                                                                </th>
+                                                                <th>
+                                                                    <a href="DenyJobController?idJob=${job.idJob}"><button class="btn btn-danger">Delete</button></a>
+                                                                </th>
+                                                            </tr>  
+                                                        </c:forEach>                                              
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
