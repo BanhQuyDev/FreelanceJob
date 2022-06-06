@@ -6,6 +6,7 @@ home\JobListingController.class
 skills\SkillDTO.class
 controllers\BanUserController.class
 home\JobDetailController.class
+sendemail\SendEmail$1.class
 controllers\RenderJobDetail.class
 controllers\SearchUser.class
 users\UserDTO.class
@@ -35,6 +36,7 @@ users\UserDAO.class
 controllers\FreeLancerDetailController.class
 jobs\JobDAO.class
 controllers\ChangeModeController.class
+sendemail\SendEmail.class
 contract\ContractDTO.class
 controllers\UnappropriatedJobController.class
 controllers\GetAllFreelancerApplyController.class
