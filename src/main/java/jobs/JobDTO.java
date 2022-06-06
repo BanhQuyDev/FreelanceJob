@@ -190,4 +190,7 @@ public class JobDTO {
     public String showPrice(double price) {
         return Utils.convertPrice(price);
     }
+    public String showDuration(double duration) {
+        return Utils.convertPrice(duration);
+    }
 }

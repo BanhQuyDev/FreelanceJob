@@ -130,7 +130,7 @@
                                             <a href="JobDetailController?jobId=${job.idJob}"><h4>${job.title}</h4></a>
                                             <ul>
                                                 <li>${job.nameEmployer}</li>
-                                                <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
+                                                <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>
                                                     <c:set var="salary" value="${job.salary}"/>
                                                 <li>${job.showPrice(salary)} VNĐ</li>
                                             </ul>
