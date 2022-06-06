@@ -77,61 +77,9 @@
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-services text-center mb-30">
                                     <a href="JobListingController?selectedMajor=${major.major_name}">
-                                        <c:choose>
-                                            <c:when test="${major.id_major == 'AI'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-microchip-ai"></i></span>
-                                                </div>
-                                            </c:when>
-
-                                            <c:when test="${major.id_major == 'EN'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-microchip-ai"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${major.id_major == 'GD'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-microchip-ai"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${major.id_major == 'IA'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-house-lock"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${major.id_major == 'IB'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-microchip-ai"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${major.id_major == 'JP'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-microchip-ai"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${major.id_major == 'MC'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-users"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${major.id_major == 'MK'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-microchip-ai"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${major.id_major == 'SE'}"> 
-                                                <div class="services-ion">
-                                                    <span><i class="fa-solid fa-computer"></i></span>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="services-ion">
-                                                    <!--<span><i class="fa-solid fa-computer"></i></span>-->
-                                                    <span class="flaticon-cms"></span>
-                                                </div>
-                                            </c:otherwise>
-                                        </c:choose>
-
+                                        <div class="services-ion">
+                                            <span ><img style="width: 60%;margin-bottom:10px" src="${major.image_major}"/></span>
+                                        </div>                                       
                                         <div class="services-cap">
                                             <h5>${major.id_major}</h5>
                                             <span>${major.major_name}</span>
@@ -183,7 +131,7 @@
                                             <ul>
                                                 <li>${job.nameEmployer}</li>
                                                 <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                                <c:set var="salary" value="${job.salary}"/>
+                                                    <c:set var="salary" value="${job.salary}"/>
                                                 <li>${job.showPrice(salary)} VNĐ</li>
                                             </ul>
                                         </div>

@@ -14,7 +14,7 @@ import utils.DBUtils;
 
 public class MajorDAO {
 
-    private final String GET_ALL_MAJOR = "SELECT id_major, major_name FROM tblMajor";
+    private final String GET_ALL_MAJOR = "SELECT id_major, major_name,img_major FROM tblMajor";
     private static final String GET_MAJOR_NAME = "SELECT major_name FROM tblMajor WHERE id_major = ?";
 
     public List<MajorDTO> getAllMajor() throws SQLException {
@@ -55,7 +55,8 @@ public class MajorDAO {
                 while (rs.next()) {
                     String majorId = rs.getString("id_major");
                     String majorName = rs.getString("major_name");
-                    majorList.add(new MajorDTO(majorId, majorName));
+                    String img_major = rs.getString("img_major");
+                    majorList.add(new MajorDTO(majorId, majorName,img_major));
                 }
             }
         } catch (Exception e) {
