@@ -38,7 +38,7 @@
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
-        <c:if test="${sessionScope.LOGIN_USER == NULL}">
+        <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'FREELANCER' }">
             <c:redirect url="index.jsp"></c:redirect>
         </c:if>
         <div class="container">
@@ -48,7 +48,7 @@
                     <ol class="breadcrumb" style="background-color: #fb246a">
                         <li class="breadcrumb-item "><a href="index.jsp">Home</a></li>
                         <li class="breadcrumb-item active">
-                            <a href="javascript:void(0)">Freelancer</a>
+                            <a href="GetAllFreelancerApplyController">List Freelancers</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             Freelancer Profile

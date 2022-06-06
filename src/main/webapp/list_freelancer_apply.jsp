@@ -35,131 +35,117 @@
 
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
-            <main>
-                <!-- Hero Area Start-->
-                <div class="slider-area ">
-                    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="hero-cap text-center">
-                                        <h2>Get your job</h2>
-                                    </div>
+        <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'FREELANCER' }">
+            <c:redirect url="index.jsp"></c:redirect>
+        </c:if>
+        <main>
+            <!-- Hero Area Start-->
+            <div class="slider-area ">
+                <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="hero-cap text-center">
+                                    <h2>Get your job</h2>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Hero Area End -->
-                <!-- Job List Area Start -->
-                <div class="job-listing-area pt-120 pb-120">
-                    <div class="container">
-                        <div class="row">
-                            <!-- Left content -->
-                            <div class="col-xl-2 col-lg-2 col-md-4">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="small-section-tittle2 mb-45">
-                                            <div class="ion"> <svg 
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    width="20px" height="12px">
-                                                <path fill-rule="evenodd"  fill="rgb(27, 207, 107)"
-                                                      d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
-                                                </svg>
-                                            </div>
-                                            <h4>Filter Jobs</h4>
-                                        </div>
-                                    </div>
-                                </div>
+            </div>
+            <!-- Hero Area End -->
+            <!-- Job List Area Start -->
+            <div class="job-listing-area pt-50 pb-120">
+                <div class="container">
+                    <div class="row">
+                        <!-- Left content -->
+                        <div class="col-xl-12 col-lg-12 col-md-4">
+                            <div class="row mb-3" style="display: flex; flex-direction: row; justify-content: left; align-items: center">
                                 <!-- Job Category Listing start -->
-                                <div class="job-category-listing mb-50">
-                                    <!-- single one -->
-                                    <form action="JobListingController" method="GET">
-                                        <div class="single-listing">
-                                            <div class="small-section-tittle2">
-                                                <!--                                                <button style="padding: 20px; margin-left: 60%; border-radius: 8px" class="btn btn-info" type="submit">Filter</button>-->
-                                                <h4>By Job</h4>
-                                            </div>
-                                            <!-- Select job items start -->
-                                            <select name="selectedMajor" onchange="this.form.submit()">
-                                            <%--<c:choose>--%>
-                                            <%--<c:when test="${!empty requestScope.SELECTED_MAJOR}">--%>
-                                            <option value="All">All Job</option>
-                                            <%--</c:when>--%>
-                                            <%--<c:otherwise>--%>
-                                                <!--<option value="${requestScope.SELECTED_MAJOR}">${requestScope.SELECTED_MAJOR}</option>-->
-                                            <%--</c:otherwise>--%>
-                                            <%--</c:choose>--%>
-                                            <c:forEach var="major" items="${requestScope.LIST_MAJOR}">
-                                                <option value="${major.id_major.trim()}">${major.id_major}</option>
-                                            </c:forEach>
-                                        </select>
+                                <!-- single one -->
+                                <div class="count-job font-weight-bold text-monospace">
+                                    <span>List Freelancers:</span>
+                                </div>
+                                <form action="FilterFreelancerApplyController" method="GET">                                         
+                                    <!-- Select job items start -->
+                                    <select name="selectedJob" onchange="this.form.submit()">
+                                        <option value="0">All Job</option>                   
+                                        <c:forEach var="job" items="${sessionScope.LIST_JOB_EMPLOYEER}">
+                                            <option ${job.idJob == requestScope.JOB_SELECTED ? "selected":""} value="${job.idJob}">${job.title}</option>
+                                        </c:forEach>
+                                    </select>
 
-                                        <!--  Select job items End-->   
-                                    </div>
+                                    <!--  Select job items End-->   
                                 </form>
+
+                                <!-- Job Category Listing End -->
                             </div>
-                            <!-- Job Category Listing End -->
                         </div>
                         <!-- Right content -->
-                        <div class="col-xl-10 col-lg-10 col-md-8">
+                        <div class="col-xl-12 col-lg-12 col-md-8">
                             <!-- Featured_job_start -->
                             <section class="featured-job-area">
                                 <div class="container">
                                     <!-- Count of Job list Start -->
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="count-job mb-35 font-weight-bold text-monospace">
-                                                <span>${requestScope.LIST_JOB.size()} List Freelancers:</span>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <!-- Count of Job list End -->
                                     <!-- single-job-content -->
-                                    <div  style="display: grid; grid-template-columns:repeat(3, 1fr); gap: 10px">
-                                        <c:forEach items="${requestScope.LIST_FREELANCER_APPLY}" var="LF">
-                                            <div class="w-100 h-100 p-3" style="border-radius: 8px; border: 1px solid #fb246a">
-                                                <div class="freelancer d-flex border-bottom" style="gap: 10px; padding-bottom: 10px;">
-                                                    <div class="freelancer_img ">
-                                                        <img class="border rounded-circle" style="object-fit: cover; flex-shrink: 0" src=${LF.picture} alt=${LF.fullName}/>
-                                                    </div>
-                                                    <div class="freelancer_info d-flex flex-column" style="row-gap: 20px;">
-                                                        <div class="freelancer_info_name font-weight-bold text-primary">
-                                                            <span>${LF.fullName}</span>
-                                                        </div>
-                                                        <div class="freelancer_info_email font-weight-bold" style="color: #FAC213">
-                                                            <span>${LF.email}</span>
-                                                        </div>
-                                                        <div class="freelancer_info_email font-weight-normal font-weight-bold d-flex flex-column">
-                                                            <span style="outline-color: #0063FF">Apply for Job:</span>
-                                                            <a class="text-center text-success" href="#">${LF.title}</a>
-                                                        </div>
-                                                    </div>
+                                    <c:choose>
+                                        <c:when test="${requestScope.LIST_FREELANCER_APPLY.size() == 0}">
+                                            <div class="text-center">
+                                                <span class="text-danger font-weight-bold">Empty List</span>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${requestScope.LIST_FREELANCER_APPLY != NULL}">
+                                            <c:if test="${requestScope.SUCCESS_MESSAGE_APPROVE != null}">
+                                                <div class="alert alert-success">
+                                                    <center>
+                                                        <strong>Success!</strong> ${requestScope.SUCCESS_MESSAGE_APPROVE}
+                                                    </center>
                                                 </div>
-                                                <div class="text-center mt-4">
-                                                    <a class="btn btn-outline-success mb-2 p-4 border" style="border-radius: 16px" href="FreeLancerDetailController?id_freelancer=${LF.id_freelancer}">View Profile</a>
-                                                </div>
-                                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 10px" >
+                                            </c:if>
+                                            <div  style="display: grid; grid-template-columns:repeat(3, 1fr); gap: 10px">
+                                                <c:forEach items="${requestScope.LIST_FREELANCER_APPLY}" var="LF">
+                                                    <form action="ApproveFreelancerController" method="POST">
+                                                        <div class="w-100 h-100 p-3" style="border-radius: 8px; border: 1px solid #007bff">
+                                                            <div class="freelancer d-flex border-bottom" style="gap: 10px; padding-bottom: 10px;">
+                                                                <div class="freelancer_img ">
+                                                                    <img class="border rounded-circle" style="object-fit: cover; flex-shrink: 0" src=${LF.picture} alt=${LF.fullName}/>
+                                                                </div>
+                                                                <div class="freelancer_info d-flex flex-column" style="row-gap: 20px;">
+                                                                    <div class="freelancer_info_name font-weight-bold text-primary">
+                                                                        <span>${LF.fullName}</span>
+                                                                    </div>
+                                                                    <div class="freelancer_info_email font-weight-bold" style="color: #FAC213">
+                                                                        <span>${LF.email}</span>
+                                                                    </div>
+                                                                    <div class="freelancer_info_email font-weight-normal font-weight-bold d-flex flex-column">
+                                                                        <span style="outline-color: #0063FF">Apply for Job:</span>
+                                                                        <a class="text-center text-success" href="#">${LF.title}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <div class="text-center mt-4">
+                                                                    <a class="btn btn-outline-primary mb-2 p-4 border" style="border-radius: 16px" href="FreeLancerDetailController?id_freelancer=${LF.id_freelancer}">View Profile</a>
+                                                                </div>
+                                                                <div class="text-center mt-4 mx-auto" >
+                                                                    <button type="submit"  class="btn-outline-success mb-2 border" style="padding: 10px;border-radius: 16px;display: flex;justify-content: center; cursor: pointer">
+                                                                        <img style="width: 30px; height: 30px; border-radius: 100rem; object-fit: cover" src="https://icon-library.com/images/check-image-icon/check-image-icon-5.jpg" alt="alt"/>
+                                                                    </button>
+                                                                </div> 
+                                                            </div>
 
-                                                    <div class="text-center mt-4" >
-                                                        <a class="btn-outline-success mb-2 border" style="padding: 10px;border-radius: 16px;display: flex;justify-content: center;
-}"  href="#">
-                                                            <img style="width: 30px; height: 30px; border-radius: 100rem; object-fit: cover" src="https://icon-library.com/images/check-image-icon/check-image-icon-5.jpg" alt="alt"/>
-                                                        </a>
-                                                    </div>
-                                                    <div class="text-center mt-4" >
-                                                        <a class="btn-outline-danger mb-2 border" style="padding: 10px;border-radius: 16px;display: flex;justify-content: center;
-}"  href="#">
-                                                            <img style="width: 30px; height: 30px; border-radius: 100rem; object-fit: cover" src="https://w7.pngwing.com/pngs/349/105/png-transparent-false-error-missing-absent-x-red-cross-letter-circle-gui-thumbnail.png" alt="alt"/>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                        </div>
+                                                        <input name="id_freelancer" value="${LF.id_freelancer}" type="hidden">
+                                                        <input name="id_job" value="${LF.id_job}" type="hidden">
+                                                    </form>
+                                                </c:forEach>
 
                                             </div>
-                                        </c:forEach>
+                                        </c:when>
+                                    </c:choose>
 
-                                    </div>
                                 </div>
                             </section>
                             <!-- Featured_job_end -->
@@ -169,24 +155,24 @@
             </div>
             <!-- Job List Area End -->
             <!--Pagination Start  -->
-            <div class="pagination-area pb-115 text-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="single-wrap d-flex justify-content-center">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-start">
-                                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
-                                    </ul>
-                                </nav>
+            <!--            <div class="pagination-area pb-115 text-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="single-wrap d-flex justify-content-center">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-start">
+                                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </div>-->
             <!--Pagination End  -->
 
         </main>
@@ -227,6 +213,12 @@
         <!-- Jquery Plugins, main Jquery -->	
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
-
+         <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+        </script>
     </body>
 </html>

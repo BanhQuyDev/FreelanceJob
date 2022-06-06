@@ -16,9 +16,7 @@ import javax.servlet.http.HttpSession;
 import jobs.JobApplicationDTO;
 import jobs.JobDAO;
 import jobs.JobDTO;
-import skills.SkillDAO;
-import skills.SkillDTO;
-import skills.SkillFreelancerDTO;
+
 import users.UserDTO;
 
 /**
@@ -35,14 +33,17 @@ public class GetAllFreelancerApplyController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
-         HttpSession session = request.getSession();
+        String url = ERROR;
+        HttpSession session = request.getSession();
         try {
             UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-            List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId()); 
+            List<JobApplicationDTO> listJoblistJobProcessing;
+
+            JobDAO dao = new JobDAO();
+            listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
             request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
-            List<SkillFreelancerDTO> listSkillByUser = new SkillDAO().getAllSkill();
-            request.setAttribute("SKILL_FREELANCER", listSkillByUser);
+            List<JobDTO> listJobByEmployeer = new JobDAO().getAllJobByEmployeer(user.getId());
+            session.setAttribute("LIST_JOB_EMPLOYEER", listJobByEmployeer);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at GetAllJob:" + e.toString());

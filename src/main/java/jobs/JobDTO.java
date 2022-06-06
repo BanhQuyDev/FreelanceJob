@@ -34,6 +34,10 @@ public class JobDTO {
     public JobDTO(int idJob) {
         this.idJob = idJob;
     }
+    public JobDTO(int idJob, String title) {
+        this.idJob = idJob;
+        this.title = title;
+    }
 
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String nameEmployer, String idMajor, String createDate) {
         this.idJob = idJob;
