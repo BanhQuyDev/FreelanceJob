@@ -157,7 +157,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Job List Area End -->
+            <!-- Job List Area End -->        
             <!--Pagination Start  -->
             <div class="pagination-area pb-115 text-center">
                 <div class="container">
@@ -178,7 +178,6 @@
                 </div>
             </div>
             <!--Pagination End  -->
-
         </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
 

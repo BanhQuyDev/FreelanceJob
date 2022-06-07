@@ -1,4 +1,4 @@
-contract\ContractDAO.class
+contracts\ContractDTO.class
 controllers\FilterFreelancerApplyController.class
 controllers\FilterMajorController.class
 controllers\AcceptJobController.class
@@ -6,6 +6,7 @@ home\JobListingController.class
 skills\SkillDTO.class
 controllers\BanUserController.class
 home\JobDetailController.class
+home\ApplyJobController.class
 sendemail\SendEmail$1.class
 controllers\RenderJobDetail.class
 controllers\SearchUser.class
@@ -28,16 +29,17 @@ controllers\GetAllJob.class
 utils\Utils.class
 controllers\UpdateUserSkillController.class
 controllers\SearchJob.class
+contracts\ContractDAO.class
 controllers\GetAllUser.class
 home\HomeController.class
 controllers\UpdateProfileUserController.class
 skills\SkillJobDTO.class
+home\HistoryController.class
 users\UserDAO.class
 controllers\FreeLancerDetailController.class
 jobs\JobDAO.class
 controllers\ChangeModeController.class
 sendemail\SendEmail.class
-contract\ContractDTO.class
 controllers\UnappropriatedJobController.class
 controllers\GetAllFreelancerApplyController.class
 controllers\LoginGoogleController.class

@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import contract.ContractDAO;
+import contracts.ContractDAO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;

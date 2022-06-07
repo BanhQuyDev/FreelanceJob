@@ -21,6 +21,8 @@
             href="assets/img/favicon.ico"
             />
 
+        <<link rel="stylesheet" href="./home/home.css"/>
+
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
@@ -137,7 +139,23 @@
                                         </div>
                                     </div>
                                     <div class="items-link f-right">
-                                        <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                        <c:choose>
+                                            <c:when test="${job.nameEmployer != sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                               <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                            </c:when>
+                                            <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                               <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
+                                                 data-placement="auto" data-animation="true">
+                                                <a>Apply</a>
+                                            </div>
+                                            </c:when>
+                                            <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
+                                               <div data-toggle="tooltip" data-html="true" title="Change to Freelancer Mode to apply!!!"
+                                                 data-placement="auto" data-animation="true">
+                                                <a>Apply</a>
+                                            </div>
+                                            </c:when>
+                                        </c:choose>                         
                                         <span>CREATE DATE : ${job.createDate}</span>
                                     </div>
                                 </div>
@@ -158,7 +176,12 @@
                 $(".alert").fadeTo(400, 0).slideUp(400, function () {
                     $(this).remove();
                 });
-            }, 3000);
+            }, 3000)
+        </script> 
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
         </script>
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->
