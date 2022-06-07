@@ -35,8 +35,15 @@ public class HistoryController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userMode = (String) session.getAttribute("MODE");
             ContractDAO contractDao = new ContractDAO();
-            List<ContractDTO> listContract = contractDao.getAllContractForHistory(loginUser.getId());
+
+            List<ContractDTO> listContract = null;
+            if (userMode.equalsIgnoreCase("FREELANCER")) {
+                listContract = contractDao.getAllContractForHistory(loginUser.getId());
+            } else if (userMode.equalsIgnoreCase("EMPLOYER")) {
+                listContract = contractDao.getAllContractForHistoryForEmployer(loginUser.getId());
+            }
 
             List<ContractDTO> listContractDetail = new ArrayList<>();
             for (ContractDTO contractDTO : listContract) {

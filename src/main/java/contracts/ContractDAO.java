@@ -22,6 +22,11 @@ public class ContractDAO {
             + "	 (SELECT U.fullname FROM tblContract C, tblEmployer E, tblUser U WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = Cc.id_contract) as employer_name,\n"
             + "	 (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
             + "FROM tblContract Cc, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND U.id_user = ?";
+    private final String GET_ALL_CONTRACT_FOR_HISTORY_FOR_EMPLOYER = "SELECT Cc.id_contract, Cc.create_date, Cc.status, U.fullname as employer_name,\n"
+            + "	(SELECT U.fullname FROM tblContract C, tblFreelancer F, tblUser U WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = Cc.id_contract) as freelancer_name,\n"
+            + "    (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
+            + "FROM tblContract Cc, tblEmployer E, tblUser U \n"
+            + "WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND U.id_user = ?";
     private final String GET_CONTRACT_BY_ID = "SELECT C.id_contract, C.create_date, C.status, J.title, J.salary, J.description, J.duration\n"
             + "FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = ?";
 
@@ -34,6 +39,36 @@ public class ContractDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_CONTRACT_FOR_HISTORY);
+                ptm.setInt(1, id_user);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_contract = rs.getInt("id_contract");
+                    String[] split = rs.getString("create_date").split(" ");
+                    String create_date = split[0];
+                    int status = rs.getInt("status");
+                    String job_title = rs.getString("job_title");
+                    String freelancer_name = rs.getString("freelancer_name");
+                    String employer_name = rs.getString("employer_name");
+                    list.add(new ContractDTO(id_contract, create_date, freelancer_name, employer_name, job_title, status));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return list;
+    }
+
+    public List<ContractDTO> getAllContractForHistoryForEmployer(int id_user) throws SQLException {
+        List<ContractDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_CONTRACT_FOR_HISTORY_FOR_EMPLOYER);
                 ptm.setInt(1, id_user);
                 rs = ptm.executeQuery();
                 while (rs.next()) {

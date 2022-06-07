@@ -68,7 +68,7 @@
                                                         <li><a href="#">List Freelancer Apply</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">History</a></li>
+                                                <li><a href="HistoryController">History</a></li>
                                                 </c:when>
                                                 <c:otherwise>
                                                 <li><a href="JobListingController">Find Jobs </a></li>
@@ -167,6 +167,14 @@
                     </center>
                 </div>
             </c:if>
+            <c:if test="${requestScope.APPLY_SUCCESS != null}">
+                <div class="alert alert-success">
+                    <center>
+                        <strong>Apply successfully! </strong> ${requestScope.APPLY_SUCCESS}
+                    </center>
+                </div>
+            </c:if>
+            
         </div>
     </div>
     <!-- Header End -->

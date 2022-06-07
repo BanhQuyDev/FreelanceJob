@@ -27,6 +27,7 @@ public class JobDTO {
     private String idMajor;
     private String createDate;
     private String[]skillJob;
+
     public JobDTO() {
         
     }
@@ -44,7 +45,6 @@ public class JobDTO {
         this.idMajor = idMajor;
         this.createDate = createDate;
     }
-    
 
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor) {
         this.idJob = idJob;

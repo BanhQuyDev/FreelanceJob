@@ -5,6 +5,7 @@ home\JobListingController.class
 skills\SkillDTO.class
 controllers\BanUserController.class
 home\JobDetailController.class
+home\ApplyJobController.class
 controllers\RenderJobDetail.class
 users\UserDTO.class
 controllers\UnbanUserController.class

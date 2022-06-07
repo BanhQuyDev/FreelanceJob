@@ -21,6 +21,8 @@
             href="assets/img/favicon.ico"
             />
 
+        <<link rel="stylesheet" href="./home/home.css"/>
+
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
@@ -183,13 +185,24 @@
                                             <ul>
                                                 <li>${job.nameEmployer}</li>
                                                 <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                                <c:set var="salary" value="${job.salary}"/>
+                                                    <c:set var="salary" value="${job.salary}"/>
                                                 <li>${job.showPrice(salary)} VNĐ</li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="items-link f-right">
-                                        <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                        <c:if test="${job.nameEmployer != sessionScope.LOGIN_USER.name}">
+                                            <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                        </c:if>
+                                        <c:if test="${job.nameEmployer == sessionScope.LOGIN_USER.name}">
+                                            <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
+                                                 data-placement="auto" data-animation="true">
+                                                <a>Apply</a>
+                                            </div>
+                                            <!--<div class="tooltipNhaLam">-->
+                                            <!--<a>Apply</a>-->
+                                            <!--</div>-->
+                                        </c:if>
                                         <span>CREATE DATE : ${job.createDate}</span>
                                     </div>
                                 </div>
@@ -211,6 +224,9 @@
                     $(this).remove();
                 });
             }, 3000);
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
         </script>
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->

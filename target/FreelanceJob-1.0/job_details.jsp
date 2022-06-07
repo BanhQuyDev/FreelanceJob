@@ -71,7 +71,7 @@
                                         <ul>
                                             <li>${job.nameEmployer}</li>
                                             <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                            <c:set var="salary" value="${job.salary}"/>
+                                                <c:set var="salary" value="${job.salary}"/>
                                             <li>${job.showPrice(salary)} VNĐ</li>
                                         </ul>
                                     </div>
@@ -94,7 +94,8 @@
                                     </div>
                                     <div style="column-gap: 10%; row-gap: 28px" class="row justify-content-between text-center p-4">
                                         <c:forEach var="skillName" items="${requestScope.SKILL_JOB}">
-                                            <button type="button" class="btn col-3">${skillName}</button>
+                                            <!--<button type="button" class="btn col-3"></button>-->
+                                            <p class="col-3 shadow-lg rounded text-success font-weight-bold p-2">${skillName}</p>
                                         </c:forEach>                                      
                                     </div>
                                 </div>
@@ -114,7 +115,12 @@
                                     <li>Create date : <span>${job.createDate}</span></li>
                                 </ul>
                                 <div class="apply-btn2">
-                                    <a href="#" class="btn">Apply Now</a>
+                                    <c:if test="${requestScope.APPLY_SUCCESS == null}">
+                                        <a href="ApplyJobController?jobId=${job.idJob}" class="btn rounded">Apply Now</a>
+                                    </c:if>
+                                    <c:if test="${requestScope.APPLY_SUCCESS != null}">
+                                        <a class="btn" style="pointer-events: none; background-color: #f2722970">Apply Now</a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
