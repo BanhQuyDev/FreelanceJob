@@ -65,7 +65,7 @@
                                     type="number"
                                     name="duration"
                                     class="form-control"
-                                    value="${job.duration}"
+                                    value="${job.showDuration(job.duration)}"
                                     readonly=""
                                     />
                             </div>
