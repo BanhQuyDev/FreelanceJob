@@ -57,13 +57,13 @@ public class JobDAO {
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_major = M.id_major AND id_status = 2 AND M.id_major = (SELECT id_major FROM tblMajor WHERE major_name = ?)";
     private static final String GET_JOB_DETAIL = "SELECT J.id_job, J.title, J.salary, J.description, J.duration, J.start_date, J.create_date, U.fullname FROM tblJob J, tblEmployer E, tblUser U\n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_status = 2 AND J.id_job = ?";
-
     private static final String SEARCH_JOB = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2 AND U.email like ?";
     private static final String SEARCH_JOB_SPAM = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1 AND U.email like ?";
+    private static final String APPLY_JOB = "INSERT INTO tblJobApplication(id_freelancer, id_job) VALUES(?, ?)";
 
     public List<JobDTO> getAllJobUnappropriated() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
@@ -539,6 +539,7 @@ public class JobDAO {
         return listUser;
     }
 
+   
     public boolean updateFreelancerAppy(int id_job, int id_freelancer) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -745,5 +746,25 @@ public class JobDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
+    }
+    
+     public boolean insertJobApplication(int idFreelancer, int idJob) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(APPLY_JOB);
+                ptm.setInt(1, idFreelancer);
+                ptm.setInt(2, idJob);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return check;
     }
 }

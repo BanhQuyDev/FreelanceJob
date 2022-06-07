@@ -167,6 +167,14 @@
                     </center>
                 </div>
             </c:if>
+            <c:if test="${requestScope.APPLY_SUCCESS != null}">
+                <div class="alert alert-success">
+                    <center>
+                        <strong>Apply successfully! </strong> ${requestScope.APPLY_SUCCESS}
+                    </center>
+                </div>
+            </c:if>
+            
         </div>
     </div>
     <!-- Header End -->
