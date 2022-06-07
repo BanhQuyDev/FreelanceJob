@@ -81,28 +81,28 @@
                                                 <h4>By Major</h4>
                                             </div>
                                             <!-- Select job items start -->
-                                            <c:set var="selectedMajor" value="${param.selectedMajor}"/>
-                                            <select name="selectedMajor" onchange="this.form.submit()">
-                                                <c:choose>
-                                                    <c:when test="${empty selectedMajor}">
-                                                        <option value="All Major">All Major</option>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <c:set var="all" value="All Major"/>
-                                                        <c:if test="${selectedMajor ne all}">
-                                                            <option value="${selectedMajor}">${selectedMajor}</option>
-                                                            <option  value="All Major">All Major</option>
-                                                        </c:if>
-                                                        <c:if test="${selectedMajor eq all}">
-                                                            <option value="${selectedMajor}">${selectedMajor}</option>
-                                                        </c:if>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <c:forEach items="${requestScope.LIST_MAJOR}" var="c">
-                                                    <c:if test="${c.major_name ne selectedMajor}">
-                                                        <option value="${c.major_name}">${c.major_name}</option>
+                                        <c:set var="selectedMajor" value="${param.selectedMajor}"/>
+                                        <select name="selectedMajor" onchange="this.form.submit()">
+                                            <c:choose>
+                                                <c:when test="${empty selectedMajor}">
+                                                    <option value="All Major">All Major</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set var="all" value="All Major"/>
+                                                    <c:if test="${selectedMajor ne all}">
+                                                        <option value="${selectedMajor}">${selectedMajor}</option>
+                                                        <option  value="All Major">All Major</option>
                                                     </c:if>
-                                                </c:forEach>
+                                                    <c:if test="${selectedMajor eq all}">
+                                                        <option value="${selectedMajor}">${selectedMajor}</option>
+                                                    </c:if>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:forEach items="${requestScope.LIST_MAJOR}" var="c">
+                                                <c:if test="${c.major_name ne selectedMajor}">
+                                                    <option value="${c.major_name}">${c.major_name}</option>
+                                                </c:if>
+                                            </c:forEach>
                                         </select>
 
                                         <!--  Select job items End-->   
@@ -139,13 +139,29 @@
                                                     <ul>
                                                         <li>${job.nameEmployer}</li>
                                                         <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>
-                                                        <c:set var="salary" value="${job.salary}"/>
+                                                            <c:set var="salary" value="${job.salary}"/>
                                                         <li>${job.showPrice(salary)} VNĐ</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="items-link items-link2 f-right">
-                                                <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                                <c:choose>
+                                                    <c:when test="${job.nameEmployer != sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                                        <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                                    </c:when>
+                                                    <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                                        <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
+                                                             data-placement="auto" data-animation="true">
+                                                            <a>Apply</a>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
+                                                        <div data-toggle="tooltip" data-html="true" title="Change to Freelancer Mode to apply!!!"
+                                                             data-placement="auto" data-animation="true">
+                                                            <a>Apply</a>
+                                                        </div>
+                                                    </c:when>
+                                                </c:choose>   
                                                 <span>CREATE DATE : ${job.createDate}</span>
                                             </div>
                                         </div>

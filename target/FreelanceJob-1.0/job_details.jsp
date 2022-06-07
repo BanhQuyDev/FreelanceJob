@@ -116,10 +116,15 @@
                                 </ul>
                                 <div class="apply-btn2">
                                     <c:choose>
+                                        <c:when test="${sessionScope.LOGIN_USER == null}">
+                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                        &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" 
+                                        class="btn rounded">Apply Now</a>
+                                        </c:when>
                                         <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER'}">
                                             <a href="ApplyJobController?jobId=${job.idJob}" class="btn rounded">Apply Now</a>
                                         </c:when>
-                                        <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE == 'EMPLOYER'}">
+                                        <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE != 'EMPLOYER'}">
                                             <a class="btn" style="pointer-events: none; background-color: #f2722970">Apply Now</a>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE == 'EMPLOYER'}">

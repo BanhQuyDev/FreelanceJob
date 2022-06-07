@@ -10,14 +10,21 @@ public class MajorDTO {
     private String id_major;
     private String major_name;
     private String image_major;
+    private int totalJob;
 
     public MajorDTO() {
     }
 
-    public MajorDTO(String id_major, String major_name,String image_major) {
+    public MajorDTO(String id_major, String major_name,String image_major,int totalJob) {
         this.id_major = id_major;
         this.major_name = major_name;
         this.image_major = image_major;
+        this.totalJob = totalJob;
+    }
+    public MajorDTO(String id_major, String major_name,int totalJob) {
+        this.id_major = id_major;
+        this.major_name = major_name;
+        this.totalJob = totalJob;
     }
     public MajorDTO(String id_major, String major_name) {
         this.id_major = id_major;
@@ -46,6 +53,14 @@ public class MajorDTO {
 
     public void setImage_major(String image_major) {
         this.image_major = image_major;
+    }
+
+    public int getTotalJob() {
+        return totalJob;
+    }
+
+    public void setTotalJob(int totalJob) {
+        this.totalJob = totalJob;
     }
     
     @Override

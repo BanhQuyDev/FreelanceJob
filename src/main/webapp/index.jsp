@@ -84,6 +84,7 @@
                                         </div>                                       
                                         <div class="services-cap">
                                             <h5>${major.id_major}</h5>
+                                            <span style="color: #5d5df4">${major.totalJob} job(s)</span><br>
                                             <span>${major.major_name}</span>
                                         </div>
                                     </a>                           

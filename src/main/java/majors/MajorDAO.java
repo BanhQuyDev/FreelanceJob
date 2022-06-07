@@ -14,7 +14,10 @@ import utils.DBUtils;
 
 public class MajorDAO {
 
-    private final String GET_ALL_MAJOR = "SELECT id_major, major_name,img_major FROM tblMajor";
+    private final String GET_ALL_MAJOR = "  SELECT id_major, major_name,img_major,(SELECT COUNT(J.id_major) as numOfJob\n"
+            + "  FROM tblJob J \n"
+            + "  WHERE J.id_major = M.id_major\n"
+            + "  GROUP BY J.id_major)as numOfJob FROM tblMajor M";
     private static final String GET_MAJOR_NAME = "SELECT major_name FROM tblMajor WHERE id_major = ?";
 
     public List<MajorDTO> getAllMajor() throws SQLException {
@@ -22,8 +25,7 @@ public class MajorDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-
-           try {
+        try {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_MAJOR);
@@ -42,12 +44,14 @@ public class MajorDAO {
         return list;
     }
 
+
     public List<MajorDTO> getAllMajorList() throws SQLException {
         List<MajorDTO> majorList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+            int totalJob = 0;
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_MAJOR);
@@ -56,7 +60,8 @@ public class MajorDAO {
                     String majorId = rs.getString("id_major");
                     String majorName = rs.getString("major_name");
                     String img_major = rs.getString("img_major");
-                    majorList.add(new MajorDTO(majorId, majorName,img_major));
+                    totalJob = rs.getInt("numOfJob");
+                    majorList.add(new MajorDTO(majorId, majorName, img_major,totalJob));
                 }
             }
         } catch (Exception e) {
