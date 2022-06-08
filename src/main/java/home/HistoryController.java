@@ -38,11 +38,43 @@ public class HistoryController extends HttpServlet {
             String userMode = (String) session.getAttribute("MODE");
             ContractDAO contractDao = new ContractDAO();
 
+            String selectedContractStatus = request.getParameter("selectedContractStatus");
+            int contractStatus = 2;
+            if (selectedContractStatus != null) {
+                contractStatus = Integer.parseInt(selectedContractStatus);
+            }
+
             List<ContractDTO> listContract = null;
             if (userMode.equalsIgnoreCase("FREELANCER")) {
-                listContract = contractDao.getAllContractForHistory(loginUser.getId());
+                switch (contractStatus) {
+                    case 0:
+                        listContract = contractDao.filterContractForHistory(loginUser.getId(), contractStatus);
+                        break;
+                    case 1:
+                        listContract = contractDao.filterContractForHistory(loginUser.getId(), contractStatus);
+                        break;
+                    case 2:
+                        listContract = contractDao.getAllContractForHistory(loginUser.getId());
+                        break;
+                    default:
+                        break;
+                }
+
             } else if (userMode.equalsIgnoreCase("EMPLOYER")) {
-                listContract = contractDao.getAllContractForHistoryForEmployer(loginUser.getId());
+                switch (contractStatus) {
+                    case 0:
+                        listContract = contractDao.filterContractForHistoryForEmployer(loginUser.getId(), contractStatus);
+                        break;
+                    case 1:
+                        listContract = contractDao.filterContractForHistoryForEmployer(loginUser.getId(), contractStatus);
+                        break;
+                    case 2:
+                        listContract = contractDao.getAllContractForHistoryForEmployer(loginUser.getId());
+                        break;
+                    default:
+                        break;
+                }
+
             }
 
             List<ContractDTO> listContractDetail = new ArrayList<>();

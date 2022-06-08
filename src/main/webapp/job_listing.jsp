@@ -147,7 +147,12 @@
                                             <div class="items-link items-link2 f-right">
                                                 <c:choose>
                                                     <c:when test="${job.nameEmployer != sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
-                                                        <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                                        <c:if test="${job.jobApplication != 0}">
+                                                            <a style="pointer-events: none; background-color: #f2722970">Processsing...</a>
+                                                        </c:if>
+                                                        <c:if test="${job.jobApplication == 0}">
+                                                            <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                                        </c:if>    
                                                     </c:when>
                                                     <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
                                                         <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
