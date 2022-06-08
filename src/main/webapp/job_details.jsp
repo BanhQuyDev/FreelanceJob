@@ -113,12 +113,12 @@
                             <div class="post-details3  mb-50 rounded" style="border: 3px solid #ededed;">
                                 <!-- Small Section Tittle -->
                                 <div class="small-section-tittle">
-                                    <h4 class="text-monospace">Job Overview</h4>
+                                    <h4 class="text-monospace">Job Payment</h4>
                                 </div>
                                 <ul>
                                     <li>Start Date : <span>${job.startDate}</span></li>
-                                    <li>Price :  <span>${job.showPrice(salary)}VNĐ</span></li>
                                     <li>Create date : <span>${job.createDate}</span></li>
+                                    <li>Salary :  <span>${job.showPrice(salary)}VNĐ</span></li>
                                 </ul>
                                 <div class="apply-btn2">
                                     <c:choose>
