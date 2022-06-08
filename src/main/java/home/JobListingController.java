@@ -13,10 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
 import majors.MajorDAO;
 import majors.MajorDTO;
+import users.UserDTO;
 
 /**
  *
@@ -34,20 +36,34 @@ public class JobListingController extends HttpServlet {
         String url = ERROR;
         try {
             MajorDAO majorDao = new MajorDAO();
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             List<MajorDTO> listMajor = majorDao.getAllMajorList();
             request.setAttribute("LIST_MAJOR", listMajor);
             String selectedMajor = request.getParameter("selectedMajor");
             JobDAO jobDao = new JobDAO();
             List<JobDTO> listJob = new ArrayList<>();
-            if (selectedMajor == null || selectedMajor.equals("All Major")) {
-                listJob = jobDao.getAllJob();
-                request.setAttribute("LIST_JOB", listJob);
+            if (loginUser == null) {
+                if (selectedMajor == null || selectedMajor.equals("All Major")) {
+                    listJob = jobDao.getAllJob();
+                    request.setAttribute("LIST_JOB", listJob);
+                } else {
+                    listJob = jobDao.getJobByMajor(selectedMajor);
+                    request.setAttribute("LIST_JOB", listJob);
+                    request.setAttribute("SELECTED_MAJOR", selectedMajor);
+                }
+                url = SUCCESS;
             } else {
-                listJob = jobDao.getJobByMajor(selectedMajor);
-                request.setAttribute("LIST_JOB", listJob);
-                request.setAttribute("SELECTED_MAJOR", selectedMajor);
+                if (selectedMajor == null || selectedMajor.equals("All Major")) {
+                    listJob = jobDao.getAllJob(loginUser.getId());
+                    request.setAttribute("LIST_JOB", listJob);
+                } else {
+                    listJob = jobDao.getJobByMajor(selectedMajor,loginUser.getId());
+                    request.setAttribute("LIST_JOB", listJob);
+                    request.setAttribute("SELECTED_MAJOR", selectedMajor);
+                }
+                url = SUCCESS;
             }
-            url = SUCCESS;
         } catch (Exception e) {
             log("Error at JobListingController : " + e.toString());
         } finally {
