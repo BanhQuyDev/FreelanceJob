@@ -149,14 +149,12 @@
                                             </c:if>                       
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
-                                            <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
-                                                 data-placement="auto" data-animation="true">
+                                            <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can't apply Your Own Job" data-content="Please apply another">
                                                 <a>Apply</a>
                                             </div>
                                         </c:when>
                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                            <div data-toggle="tooltip" data-html="true" title="Change to Freelancer Mode to apply!!!"
-                                                 data-placement="auto" data-animation="true">
+                                            <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can' apply As An Employer" data-content="Please change your mode">
                                                 <a>Apply</a>
                                             </div>
                                         </c:when>
@@ -183,11 +181,6 @@
             });
         }, 3000)
     </script> 
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
@@ -217,7 +210,7 @@
     <script src="./assets/js/jquery.validate.min.js"></script>
     <script src="./assets/js/mail-script.js"></script>
     <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-
+    
     <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
@@ -225,5 +218,14 @@
         src="https://kit.fontawesome.com/b36bcbb61e.js"
         crossorigin="anonymous"
     ></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover(),
+            $('.popover-dismiss').popover({
+                trigger: 'focus'
+            })
+        })
+    </script>
 </body>
 </html>

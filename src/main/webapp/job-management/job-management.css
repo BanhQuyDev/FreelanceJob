@@ -1,10 +1,3 @@
-/*body {
-    background: #ddd !important;
-}*/
-
-/*-------------------
-    -----News Styles-----
-    ---------------------*/
 .timeline {
     position: relative;
     margin-bottom: 100px;
@@ -37,7 +30,7 @@
 
 .timeline .date-title {
     text-align: center;
-    margin: 70px 0 50px;
+    margin: 70px 0 70px !important;
 }
 
 .timeline .date-title span {
@@ -81,9 +74,27 @@
     background: #5CC9DF;
     color: #fff;
 }
+.news-item:hover .news-content.news-done p{
+    color: #fff !important;
+}
+.news-item:hover .news-content.news-done small{
+    color: #fff;
+}
+.news-item:hover .news-content.news-done .news-title{
+    color: #fff;
+}
 
 .news-item:hover .news-content.news-doing {
     background: #f89a20;
+    color: #fff;
+}
+.news-item:hover .news-content.news-doing p{
+    color: #fff !important;
+}
+.news-item:hover .news-content.news-doing small{
+    color: #fff;
+}
+.news-item:hover .news-content.news-doing .news-title{
     color: #fff;
 }
 
@@ -171,6 +182,11 @@
     -webkit-transition: color .3s ease-out;
     transition: color .3s ease-out;
 }
+.news-content.news-done .date p{
+    color: #5CC9DF !important;
+    -webkit-transition: color .3s ease-out;
+    transition: color .3s ease-out;
+}
 
 .news-content.news-doing .date {
     position: absolute;
@@ -178,6 +194,11 @@
     height: 80px;
     left: 10px;
     text-align: center;
+    color: #f89a20 !important;
+    -webkit-transition: color .3s ease-out;
+    transition: color .3s ease-out;
+}
+.news-content.news-doing .date p{
     color: #f89a20 !important;
     -webkit-transition: color .3s ease-out;
     transition: color .3s ease-out;

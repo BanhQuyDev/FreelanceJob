@@ -51,81 +51,82 @@
                     </div>
                 </div>
             </div>
+        
+            <div style="background: #ddd ; padding: 50px 0px">
+                <div class="container bootstrap snippets bootdey" >
+                    <section id="news" class="bg-white padding-top-bottom" style="background: #ddd !important;">
+                        <div class="container snippets bootdey">
+                            <div class="timeline">
+                                <div class="date-title">
+                                    <span>Timeline</span>
+                                </div>
+                                <div class="row">
 
-        <div class="container bootstrap snippets bootdey">
-                <section id="news" class="bg-white padding-top-bottom">
-                    <div class="container snippets bootdey">
-                        <div class="timeline">
-                            <div class="date-title">
-                                <span>Timeline</span>
+                                    <div class="col-sm-6 news-item">
+                                        <div class="news-content news-done">
+                                            <div class="date">
+                                                <p>28/9</p>
+                                                <small>2022</small>
+                                            </div>
+                                            <h2 class="news-title">Title 1</h2>
+                                            <div class="news-media">
+                                                <a class="colorbox cboxElement" href="#">
+                                                    <!-- <img class="" src="https://via.placeholder.com/400x400/FFB6C1/000000" alt=""> -->
+                                                </a>
+                                            </div>
+                                            <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                            <div style="text-align: center; margin-left: 80%;">
+                                                <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 news-item right">
+                                        <div class="news-content news-doing">
+                                            <div class="date">
+                                                <p>27</p>
+                                                <small>Thu</small>
+                                            </div>
+                                            <h2 class="news-title">Title 2</h2>
+                                            <div class="news-media gallery">
+                                                <a class="colorbox cboxElement" href="#">
+                                                    <!-- <img class="" src="https://via.placeholder.com/400x400/87CEFA/000000" alt=""> -->
+                                                </a>
+                                                <a class="colorbox cboxElement" href="#"></a>
+                                            </div>
+                                            <p>But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure…</p>
+                                            <div style="text-align: center; margin-left: 80%;">
+                                                <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 news-item">
+                                        <div class="news-content news-doing">
+                                            <div class="date">
+                                                <p>28/9</p>
+                                                <small>2022</small>
+                                            </div>
+                                            <h2 class="news-title">Title 1</h2>
+                                            <div class="news-media">
+                                                <a class="colorbox cboxElement" href="#">
+                                                    <!-- <img class="" src="https://via.placeholder.com/400x400/FFB6C1/000000" alt=""> -->
+                                                </a>
+                                            </div>
+                                            <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                            <div style="text-align: center; margin-left: 80%;">
+                                                <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
-                            <div class="row">
-
-                                <div class="col-sm-6 news-item">
-                                    <div class="news-content news-done">
-                                        <div class="date">
-                                            <p style="color: #ffffff">28/9</p>
-                                            <small>2022</small>
-                                        </div>
-                                        <h2 class="news-title">Title 1</h2>
-                                        <div class="news-media">
-                                            <a class="colorbox cboxElement" href="#">
-                                                <!-- <img class="" src="https://via.placeholder.com/400x400/FFB6C1/000000" alt=""> -->
-                                            </a>
-                                        </div>
-                                        <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
-                                        <div style="text-align: center; margin-left: 80%;">
-                                            <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 news-item right">
-                                    <div class="news-content news-doing">
-                                        <div class="date">
-                                            <p>27</p>
-                                            <small>Thu</small>
-                                        </div>
-                                        <h2 class="news-title">Title 2</h2>
-                                        <div class="news-media gallery">
-                                            <a class="colorbox cboxElement" href="#">
-                                                <!-- <img class="" src="https://via.placeholder.com/400x400/87CEFA/000000" alt=""> -->
-                                            </a>
-                                            <a class="colorbox cboxElement" href="#"></a>
-                                        </div>
-                                        <p>But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure…</p>
-                                        <div style="text-align: center; margin-left: 80%;">
-                                            <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 news-item">
-                                    <div class="news-content news-doing">
-                                        <div class="date">
-                                            <p>28/9</p>
-                                            <small>2022</small>
-                                        </div>
-                                        <h2 class="news-title">Title 1</h2>
-                                        <div class="news-media">
-                                            <a class="colorbox cboxElement" href="#">
-                                                <!-- <img class="" src="https://via.placeholder.com/400x400/FFB6C1/000000" alt=""> -->
-                                            </a>
-                                        </div>
-                                        <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
-                                        <div style="text-align: center; margin-left: 80%;">
-                                            <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </div>
-
 
 
         <jsp:include page="component/footer.jsp"></jsp:include>
