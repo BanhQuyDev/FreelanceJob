@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-        <div class="container bootstrap snippets bootdey" style="color: #fff;">
+        <div class="container bootstrap snippets bootdey">
                 <section id="news" class="bg-white padding-top-bottom">
                     <div class="container snippets bootdey">
                         <div class="timeline">
