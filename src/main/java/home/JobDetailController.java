@@ -40,13 +40,15 @@ public class JobDetailController extends HttpServlet {
 
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            int jobApplicationId = jobDao.getJobApplicationId(loginUser.getId(), jobId);
+            if (loginUser != null) {
+                int jobApplicationId = jobDao.getJobApplicationId(loginUser.getId(), jobId);
+                request.setAttribute("JOB_APPLICATION_ID", jobApplicationId);
+            }
 
             int countFreelancer = jobDao.countFreelancerIn1Job(jobId);
 
             request.setAttribute("JOB_DETAIL", jobDetail);
             request.setAttribute("SKILL_JOB", listSkill);
-            request.setAttribute("JOB_APPLICATION_ID", jobApplicationId);
             request.setAttribute("COUNTING_FREELANCER", countFreelancer);
             url = SUCCESS;
         } catch (Exception e) {
