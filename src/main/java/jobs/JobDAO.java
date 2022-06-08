@@ -368,13 +368,14 @@ public class JobDAO {
         return check;
     }
 
-    public List<JobDTO> getTop4LatestJob() throws SQLException {
+    public List<JobDTO> getTop4LatestJob(int idUser) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
+            int jobApplication = 0;
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_TOP_4_LATEST_JOB);
                 rs = ptm.executeQuery();
@@ -387,6 +388,37 @@ public class JobDAO {
                     String create_date = rs.getString("create_date");
                     String[] createDate = create_date.split("\\s");
                     int freelancerQuantity = rs.getInt("freelancerQuantity");
+                    jobApplication = getJobApplicationId(idUser, id_job);
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], freelancerQuantity,jobApplication));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listJob;
+    }
+    public List<JobDTO> getTop4LatestJob() throws SQLException {
+        List<JobDTO> listJob = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            int jobApplication = 0;
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_TOP_4_LATEST_JOB);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_job = rs.getInt("id_job");
+                    String title = rs.getString("title");
+                    Double duration = rs.getDouble("duration");
+                    Double salary = rs.getDouble("salary");
+                    String fullname = rs.getString("fullname");
+                    String create_date = rs.getString("create_date");
+                    String[] createDate = create_date.split("\\s");
+                    int freelancerQuantity = rs.getInt("freelancerQuantity");                   
                     listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], freelancerQuantity));
                 }
             }
@@ -426,8 +458,69 @@ public class JobDAO {
         }
         return listJob;
     }
+        public List<JobDTO> getAllJob(int idUser) throws SQLException {
+        List<JobDTO> listJob = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            int jobApplication = 0;
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_JOB);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_job = rs.getInt("id_job");
+                    String title = rs.getString("title");
+                    Double duration = rs.getDouble("duration");
+                    Double salary = rs.getDouble("salary");
+                    String fullname = rs.getString("fullname");
+                    String create_date = rs.getString("create_date");
+                    String[] createDate = create_date.split("\\s");
+                    jobApplication = getJobApplicationId(idUser, id_job);
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], 0,jobApplication));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listJob;
+    }
 
-    public List<JobDTO> getJobByMajor(String major_name) throws SQLException {
+    public List<JobDTO> getJobByMajor(String major_name,int idUser) throws SQLException {
+        List<JobDTO> listJob = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            int jobApplication = 0;
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_JOB_BY_MAJOR);
+                ptm.setString(1, major_name);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_job = rs.getInt("id_job");
+                    String title = rs.getString("title");
+                    Double duration = rs.getDouble("duration");
+                    Double salary = rs.getDouble("salary");
+                    String fullname = rs.getString("fullname");
+                    String create_date = rs.getString("create_date");
+                    String[] createDate = create_date.split("\\s");
+                    jobApplication = getJobApplicationId(idUser, id_job);
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], 0,jobApplication));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listJob;
+    }
+        public List<JobDTO> getJobByMajor(String major_name) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;

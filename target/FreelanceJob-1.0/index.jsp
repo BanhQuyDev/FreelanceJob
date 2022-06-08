@@ -141,12 +141,16 @@
                                 <div class="items-link f-right">
                                     <c:choose>
                                         <c:when test="${job.nameEmployer != sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
-                                            <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                            <c:if test="${job.jobApplication != 0}">
+                                                <a style="pointer-events: none; background-color: #f2722970">Processsing...</a>
+                                            </c:if>
+                                            <c:if test="${job.jobApplication == 0}">
+                                               <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                            </c:if> 
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
                                             <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can't apply Your Own Job" data-content="Please apply another">
-                                                <a>Apply</a>
-                                            </div>
+                                                                  
                                         </c:when>
                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                             <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can' apply As An Employer" data-content="Please change your mode">
@@ -214,7 +218,7 @@
         src="https://kit.fontawesome.com/b36bcbb61e.js"
         crossorigin="anonymous"
     ></script>
-    
+
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover(),
@@ -223,5 +227,6 @@
             })
         })
     </script>
+
 </body>
 </html>
