@@ -3,7 +3,6 @@
     Created on : May 28, 2022, 10:38:23 AM
     Author     : QUANG HUY
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="site.webmanifest" />
-        <link
+        <linkss
             rel="shortcut icon"
             type="image/x-icon"
             href="assets/img/favicon.ico"
@@ -121,7 +120,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-10">
                             <!-- single-job-content -->
-                            <c:forEach var="job" items="${requestScope.LIST_TOP_4_LATEST_JOB}">                    
+                            <c:forEach var="job" items="${requestScope.LIST_TOP_4_LATEST_JOB}">
                                 <div class="single-job-items mb-30">
                                     <div class="job-items">
                                         <div class="company-img">
@@ -156,8 +155,14 @@
                                                 <a>Apply</a>
                                             </div>
                                             </c:when>
-                                        </c:choose>                         
-                                        <span>CREATE DATE : ${job.createDate}</span>
+                                        </c:choose>                        
+                                            <%--<c:when test="${sessionScope.MODE == 'EMPLOYER'}">--%>
+<!--                                                <div data-toggle="tooltip" data-html="true" title="You have already applied thiss Job!!"
+                                                     data-placement="auto" data-animation="true">
+                                                    <a>Apply</a>
+                                                </div>-->
+                                            <%--</c:when>--%>
+                                        <span> <strong> ${job.freelancerQuantity} </strong> Freelancer(s) Applied !!</span>
                                     </div>
                                 </div>
                             </c:forEach>

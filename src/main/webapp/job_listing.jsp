@@ -106,9 +106,9 @@
                                         </select>
 
                                         <!--  Select job items End-->   
-                                    </div>
-                                </form>
-                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             <!-- Job Category Listing End -->
                         </div>
                         <!-- Right content -->

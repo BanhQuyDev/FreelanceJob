@@ -42,7 +42,6 @@ public class JobListingController extends HttpServlet {
             if (selectedMajor == null || selectedMajor.equals("All Major")) {
                 listJob = jobDao.getAllJob();
                 request.setAttribute("LIST_JOB", listJob);
-//                request.setAttribute("SELECTED_MAJOR", selectedMajor);
             } else {
                 listJob = jobDao.getJobByMajor(selectedMajor);
                 request.setAttribute("LIST_JOB", listJob);
