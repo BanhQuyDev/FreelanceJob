@@ -38,16 +38,26 @@ public class ApproveFreelancerController extends HttpServlet {
             int id_job = Integer.parseInt(request.getParameter("id_job"));
             int id_freelancer = Integer.parseInt(request.getParameter("id_freelancer"));
             boolean checkApprove = new JobDAO().updateFreelancerAppy(id_job, id_freelancer);
-            if (checkApprove) {
+            List<JobApplicationDTO> listFreelancerApplyByJob = new JobDAO().getFreelancerApplyByJob(id_job);
+            if (checkApprove && listFreelancerApplyByJob.size() == 1) {
+                List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
+                request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
+                boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
+                if (checkAddContract) {
+                    request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
+                    url = SUCCESS;
+                }
+            }
+            if (checkApprove && listFreelancerApplyByJob.size() != 1) {
                 boolean checkDeny = new JobDAO().updateFreelancerDeny(id_job, id_freelancer);
                 if (checkDeny) {
                     List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
                     request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
-                    boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                    if (checkAddContract) {
-                        request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
-                        url = SUCCESS;
-                    }
+                }
+                boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
+                if (checkAddContract) {
+                    request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
+                    url = SUCCESS;
                 }
             }
 

@@ -22,6 +22,11 @@ public class JobApplicationDTO {
     public JobApplicationDTO() {
     }
 
+    public JobApplicationDTO( int id_freelancer, int id_job) {
+        this.id_freelancer = id_freelancer;
+        this.id_job = id_job;
+    }
+
     public JobApplicationDTO(int id_freelancer, String fullName, String email, String title, String picture, int id_job) {
         this.id_freelancer = id_freelancer;
         this.fullName = fullName;

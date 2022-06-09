@@ -72,6 +72,14 @@ public class JobDAO {
             + "WHERE JA.id_freelancer = F.id_freelancer AND JA.id_job = J.id_job AND F.id_freelancer = ? AND J.id_job = ?";
     private static final String COUNT_FREELANCER_IN_JOB = "SELECT COUNT(JA.id_job) as freelancerQuantity FROM tblJob J, tblJobApplication JA, tblFreelancer F\n"
             + "WHERE JA.id_job = J.id_job AND JA.id_freelancer = F.id_freelancer AND J.id_job = ? GROUP BY JA.id_job";
+    private static final String GET_APPLIED_JOB_FOR_FREELANCER = "SELECT J.id_job, J.title, J.salary, J.description, J.duration, J.start_date, JA.id_application, JA.status, JA.create_date,\n"
+            + "(SELECT M.major_name FROM tblMajor M WHERE M.id_major = J.id_major) AS major_name FROM tblJobApplication JA, tblFreelancer F, tblJob J, tblUser U\n"
+            + "WHERE JA.id_freelancer = F.id_freelancer AND JA.id_job = J.id_job AND F.id_freelancer = U.id_user AND JA.status IS NULL AND U.id_user = ?\n"
+            + "UNION\n"
+            + "SELECT J.id_job, J.title, J.salary, J.description, J.duration, J.start_date, JA.id_application, JA.status, JA.create_date,\n"
+            + "(SELECT M.major_name FROM tblMajor M WHERE M.id_major = J.id_major) AS major_name FROM tblJobApplication JA, tblFreelancer F, tblJob J, tblUser U\n"
+            + "WHERE JA.id_freelancer = F.id_freelancer AND JA.id_job = J.id_job AND F.id_freelancer = U.id_user AND JA.status = 1 AND U.id_user = ?\n"
+            + "ORDER BY JA.status DESC, JA.create_date DESC";
 
     public List<JobDTO> getAllJobUnappropriated() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
@@ -389,7 +397,7 @@ public class JobDAO {
                     String[] createDate = create_date.split("\\s");
                     int freelancerQuantity = rs.getInt("freelancerQuantity");
                     jobApplication = getJobApplicationId(idUser, id_job);
-                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], freelancerQuantity,jobApplication));
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], freelancerQuantity, jobApplication));
                 }
             }
         } catch (Exception e) {
@@ -399,6 +407,7 @@ public class JobDAO {
         }
         return listJob;
     }
+
     public List<JobDTO> getTop4LatestJob() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -418,7 +427,7 @@ public class JobDAO {
                     String fullname = rs.getString("fullname");
                     String create_date = rs.getString("create_date");
                     String[] createDate = create_date.split("\\s");
-                    int freelancerQuantity = rs.getInt("freelancerQuantity");                   
+                    int freelancerQuantity = rs.getInt("freelancerQuantity");
                     listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], freelancerQuantity));
                 }
             }
@@ -458,7 +467,8 @@ public class JobDAO {
         }
         return listJob;
     }
-        public List<JobDTO> getAllJob(int idUser) throws SQLException {
+
+    public List<JobDTO> getAllJob(int idUser) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -478,7 +488,7 @@ public class JobDAO {
                     String create_date = rs.getString("create_date");
                     String[] createDate = create_date.split("\\s");
                     jobApplication = getJobApplicationId(idUser, id_job);
-                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], 0,jobApplication));
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], 0, jobApplication));
                 }
             }
         } catch (Exception e) {
@@ -489,7 +499,7 @@ public class JobDAO {
         return listJob;
     }
 
-    public List<JobDTO> getJobByMajor(String major_name,int idUser) throws SQLException {
+    public List<JobDTO> getJobByMajor(String major_name, int idUser) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -510,7 +520,7 @@ public class JobDAO {
                     String create_date = rs.getString("create_date");
                     String[] createDate = create_date.split("\\s");
                     jobApplication = getJobApplicationId(idUser, id_job);
-                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], 0,jobApplication));
+                    listJob.add(new JobDTO(id_job, title, salary, "", duration, "", "", fullname, "", createDate[0], 0, jobApplication));
                 }
             }
         } catch (Exception e) {
@@ -520,7 +530,8 @@ public class JobDAO {
         }
         return listJob;
     }
-        public List<JobDTO> getJobByMajor(String major_name) throws SQLException {
+
+    public List<JobDTO> getJobByMajor(String major_name) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -917,5 +928,68 @@ public class JobDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return check;
+    }
+
+    public List<JobDTO> getAppliedJobForFreelancer(int idFreelancer) throws SQLException {
+        List<JobDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_APPLIED_JOB_FOR_FREELANCER);
+                ptm.setInt(1, idFreelancer);
+                ptm.setInt(2, idFreelancer);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_job = rs.getInt("id_job");
+                    String title = rs.getString("title");
+                    Double salary = rs.getDouble("salary");
+                    String description = rs.getString("description");
+                    Double duration = rs.getDouble("duration");
+                    String start_date = rs.getString("start_date");
+                    int id_application = rs.getInt("id_application");
+                    int status_ja = rs.getInt("status");
+                    String[] split = rs.getString("create_date").split(" ");
+                    String create_date_ja = split[0];
+                    String major_name = rs.getString("major_name");
+                    list.add(new JobDTO(id_job, title, salary, description, duration, start_date, major_name, id_application, create_date_ja, status_ja));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return list;
+    }
+
+    public List<JobApplicationDTO> getFreelancerApplyByJob(int id_job) throws SQLException {
+        List<JobApplicationDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT [id_freelancer]\n"
+                + "      ,[id_job]\n"
+                + "  FROM [dbo].[tblJobApplication] WHERE [id_job] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id_job);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_freelancer = rs.getInt("id_freelancer");
+                    int idJob = rs.getInt("id_job");
+                    list.add(new JobApplicationDTO(id_freelancer, idJob));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return list;
     }
 }

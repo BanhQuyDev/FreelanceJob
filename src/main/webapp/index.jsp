@@ -3,7 +3,7 @@
     Created on : May 28, 2022, 10:38:23 AM
     Author     : QUANG HUY
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="assets/css/editlogin.css" />
 </head>
 
-<body>
+<body> 
     <c:if test="${sessionScope.TYPE == 'admin'}">
         <c:redirect url="LogoutController"></c:redirect>
     </c:if>
@@ -145,18 +145,16 @@
                                                 <a style="pointer-events: none; background-color: #f2722970">Processsing...</a>
                                             </c:if>
                                             <c:if test="${job.jobApplication == 0}">
-                                               <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
-                                            </c:if>                       
+                                                <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                            </c:if>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
-                                            <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
-                                                 data-placement="auto" data-animation="true">
-                                                <a>Apply</a>
-                                            </div>
+                                            <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can't apply Your Own Job" data-content="Please apply another">
+                                                  <a>Apply</a>
+                                            </div>                
                                         </c:when>
                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                            <div data-toggle="tooltip" data-html="true" title="Change to Freelancer Mode to apply!!!"
-                                                 data-placement="auto" data-animation="true">
+                                            <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can' apply As An Employer" data-content="Please change your mode">
                                                 <a>Apply</a>
                                             </div>
                                         </c:when>
@@ -183,11 +181,6 @@
             });
         }, 3000)
     </script> 
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
@@ -225,5 +218,15 @@
         src="https://kit.fontawesome.com/b36bcbb61e.js"
         crossorigin="anonymous"
     ></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover(),
+                    $('.popover-dismiss').popover({
+                trigger: 'focus'
+            })
+        })
+    </script>
+
 </body>
 </html>

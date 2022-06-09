@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -52,80 +53,84 @@
                 </div>
             </div>
 
-        <div class="container bootstrap snippets bootdey">
-                <section id="news" class="bg-white padding-top-bottom">
-                    <div class="container snippets bootdey">
-                        <div class="timeline">
-                            <div class="date-title">
-                                <span>Timeline</span>
+            <div style="background: #ddd ; padding: 50px 0px">
+                <div class="container bootstrap snippets bootdey" >
+                    <section id="news" class="bg-white padding-top-bottom" style="background: #ddd !important;">
+                        <div class="container snippets bootdey">
+                            <div class="timeline">
+                                <div class="date-title">
+                                    <span>Timeline</span>
+                                </div>
+                                <div class="row">
+                                <c:forEach var="job" items="${requestScope.LIST_APPLIED_JOB}" varStatus="counting">
+                                    <c:set var="date" value="${fn:split(job.createDateJobApplication, '-')}"/>
+                                    <c:if test="${counting.count % 2 != 0}">
+                                        <div class="col-sm-6 news-item">
+                                            <c:if test="${job.statusJobApplication == 1}">
+                                                <div class="news-content news-done">
+                                                    <div class="date">
+                                                        <p>${date[2]}/${date[1]}</p>
+                                                        <small>${date[0]}</small>
+                                                    </div>
+                                                    <h2 class="news-title"> ${job.title} <i style="" class="fas fa-check-circle"></i></h2>
+                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                    <div style="text-align: center; margin-left: 60%;">
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${job.statusJobApplication == 0}">
+                                                <div class="news-content news-doing">
+                                                    <div class="date">
+                                                        <p>${date[2]}/${date[1]}</p>
+                                                        <small>${date[0]}</small>
+                                                    </div>
+                                                    <h2 class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
+                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                    <div style="text-align: center; margin-left: 60%;">
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${counting.count % 2 == 0}">
+                                        <div class="col-sm-6 news-item right">
+                                            <c:if test="${job.statusJobApplication == 1}">
+                                                <div class="news-content news-done">
+                                                    <div class="date">
+                                                        <p>${date[2]}/${date[1]}</p>
+                                                        <small>${date[0]}</small>
+                                                    </div>
+                                                    <h2 class="news-title">${job.title} <i style="" class="fas fa-check-circle"></i></h2>
+                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                    <div style="text-align: center; margin-left: 60%;">
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${job.statusJobApplication == 0}">
+                                                <div class="news-content news-doing">
+                                                    <div class="date">
+                                                        <p>${date[2]}/${date[1]}</p>
+                                                        <small>${date[0]}</small>
+                                                    </div>
+                                                    <h2 class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
+                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                    <div style="text-align: center; margin-left: 60%;">
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
                             </div>
-                            <div class="row">
-
-                                <div class="col-sm-6 news-item">
-                                    <div class="news-content news-done">
-                                        <div class="date">
-                                            <p style="color: #ffffff">28/9</p>
-                                            <small>2022</small>
-                                        </div>
-                                        <h2 class="news-title">Title 1</h2>
-                                        <div class="news-media">
-                                            <a class="colorbox cboxElement" href="#">
-                                                <!-- <img class="" src="https://via.placeholder.com/400x400/FFB6C1/000000" alt=""> -->
-                                            </a>
-                                        </div>
-                                        <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
-                                        <div style="text-align: center; margin-left: 80%;">
-                                            <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 news-item right">
-                                    <div class="news-content news-doing">
-                                        <div class="date">
-                                            <p>27</p>
-                                            <small>Thu</small>
-                                        </div>
-                                        <h2 class="news-title">Title 2</h2>
-                                        <div class="news-media gallery">
-                                            <a class="colorbox cboxElement" href="#">
-                                                <!-- <img class="" src="https://via.placeholder.com/400x400/87CEFA/000000" alt=""> -->
-                                            </a>
-                                            <a class="colorbox cboxElement" href="#"></a>
-                                        </div>
-                                        <p>But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure…</p>
-                                        <div style="text-align: center; margin-left: 80%;">
-                                            <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6 news-item">
-                                    <div class="news-content news-doing">
-                                        <div class="date">
-                                            <p>28/9</p>
-                                            <small>2022</small>
-                                        </div>
-                                        <h2 class="news-title">Title 1</h2>
-                                        <div class="news-media">
-                                            <a class="colorbox cboxElement" href="#">
-                                                <!-- <img class="" src="https://via.placeholder.com/400x400/FFB6C1/000000" alt=""> -->
-                                            </a>
-                                        </div>
-                                        <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
-                                        <div style="text-align: center; margin-left: 80%;">
-                                            <label class="read-more" href="#">ngu<i class="fa-solid fa-circle-check"></i></label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
                         </div>
                     </div>
                 </section>
             </div>
-
+        </div>
 
 
         <jsp:include page="component/footer.jsp"></jsp:include>
