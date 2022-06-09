@@ -3,7 +3,7 @@
     Created on : May 28, 2022, 10:38:23 AM
     Author     : QUANG HUY
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="assets/css/editlogin.css" />
 </head>
 
-<body>
+<body> 
     <c:if test="${sessionScope.TYPE == 'admin'}">
         <c:redirect url="LogoutController"></c:redirect>
     </c:if>
@@ -145,13 +145,13 @@
                                                 <a style="pointer-events: none; background-color: #f2722970">Processsing...</a>
                                             </c:if>
                                             <c:if test="${job.jobApplication == 0}">
-                                               <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
-                                            </c:if>                       
+                                                <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                            </c:if>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
                                             <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can't apply Your Own Job" data-content="Please apply another">
-                                                <a>Apply</a>
-                                            </div>
+                                                  <a>Apply</a>
+                                            </div>                
                                         </c:when>
                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                             <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can' apply As An Employer" data-content="Please change your mode">
@@ -210,7 +210,7 @@
     <script src="./assets/js/jquery.validate.min.js"></script>
     <script src="./assets/js/mail-script.js"></script>
     <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    
+
     <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
@@ -222,10 +222,11 @@
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover(),
-            $('.popover-dismiss').popover({
+                    $('.popover-dismiss').popover({
                 trigger: 'focus'
             })
         })
     </script>
+
 </body>
 </html>
