@@ -54,7 +54,7 @@
                                                 <li>
                                                     <a style="color: black" href="#">Job Management</a>
                                                     <ul class="submenu">
-                                                        <li><a href="job_management.jsp">List Job Apply</a></li>
+                                                        <li><a href="JobApplyController">List Job Apply</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="HistoryController">History</a></li>

@@ -28,6 +28,8 @@ public class JobDTO {
     private String[] skillJob;
     private int freelancerQuantity;
     private int jobApplication;
+    private String createDateJobApplication;
+    private int statusJobApplication;
 
     public JobDTO() {
 
@@ -135,6 +137,20 @@ public class JobDTO {
         this.nameMajor = nameMajor;
         this.createDate = createDate;
     }
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String nameMajor, int jobApplication, String createDateJobApplication, int statusJobApplication) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.nameMajor = nameMajor;
+        this.jobApplication = jobApplication;
+        this.createDateJobApplication = createDateJobApplication;
+        this.statusJobApplication = statusJobApplication;
+    }
+
 
     public int getIdJob() {
         return idJob;
@@ -264,5 +280,23 @@ public class JobDTO {
     public void setJobApplication(int jobApplication) {
         this.jobApplication = jobApplication;
     }
+
+    public String getCreateDateJobApplication() {
+        return createDateJobApplication;
+    }
+
+    public void setCreateDateJobApplication(String createDateJobApplication) {
+        this.createDateJobApplication = createDateJobApplication;
+    }
+
+    public int getStatusJobApplication() {
+        return statusJobApplication;
+    }
+
+    public void setStatusJobApplication(int statusJobApplication) {
+        this.statusJobApplication = statusJobApplication;
+    }
+
+
     
 }
