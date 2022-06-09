@@ -49,28 +49,29 @@
                                     />
                             </div>
                             <div class="form-group">
-                                <label for="job-title">Price</label>
+                                <label for="job-price">Price</label>
+                                <c:set var="salary" value="${job.salary}"/>
                                 <input
-                                    type="number"
+                                    type="text"
                                     name="salary"
                                     class="form-control"
                                     readonly=""
-                                    value="${job.salary}"
+                                    value="${job.showPrice(salary)} VND"
                                     />
                             </div>
                             <div class="form-group">
-                                <label for="job-location">Duration (by day)</label>
+                                <label for="job-duration">Duration (by day)</label>
                                 <input
                                     type="number"
                                     name="duration"
                                     class="form-control"
-                                    value="${job.duration}"
+                                    value="${job.showDuration(job.duration)}"
                                     readonly=""
                                     />
                             </div>
 
                             <div class="form-group">
-                                <label for="job-location">Major</label>
+                                <label for="job-major">Major</label>
                                 <input
                                     type="text"
                                     name="major"
@@ -81,12 +82,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Job Description</label>
+                                <label for="job_description">Job Description</label>
                                 <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="job-location">Created By</label>
+                                <label for="job-created">Created By</label>
                                 <input
                                     type="text"
                                     name="employer"
@@ -106,12 +107,12 @@
                             </div>
                             <a href="GetAllJob" class="btn btn-block btn-primary btn-md" style="border-radius: 20px; margin: 10px 0px">Back</a>
                             <c:choose>
-                                <c:when test="${job.status == 'Unappropriated'}">
+                                <c:when test="${job.status == 'Spam'}">
                                     <a href="AcceptJobController?idJob=${job.idJob}" class="btn btn-success" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Recovery</a>
                                     <a href="DenyJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Delete</a>
                                 </c:when>                         
                                 <c:otherwise>
-                                    <a href="UnappropriatedJobController?idJob=${job.idJob}"><button class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Unappropriated</button></a>
+                                    <a href="UnappropriatedJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Spam</a>
                                 </c:otherwise>
                             </c:choose>
                         </form>

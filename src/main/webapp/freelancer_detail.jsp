@@ -39,14 +39,14 @@
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
         <c:if test="${sessionScope.LOGIN_USER == NULL}">
-            <c:redirect url="index.jsp"></c:redirect>
+            <c:redirect url="HomeController"></c:redirect>
         </c:if>
         <div class="container">
             <div class="main-body p-2 border border-danger mt-5 mb-5" style="border-radius: 8px">
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb" class="main-breadcrumb">
                     <ol class="breadcrumb" style="background-color: #fb246a">
-                        <li class="breadcrumb-item "><a href="index.jsp">Home</a></li>
+                        <li class="breadcrumb-item "><a href="HomeController">Home</a></li>
                         <li class="breadcrumb-item">
                             <a href="javascript:void(0)">User</a>
                         </li>

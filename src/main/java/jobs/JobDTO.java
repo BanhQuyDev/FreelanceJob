@@ -5,8 +5,7 @@
  */
 package jobs;
 
-import java.util.List;
-import skills.SkillJobDTO;
+import utils.Utils;
 
 /**
  *
@@ -24,12 +23,27 @@ public class JobDTO {
     private int idEmployer;
     private String nameEmployer;
     private String idMajor;
+    private String nameMajor;
     private String createDate;
-    private String[]skillJob;
+    private String[] skillJob;
+    private int freelancerQuantity;
+    private int jobApplication;
+    private String createDateJobApplication;
+    private int statusJobApplication;
+
     public JobDTO() {
-        
+
     }
-   
+
+    public JobDTO(int idJob) {
+        this.idJob = idJob;
+    }
+
+    public JobDTO(int idJob, String title) {
+        this.idJob = idJob;
+        this.title = title;
+    }
+
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String nameEmployer, String idMajor, String createDate) {
         this.idJob = idJob;
         this.title = title;
@@ -43,7 +57,6 @@ public class JobDTO {
         this.idMajor = idMajor;
         this.createDate = createDate;
     }
-    
 
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor) {
         this.idJob = idJob;
@@ -56,6 +69,7 @@ public class JobDTO {
         this.nameEmployer = nameEmployer;
         this.idMajor = idMajor;
     }
+
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate) {
         this.idJob = idJob;
         this.title = title;
@@ -69,7 +83,35 @@ public class JobDTO {
         this.createDate = createDate;
     }
 
-    public JobDTO(String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String idMajor,String[]skillJob) {
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate, int freelancerQuantity) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = idMajor;
+        this.createDate = createDate;
+        this.freelancerQuantity = freelancerQuantity;
+    }
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate, int freelancerQuantity,int jobApplication) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = idMajor;
+        this.createDate = createDate;
+        this.freelancerQuantity = freelancerQuantity;
+        this.jobApplication = jobApplication;
+    }
+
+    public JobDTO(String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String idMajor, String[] skillJob) {
         this.title = title;
         this.salary = salary;
         this.description = description;
@@ -80,7 +122,36 @@ public class JobDTO {
         this.idMajor = idMajor;
         this.skillJob = skillJob;
     }
-    
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String nameEmployer, String idMajor, String nameMajor, String createDate) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.idEmployer = idEmployer;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = idMajor;
+        this.nameMajor = nameMajor;
+        this.createDate = createDate;
+    }
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String nameMajor, int jobApplication, String createDateJobApplication, int statusJobApplication) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.nameMajor = nameMajor;
+        this.jobApplication = jobApplication;
+        this.createDateJobApplication = createDateJobApplication;
+        this.statusJobApplication = statusJobApplication;
+    }
+
+
     public int getIdJob() {
         return idJob;
     }
@@ -161,6 +232,14 @@ public class JobDTO {
         this.createDate = createDate;
     }
 
+    public String getNameMajor() {
+        return nameMajor;
+    }
+
+    public void setNameMajor(String nameMajor) {
+        this.nameMajor = nameMajor;
+    }
+
     public int getIdEmployer() {
         return idEmployer;
     }
@@ -169,12 +248,55 @@ public class JobDTO {
         this.idEmployer = idEmployer;
     }
 
-    public String[]getSkillJob() {
+    public String[] getSkillJob() {
+
         return skillJob;
     }
 
     public void setSkillJob(String[] skillJob) {
         this.skillJob = skillJob;
     }
+
+    public int getFreelancerQuantity() {
+        return freelancerQuantity;
+    }
+
+    public void setFreelancerQuantity(int freelancerQuantity) {
+        this.freelancerQuantity = freelancerQuantity;
+    }
+
+    public String showPrice(double price) {
+        return Utils.convertPrice(price);
+    }
+
+    public String showDuration(double duration) {
+        return Utils.convertPrice(duration);
+    }
+
+    public int getJobApplication() {
+        return jobApplication;
+    }
+
+    public void setJobApplication(int jobApplication) {
+        this.jobApplication = jobApplication;
+    }
+
+    public String getCreateDateJobApplication() {
+        return createDateJobApplication;
+    }
+
+    public void setCreateDateJobApplication(String createDateJobApplication) {
+        this.createDateJobApplication = createDateJobApplication;
+    }
+
+    public int getStatusJobApplication() {
+        return statusJobApplication;
+    }
+
+    public void setStatusJobApplication(int statusJobApplication) {
+        this.statusJobApplication = statusJobApplication;
+    }
+
+
     
 }

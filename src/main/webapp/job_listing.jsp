@@ -75,24 +75,33 @@
                                 <!-- Job Category Listing start -->
                                 <div class="job-category-listing mb-50">
                                     <!-- single one -->
-                                    <form action="JobListingController" method="GET">
+                                    <form action="JobListingController" method="POST">
                                         <div class="single-listing">
                                             <div class="small-section-tittle2">
-                                                <!--                                                <button style="padding: 20px; margin-left: 60%; border-radius: 8px" class="btn btn-info" type="submit">Filter</button>-->
                                                 <h4>By Major</h4>
                                             </div>
                                             <!-- Select job items start -->
-                                            <select name="selectedMajor" onchange="this.form.submit()">
-                                            <%--<c:choose>--%>
-                                                <%--<c:when test="${!empty requestScope.SELECTED_MAJOR}">--%>
-                                                    <option value="All">All Major</option>
-                                                <%--</c:when>--%>
-                                                <%--<c:otherwise>--%>
-                                                    <!--<option value="${requestScope.SELECTED_MAJOR}">${requestScope.SELECTED_MAJOR}</option>-->
-                                                <%--</c:otherwise>--%>
-                                            <%--</c:choose>--%>
-                                            <c:forEach var="major" items="${requestScope.LIST_MAJOR}">
-                                                <option value="${major.id_major.trim()}">${major.id_major}</option>
+                                        <c:set var="selectedMajor" value="${param.selectedMajor}"/>
+                                        <select name="selectedMajor" onchange="this.form.submit()">
+                                            <c:choose>
+                                                <c:when test="${empty selectedMajor}">
+                                                    <option value="All Major">All Major</option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:set var="all" value="All Major"/>
+                                                    <c:if test="${selectedMajor ne all}">
+                                                        <option value="${selectedMajor}">${selectedMajor}</option>
+                                                        <option  value="All Major">All Major</option>
+                                                    </c:if>
+                                                    <c:if test="${selectedMajor eq all}">
+                                                        <option value="${selectedMajor}">${selectedMajor}</option>
+                                                    </c:if>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <c:forEach items="${requestScope.LIST_MAJOR}" var="c">
+                                                <c:if test="${c.major_name ne selectedMajor}">
+                                                    <option value="${c.major_name}">${c.major_name}</option>
+                                                </c:if>
                                             </c:forEach>
                                         </select>
 
@@ -121,21 +130,43 @@
                                         <div class="single-job-items mb-30">
                                             <div class="job-items">
                                                 <div class="company-img">
-                                                    <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""/></a>
+                                                    <a href="JobDetailController?jobId=${job.idJob}"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""/></a>
                                                 </div>
                                                 <div class="job-tittle job-tittle2">
-                                                    <a href="#">
+                                                    <a href="JobDetailController?jobId=${job.idJob}">
                                                         <h4>${job.title}</h4>
                                                     </a>
                                                     <ul>
                                                         <li>${job.nameEmployer}</li>
-                                                        <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                                        <li>${job.salary}VNĐ</li>
+                                                        <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>
+                                                            <c:set var="salary" value="${job.salary}"/>
+                                                        <li>${job.showPrice(salary)} VNĐ</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="items-link items-link2 f-right">
-                                                <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                                <c:choose>
+                                                    <c:when test="${job.nameEmployer != sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                                        <c:if test="${job.jobApplication != 0}">
+                                                            <a style="pointer-events: none; background-color: #f2722970">Processsing...</a>
+                                                        </c:if>
+                                                        <c:if test="${job.jobApplication == 0}">
+                                                            <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
+                                                        </c:if>    
+                                                    </c:when>
+                                                    <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                                        <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
+                                                             data-placement="auto" data-animation="true">
+                                                            <a>Apply</a>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
+                                                        <div data-toggle="tooltip" data-html="true" title="Change to Freelancer Mode to apply!!!"
+                                                             data-placement="auto" data-animation="true">
+                                                            <a>Apply</a>
+                                                        </div>
+                                                    </c:when>
+                                                </c:choose>   
                                                 <span>CREATE DATE : ${job.createDate}</span>
                                             </div>
                                         </div>
@@ -147,7 +178,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Job List Area End -->
+            <!-- Job List Area End -->        
             <!--Pagination Start  -->
             <div class="pagination-area pb-115 text-center">
                 <div class="container">
@@ -168,7 +199,6 @@
                 </div>
             </div>
             <!--Pagination End  -->
-
         </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
 

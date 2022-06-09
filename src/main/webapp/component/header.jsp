@@ -51,11 +51,13 @@
                                             <c:choose>
                                                 <c:when test="${sessionScope.MODE == 'FREELANCER'}">
                                                 <li><a href="JobListingController">Find Jobs </a></li>
-                                                <a style="color: black" href="#">Job Management</a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">List Job Apply</a></li>
-                                                </ul>
-                                                <li><a href="#">History</a></li>
+                                                <li>
+                                                    <a style="color: black" href="#">Job Management</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="JobApplyController">List Job Apply</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="HistoryController">History</a></li>
                                                 </c:when>                                              
                                                 <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                                 <li><a href="RenderSkillPostJob">Post a Job </a></li>
@@ -63,10 +65,10 @@
                                                     <a href="#">Job Management</a>
                                                     <ul class="submenu">
                                                         <li><a href="#">Your Post</a></li>
-                                                        <li><a href="#">List Freelancer Apply</a></li>
+                                                        <li><a href="GetAllFreelancerApplyController">List Freelancer Apply</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">History</a></li>
+                                                <li><a href="HistoryController">History</a></li>
                                                 </c:when>
                                                 <c:otherwise>
                                                 <li><a href="JobListingController">Find Jobs </a></li>
@@ -112,8 +114,8 @@
                                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i><button class="btn btn-primary">Employer</button></a>
-                                                                </c:when>
-                                                                <c:otherwise>
+                                                        </c:when>
+                                                        <c:otherwise>
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i> Employer</a>
                                                         </c:otherwise>
@@ -165,6 +167,14 @@
                     </center>
                 </div>
             </c:if>
+            <c:if test="${requestScope.APPLY_SUCCESS != null}">
+                <div class="alert alert-success">
+                    <center>
+                        <strong>Apply successfully! </strong> ${requestScope.APPLY_SUCCESS}
+                    </center>
+                </div>
+            </c:if>
+            
         </div>
     </div>
     <!-- Header End -->

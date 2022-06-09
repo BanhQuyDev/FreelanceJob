@@ -70,8 +70,9 @@
                                         </a>
                                         <ul>
                                             <li>${job.nameEmployer}</li>
-                                            <li><i class="fa-solid fa-business-time"></i>${job.duration} day(s)</li>
-                                            <li>${job.salary}VNĐ</li>
+                                            <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>
+                                                <c:set var="salary" value="${job.salary}"/>
+                                            <li>${job.idMajor} - ${job.nameMajor}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -79,6 +80,12 @@
                             <!-- job single End -->
 
                             <div class="job-post-details">
+                                <div class="post-details1 mb-50">
+                                    <!-- Small Section Tittle -->
+                                    <div class="small-section-tittle text-center">                                        
+                                        <h4 class="text-monospace">(<span style="color: blue">${requestScope.COUNTING_FREELANCER}</span>) Freelancer(s) Applied this job</h4>
+                                    </div>
+                                </div>
                                 <div class="post-details1 mb-50">
                                     <!-- Small Section Tittle -->
                                     <div class="small-section-tittle">
@@ -93,7 +100,8 @@
                                     </div>
                                     <div style="column-gap: 10%; row-gap: 28px" class="row justify-content-between text-center p-4">
                                         <c:forEach var="skillName" items="${requestScope.SKILL_JOB}">
-                                            <button type="button" class="btn col-3">${skillName}</button>
+                                            <!--<button type="button" class="btn col-3"></button>-->
+                                            <p class="col-3 shadow-lg rounded text-success font-weight-bold p-2">${skillName}</p>
                                         </c:forEach>                                      
                                     </div>
                                 </div>
@@ -102,18 +110,36 @@
                         </div>
                         <!-- Right Content -->
                         <div class="col-xl-4 col-lg-4">
-                            <div class="post-details3  mb-50">
+                            <div class="post-details3  mb-50 rounded" style="border: 3px solid #ededed;">
                                 <!-- Small Section Tittle -->
                                 <div class="small-section-tittle">
-                                    <h4 class="text-monospace">Job Overview</h4>
+                                    <h4 class="text-monospace">Job Payment</h4>
                                 </div>
                                 <ul>
                                     <li>Start Date : <span>${job.startDate}</span></li>
-                                    <li>Price :  <span>${job.salary}VNĐ</span></li>
                                     <li>Create date : <span>${job.createDate}</span></li>
+                                    <li>Salary :  <span>${job.showPrice(salary)}VNĐ</span></li>
                                 </ul>
                                 <div class="apply-btn2">
-                                    <a href="#" class="btn">Apply Now</a>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.LOGIN_USER == null}">
+                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                               &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" 
+                                               class="btn rounded">Apply Now</a>
+                                        </c:when>
+                                        <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">
+                                            <a href="ApplyJobController?jobId=${job.idJob}" class="btn rounded">Apply Now</a>
+                                        </c:when>
+                                        <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE != 'EMPLOYER'}">
+                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Processing...</a>
+                                        </c:when>
+                                        <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE == 'EMPLOYER'}">
+                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Apply Now</a>
+                                        </c:when>
+                                        <c:when test="${requestScope.JOB_APPLICATION_ID != 0}">
+                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Processsing...</a>
+                                        </c:when>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
