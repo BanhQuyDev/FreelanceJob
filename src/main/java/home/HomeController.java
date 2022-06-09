@@ -12,10 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
 import majors.MajorDAO;
 import majors.MajorDTO;
+import users.UserDTO;
 
 /**
  *
@@ -32,13 +34,21 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             MajorDAO majorDao = new MajorDAO();
             List<MajorDTO> listMajor = majorDao.getAllMajorList();
             request.setAttribute("LIST_MAJOR", listMajor);
             JobDAO jobDao = new JobDAO();
-            List<JobDTO> listJob = jobDao.getTop4LatestJob();
-            request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
-            url = SUCCESS;
+            if (loginUser != null) {
+                List<JobDTO> listJob = jobDao.getTop4LatestJob(loginUser.getId());
+                request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
+                url = SUCCESS;
+            }else{
+                List<JobDTO> listJob = jobDao.getTop4LatestJob();
+                request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
+                url = SUCCESS;
+            }
         } catch (Exception e) {
             log("Error at HomeController : " + e.toString());
         } finally {

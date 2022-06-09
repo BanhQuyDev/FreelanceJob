@@ -1,275 +1,252 @@
-body{
-    background:#ddd;
-    }
-    
-    /*-------------------
+/*body {
+    background: #ddd !important;
+}*/
+
+/*-------------------
     -----News Styles-----
-    ---------------------*/    
-    .timeline{
-        position:relative;
-        margin-bottom:100px;
-        z-index:1;
-    }
-    
-    .timeline:before{
-        display:block;
-        content:"";
-        position:absolute;
-        width:50%;
-        height:100%;
-        left:1px;
-        top:0;
-        border-right:1px solid #5CC9DF;
-        z-index:-1;
-    } 
-    
-    .timeline:after{
-        display:block;
-        content:"";
-        position:absolute;
-        width:50%;
-        height:100px;
-        left:1px;
-        bottom:-105px;
-        border-right:1px dashed #5CC9DF;
-        z-index:-1;
-    } 
-    
-    .timeline .date-title{
-        text-align:center;
-        margin:70px 0 50px;
-    }
-    
-    .timeline .date-title span{
-        padding:15px 30px;
-        font-size:21px;
-        font-weight:400;
-        color:#fff;
-        background:#5CC9DF;
-        border-radius:5px;
-    }
-    
-    .news-item {
-        padding-bottom:45px;
-    }
-    
-    .news-item.right {
-        float:right;
-        margin-top:40px;
-    }
-    /* ---------------------------------------------------- */
-    .news-item .news-content {
-        margin:20px 30px 0 0;
-        position:relative;
-        padding:30px;
-        padding-left:100px;
-        background:#f5f5f5;
-        border-radius:10px;
-        box-shadow:-10px 10px 0 rgba(0,0,0,0.08);
-        -webkit-transition:all .3s ease-out;
-        transition:all .3s ease-out;
-    }
-    
-    .news-item.right .news-content {
-        margin:20px 0 0 30px;
-        box-shadow: 10px 10px 0 rgba(0,0,0,0.08);
-    }
+    ---------------------*/
+.timeline {
+    position: relative;
+    margin-bottom: 100px;
+    z-index: 1;
+}
 
-    /* đay rồi */
-    .news-item:hover .news-content.news-done {
-        background:#5CC9DF;
-        color:#fff;
-    }
-    .news-item:hover .news-content.news-doing {
-        background:#f89a20;
-        color:#fff;
-    }
-     
-    /* -------------------------------------------- */
+.timeline:before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 1px;
+    top: 0;
+    border-right: 1px solid #5CC9DF;
+    z-index: -1;
+}
 
-    .news-item .news-content:after {
-        display:block;
-        content:"";
-        position:absolute;
-        top:50px;
-        right:-40px;
-        width:0px;
-        height:0px;
-        background:transparent;
-        border:20px solid transparent;
-        border-left:20px solid #f5f5f5;
-        -webkit-transition:border-left-color .3s ease-out;
-        transition:border-left-color .3s ease-out;
-    }
-    
-    .news-item.right .news-content:after {
-        position:absolute;
-        left:-40px;
-        right:auto;
-        border-left:20px solid transparent;
-        border-right:20px solid #f5f5f5;
-        -webkit-transition:border-right-color .3s ease-out;
-        transition:border-right-color .3s ease-out;
-    }
-    
-    .news-item:hover .news-content.news-done:after {
-        border-left-color:#5CC9DF;
-    }
+.timeline:after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100px;
+    left: 1px;
+    bottom: -105px;
+    border-right: 1px dashed #5CC9DF;
+    z-index: -1;
+}
 
-    .news-item:hover .news-content.news-doing:after {
-        border-left-color:#f89a20;
-    }
-    
-    .news-item.right:hover .news-content.news-doing:after {
-        border-left-color:transparent;
-        border-right-color:#f89a20;
-    }
-    
-    .news-item.right:hover .news-content.news-done:after {
-        border-left-color:transparent;
-        border-right-color:#5CC9DF;
-    }
-    
-    /* ============================================== */
+.timeline .date-title {
+    text-align: center;
+    margin: 70px 0 50px;
+}
 
-    .news-item .news-content.news-done:before {
-        display:block;
-        content:"";
-        position:absolute;
-        width:20px;
-        height:20px;
-        right:-55px;
-        top:60px;
-        background:#5CC9DF;
-        border:3px solid #fff;
-        border-radius:50%;
-        -webkit-transition:background .3s ease-out;
-        transition:background .3s ease-out;
-    }
+.timeline .date-title span {
+    padding: 15px 30px;
+    font-size: 21px;
+    font-weight: 400;
+    color: #fff;
+    background: #5CC9DF;
+    border-radius: 10px;
+}
 
-    .news-item .news-content.news-doing:before {
-        display:block;
-        content:"";
-        position:absolute;
-        width:20px;
-        height:20px;
-        right:-55px;
-        top:60px;
-        background:#f89a20;
-        border:3px solid #fff;
-        border-radius:50%;
-        -webkit-transition:background .3s ease-out;
-        transition:background .3s ease-out;
-    }
+.news-item {
+    padding-bottom: 45px;
+}
 
-    /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
-    
-    .news-item.right .news-content:before {
-        left:-55px;
-        right:auto;
-    }
-    
-    .news-content.news-done .date {
-        position:absolute;
-        width:80px;
-        height:80px;
-        left:10px;
-        text-align:center;
-        color:#5CC9DF;
-        -webkit-transition:color .3s ease-out;
-        transition:color .3s ease-out;
-    }
-    
-    .news-content.news-doing .date {
-        position:absolute;
-        width:80px;
-        height:80px;
-        left:10px;
-        text-align:center;
-        color:#f89a20;
-        -webkit-transition:color .3s ease-out;
-        transition:color .3s ease-out;
-    }
-    
-    .news-item:hover .news-content .date {
-        color:#fff;
-    }
-    
-    .news-content .date p{
-        margin:0;
-        font-size:35px;
-        font-weight:600;
-        line-height:60px;
-    }
-    
-    .news-content .date small{
-        margin:0;
-        font-size:26px;
-        font-weight:300;
-        line-height:24px;
-    }
-    
-    /* ========================================================= */
-    
-    .news-content .news-title{
-        font-size:24px;
-        font-weight:300;
-    }
-    
-    .news-content p{
-        font-size:16px;
-        line-height:24px;
-        font-weight:300;
-        letter-spacing:0.02em;
-        margin-bottom:10px;
-    }
-    
-    .news-content .read-more,
-    .news-content .read-more:hover,
-    .news-content .read-more:active,
-    .news-content .read-more:focus{
-        text-decoration:none;
-        font-size:16px;
-        color:#7A7C7F;
-        line-height:24px;
-    }
-    
-    .news-item:hover .news-content .read-more,
-    .news-item:hover .news-content .read-more:hover,
-    .news-item:hover .news-content .read-more:active,
-    .news-item:hover .news-content .read-more:focus{
-        color:#fff;
-    }
-    
-    .news-content .read-more{
-        -webkit-transition:padding .3s ease-out;
-        transition:padding .3s ease-out;
-    }
-    
-    .news-content .read-more:hover {
-        padding-left:7px;
-    }
-    
-    /* .news-content .read-more:after{
-        content:'\f054';
-        padding-left:15px;
-        font-family:'FontAwesome';
-        font-size:21px;
-        line-height:21px;
-        color:#5CC9DF;
-        vertical-align:middle;
-        -webkit-transition:padding .3s ease-out;
-        transition:padding .3s ease-out;
-    } */
-    
-    .news-content .read-more:hover:after{
-        padding-left:20px;
-    }
-    
-    .news-item:hover .news-content .read-more:after{
-        color:#fff;
-    }
-    
-    
+.news-item.right {
+    float: right;
+    margin-top: 45px;
+}
 
-                                            
+/* ---------------------------------------------------- */
+.news-item .news-content {
+    margin: 20px 30px 0 0;
+    box-shadow: -10px 10px 0 rgba(0, 0, 0, 0.08);
+    position: relative;
+    padding: 30px;
+    padding-left: 100px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.news-item.right .news-content {
+    margin: 20px 0 0 30px;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* đay rồi */
+.news-item:hover .news-content.news-done {
+    background: #5CC9DF;
+    color: #fff;
+}
+
+.news-item:hover .news-content.news-doing {
+    background: #f89a20;
+    color: #fff;
+}
+
+/* ---------------------icon-link----------------------- */
+.news-item .news-content:after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50px;
+    right: -40px;
+    width: 0px;
+    height: 0px;
+    background: transparent;
+    border: 20px solid transparent;
+    border-left: 20px solid #f5f5f5;
+    -webkit-transition: border-left-color .3s ease-out;
+    transition: border-left-color .3s ease-out;
+}
+
+.news-item.right .news-content:after {
+    position: absolute;
+    left: -40px;
+    right: auto;
+    border-left: 20px solid transparent;
+    border-right: 20px solid #f5f5f5;
+    -webkit-transition: border-right-color .3s ease-out;
+    transition: border-right-color .3s ease-out;
+}
+
+.news-item:hover .news-content.news-done:after {
+    border-left-color: #5CC9DF;
+}
+
+.news-item:hover .news-content.news-doing:after {
+    border-left-color: #f89a20;
+}
+
+.news-item.right:hover .news-content.news-doing:after {
+    border-left-color: transparent;
+    border-right-color: #f89a20;
+}
+
+.news-item.right:hover .news-content.news-done:after {
+    border-left-color: transparent;
+    border-right-color: #5CC9DF;
+}
+/* ----------------------------------------------------- */
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+.news-item .news-content::before{
+    display: block;
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: -55px;
+    top: 60px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    -webkit-transition: background .3s ease-out;
+    transition: background .3s ease-out;
+}
+
+.news-item .news-content.news-done::before {
+    background: #5CC9DF;
+}
+
+.news-item .news-content.news-doing::before {
+    background: #f89a20;
+}
+
+.news-item.right .news-content:before {
+    left: -55px;
+    right: auto;
+}
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+.news-content.news-done .date {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 10px;
+    text-align: center;
+    color: #5CC9DF !important;
+    -webkit-transition: color .3s ease-out;
+    transition: color .3s ease-out;
+}
+
+.news-content.news-doing .date {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 10px;
+    text-align: center;
+    color: #f89a20 !important;
+    -webkit-transition: color .3s ease-out;
+    transition: color .3s ease-out;
+}
+
+.news-item:hover .news-content .date {
+    color: #fff;
+}
+
+.news-content .date p {
+    margin: 0;
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 60px;
+}
+
+.news-content .date small {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 24px;
+}
+
+/* ========================================================= */
+
+.news-content .news-title {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.news-content p {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+}
+
+.news-content .read-more,
+.news-content .read-more:hover,
+.news-content .read-more:active,
+.news-content .read-more:focus {
+    text-decoration: none;
+    font-size: 16px;
+    color: #7A7C7F;
+    line-height: 24px;
+}
+
+.news-item:hover .news-content .read-more,
+.news-item:hover .news-content .read-more:hover,
+.news-item:hover .news-content .read-more:active,
+.news-item:hover .news-content .read-more:focus {
+    color: #fff;
+}
+
+.news-content .read-more {
+    -webkit-transition: padding .3s ease-out;
+    transition: padding .3s ease-out;
+}
+
+.news-content .read-more:hover {
+    padding-left: 7px;
+}
+
+.news-content .read-more:hover:after {
+    padding-left: 20px;
+}
+
+.news-item:hover .news-content .read-more:after {
+    color: #fff;
+}

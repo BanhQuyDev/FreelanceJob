@@ -12,8 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
+import users.UserDTO;
 
 /**
  *
@@ -34,9 +36,20 @@ public class JobDetailController extends HttpServlet {
 
             JobDAO jobDao = new JobDAO();
             JobDTO jobDetail = jobDao.getDetailJob(jobId);
-            List<String>listSkill=jobDao.getSkillJob(jobId);
+            List<String> listSkill = jobDao.getSkillJob(jobId);
+
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            if (loginUser != null) {
+                int jobApplicationId = jobDao.getJobApplicationId(loginUser.getId(), jobId);
+                request.setAttribute("JOB_APPLICATION_ID", jobApplicationId);
+            }
+
+            int countFreelancer = jobDao.countFreelancerIn1Job(jobId);
+
             request.setAttribute("JOB_DETAIL", jobDetail);
             request.setAttribute("SKILL_JOB", listSkill);
+            request.setAttribute("COUNTING_FREELANCER", countFreelancer);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at JobDetailController : " + e.toString());

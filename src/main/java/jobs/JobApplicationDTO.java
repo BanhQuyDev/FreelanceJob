@@ -18,6 +18,7 @@ public class JobApplicationDTO {
     private String email;
     private String picture;
     private String title;
+
     public JobApplicationDTO() {
     }
 

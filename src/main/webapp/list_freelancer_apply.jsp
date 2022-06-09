@@ -213,7 +213,7 @@
         <!-- Jquery Plugins, main Jquery -->	
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
-         <script>
+        <script>
             window.setTimeout(function () {
                 $(".alert").fadeTo(400, 0).slideUp(400, function () {
                     $(this).remove();

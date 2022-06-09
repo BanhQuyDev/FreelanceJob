@@ -35,9 +35,11 @@ public class ApplyJobController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
             String jobId = request.getParameter("jobId");
-
             JobDAO jobDao = new JobDAO();
+
             if (jobDao.insertJobApplication(user.getId(), Integer.parseInt(jobId))) {
+                int countFreelancer = jobDao.countFreelancerIn1Job(Integer.parseInt(jobId));
+                request.setAttribute("COUNTING_FREELANCER", countFreelancer);
                 request.setAttribute("APPLY_SUCCESS", "Waiting for employer approval...");
 
                 JobDTO jobDetail = jobDao.getDetailJob(Integer.parseInt(jobId));
