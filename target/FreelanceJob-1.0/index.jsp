@@ -146,12 +146,12 @@
                                             </c:if>
                                             <c:if test="${job.jobApplication == 0}">
                                                 <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
-                                            </c:if>                       
+                                            </c:if>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
                                             <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can't apply Your Own Job" data-content="Please apply another">
-                                                <a>Apply</a>
-                                            </div>
+                                                  <a>Apply</a>
+                                            </div>                
                                         </c:when>
                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                             <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can' apply As An Employer" data-content="Please change your mode">
@@ -227,5 +227,6 @@
             })
         })
     </script>
+
 </body>
 </html>
