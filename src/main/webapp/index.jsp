@@ -14,13 +14,13 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="site.webmanifest" />
-    <linkss
+    <link
         rel="shortcut icon"
         type="image/x-icon"
         href="assets/img/favicon.ico"
         />
 
-    <<link rel="stylesheet" href="./home/home.css"/>
+    <link rel="stylesheet" href="./home/home.css"/>
 
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
