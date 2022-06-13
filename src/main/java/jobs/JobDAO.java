@@ -954,7 +954,11 @@ public class JobDAO {
                     String[] split = rs.getString("create_date").split(" ");
                     String create_date_ja = split[0];
                     String major_name = rs.getString("major_name");
-                    list.add(new JobDTO(id_job, title, salary, description, duration, start_date, major_name, id_application, create_date_ja, status_ja));
+//                    int applicationTime = -1;
+                    int applicationTime = getApplicationTime(id_job, idFreelancer);
+//                    int executionTime = 9999;
+                    int executionTime = getExecutionTime(id_job, idFreelancer);
+                    list.add(new JobDTO(id_job, title, salary, description, duration, start_date, major_name, id_application, create_date_ja, status_ja, applicationTime, executionTime));
                 }
             }
         } catch (Exception e) {
@@ -991,5 +995,57 @@ public class JobDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
+    }
+
+    public int getApplicationTime(int idJob, int idFreelancer) throws SQLException {
+        int check = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT DATEDIFF(HOUR, JA.create_date, GETDATE()) appliedDate FROM tblJob J, tblJobApplication JA, tblFreelancer F\n"
+                + "WHERE J.id_job = JA.id_job AND JA.id_freelancer = F.id_freelancer AND JA.status IS NULL AND J.id_job = ? AND F.id_freelancer = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, idJob);
+                ptm.setInt(2, idFreelancer);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = rs.getInt("appliedDate");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return check;
+    }
+
+    public int getExecutionTime(int idJob, int idFreelancer) throws SQLException {
+        int check = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT DATEDIFF(HOUR, J.start_date, GETDATE()) executionTime FROM tblJob J, tblContract C, tblFreelancer F, tblJobApplication JA\n"
+                + "WHERE C.id_freelancer = F.id_freelancer AND C.id_job = J.id_job AND JA.id_freelancer = F.id_freelancer AND JA.id_job = J.id_job AND JA.status = 1 AND J.id_job = ? AND F.id_freelancer = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, idJob);
+                ptm.setInt(2, idFreelancer);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = rs.getInt("executionTime");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return check;
     }
 }

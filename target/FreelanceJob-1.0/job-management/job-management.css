@@ -64,6 +64,11 @@
     transition: all .3s ease-out;
 }
 
+.news-item .news-content h5{
+    color: #0b1c39de !important;
+    transition: .3s ease-out;
+}
+
 .news-item.right .news-content {
     margin: 20px 0 0 30px;
     box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.08);
@@ -96,6 +101,11 @@
 .news-item:hover .news-content.news-done .news-title{
     color: #fff;
 }
+.news-item:hover .news-content.news-done h5{
+    color: #fff !important;
+    font-size: 22px;
+    transition: .3s ease-out;
+}
 
 .news-item:hover .news-content.news-doing {
     background: #f89a20;
@@ -109,6 +119,11 @@
 }
 .news-item:hover .news-content.news-doing .news-title{
     color: #fff;
+}
+.news-item:hover .news-content.news-doing h5{
+    color: #fff !important;
+    font-size: 22px;
+    transition: .3s ease-out;
 }
 
 /* ---------------------icon-link----------------------- */
@@ -284,3 +299,185 @@
 .news-item:hover .news-content .read-more:after {
     color: #fff;
 }
+
+/* =============================Modal============================ */
+.cookiesContent {
+    /* width: 320px; */
+    /* display: flex;
+    flex-direction: column; */
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    border-radius: 20px;
+    padding: 50px;
+    border: 5px solid red;
+}
+
+.cookiesContent img {
+    width: 82px;
+    margin-bottom: 15px;
+}
+
+.cookiesContent p {
+    text-align: left;
+    font-size: 18px;
+}
+
+.cookiesContent button {
+    background-color: #ed6755;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 14px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1);
+}
+
+/* ========= Modal Border ========= */
+.box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: #111845a6;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0px 20px 50px rgb(23, 32, 90);
+    border: 2px solid #2a3cad;
+    color: white;
+    padding: 20px;
+}
+
+.box:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background: rgba(255,255,255,0.1);
+    transition:0.5s;
+    pointer-events: none;
+}
+
+.box:hover:before{
+    left:-50%;
+    transform: skewX(-5deg);
+}
+
+
+.box .content{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+    bottom:15px;
+    border: 3px solid #f0a591;
+    padding:20px;
+    /* text-align:center; */
+    /* box-shadow: 0 50px 10px rgba(9,0,0,0.5); */
+
+}
+
+.box span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    box-sizing: border-box;
+
+}
+
+.box span:nth-child(1)
+{
+    transform:rotate(0deg);
+}
+
+.box span:nth-child(2)
+{
+    transform:rotate(90deg);
+}
+
+.box span:nth-child(3)
+{
+    transform:rotate(180deg);
+}
+
+.box span:nth-child(4)
+{
+    transform:rotate(270deg);
+}
+
+.box span:before
+{
+    content: '';
+    position: absolute;
+    width:100%;
+    height: 2px;
+    background: #50dfdab1;
+    animation: animate 4s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform:scaleX(0);
+        transform-origin: left;
+    }
+    50%
+    {
+        transform:scaleX(1);
+        transform-origin: left;
+    }
+    50.1%
+    {
+        transform:scaleX(1);
+        transform-origin: right;
+    }
+    100%
+    {
+        transform:scaleX(0);
+        transform-origin: right;
+
+    }
+} 
+
+
+/* == */
+body.modal-open {
+    overflow: auto !important;
+}
+
+body.modal-open[style] {
+    padding-right: 0px !important;
+}
+
+/* == */
+.typing-demo {
+  width: 100%;
+  animation: typing 2s steps(22), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: 'Menlo', monospace; 
+  font-size: 40px;
+  text-shadow: 0px 0px 8px #1f2b7ba1;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
+

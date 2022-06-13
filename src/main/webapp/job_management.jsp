@@ -73,9 +73,20 @@
                                                         <small>${date[0]}</small>
                                                     </div>
                                                     <h2 class="news-title"> ${job.title} <i style="" class="fas fa-check-circle"></i></h2>
-                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                        <c:if test="${job.executionTimeJobApplication < 0}">
+                                                        <h5><i class="far fa-lightbulb"></i> This job will start in <strong>${job.showDuration(Math.floor((job.executionTimeJobApplication*(-1))/24))}</strong> day(s)</h5>
+                                                        <p>Prepare yourself</p>
+                                                    </c:if>
+                                                    <c:if test="${Math.floor(job.executionTimeJobApplication/24) == 0}">
+                                                        <h5><i class="fas fa-map-marker-alt"></i> You are doing this job !!</h5>
+                                                        <p>Have a nice day at work</p>
+                                                    </c:if>
+                                                    <c:if test="${Math.floor(job.executionTimeJobApplication/24) > 0}">
+                                                        <h5><i class="fas fa-lightbulb"></i> You have been working for <strong>${job.showDuration(Math.floor(job.executionTimeJobApplication/24))}</strong> day(s)</h5>
+                                                        <p>Keep going !!</p>
+                                                    </c:if>
                                                     <div style="text-align: center; margin-left: 60%;">
-                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" data-toggle="modal" data-target="#modalVupro${counting.count}">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
                                                     </div>
                                                 </div>
                                             </c:if>
@@ -86,9 +97,16 @@
                                                         <small>${date[0]}</small>
                                                     </div>
                                                     <h2 class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
-                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                        <c:if test="${Math.floor(job.appliedTimeJobApplication/24) != 0}">
+                                                        <h5><i class="fas fa-caret-right"></i> You have applied this job for <strong>${job.showDuration(Math.floor(job.appliedTimeJobApplication/24))}</strong> day(s).</h5>
+                                                        <p>Please wait for Approval ...</p>
+                                                    </c:if>
+                                                    <c:if test="${Math.floor(job.appliedTimeJobApplication/24) == 0}">
+                                                        <h5><i class="fas fa-caret-right"></i> You have just applied for this job !</h5>
+                                                        <p>Please wait for Approval ...</p>
+                                                    </c:if>
                                                     <div style="text-align: center; margin-left: 60%;">
-                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" data-toggle="modal" data-target="#modalVupro${counting.count}">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
                                                     </div>
                                                 </div>
                                             </c:if>
@@ -103,9 +121,20 @@
                                                         <small>${date[0]}</small>
                                                     </div>
                                                     <h2 class="news-title">${job.title} <i style="" class="fas fa-check-circle"></i></h2>
-                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                        <c:if test="${job.executionTimeJobApplication < 0}">
+                                                        <h5><i class="far fa-lightbulb"></i> This job will start in <strong>${job.showDuration(Math.floor((job.executionTimeJobApplication*(-1))/24))}</strong> day(s)</h5>
+                                                        <p>Prepare yourself</p>
+                                                    </c:if>
+                                                    <c:if test="${Math.floor(job.executionTimeJobApplication/24) == 0}">
+                                                        <h5><i class="fas fa-map-marker-alt"></i> You are doing this job !!</h5>
+                                                        <p>Have a nice day at work </p>
+                                                    </c:if>
+                                                    <c:if test="${Math.floor(job.executionTimeJobApplication/24) > 0}">
+                                                        <h5><i class="fas fa-lightbulb"></i> You have been working for <strong>${job.showDuration(Math.floor(job.executionTimeJobApplication/24))}</strong> day(s)</h5>
+                                                        <p>Keep going !!</p>
+                                                    </c:if>
                                                     <div style="text-align: center; margin-left: 60%;">
-                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" data-toggle="modal" data-target="#modalVupro${counting.count}">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
                                                     </div>
                                                 </div>
                                             </c:if>
@@ -116,9 +145,16 @@
                                                         <small>${date[0]}</small>
                                                     </div>
                                                     <h2 class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
-                                                    <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure…</p>
+                                                        <c:if test="${Math.floor(job.appliedTimeJobApplication/24) != 0}">
+                                                        <h5><i class="fas fa-caret-right"></i> You have applied this job for <strong>${job.showDuration(Math.floor(job.appliedTimeJobApplication/24))}</strong> day(s).</h5>
+                                                        <p>Please wait for Approval ...</p>
+                                                    </c:if>
+                                                    <c:if test="${Math.floor(job.appliedTimeJobApplication/24) == 0}">
+                                                        <h5><i class="fas fa-caret-right"></i> You have just applied for this job !</h5>
+                                                        <p>Please wait for Approval ...</p>
+                                                    </c:if>                                                  
                                                     <div style="text-align: center; margin-left: 60%;">
-                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" href="#">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
+                                                        <label style="text-shadow: 3px 3px 10px #fff; font-size: 19px; cursor: pointer" class="read-more" data-toggle="modal" data-target="#modalVupro${counting.count}">More detail <i class="far fa-arrow-alt-circle-right"></i></label>
                                                     </div>
                                                 </div>
                                             </c:if>
@@ -131,6 +167,34 @@
                 </section>
             </div>
         </div>
+
+        <c:forEach var="job" items="${requestScope.LIST_APPLIED_JOB}" varStatus="counting">
+            <div class="modal fade" id="modalVupro${counting.count}">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <!-- <div class="modal-content"> -->
+                    <div class="box">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <div class="cookiesContent content" id="cookiesPopup">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1047/1047711.png" alt="cookies-img" />
+                            <h2 class="mt-4 mb-4 typing-demo"><strong>${job.title}</strong></h2>
+                            <p class="row" style="margin-bottom: 0">
+                                <label class="col-7"><strong>Salary :</strong> ${job.showPrice(job.salary)} VNĐ</label>
+                                <label class="col-5"><strong>Duration :</strong> ${job.showDuration(job.duration)} day(s)</label>
+                            </p>
+                            <p><strong>Description :</strong> ${job.description}</p>
+                            <p><strong>Major :</strong> ${job.nameMajor}</p>
+                            <p>Wedmproving user experience, analytics and marketing.oris!</p>
+                            <p>Wedmproving user experience, analytics and marketing.oris!</p>
+
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </c:forEach>
 
 
         <jsp:include page="component/footer.jsp"></jsp:include>
