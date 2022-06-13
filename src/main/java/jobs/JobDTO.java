@@ -30,6 +30,8 @@ public class JobDTO {
     private int jobApplication;
     private String createDateJobApplication;
     private int statusJobApplication;
+    private int appliedTimeJobApplication;
+    private int executionTimeJobApplication;
 
     public JobDTO() {
 
@@ -96,7 +98,8 @@ public class JobDTO {
         this.createDate = createDate;
         this.freelancerQuantity = freelancerQuantity;
     }
-    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate, int freelancerQuantity,int jobApplication) {
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String idMajor, String createDate, int freelancerQuantity, int jobApplication) {
         this.idJob = idJob;
         this.title = title;
         this.salary = salary;
@@ -138,7 +141,7 @@ public class JobDTO {
         this.createDate = createDate;
     }
 
-    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String nameMajor, int jobApplication, String createDateJobApplication, int statusJobApplication) {
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String nameMajor, int jobApplication, String createDateJobApplication, int statusJobApplication, int appliedTimeJobApplication, int executionTimeJobApplication) {
         this.idJob = idJob;
         this.title = title;
         this.salary = salary;
@@ -149,8 +152,9 @@ public class JobDTO {
         this.jobApplication = jobApplication;
         this.createDateJobApplication = createDateJobApplication;
         this.statusJobApplication = statusJobApplication;
+        this.appliedTimeJobApplication = appliedTimeJobApplication;
+        this.executionTimeJobApplication = executionTimeJobApplication;
     }
-
 
     public int getIdJob() {
         return idJob;
@@ -297,6 +301,20 @@ public class JobDTO {
         this.statusJobApplication = statusJobApplication;
     }
 
+    public int getAppliedTimeJobApplication() {
+        return appliedTimeJobApplication;
+    }
 
-    
+    public void setAppliedTimeJobApplication(int appliedTimeJobApplication) {
+        this.appliedTimeJobApplication = appliedTimeJobApplication;
+    }
+
+    public int getExecutionTimeJobApplication() {
+        return executionTimeJobApplication;
+    }
+
+    public void setExecutionTimeJobApplication(int executionTimeJobApplication) {
+        this.executionTimeJobApplication = executionTimeJobApplication;
+    }
+
 }
