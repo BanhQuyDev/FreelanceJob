@@ -93,7 +93,6 @@ public class MajorDAO {
         } finally {
             DBUtils.closeConnection(conn, ptm, rs);
         }
-
         return major_name;
     }
 

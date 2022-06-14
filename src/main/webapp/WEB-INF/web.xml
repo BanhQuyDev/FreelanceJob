@@ -8,6 +8,10 @@
         <servlet-name>RenderJobDetail</servlet-name>
         <servlet-class>controllers.RenderJobDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateJobController</servlet-name>
+        <servlet-class>controllers.UpdateJobController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PostJobController</servlet-name>
         <url-pattern>/PostJobController</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>RenderJobDetail</servlet-name>
         <url-pattern>/RenderJobDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateJobController</servlet-name>
+        <url-pattern>/UpdateJobController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

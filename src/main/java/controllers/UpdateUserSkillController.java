@@ -24,15 +24,6 @@ import users.UserDTO;
     @WebServlet(name = "UpdateUserSkillController", urlPatterns = {"/UpdateUserSkillController"})
 public class UpdateUserSkillController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private static final String ERROR = "freelancer_update_skill.jsp";
     private static final String SUCCESS = "freelancer_update_skill.jsp";
 
