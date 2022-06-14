@@ -14,7 +14,6 @@ import java.util.List;
 import utils.DBUtils;
 
 public class SkillDAO {
-
     public static final String GET_LIST_SKILL_BY_USER = ""
             + "SELECT [tblSkill].[id_skill],[tblSkill].[skill_name] \n"
             + "FROM ((tblUser INNER JOIN [tblFreelancerSkill] ON [tblUser].[id_user] = [tblFreelancerSkill].[id_freelancer])\n"
@@ -23,6 +22,10 @@ public class SkillDAO {
     public static final String GET_LIST_SKILL = ""
             + "SELECT [tblSkill].[id_skill], [tblSkill].[skill_name]"
             + "FROM [tblSkill]";
+
+    private final String GET_ALL_SKILL_A_JOB = "SELECT S.id_skill, S.skill_name\n" +
+            "FROM tblJob J INNER JOIN tblJobSkill JS ON J.id_job = JS.id_job INNER JOIN tblSkill S ON JS.id_skill = S.id_skill\n" +
+            "WHERE J.id_job = ?";
 
     public List<SkillDTO> getAllSkillByUser(int id) throws SQLException {
         List<SkillDTO> listSkill = new ArrayList<>();
@@ -92,7 +95,6 @@ public class SkillDAO {
         }
         return listSkill;
     }
-
 
     public List<SkillDTO> getAllSkillByUser() throws SQLException {
         List<SkillDTO> listSkill = new ArrayList<>();
@@ -343,5 +345,30 @@ public class SkillDAO {
             }
         }
         return listSkill;
+    }
+
+    public List<SkillDTO> getAllSkillAJob(int id_job) throws SQLException {
+        List<SkillDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_SKILL_A_JOB);
+                ptm.setInt(1, id_job);
+                rs = ptm.executeQuery();
+                while(rs.next()) {
+                    int id_skill = rs.getInt("id_skill");
+                    String skill_name = rs.getString("skill_name");
+                    list.add(new SkillDTO(id_skill, skill_name));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return list;
     }
 }

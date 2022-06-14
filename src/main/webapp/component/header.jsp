@@ -64,7 +64,7 @@
                                                 <li>
                                                     <a href="#">Job Management</a>
                                                     <ul class="submenu">
-                                                        <li><a href="#">Your Post</a></li>
+                                                        <li><a href="RenderJobPostController">Your Post</a></li>
                                                         <li><a href="GetAllFreelancerApplyController">List Freelancer Apply</a></li>
                                                     </ul>
                                                 </li>

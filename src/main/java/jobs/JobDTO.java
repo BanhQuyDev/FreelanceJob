@@ -12,7 +12,6 @@ import utils.Utils;
  * @author QUANG HUY
  */
 public class JobDTO {
-
     private int idJob;
     private String title;
     private double salary;
@@ -30,6 +29,8 @@ public class JobDTO {
     private int jobApplication;
     private String createDateJobApplication;
     private int statusJobApplication;
+
+
 
     public JobDTO() {
 
@@ -151,6 +152,37 @@ public class JobDTO {
         this.statusJobApplication = statusJobApplication;
     }
 
+    public JobDTO(int idJob, String title, String status, String nameMajor, int freelancerQuantity) {
+        this.idJob = idJob;
+        this.title = title;
+        this.status = status;
+        this.nameMajor = nameMajor;
+        this.freelancerQuantity = freelancerQuantity;
+    }
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String id_major, String major_name, String createDate) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = id_major;
+        this.nameMajor = major_name;
+        this.createDate = createDate;
+    }
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String major) {
+       this.idJob = idJob;
+       this.title = title;
+       this.salary = salary;
+       this.description = description;
+       this.duration = duration;
+       this.startDate = startDate;
+       this.idMajor = major;
+    }
 
     public int getIdJob() {
         return idJob;
@@ -249,7 +281,6 @@ public class JobDTO {
     }
 
     public String[] getSkillJob() {
-
         return skillJob;
     }
 
