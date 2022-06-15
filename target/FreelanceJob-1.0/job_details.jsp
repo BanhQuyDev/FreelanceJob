@@ -155,7 +155,13 @@
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
-
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                    $(this).remove();
+                });
+            }, 3000)
+        </script> 
         <!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->

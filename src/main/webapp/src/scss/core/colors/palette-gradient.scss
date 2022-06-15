@@ -1,4 +1,4 @@
-// ================================================================================================
+/*// ================================================================================================
 //   File Name: pallette-gradient.scss
 //   Description: gradient color system styles
 //   ----------------------------------------------------------------------------------------------
@@ -83,9 +83,9 @@ $color in $colors {
 
 
 
-/*
+
   Gradient color mixin
-*/
+
 
 @each $gcolor_name,
 $gcolor in $gradient-colors {
@@ -125,4 +125,4 @@ $gcolor in $gradient-colors {
     body.horizontal-layout .main-menu-content {
         background: #fff !important;
     }
-}
+}*/

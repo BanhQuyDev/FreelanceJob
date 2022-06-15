@@ -77,6 +77,7 @@ public class LoginGoogleController extends HttpServlet {
                         if (checkCreate) {
                             session.setAttribute("LOGIN_USER", user);
                             session.setAttribute("TYPE", "user");
+                            session.setAttribute("MODE", "FREELANCER");
                             request.setAttribute("SUCCESS_MESSAGE", "Login Successfully !!!");
                             url = INDEX_PAGE;
                         }

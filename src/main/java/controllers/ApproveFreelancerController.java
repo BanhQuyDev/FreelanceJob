@@ -43,7 +43,8 @@ public class ApproveFreelancerController extends HttpServlet {
                 List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
                 request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
                 boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                if (checkAddContract) {
+                boolean changeStausJob = new JobDAO().appliedJob(id_job);
+                if (checkAddContract && changeStausJob ) {
                     request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
                     url = SUCCESS;
                 }
@@ -55,7 +56,8 @@ public class ApproveFreelancerController extends HttpServlet {
                     request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
                 }
                 boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                if (checkAddContract) {
+                boolean changeStausJob = new JobDAO().appliedJob(id_job);
+                if (checkAddContract && changeStausJob) {
                     request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
                     url = SUCCESS;
                 }
