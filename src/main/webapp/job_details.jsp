@@ -127,6 +127,9 @@
                                                &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" 
                                                class="btn rounded">Apply Now</a>
                                         </c:when>
+                                        <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Apply Now</a>
+                                        </c:when>
                                         <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">
                                             <a href="ApplyJobController?jobId=${job.idJob}" class="btn rounded">Apply Now</a>
                                         </c:when>
@@ -152,7 +155,13 @@
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
-
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                    $(this).remove();
+                });
+            }, 3000)
+        </script> 
         <!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->

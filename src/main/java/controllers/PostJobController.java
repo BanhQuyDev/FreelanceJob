@@ -5,8 +5,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
-import majors.MajorDAO;
-import majors.MajorDTO;
-import skills.SkillDTO;
 import users.UserDTO;
 
 /**
@@ -49,11 +44,11 @@ public class PostJobController extends HttpServlet {
             JobDAO jDao = new JobDAO();
             boolean check = jDao.createJob(job);
             if (check) {
-                request.setAttribute("SUCCESS_MESSAGE", "Your post has been successfully posted");
+                request.setAttribute("SUCCESS_MESSAGE", "Your post has been successfully posted!");
                 url = SUCCESS;
 //                session.removeAttribute("MAJOR");
             } else {
-                request.setAttribute("ERROR_MESSAGE", "An unknown error");
+                request.setAttribute("ERROR_MESSAGE", "An unknown error!");
 //                session.removeAttribute("MAJOR");
             }
 

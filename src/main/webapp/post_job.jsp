@@ -46,67 +46,71 @@
                                 <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">POST JOB FORM</h3>
                                 <div class="form-group">
                                     <label for="job-title">Job Title</label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        class="form-control"
-                                        id="tile"
-                                        placeholder="Title"
-                                        required=""
-                                        />
+                                    <input type="text"
+                                           name="title"
+                                           class="form-control"
+                                           id="tile"
+                                           placeholder="Title"
+                                           required=""
+                                           />
                                 </div>
-                                <div class="form-group">
-                                    <label for="job-title">Price</label>
-                                    <input
-                                        type="number"
-                                        name="salary"
-                                        class="form-control"
-                                        id="job-title"
-                                        placeholder="1.000.000"
-                                        min="100000"
-                                        title="The price of project must be greater than 100.000 VN?"
-                                        required=""
-                                        />
-                                </div>
-                                <div class="form-group">
-                                    <label for="job-location">Duration (by day)</label>
-                                    <input
-                                        type="number"
-                                        name="duration"
-                                        class="form-control"
-                                        id="job-location"
-                                        placeholder="Duration"
-                                        required="Duration must be greater than 1 day"
-                                        min="1"
-                                        />
+
+                                <div class="form-row" style="margin-bottom: 15px">
+                                    <div class="col">
+                                        <label for="job-title">Price</label>
+                                        <input type="number" 
+                                               name="salary" 
+                                               class="form-control" 
+                                               placeholder="1.000.000"
+                                               min="100000"
+                                               title="The price of project must be greater than 100.000 VN?"
+                                               required=""
+                                               />
+                                    </div>
+                                    <div class="col">
+                                        <label for="job-location">Duration (by day)</label>
+                                        <input 
+                                            type="number"
+                                            name="duration"
+                                            class="form-control" 
+                                            placeholder="Duration"
+                                            required="Duration must be greater than 1 day"
+                                            min="1"
+                                            />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="job-region">Major</label>
-                                <c:set var="major" value="${sessionScope.MAJOR}"/>
-                                <select
-                                    class="form-select border rounded"
-                                    name="cmbMajor";
-                                    id="job-region"
-                                    data-style="btn-black"
-                                    data-width="100%"
-                                    data-live-search="true"
-                                    >
-                                    <c:forEach var="item" items="${major}">
-                                        <option value="${item.id_major}">${item.major_name}</option>
-                                    </c:forEach>
-                                </select>
+
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="job-region">Major</label>
+                                    <c:set var="major" value="${sessionScope.MAJOR}"/>
+                                    <select
+                                        class="form-select border rounded"
+                                        name="cmbMajor";
+                                        id="major"
+                                        data-style="btn-black"
+                                        data-width="100%"
+                                        data-live-search="true"
+                                        >
+                                        <c:forEach var="item" items="${major}">
+                                            <option value="${item.id_major}">${item.major_name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Start Date</label>
+                                    <input type="date" name="startDate" class="form-control" id="date_picker" placeholder="Start Date" required="" value="${job.startDate}">
+                                </div>
                             </div>
-
-                            <div style="margin-top: 6%" class="form-group">
+                            <div class="form-group">
                                 <label for="description">Job Description</label>
                                 <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label>Start Date</label>
-                                <input type="date" name="startDate" class="form-control" id="date_picker" placeholder="Start Date" required="">
-                            </div>
                             <div class="form-group">
                                 <label for="description">Skill-Job:</label>
                                 <div>

@@ -30,7 +30,7 @@
         <div class="headder-top header-sticky">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-2">
+                    <div class="d-none d-md-block col-lg-3 col-md-2">
                         <!-- Logo -->
                         <div class="logo">
                             <a href="HomeController"
@@ -64,7 +64,7 @@
                                                 <li>
                                                     <a href="#">Job Management</a>
                                                     <ul class="submenu">
-                                                        <li><a href="#">Your Post</a></li>
+                                                        <li><a href="RenderJobPostController">Your Post</a></li>
                                                         <li><a href="GetAllFreelancerApplyController">List Freelancer Apply</a></li>
                                                     </ul>
                                                 </li>
