@@ -61,13 +61,11 @@
                             <!-- job single -->
                             <div class="single-job-items mb-50">
                                 <div class="job-items">
-                                    <div class="company-img company-img-details">
+                                    <div class="company-img company-img-details mb-3">
                                         <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""></a>
+                                        <span style="font-size: 30px">${job.title}</span>
                                     </div>
                                     <div class="job-tittle">
-                                        <a href="#">
-                                            <h4>${job.title}</h4>
-                                        </a>
                                         <ul>
                                             <li>${job.nameEmployer}</li>
                                             <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>

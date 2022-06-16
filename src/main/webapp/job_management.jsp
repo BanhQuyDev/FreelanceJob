@@ -72,7 +72,7 @@
                                                         <p>${date[2]}/${date[1]}</p>
                                                         <small>${date[0]}</small>
                                                     </div>
-                                                    <h2 class="news-title"> ${job.title} <i style="" class="fas fa-check-circle"></i></h2>
+                                                        <h2 style="font-family:none!important;" class="news-title"> ${job.title} <i style="" class="fas fa-check-circle"></i></h2>
                                                         <c:if test="${job.executionTimeJobApplication < 0}">
                                                         <h5><i class="far fa-lightbulb"></i> This job will start in <strong>${job.showDuration(Math.floor((job.executionTimeJobApplication*(-1))/24))}</strong> day(s)</h5>
                                                         <p>Prepare yourself</p>
@@ -96,7 +96,7 @@
                                                         <p>${date[2]}/${date[1]}</p>
                                                         <small>${date[0]}</small>
                                                     </div>
-                                                    <h2 class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
+                                                    <h2 style="font-family:none!important;" class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
                                                         <c:if test="${Math.floor(job.appliedTimeJobApplication/24) != 0}">
                                                         <h5><i class="fas fa-caret-right"></i> You have applied this job for <strong>${job.showDuration(Math.floor(job.appliedTimeJobApplication/24))}</strong> day(s).</h5>
                                                         <p>Please wait for Approval ...</p>
@@ -120,7 +120,7 @@
                                                         <p>${date[2]}/${date[1]}</p>
                                                         <small>${date[0]}</small>
                                                     </div>
-                                                    <h2 class="news-title">${job.title} <i style="" class="fas fa-check-circle"></i></h2>
+                                                    <h2 style="font-family:none!important;" class="news-title">${job.title} <i style="" class="fas fa-check-circle"></i></h2>
                                                         <c:if test="${job.executionTimeJobApplication < 0}">
                                                         <h5><i class="far fa-lightbulb"></i> This job will start in <strong>${job.showDuration(Math.floor((job.executionTimeJobApplication*(-1))/24))}</strong> day(s)</h5>
                                                         <p>Prepare yourself</p>
@@ -144,7 +144,7 @@
                                                         <p>${date[2]}/${date[1]}</p>
                                                         <small>${date[0]}</small>
                                                     </div>
-                                                    <h2 class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
+                                                    <h2 style="font-family:none!important;" class="news-title">${job.title} <i class="far fa-check-circle"></i></h2>
                                                         <c:if test="${Math.floor(job.appliedTimeJobApplication/24) != 0}">
                                                         <h5><i class="fas fa-caret-right"></i> You have applied this job for <strong>${job.showDuration(Math.floor(job.appliedTimeJobApplication/24))}</strong> day(s).</h5>
                                                         <p>Please wait for Approval ...</p>
