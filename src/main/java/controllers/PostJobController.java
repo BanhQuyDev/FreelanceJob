@@ -44,11 +44,11 @@ public class PostJobController extends HttpServlet {
             JobDAO jDao = new JobDAO();
             boolean check = jDao.createJob(job);
             if (check) {
-                request.setAttribute("SUCCESS_MESSAGE", "Your post has been successfully posted");
+                request.setAttribute("SUCCESS_MESSAGE", "Your post has been successfully posted!");
                 url = SUCCESS;
 //                session.removeAttribute("MAJOR");
             } else {
-                request.setAttribute("ERROR_MESSAGE", "An unknown error");
+                request.setAttribute("ERROR_MESSAGE", "An unknown error!");
 //                session.removeAttribute("MAJOR");
             }
 
