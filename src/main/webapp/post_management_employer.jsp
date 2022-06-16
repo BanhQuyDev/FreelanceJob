@@ -167,6 +167,11 @@
                                                                         <span style="background-color: #fffe91; width: 60px; height: 25px; padding-bottom: 3px; border-radius: 5px; display: flex; color: #cccb00; justify-content: center; align-items: center">${status}</span>
                                                                     </div>
                                                                 </c:when>
+                                                                <c:when test="${status eq 'Applied'}">
+                                                                    <div class="badge">
+                                                                        <span style="background-color: #c2ffb9; width: 60px; height: 25px; padding-bottom: 3px; border-radius: 5px; display: flex; color: #02bf00; justify-content: center; align-items: center">${status}</span>
+                                                                    </div>
+                                                                </c:when>
                                                             </c:choose>
 
                                                         </div>
