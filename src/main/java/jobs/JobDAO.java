@@ -266,7 +266,8 @@ public class JobDAO {
         }
         return result;
     }
-        public boolean appliedJob(int idJob) throws SQLException {
+
+    public boolean appliedJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -1169,7 +1170,8 @@ public class JobDAO {
         }
         return check;
     }
-      public List<JobDTO> getAllJobPostOfEmployerByStatus(int id, String[] status) throws SQLException {
+
+    public List<JobDTO> getAllJobPostOfEmployerByStatus(int id, String[] status) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -1189,18 +1191,16 @@ public class JobDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                for (int i = 0; i < status.length; i++) {
-                    ptm = conn.prepareStatement(sql);
-                    ptm.setInt(1, id);
-                    rs = ptm.executeQuery();
-                    while (rs.next()) {
-                        int id_job = rs.getInt("id_job");
-                        String title_job = rs.getString("title");
-                        String major_name = rs.getString("major_name");
-                        String status_name = rs.getString("status_name");
-                        int freelancerQuantity = countFreelancerIn1Job(id_job);
-                        listJob.add(new JobDTO(id_job, title_job, status_name, major_name, freelancerQuantity));
-                    }
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_job = rs.getInt("id_job");
+                    String title_job = rs.getString("title");
+                    String major_name = rs.getString("major_name");
+                    String status_name = rs.getString("status_name");
+                    int freelancerQuantity = countFreelancerIn1Job(id_job);
+                    listJob.add(new JobDTO(id_job, title_job, status_name, major_name, freelancerQuantity));
                 }
             }
         } catch (Exception e) {
