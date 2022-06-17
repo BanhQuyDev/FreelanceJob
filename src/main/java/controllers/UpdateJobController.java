@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import status.StatusDAO;
+import utils.Utils;
 
 /**
  *
@@ -85,7 +86,7 @@ public class UpdateJobController extends HttpServlet {
                 case "Update Post":
                     int id_job = Integer.parseInt(request.getParameter("id_job"));
                     String title = request.getParameter("title");
-                    double salary = Double.parseDouble(request.getParameter("salary"));
+                    double salary = Double.parseDouble(Utils.convertPrice(request.getParameter("salary")));
                     double duration = Double.parseDouble(request.getParameter("duration"));
                     String major = request.getParameter("cmbMajor");
                     String description = request.getParameter("description");

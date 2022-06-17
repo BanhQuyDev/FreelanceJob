@@ -169,7 +169,7 @@
                                                                 </c:when>
                                                                 <c:when test="${status eq 'Applied'}">
                                                                     <div class="badge">
-                                                                        <span style="background-color: #c2ffb9; width: 60px; height: 25px; padding-bottom: 3px; border-radius: 5px; display: flex; color: #02bf00; justify-content: center; align-items: center">${status}</span>
+                                                                        <span style="background-color: #008cffcf; width: 60px; height: 25px; padding-bottom: 3px; border-radius: 5px; display: flex; justify-content: center; align-items: center">${status}</span>
                                                                     </div>
                                                                 </c:when>
                                                             </c:choose>
@@ -180,9 +180,9 @@
                                                                 <h5 class="heading"><strong>${p.title}</strong></h5>
                                                             </a>
                                                             <div class="mt-5">
-                                                                <div class="mt-3">
+                                                                <a class="text-dark" href="FilterFreelancerApplyController?selectedJob=${p.idJob}">
                                                                     <span class="text1">${p.freelancerQuantity} Applied</span>
-                                                                </div>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -225,13 +225,13 @@
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
-    <script>
-        window.setTimeout(function () {
-            $(".alert").fadeTo(400, 0).slideUp(400, function () {
-                $(this).remove();
-            });
-        }, 3000)
-    </script> 
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                    $(this).remove();
+                });
+            }, 3000)
+        </script> 
 
         <!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>

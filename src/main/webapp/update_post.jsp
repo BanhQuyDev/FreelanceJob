@@ -57,14 +57,15 @@
                             <div class="form-row" style="margin-bottom: 15px">
                                 <div class="col">
                                     <label for="job-title">Price</label>
-                                    <input type="number" 
-                                           name="salary" 
-                                           class="form-control" 
-                                           placeholder="1.000.000"
-                                           min="100000"
-                                           title="The price of project must be greater than 100.000 VN?"
-                                           required=""
-                                           value="${job.salary}">
+                                     <input type="text" 
+                                               id="amount"
+                                               name="salary" 
+                                               class="form-control" 
+                                               title="The price of project must be greater than 100.000 VN?"
+                                               required=""
+                                               maxlength="15"
+                                               minlength="7"
+                                               value="${job.showPrice(job.salary)}">
                                 </div>
                                 <div class="col">
                                     <label for="job-location">Duration (by day)</label>
@@ -153,6 +154,56 @@
                 $(this).remove();
             });
         }, 3000);
+    </script>
+        <script>
+        (function ($, undefined) {
+
+            "use strict";
+
+            $(function () {
+
+                var $form = $("#form");
+                var $inputPrice = $("#amount");
+
+                $inputPrice.on("keyup", function (event) {
+
+
+                    // When user select text in the document, also abort.
+                    var selection = window.getSelection().toString();
+                    if (selection !== '') {
+                        return;
+                    }
+
+                    // When the arrow keys are pressed, abort.
+                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                        return;
+                    }
+                    var $this = $(this);
+                    // Get the value.
+                    var input = $this.val();
+                    var input = input.replace(/[\D\s\._\-]+/g, "");
+                    input = input ? parseInt(input, 10) : 0;
+
+                    $this.val(function () {
+                        return (input === 0) ? "" : input.toLocaleString("en-US");
+                    });
+                });
+                /**
+                 * ==================================
+                 * When Form Submitted
+                 * ==================================
+                 */
+                $form.on("submit", function (event) {
+                    var $this = $(this);
+                    var arr = $this.serializeArray();
+                    for (var i = 0; i < arr.length; i++) {
+                        arr[i].value = arr[i].value.replace(/[($)\s\._\-]+/g, ''); // Sanitize the values.
+                    }
+                    ;
+                });
+
+            });
+        })(jQuery);
     </script>
     <!--<script src="mutile/js/bootstrap.min.js"></script>-->
     <script src="mutile/js/popper.js"></script>

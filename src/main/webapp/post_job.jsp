@@ -34,7 +34,6 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
-
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
@@ -42,7 +41,7 @@
                 <div class="container">
                     <div class="row mb-5">
                         <div class="col-lg-12">
-                            <form action="PostJobController" class="p-4 p-md-5 border rounded" method="post" >
+                            <form id="form" action="PostJobController" class="p-4 p-md-5 border rounded" method="post" >
                                 <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">POST JOB FORM</h3>
                                 <div class="form-group">
                                     <label for="job-title">Job Title</label>
@@ -58,13 +57,14 @@
                                 <div class="form-row" style="margin-bottom: 15px">
                                     <div class="col">
                                         <label for="job-title">Price</label>
-                                        <input type="number" 
+                                        <input type="text" 
+                                               id="amount"
                                                name="salary" 
                                                class="form-control" 
-                                               placeholder="1.000.000"
-                                               min="100000"
                                                title="The price of project must be greater than 100.000 VN?"
                                                required=""
+                                               maxlength="15"
+                                               minlength="7"
                                                />
                                     </div>
                                     <div class="col">
@@ -83,7 +83,6 @@
                                 <div class="form-group">
 
                                 </div>
-
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="job-region">Major</label>
@@ -165,6 +164,56 @@
                 $(this).remove();
             });
         }, 3000);
+    </script>
+    <script>
+        (function ($, undefined) {
+
+            "use strict";
+
+            $(function () {
+
+                var $form = $("#form");
+                var $inputPrice = $("#amount");
+
+                $inputPrice.on("keyup", function (event) {
+
+
+                    // When user select text in the document, also abort.
+                    var selection = window.getSelection().toString();
+                    if (selection !== '') {
+                        return;
+                    }
+
+                    // When the arrow keys are pressed, abort.
+                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                        return;
+                    }
+                    var $this = $(this);
+                    // Get the value.
+                    var input = $this.val();
+                    var input = input.replace(/[\D\s\._\-]+/g, "");
+                    input = input ? parseInt(input, 10) : 0;
+
+                    $this.val(function () {
+                        return (input === 0) ? "" : input.toLocaleString("en-US");
+                    });
+                });
+                /**
+                 * ==================================
+                 * When Form Submitted
+                 * ==================================
+                 */
+                $form.on("submit", function (event) {
+                    var $this = $(this);
+                    var arr = $this.serializeArray();
+                    for (var i = 0; i < arr.length; i++) {
+                        arr[i].value = arr[i].value.replace(/[($)\s\._\-]+/g, ''); // Sanitize the values.
+                    }
+                    ;
+                });
+
+            });
+        })(jQuery);
     </script>
     <!--<script src="mutile/js/bootstrap.min.js"></script>-->
     <script src="mutile/js/popper.js"></script>

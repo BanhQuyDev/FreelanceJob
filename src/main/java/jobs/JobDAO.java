@@ -80,10 +80,12 @@ public class JobDAO {
             + "WHERE JA.id_freelancer = F.id_freelancer AND JA.id_job = J.id_job AND F.id_freelancer = U.id_user AND JA.status = 1 AND U.id_user = ?\n"
             + "ORDER BY JA.status DESC, JA.create_date DESC";
 
+    private final String GET_ALL_POST_OF_EMPLOYER_APPLY = "SELECT J.id_job, J.title, M.major_name, JS.status_name\n"
+            + "FROM tblMajor M inner join tblJob J on M.id_major = J.id_major inner join tblJobStatus JS ON J.id_status = JS.id_status\n"
+            + "WHERE J.id_employer = ? AND J.id_status = 2 ";
     private final String GET_ALL_POST_OF_EMPLOYER = "SELECT J.id_job, J.title, M.major_name, JS.status_name\n"
             + "FROM tblMajor M inner join tblJob J on M.id_major = J.id_major inner join tblJobStatus JS ON J.id_status = JS.id_status\n"
-            + "WHERE J.id_employer = ?";
-
+            + "WHERE J.id_employer = ? ";
     private final String GET_ALL_POST_BY_MAJOR = "SELECT J.id_job, J.title, M.major_name, JS.status_name\n"
             + "FROM tblMajor M inner join tblJob J on M.id_major = J.id_major inner join tblJobStatus JS ON J.id_status = JS.id_status\n"
             + "WHERE J.id_major = (SELECT id_major FROM tblMajor WHERE major_name = ?) AND J.id_employer = ?";
@@ -775,6 +777,33 @@ public class JobDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_POST_OF_EMPLOYER);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_job = rs.getInt("id_job");
+                    String title_job = rs.getString("title");
+                    String major_name = rs.getString("major_name");
+                    String status = rs.getString("status_name");
+                    int freelancerQuantity = countFreelancerIn1Job(id_job);
+                    listJob.add(new JobDTO(id_job, title_job, status, major_name, freelancerQuantity));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return listJob;
+    }
+    public List<JobDTO> getAllJobByEmployeerApply(int id) throws SQLException {
+        List<JobDTO> listJob = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_ALL_POST_OF_EMPLOYER_APPLY);
                 ptm.setInt(1, id);
                 rs = ptm.executeQuery();
                 while (rs.next()) {

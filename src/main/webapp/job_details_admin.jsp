@@ -48,73 +48,78 @@
                                     readonly=""
                                     />
                             </div>
-                            <div class="form-group">
-                                <label for="job-price">Price</label>
-                                <c:set var="salary" value="${job.salary}"/>
-                                <input
-                                    type="text"
-                                    name="salary"
-                                    class="form-control"
-                                    readonly=""
-                                    value="${job.showPrice(salary)} VND"
-                                    />
+                            <div class="form-row" style="margin-bottom: 15px">
+                                <div class="col">
+                                    <label for="job-price">Price</label>
+                                    <c:set var="salary" value="${job.salary}"/>
+                                    <input
+                                        type="text"
+                                        name="salary"
+                                        class="form-control"
+                                        readonly=""
+                                        value="${job.showPrice(salary)} VND"
+                                        />
+                                </div>
+                                <div class="col">
+                                    <label for="job-duration">Duration (by day)</label>
+                                    <input
+                                        type="number"
+                                        name="duration"
+                                        class="form-control"
+                                        value="${job.showDuration(job.duration)}"
+                                        readonly=""
+                                        />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="job-duration">Duration (by day)</label>
-                                <input
-                                    type="number"
-                                    name="duration"
-                                    class="form-control"
-                                    value="${job.showDuration(job.duration)}"
-                                    readonly=""
-                                    />
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="job-major">Major</label>
+                                    <input
+                                        type="text"
+                                        name="major"
+                                        class="form-control"
+                                        value="${job.idMajor}"
+                                        readonly=""
+                                        />
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Start Date</label>
+                                    <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.startDate}" readonly="">
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="job-major">Major</label>
-                                <input
-                                    type="text"
-                                    name="major"
-                                    class="form-control"
-                                    value="${job.idMajor}"
-                                    readonly=""
-                                    />
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="job-created">Created By</label>
+                                    <input
+                                        type="text"
+                                        name="employer"
+                                        class="form-control"
+                                        value="${job.nameEmployer}"
+                                        readonly=""
+                                        />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Create Date</label>
+                                    <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.createDate}" readonly="">
+                                </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="job_description">Job Description</label>
                                 <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
                             </div>
-
-                            <div class="form-group">
-                                <label for="job-created">Created By</label>
-                                <input
-                                    type="text"
-                                    name="employer"
-                                    class="form-control"
-                                    value="${job.nameEmployer}"
-                                    readonly=""
-                                    />
-                            </div>
-
-                            <div class="form-group">
-                                <label>Start Date</label>
-                                <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.startDate}" readonly="">
-                            </div>
-                            <div class="form-group">
-                                <label>Create Date</label>
-                                <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.createDate}" readonly="">
-                            </div>
-                            <a href="GetAllJob" class="btn btn-block btn-primary btn-md" style="border-radius: 20px; margin: 10px 0px">Back</a>
-                            <c:choose>
-                                <c:when test="${job.status == 'Spam'}">
-                                    <a href="AcceptJobController?idJob=${job.idJob}" class="btn btn-success" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Recovery</a>
-                                    <a href="DenyJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Delete</a>
-                                </c:when>                         
-                                <c:otherwise>
-                                    <a href="UnappropriatedJobController?idJob=${job.idJob}" class="btn btn-danger" style="width: 100%; color: white; text-align: center; border-radius: 20px; margin: 10px 0px">Spam</a>
-                                </c:otherwise>
-                            </c:choose>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-md" style="margin: 10px 8px" onclick="history.back()">Go Back</button>
+                                <c:choose>
+                                    <c:when test="${job.status == 'Spam' || job.status == 'Updated'}">
+                                        <a href="AcceptJobController?idJob=${job.idJob}" class="btn" style="background-color:#28a745;  color: white; text-align: center;  margin: 10px 8px 10px 0px">Recovery</a>
+                                        <a href="DenyJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Delete</a>
+                                    </c:when>                         
+                                    <c:otherwise>
+                                        <a href="UnappropriatedJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Spam</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>                          
                         </form>
                     </div>
                 </div>

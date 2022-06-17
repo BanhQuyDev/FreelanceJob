@@ -39,7 +39,7 @@
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
-       <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'EMPLOYER'}">
+        <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'EMPLOYER'}">
             <c:redirect url="index.jsp"></c:redirect>
         </c:if>
         <div class="container">
@@ -65,25 +65,26 @@
                     <form action="UpdateProfileUserController" method="POST" style="width: 100%">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <label for="email" class="form-label font-weight-bold">Email:</label>
                                     <input type="email" class="form-control" id="email" name="email" value="${sessionScope.LOGIN_USER.email}"
                                            readonly=""> 
                                 </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <label for="fullName" class="form-label font-weight-bold">Full Name:</label>
                                     <input type="text" class="form-control" id="fullName" name="fullName" value="${sessionScope.LOGIN_USER.name}" readonly="" >
                                 </div>
                             </div>
                             <hr />
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <label for="phone" class="form-label font-weight-bold">Phone <span class="text-danger">*</span> :</label>
                                     <input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.LOGIN_USER.phone.trim()}" 
                                            pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" placeholder="Please enter your phone..." size="12" required="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="dob" class="form-label font-weight-bold">Date of birth:</label>
+                                    <input type="date" class="form-control" id="dob" name="dob" value="${sessionScope.LOGIN_USER.dob}"  min="1900-01-01" max="3000-12-31">
                                 </div>
                             </div>
                             <hr/>
@@ -91,13 +92,6 @@
                                 <div class="col-sm-12">
                                     <label for="bio" class="form-label font-weight-bold">Bio:</label>
                                     <input type="text" class="form-control" id="bio" name="bio" value="${sessionScope.LOGIN_USER.bio}" placeholder="Please enter your bio..." size="255">
-                                </div>
-                            </div>
-                            <hr/>
-                              <div class="row">
-                                <div class="col-sm-12">
-                                    <label for="dob" class="form-label font-weight-bold">Date of birth:</label>
-                                    <input type="date" class="form-control" id="dob" name="dob" value="${sessionScope.LOGIN_USER.dob}"  min="1900-01-01" max="3000-12-31">
                                 </div>
                             </div>
                             <hr />
@@ -113,7 +107,7 @@
                                 <input class="btn btn-outline-success text-uppercase fw-bold font-size-lg" style="border-radius: 8px" 
                                        type="submit" name="edit" value="Edit">
                             </div>
-                              </div>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -121,24 +121,52 @@
                                 <div class="apply-btn2">
                                     <c:choose>
                                         <c:when test="${sessionScope.LOGIN_USER == null}">
-                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
-                                               &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" 
-                                               class="btn rounded">Apply Now</a>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                                       &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" 
+                                                       class="btn" style="padding-left:25px;padding-right:25px;">Apply Now</a>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                </div>
+                                            </div>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
-                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Apply Now</a>
+                                            <button class="btn" onclick="history.back()">Previous</button>
                                         </c:when>
-                                        <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">
-                                            <a href="ApplyJobController?jobId=${job.idJob}" class="btn rounded">Apply Now</a>
+                                        <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">                
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <a class="btn rounded" style="padding-left:25px;padding-right:25px;" href="ApplyJobController?jobId=${job.idJob}">Apply Now</a>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                </div>
+                                            </div>
                                         </c:when>
                                         <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE != 'EMPLOYER'}">
-                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Processing...</a>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                </div>
+                                            </div>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE == 'EMPLOYER'}">
-                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Apply Now</a>
+                                            <button class="btn" onclick="history.back()">Previous</button>
                                         </c:when>
                                         <c:when test="${requestScope.JOB_APPLICATION_ID != 0}">
-                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Processsing...</a>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                </div>
+                                            </div>
                                         </c:when>
                                     </c:choose>
                                 </div>

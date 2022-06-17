@@ -226,11 +226,23 @@
                                                                     <th>${job.startDate}</th>
                                                                     <th>${job.createDate}</th>
                                                                     <th>${job.idMajor}</th>
-                                                                    <th style="color: green">${job.status}</th>
+                                                                    <c:if test="${job.status == 'Posted'}">
+                                                                        <th style="color: green">${job.status}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${job.status == 'Applied'}">
+                                                                        <th style="color: #008cffcf">${job.status}</th>
+                                                                    </c:if>
                                                                     <th>
-                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}">
-                                                                            <button class="btn btn-danger">Spam</button>
-                                                                        </a>
+                                                                        <c:if test="${job.status == 'Posted'}">
+                                                                            <a href="UnappropriatedJobController?idJob=${job.idJob}">
+                                                                                <button class="btn btn-danger">Spam</button>
+                                                                            </a> 
+                                                                        </c:if>
+                                                                        <c:if test="${job.status == 'Applied'}">
+                                                                            <a href="UnappropriatedJobController?idJob=${job.idJob}">
+                                                                                <button class="btn btn-secondary" disabled>Spam</button>
+                                                                            </a> 
+                                                                        </c:if>
                                                                     </th>
                                                                 </tr>
                                                             </c:forEach>
@@ -264,7 +276,7 @@
                                                             <th>Delete</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody style="text-align: center">
                                                         <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}"
                                                                    varStatus="counter">
                                                             <tr>
