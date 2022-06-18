@@ -29,6 +29,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
+        <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
 
     </head>
     <body>
@@ -43,7 +44,7 @@
                             <input type="hidden" name="status" value="${job.status}"/>
                             <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">UPDATE JOB FORM</h3>
                             <div class="form-group">
-                                <label for="job-title">Job Title</label>
+                                <label><strong>Job Title</strong></label>
                                 <input type="text"
                                        name="title"
                                        class="form-control"
@@ -56,7 +57,7 @@
 
                             <div class="form-row" style="margin-bottom: 15px">
                                 <div class="col">
-                                    <label for="job-title">Price</label>
+                                    <label><strong>Price</strong></label>
                                      <input type="text" 
                                                id="amount"
                                                name="salary" 
@@ -68,7 +69,7 @@
                                                value="${job.showPrice(job.salary)}">
                                 </div>
                                 <div class="col">
-                                    <label for="job-location">Duration (by day)</label>
+                                    <label><strong>Duration (by day)</strong></label>
                                     <input 
                                         type="number"
                                         name="duration"
@@ -82,11 +83,11 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label>Major</label>
+                                    <label><strong>Major</strong></label>
                                     <c:set var="major" value="${requestScope.LIST_MAJOR}"/>
                                     <c:set var="id_major" value="${job.idMajor}"/>
                                     <c:set var="major_name" value="${job.nameMajor}"/>
-                                    <select class="form-select border rounded" name="cmbMajor"; id="job-region" data-style="btn-black" data-width="100%" data-live-search="true">
+                                    <select class="form-select border rounded" name="cmbMajor"; data-style="btn-black" data-width="100%" data-live-search="true">
                                         <option value="${id_major}">${major_name}</option>
                                         <c:forEach var="item" items="${major}">
                                             <c:if test="${item.major_name ne major_name}">
@@ -96,20 +97,20 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Start Date</label>
+                                    <label><strong>Start Date</strong></label>
                                     <input type="date" name="startDate" class="form-control" id="date_picker" placeholder="Start Date" required="" value="${job.startDate}">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Job Description</label>
-                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">${job.description}</textarea>
+                                <label><strong>Job Description</strong></label>
+                                <textarea id="description" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">${job.description}</textarea>
                             </div>
 
                             <c:set var="skill" value="${requestScope.LIST_SKILL_JOB}"/>
                             <c:set var="skillOfJob" value="${requestScope.LIST_SELECTED_SKILL}"/>
                             <div class="form-group">
-                                <label>Skill-Job: </label>
+                                <label><strong>Skill-Job</strong></label>
                                 <div>
                                     <select style="width: 100%;" class="js-select2" multiple="multiple" name="skillJob">
                                         <c:forEach begin="0" end="${skill.size() - 1}" var="i">
@@ -147,7 +148,9 @@
     <jsp:include page="component/footer.jsp"></jsp:include>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-
+    <script>
+        CKEDITOR.replace('description');
+    </script>
     <script>
         window.setTimeout(function () {
             $(".alert").fadeTo(400, 0).slideUp(400, function () {

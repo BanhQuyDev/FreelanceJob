@@ -34,6 +34,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
+        <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
@@ -44,7 +45,7 @@
                             <form id="form" action="PostJobController" class="p-4 p-md-5 border rounded" method="post" >
                                 <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">POST JOB FORM</h3>
                                 <div class="form-group">
-                                    <label for="job-title">Job Title</label>
+                                    <label for="job-title"><strong>Job Title</strong></label>
                                     <input type="text"
                                            name="title"
                                            class="form-control"
@@ -56,19 +57,20 @@
 
                                 <div class="form-row" style="margin-bottom: 15px">
                                     <div class="col">
-                                        <label for="job-title">Price</label>
+                                        <label><strong>Price</strong></label>
                                         <input type="text" 
                                                id="amount"
                                                name="salary" 
                                                class="form-control" 
-                                               title="The price of project must be greater than 100.000 VN?"
+                                               title="The price of project must be greater than 100.000 VNĐ?"
                                                required=""
                                                maxlength="15"
                                                minlength="7"
+                                               placeholder="Price"
                                                />
                                     </div>
                                     <div class="col">
-                                        <label for="job-location">Duration (by day)</label>
+                                        <label><strong>Duration (by day)</strong></label>
                                         <input 
                                             type="number"
                                             name="duration"
@@ -85,7 +87,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="job-region">Major</label>
+                                        <label><strong>Major</strong></label>
                                     <c:set var="major" value="${sessionScope.MAJOR}"/>
                                     <select
                                         class="form-select border rounded"
@@ -101,17 +103,17 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Start Date</label>
+                                    <label><strong>Start Date</strong></label>
                                     <input type="date" name="startDate" class="form-control" id="date_picker" placeholder="Start Date" required="" value="${job.startDate}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="description">Job Description</label>
-                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <label for="description"><strong>Job Description</strong></label>
+                                <textarea id="description" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Skill-Job:</label>
+                                <label for="description"><strong>Skill-Job</strong></label>
                                 <div>
                                     <select style="width: 100%" class="js-select2" multiple="multiple" name="skillJob">
                                         <c:forEach var="s" items="${requestScope.LIST_SKILL_POST}">
@@ -148,7 +150,9 @@
     <jsp:include page="component/footer.jsp"></jsp:include>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-
+    <script>
+        CKEDITOR.replace('description');
+    </script>
     <script language="javascript">
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
