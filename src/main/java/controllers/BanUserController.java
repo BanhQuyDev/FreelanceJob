@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sendemail.SendEmail;
 import users.UserDAO;
+import users.UserDTO;
 
 /**
  *
@@ -22,18 +24,25 @@ import users.UserDAO;
 public class BanUserController extends HttpServlet {
 
    private static final String ERROR = "admin.jsp";
-    private static final String SUCCESS = "GetAllUser";
+   private static final String SUCCESS = "GetAllUser";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
             int idUser = Integer.parseInt(request.getParameter("idUser"));
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            String reason = request.getParameter("reason").toUpperCase();
+            UserDTO banUser = new UserDTO(fullName, email);
             UserDAO dao = new UserDAO();
             boolean checkAccept = dao.banUser(idUser); 
             if(checkAccept){
-                request.setAttribute("SUCCESS", "Ban Successfully!!");
+                SendEmail.sendEmailBanUser(banUser, reason);
+                request.setAttribute("SUCCESS", "'" + email + "' account was disabled successfully!");
                 url = SUCCESS;
             }else{
                 request.setAttribute("FAIL", "Ban Failed!!");
