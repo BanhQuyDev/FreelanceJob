@@ -15,7 +15,6 @@ import skills.SkillDTO;
 import users.UserDTO;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
