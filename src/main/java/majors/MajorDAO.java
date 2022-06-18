@@ -16,7 +16,7 @@ public class MajorDAO {
 
     private final String GET_ALL_MAJOR = "  SELECT id_major, major_name,img_major,(SELECT COUNT(J.id_major) as numOfJob\n"
             + "  FROM tblJob J \n"
-            + "  WHERE J.id_major = M.id_major\n"
+            + "  WHERE J.id_major = M.id_major AND J.id_status = 2\n"
             + "  GROUP BY J.id_major)as numOfJob FROM tblMajor M";
     private static final String GET_MAJOR_NAME = "SELECT major_name FROM tblMajor WHERE id_major = ?";
 

@@ -12,7 +12,6 @@ import java.util.Locale;
  * @author Tung Nguyen
  */
 public class Utils {
-    
     public static String convertPrice(double price) {
         String convertPrice = null;
         Locale localeEN = new Locale("en", "EN");
@@ -20,5 +19,13 @@ public class Utils {
         convertPrice = en.format(price);
         return convertPrice;
     }
-    
+
+    public static String convertPrice(String price) {
+        String convertPrice = "";
+        String[] array = price.split(",");
+        for (String newArray : array) {
+            convertPrice += newArray;
+        }
+        return convertPrice;
+    }
 }

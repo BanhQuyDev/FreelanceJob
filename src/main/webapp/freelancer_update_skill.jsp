@@ -54,7 +54,7 @@
                         <li class="breadcrumb-item" aria-current="page">
                             <a href="freelancer_detail.jsp">User Profile</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">
+                        <li style="color: white" class="breadcrumb-item active" aria-current="page">
                             Edit User Profile
                         </li>
                     </ol>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
 import users.UserDTO;
+import utils.Utils;
 
 /**
  *
@@ -32,7 +33,7 @@ public class PostJobController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             String title = request.getParameter("title");
-            double salary = Double.parseDouble(request.getParameter("salary"));
+            double salary = Double.parseDouble(Utils.convertPrice(request.getParameter("salary")));
             double duration = Double.parseDouble(request.getParameter("duration"));
             String major = request.getParameter("cmbMajor");
             String description = request.getParameter("description");
