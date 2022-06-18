@@ -6,6 +6,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +34,16 @@ public class GetAllJob extends HttpServlet {
             JobDAO dao = new JobDAO();
             List<JobDTO> listJoblistJobProcessing = dao.getAllJobUnappropriated();
             List<JobDTO> listJobAccepted = dao.getAllJobAccepted();
+             List<JobDTO> listJobUnappropriatedDetail = new ArrayList<>();
+             List<JobDTO> listJobAcceptedDetail = new ArrayList<>();
+            for (JobDTO jobUnappropriated : listJoblistJobProcessing) {
+                listJobUnappropriatedDetail.add(dao.getAJobByID(jobUnappropriated.getIdJob()));
+            }
+            for (JobDTO jobAccepted : listJobAccepted) {
+                listJobAcceptedDetail.add(dao.getAJobByID(jobAccepted.getIdJob()));
+            }
+            request.setAttribute("JOB_UNAPPROPRIATED_DETAIL", listJobUnappropriatedDetail);
+            request.setAttribute("JOB_ACCEPTED_DETAIL", listJobAcceptedDetail);
             request.setAttribute("LIST_JOB_UNAPPROPRIATED", listJoblistJobProcessing);
             request.setAttribute("LIST_JOB_ACCEPTED", listJobAccepted);
             url = SUCCESS;

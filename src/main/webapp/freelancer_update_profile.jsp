@@ -39,8 +39,8 @@
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
-        <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'EMPLOYER'}">
-            <c:redirect url="index.jsp"></c:redirect>
+        <c:if test="${sessionScope.LOGIN_USER == NULL}">
+            <c:redirect url="HomeController"></c:redirect>
         </c:if>
         <div class="container">
             <div class="main-body p-4 border border-danger mt-5 mb-5" style="border-radius: 8px">

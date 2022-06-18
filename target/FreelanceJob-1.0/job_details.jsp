@@ -64,6 +64,33 @@
                                     <div class="company-img company-img-details mb-3">
                                         <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""></a>
                                         <span style="font-size: 30px">${job.title}</span>
+                                        <c:if test="${sessionScope.LOGIN_USER != null}">
+                                            <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" ><i style="color:#e50505; margin-left: 50px; font-size:20px" class="fa fa-flag" aria-hidden="true"></i></a>                                    
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <form action="ReportController" method="POST">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Your Report</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="message-text" class="col-form-label">Reason:</label>
+                                                                    <textarea name="content" class="form-control" id="message-text" rows="3"></textarea>
+                                                                    <input type="hidden" name="jobId" value="${job.idJob}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-center">
+                                                                <button type="submit" class="btn" style="background-color:#e53805d6">Send Report</button>
+                                                            </div>
+                                                      </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>                                       
                                     </div>
                                     <div class="job-tittle">
                                         <ul>
@@ -115,6 +142,7 @@
                                 </div>
                                 <ul>
                                     <li>Start Date : <span>${job.startDate}</span></li>
+                                    <li>End Date : <span>${job.endDate}</span></li>
                                     <li>Create date : <span>${job.createDate}</span></li>
                                     <li>Salary :  <span>${job.showPrice(salary)}VNĐ</span></li>
                                 </ul>
@@ -141,17 +169,17 @@
                                                     <a class="btn rounded" style="padding-left:25px;padding-right:25px;" href="ApplyJobController?jobId=${job.idJob}">Apply Now</a>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                    <a href="JobListingController?selectedMajor=All Major" class="btn" style="margin-left: 60px;">Previous</a>
                                                 </div>
                                             </div>
                                         </c:when>
-                                        <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE != 'EMPLOYER'}">
+                                        <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID != 0}">
                                             <div class="row">
                                                 <div class="col-sm-4">
                                                     <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                    <a href="JobListingController?selectedMajor=All Major" class="btn" style="margin-left: 60px;">Previous</a>
                                                 </div>
                                             </div>
                                         </c:when>
