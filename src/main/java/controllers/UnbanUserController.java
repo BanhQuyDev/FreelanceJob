@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sendemail.SendEmail;
 import users.UserDAO;
+import users.UserDTO;
 
 /**
  *
@@ -30,9 +32,13 @@ public class UnbanUserController extends HttpServlet {
         String url = ERROR;
         try {
             int idUser = Integer.parseInt(request.getParameter("idUser"));
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            UserDTO unbanUser = new UserDTO(fullName, email);
             UserDAO dao = new UserDAO();
             boolean checkAccept = dao.unbanUser(idUser); 
             if(checkAccept){
+                SendEmail.sendEmailUnbanUser(unbanUser);
                 request.setAttribute("SUCCESS", "Unban Successfully!!");
                 url = SUCCESS;
             }else{

@@ -246,6 +246,7 @@
                                                                     </th>
                                                                 </tr>
                                                             </c:forEach>
+                                                            <!--Popup start here-->
                                                             <c:forEach var="job" items="${requestScope.JOB_ACCEPTED_DETAIL}" varStatus="counting">    
                                                             <div class="modal fade" id="job_accepted_detail${counting.count}">
                                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -254,8 +255,11 @@
                                                                             <div class="container">
                                                                                 <div class="row mb-5">
                                                                                     <div class="col-lg-12">
-                                                                                        <form class="" method="post" style="width: 70%; margin: auto; margin-top: 4%">
-                                                                                            <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">JOB INFORMATION</h3>
+                                                                                        <form method="post" style="width: 70%; margin: auto; margin-top: 4%">
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                            <h2 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">JOB INFORMATION</h2>
                                                                                             <div class="form-group">
                                                                                                 <label for="job-title">Job Title</label>
                                                                                                 <input
@@ -331,7 +335,12 @@
                                                                                                     <c:when test="${job.status == 'Spam' || job.status == 'Updated'}">
                                                                                                         <a href="AcceptJobController?idJob=${job.idJob}" class="btn" style="background-color:#28a745;  color: white; text-align: center;  margin: 10px 8px 10px 0px">Recovery</a>
                                                                                                         <a href="DenyJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Delete</a>
-                                                                                                    </c:when>                         
+                                                                                                    </c:when>  
+                                                                                                    <c:when test="${job.status == 'Applied'}">
+                                                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}">
+                                                                                                            <button class="btn btn-secondary" disabled>Spam</button>
+                                                                                                        </a> 
+                                                                                                    </c:when>
                                                                                                     <c:otherwise>
                                                                                                         <a href="UnappropriatedJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Spam</a>
                                                                                                     </c:otherwise>
@@ -346,6 +355,7 @@
                                                                 </div>
                                                             </div>
                                                         </c:forEach>
+                                                        <!--Popup close here-->
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -414,7 +424,10 @@
                                                                             <div class="row mb-5">
                                                                                 <div class="col-lg-12">
                                                                                     <form class="" method="post" style="width: 70%; margin: auto; margin-top: 4%">
-                                                                                        <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">JOB INFORMATION</h3>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                        <h2 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">JOB INFORMATION</h2>
                                                                                         <div class="form-group">
                                                                                             <label for="job-title">Job Title</label>
                                                                                             <input
@@ -573,12 +586,89 @@
                                                                     <th>${user.phone}</th>
                                                                     <th>${user.numOfSpam}</th>
                                                                     <th>
-                                                                        <a href="BanUserController?idUser=${user.id}">
+                                                                        <a data-toggle="modal" data-target="#user_ban${counter.count}">
                                                                             <button class="btn btn-danger">Ban</button>
                                                                         </a>
                                                                     </th>
                                                                 </tr>
                                                             </c:forEach>
+
+                                                            <!--Popup User Management start here-->
+                                                            <c:forEach var="user" items="${requestScope.LIST_USER}" varStatus="counting">    
+                                                            <div class="modal fade" id="user_ban${counting.count}">
+                                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                    <div class="modal-content ">
+                                                                        <section class="site-section">
+                                                                            <div class="container">
+                                                                                <div class="row mb-5">
+                                                                                    <div class="col-lg-12">
+                                                                                        <form action="BanUserController" method="POST" style="width: 70%; margin: auto; margin-top: 4%">
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                            <h2 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">USER INFORMATION</h2>
+                                                                                            <div class="form-row">
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Full Name</label>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="fullName"
+                                                                                                        class="form-control"
+                                                                                                        value="${user.name}"
+                                                                                                        readonly=""
+                                                                                                        />
+                                                                                                </div>
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Email</label>
+                                                                                                    <input 
+                                                                                                        type="text" 
+                                                                                                        name="email" 
+                                                                                                        class="form-control" 
+                                                                                                        id="date_picker" 
+                                                                                                        value="${user.email}" 
+                                                                                                        readonly="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-row">
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Date of Birth</label>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="dob"
+                                                                                                        class="form-control"
+                                                                                                        value="${user.dob}"
+                                                                                                        readonly=""
+                                                                                                        />
+                                                                                                </div>
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Phone</label>
+                                                                                                    <input 
+                                                                                                        type="text" 
+                                                                                                        name="phone" 
+                                                                                                        class="form-control" 
+                                                                                                        id="date_picker" 
+                                                                                                        value="${user.phone}" 
+                                                                                                        readonly="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="job_description">Reason Ban: </label>
+                                                                                                <textarea name="reason" class="form-control" id="exampleFormControlTextarea1" rows="4" required="" title="You must enter the reason why this account is disabled"></textarea>
+                                                                                            </div>
+                                                                                            <div class="d-flex justify-content-end">
+                                                                                                <input type="hidden" name="idUser" value="${user.id}"/>
+                                                                                                <button type="submit" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Ban</button>                                                                                               
+                                                                                            </div>                          
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                        <!--Popup User Management close here-->
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -618,7 +708,7 @@
                                                                 <th>${user.phone}</th>
                                                                 <th>${user.numOfSpam}</th>
                                                                 <th>
-                                                                    <a href="UnbanUserController?idUser=${user.id}">
+                                                                    <a href="UnbanUserController?idUser=${user.id}&fullName=${user.name}&email=${user.email}">
                                                                         <button class="btn btn-success">Unban</button>
                                                                     </a>
                                                                 </th>
