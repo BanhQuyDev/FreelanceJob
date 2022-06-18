@@ -65,7 +65,10 @@
                                         <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""></a>
                                         <span style="font-size: 30px">${job.title}</span>
                                         <c:if test="${sessionScope.LOGIN_USER != null}">
-                                            <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" ><i style="color:#e50505; margin-left: 50px; font-size:20px" class="fa fa-flag" aria-hidden="true"></i></a>                                    
+                                            <c:set var="user_name" value="${sessionScope.LOGIN_USER.name}"/>
+                                            <c:if test="${job.nameEmployer ne user_name}">
+                                                <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" ><i style="color:#e50505; margin-left: 50px; font-size:20px" class="fa fa-flag" aria-hidden="true"></i></a>                       
+                                            </c:if>           
                                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -86,7 +89,7 @@
                                                             <div class="modal-footer d-flex justify-content-center">
                                                                 <button type="submit" class="btn" style="background-color:#e53805d6">Send Report</button>
                                                             </div>
-                                                      </form>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,7 +119,7 @@
                                     <div class="small-section-tittle">
                                         <h4 class="text-monospace">Job Description</h4>
                                     </div>
-                                    <p>${job.description}</p>
+                                    ${job.description}
                                 </div>
                                 <div class="post-details1 mb-50">
                                     <!-- Small Section Tittle -->
