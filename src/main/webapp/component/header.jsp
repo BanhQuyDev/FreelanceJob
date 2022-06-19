@@ -55,6 +55,7 @@
                                                     <a style="color: black" href="#">Job Management</a>
                                                     <ul class="submenu">
                                                         <li><a href="JobApplyController">List Job Apply</a></li>
+                                                        <li><a href="work_space.jsp">Work Space</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="HistoryController">History</a></li>
@@ -66,6 +67,7 @@
                                                     <ul class="submenu">
                                                         <li><a href="RenderJobPostController">Your Post</a></li>
                                                         <li><a href="GetAllFreelancerApplyController">List Freelancer Apply</a></li>
+                                                        <li><a href="work_space.jsp">Work Space</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="HistoryController">History</a></li>
@@ -114,8 +116,8 @@
                                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i><button class="btn btn-primary">Employer</button></a>
-                                                        </c:when>
-                                                        <c:otherwise>
+                                                                </c:when>
+                                                                <c:otherwise>
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i> Employer</a>
                                                         </c:otherwise>
@@ -174,7 +176,7 @@
                     </center>
                 </div>
             </c:if>
-            
+
         </div>
     </div>
     <!-- Header End -->
