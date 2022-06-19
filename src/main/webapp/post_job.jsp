@@ -34,6 +34,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
+        <link rel="stylesheet" href="assets/css/header_notification.css"/>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>

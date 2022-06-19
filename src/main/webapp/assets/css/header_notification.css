@@ -1,0 +1,50 @@
+.notification--hover:hover{
+    background-color: #3A3B3C;
+    color: white;
+
+}
+.notification--hover {
+    padding: 0; 
+    border-radius: 16px;
+    position: relative;
+    margin-bottom: 10px;
+}
+.notification--hover:before {
+    content: "";
+    height: 100%;
+    width: 4px;
+    background-color: #00BFF2;
+    position: absolute;
+    left: -10px;
+}
+
+.notification--img {
+    width: 80px;
+    height: 80px;
+    border-radius: 999px;
+}
+.notification--list {
+    display: flex;
+    align-items: center; 
+    gap: 10px
+}
+.dropdown-notification {
+    width: 400px; 
+    border-radius: 16px; 
+    max-height: 500px; 
+    overflow-y: hidden; 
+    padding: 10px
+}
+.dropdown-notification:hover {
+        overflow-y: scroll;
+}
+.notification--header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    height: 50px;
+}

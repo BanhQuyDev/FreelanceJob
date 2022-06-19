@@ -29,6 +29,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
+        <link rel="stylesheet" href="assets/css/header_notification.css"/>
 
     </head>
     <body>
@@ -57,15 +58,15 @@
                             <div class="form-row" style="margin-bottom: 15px">
                                 <div class="col">
                                     <label for="job-title">Price</label>
-                                     <input type="text" 
-                                               id="amount"
-                                               name="salary" 
-                                               class="form-control" 
-                                               title="The price of project must be greater than 100.000 VN?"
-                                               required=""
-                                               maxlength="15"
-                                               minlength="7"
-                                               value="${job.showPrice(job.salary)}">
+                                    <input type="text" 
+                                           id="amount"
+                                           name="salary" 
+                                           class="form-control" 
+                                           title="The price of project must be greater than 100.000 VN?"
+                                           required=""
+                                           maxlength="15"
+                                           minlength="7"
+                                           value="${job.showPrice(job.salary)}">
                                 </div>
                                 <div class="col">
                                     <label for="job-location">Duration (by day)</label>
@@ -155,7 +156,7 @@
             });
         }, 3000);
     </script>
-        <script>
+    <script>
         (function ($, undefined) {
 
             "use strict";

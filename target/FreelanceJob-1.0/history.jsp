@@ -35,6 +35,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
+        <link rel="stylesheet" href="assets/css/header_notification.css"/>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
@@ -52,21 +53,21 @@
                     </div>
                 </div>
             </div>
-        <div class="timeline">
-            <div class="job-category-listing mb-50" style="margin-left: 80%;">
-                <form action="HistoryController" method="POST">
-                    <div class="single-listing">
-                        <div class="small-section-tittle2">
-                            <h4>Filter</h4>
+            <div class="timeline">
+                <div class="job-category-listing mb-50" style="margin-left: 80%;">
+                    <form action="HistoryController" method="POST">
+                        <div class="single-listing">
+                            <div class="small-section-tittle2">
+                                <h4>Filter</h4>
+                            </div>
+                            <select name="selectedContractStatus" onchange="this.form.submit()">
+                                <option value="2">All</option>
+                                <option value="1">Complete</option>
+                                <option value="0">On working</option>
+                            </select>
                         </div>
-                        <select name="selectedContractStatus" onchange="this.form.submit()">
-                            <option value="2">All</option>
-                            <option value="1">Complete</option>
-                            <option value="0">On working</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
             <c:forEach var="contract" items="${requestScope.LIST_CONTRACT}" varStatus="counting">
                 <c:if test="${counting.count % 2 != 0}">
                     <c:if test="${contract.contract_status == 1}">                

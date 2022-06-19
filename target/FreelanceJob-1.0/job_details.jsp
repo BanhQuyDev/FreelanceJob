@@ -31,6 +31,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
+        <link rel="stylesheet" href="assets/css/header_notification.css"/>
     </head>
 
     <body>
@@ -86,7 +87,7 @@
                                                             <div class="modal-footer d-flex justify-content-center">
                                                                 <button type="submit" class="btn" style="background-color:#e53805d6">Send Report</button>
                                                             </div>
-                                                      </form>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

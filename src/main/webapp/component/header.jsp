@@ -24,7 +24,6 @@
 </div>
 <!-- Preloader Start -->
 <header>
-
     <!-- Header Start -->
     <div class="header-area header-transparrent">
         <div class="headder-top header-sticky">
@@ -58,8 +57,83 @@
                                                     </ul>
                                                 </li>
                                                 <li><a href="HistoryController">History</a></li>
-                                                </c:when>                                              
-                                                <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#"
+                                                       id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                       aria-expanded="false">
+                                                        <i class="fa fa-bell"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-notification"
+                                                         aria-labelledby="navbarDropdown">                                                        
+                                                        <div class="text-center arrow_box_right notification--header">
+                                                            <div>
+                                                                <span>Notifications</span>
+                                                            </div>
+                                                            <div>
+                                                                <a href="#!" class="text-bold-700" 
+                                                                   style="text-decoration: underline; text-align: right; font-size: 16px; color: #00BFF3;
+                                                                   display: inline-block; " >View All</a>
+                                                            </div>                                                        
+                                                        </div>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>                            
+                                                    </div>
+                                                </li>
+                                            </c:when>                                              
+                                            <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                                 <li><a href="RenderSkillPostJob">Post a Job </a></li>
                                                 <li>
                                                     <a href="#">Job Management</a>
@@ -69,8 +143,85 @@
                                                     </ul>
                                                 </li>
                                                 <li><a href="HistoryController">History</a></li>
-                                                </c:when>
-                                                <c:otherwise>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#"
+                                                       id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                       aria-expanded="false">
+                                                        <i class="fa fa-bell"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-notification"
+                                                         aria-labelledby="navbarDropdown">                                                        
+                                                        <div class="text-center arrow_box_right notification--header">
+                                                            <div>
+                                                                <span>Notifications</span>
+                                                            </div>
+                                                            <div>
+                                                                <a href="#!" class="text-bold-700" 
+                                                                   style="text-decoration: underline; text-align: right; font-size: 16px; color: #00BFF3; padding: 10px;
+                                                                   display: inline-block; " >View All</a>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="#" class="notification--hover" style="padding: 0">
+                                                            <div class="notification--list">
+                                                                <div class="notification-list_img">
+                                                                    <img class="notification--img" src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                                </div>
+                                                                <div class="notification-list_detail">
+                                                                    <p class="notification--font"><b style="color: #00BFF3">John Doe</b> reacted to your postasdasdasdasdasdasdasd</p>
+                                                                    <p><small>10 mins ago</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </a>                            
+                                                    </div>
+                                                </li>
+                                            </c:when>
+                                            <c:otherwise>
                                                 <li><a href="JobListingController">Find Jobs </a></li>
                                                 <li>
                                                     <a href="#">About</a>
@@ -82,7 +233,6 @@
                                 </nav>
                             </div>
                             <!-- Header-btn -->
-
                             <c:choose>
                                 <c:when test="${sessionScope.LOGIN_USER != null}">
                                     <ul class="nav navbar-nav float-right">
@@ -114,14 +264,18 @@
                                                         <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i><button class="btn btn-primary">Employer</button></a>
-                                                        </c:when>
-                                                        <c:otherwise>
+                                                                </c:when>
+                                                                <c:otherwise>
                                                             <a class="dropdown-item" href="ChangeModeController?type=freelancer"><i class="ft-power"></i> Freelancer</a>
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i> Employer</a>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <a class="dropdown-item" href="freelancer_detail.jsp"><i class="ft-power"></i> Profile</a>
-                                                    <a class="dropdown-item" href="LogoutController"><i class="ft-power"></i> Logout</a>
+                                                            <a class="dropdown-item " href="freelancer_detail.jsp">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 24px;
+                                                             height: 21px;
+                                                             padding-right: 8px;">
+                                                        <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/></svg> Profile</a>
+                                                    <a class="dropdown-item" href="LogoutController"><i style="padding-right: 8px;" class="fas fa-sign-out-alt"></i> <i class="ft-power"></i> Logout</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -174,7 +328,7 @@
                     </center>
                 </div>
             </c:if>
-            
+
         </div>
     </div>
     <!-- Header End -->
