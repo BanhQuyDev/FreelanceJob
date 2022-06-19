@@ -1,4 +1,4 @@
-// ================================================================================================
+/*// ================================================================================================
 //   File Name: pallette.scss
 //   Description: Custom color system styles, includes background, border and text colors
 //   ----------------------------------------------------------------------------------------------
@@ -134,11 +134,11 @@ $color in $colors {
                     }
                 }
             }
-            /* .custom-control-label{
+             .custom-control-label{
         &:before{
           background-color: #ddd !important;
         }
-      } */
+      } 
             input:focus~.bg-#{$color_name} {
                 box-shadow: 0 0 0 .075rem #fff, 0 0 0 .21rem $color_value !important;
             }
@@ -263,4 +263,4 @@ $color_value in $shades {
 
 .card.border-top-5 {
     border-top-width: $border-top-5 !important;
-}
+}*/

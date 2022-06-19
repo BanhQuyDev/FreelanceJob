@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
@@ -38,7 +38,8 @@
             <main>
                 <!-- Hero Area Start-->
                 <div class="slider-area ">
-                    <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
+                    <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+                         data-background="assets/img/hero/about.jpg">
                         <div class="container">
                             <div class="row">
                                 <div class="col-xl-12">
@@ -60,11 +61,12 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="small-section-tittle2 mb-45">
-                                            <div class="ion"> <svg 
+                                            <div class="ion">
+                                                <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
                                                     width="20px" height="12px">
-                                                <path fill-rule="evenodd"  fill="rgb(27, 207, 107)"
+                                                <path fill-rule="evenodd" fill="rgb(27, 207, 107)"
                                                       d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
                                                 </svg>
                                             </div>
@@ -91,7 +93,7 @@
                                                     <c:set var="all" value="All Major"/>
                                                     <c:if test="${selectedMajor ne all}">
                                                         <option value="${selectedMajor}">${selectedMajor}</option>
-                                                        <option  value="All Major">All Major</option>
+                                                        <option value="All Major">All Major</option>
                                                     </c:if>
                                                     <c:if test="${selectedMajor eq all}">
                                                         <option value="${selectedMajor}">${selectedMajor}</option>
@@ -105,7 +107,7 @@
                                             </c:forEach>
                                         </select>
 
-                                        <!--  Select job items End-->   
+                                        <!--  Select job items End-->
                                     </div>
                                 </form>
                             </div>
@@ -130,21 +132,21 @@
                                         <div class="single-job-items mb-30">
                                             <div class="job-items">
                                                 <div class="company-img">
-                                                    <a href="JobDetailController?jobId=${job.idJob}"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""/></a>
+                                                    <a href="JobDetailController?jobId=${job.idJob}"
+                                                       ><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""
+                                                          /></a>
                                                 </div>
-                                                <div class="job-tittle job-tittle2">
-                                                    <a href="JobDetailController?jobId=${job.idJob}">
-                                                        <h4>${job.title}</h4>
-                                                    </a>
+                                                <div class="job-tittle">
+                                                    <a href="JobDetailController?jobId=${job.idJob}"><h4>${job.title}</h4></a>
                                                     <ul>
-                                                        <li>${job.nameEmployer}</li>
+                                                        <li style="margin-right: 40px!important;">${job.nameEmployer}</li>
                                                         <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>
                                                             <c:set var="salary" value="${job.salary}"/>
                                                         <li>${job.showPrice(salary)} VNĐ</li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="items-link items-link2 f-right">
+                                            <div class="items-link f-right">
                                                 <c:choose>
                                                     <c:when test="${job.nameEmployer != sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
                                                         <c:if test="${job.jobApplication != 0}">
@@ -152,22 +154,20 @@
                                                         </c:if>
                                                         <c:if test="${job.jobApplication == 0}">
                                                             <a href="JobDetailController?jobId=${job.idJob}">Apply</a>
-                                                        </c:if>    
+                                                        </c:if>
                                                     </c:when>
                                                     <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
-                                                        <div data-toggle="tooltip" data-html="true" title="You can not apply <br> <strong>Your Own Job</strong>"
-                                                             data-placement="auto" data-animation="true">
+                                                        <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can't apply Your Own Job" data-content="Please apply another">
                                                             <a>Apply</a>
-                                                        </div>
+                                                        </div>                
                                                     </c:when>
                                                     <c:when test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                        <div data-toggle="tooltip" data-html="true" title="Change to Freelancer Mode to apply!!!"
-                                                             data-placement="auto" data-animation="true">
+                                                        <div style="cursor: pointer;" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="right" data-animation="true" title="You can' apply As An Employer" data-content="Please change your mode">
                                                             <a>Apply</a>
                                                         </div>
                                                     </c:when>
-                                                </c:choose>   
-                                                <span>CREATE DATE : ${job.createDate}</span>
+                                                </c:choose>                        
+                                                <span> <strong> ${job.freelancerQuantity} </strong> Freelancer(s) Applied !!</span>
                                             </div>
                                         </div>
                                     </c:forEach>
@@ -178,7 +178,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Job List Area End -->        
+            <!-- Job List Area End -->
             <!--Pagination Start  -->
             <div class="pagination-area pb-115 text-center">
                 <div class="container">
@@ -190,7 +190,8 @@
                                         <li class="page-item active"><a class="page-link" href="#">01</a></li>
                                         <li class="page-item"><a class="page-link" href="#">02</a></li>
                                         <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                        <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -234,9 +235,20 @@
         <script src="./assets/js/mail-script.js"></script>
         <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
 
-        <!-- Jquery Plugins, main Jquery -->	
+        <!-- Jquery Plugins, main Jquery -->
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
-
+        <script
+            src="https://kit.fontawesome.com/b36bcbb61e.js"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+                                            $(function () {
+                                                $('[data-toggle="popover"]').popover(),
+                                                        $('.popover-dismiss').popover({
+                                                    trigger: 'focus'
+                                                })
+                                            })
+        </script>
     </body>
 </html>

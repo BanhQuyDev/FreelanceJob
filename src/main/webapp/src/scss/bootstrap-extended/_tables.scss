@@ -111,7 +111,7 @@
 
 // For table borderless
 
-.table-borderless {
+/*.table-borderless {
   thead th {
     border-top: 1px solid $table_border_color;
   }
@@ -120,11 +120,11 @@
       border: 0;
     }
   }
-}
+}*/
 
 // For table solid border
 
-.table > {
+/*.table > {
   thead > tr {
     &.border-solid > th {
       border-bottom-width: 2px;
@@ -137,7 +137,7 @@
   tbody > tr.border-dashed > td {
     border-top-style: dashed;
   }
-}
+}*/
 
 //For table double border
 

@@ -128,4 +128,18 @@ public class UserDTO {
         this.numOfSpam = numOfSpam;
     }
 
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", dob='" + dob + '\'' +
+                ", address='" + address + '\'' +
+                ", bio='" + bio + '\'' +
+                ", phone='" + phone + '\'' +
+                ", picture='" + picture + '\'' +
+                ", numOfSpam=" + numOfSpam +
+                '}';
+    }
 }

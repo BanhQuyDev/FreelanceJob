@@ -60,6 +60,7 @@
                     <div class="row">
                         <!-- Left content -->
                         <div class="col-xl-12 col-lg-12 col-md-4">
+                            <button class="btn" style="padding: 18px 20px; border-radius: 5px" onclick="history.back()">Previous</button>
                             <div class="row mb-3" style="display: flex; flex-direction: row; justify-content: left; align-items: center">
                                 <!-- Job Category Listing start -->
                                 <!-- single one -->
@@ -131,7 +132,8 @@
                                                                 </div>
                                                                 <div class="text-center mt-4 mx-auto" >
                                                                     <button type="submit"  class="btn-outline-success mb-2 border" style="padding: 10px;border-radius: 16px;display: flex;justify-content: center; cursor: pointer">
-                                                                        <img style="width: 30px; height: 30px; border-radius: 100rem; object-fit: cover" src="https://icon-library.com/images/check-image-icon/check-image-icon-5.jpg" alt="alt"/>
+                                                                        <img style="width: 30px; height: 30px; border-radius: 100rem; object-fit: cover; margin-right: 10px" src="https://icon-library.com/images/check-image-icon/check-image-icon-5.jpg" alt="alt"/>
+                                                                        Approve
                                                                     </button>
                                                                 </div> 
                                                             </div>
@@ -214,11 +216,11 @@
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
         <script>
-            window.setTimeout(function () {
-                $(".alert").fadeTo(400, 0).slideUp(400, function () {
-                    $(this).remove();
-                });
-            }, 3000);
+                                        window.setTimeout(function () {
+                                            $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                                                $(this).remove();
+                                            });
+                                        }, 3000);
         </script>
     </body>
 </html>

@@ -61,13 +61,41 @@
                             <!-- job single -->
                             <div class="single-job-items mb-50">
                                 <div class="job-items">
-                                    <div class="company-img company-img-details">
+                                    <div class="company-img company-img-details mb-3">
                                         <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""></a>
+                                        <span style="font-size: 30px">${job.title}</span>
+                                        <c:if test="${sessionScope.LOGIN_USER != null}">
+                                            <c:set var="user_name" value="${sessionScope.LOGIN_USER.name}"/>
+                                            <c:if test="${job.nameEmployer ne user_name}">
+                                                <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" ><i style="color:#e50505; margin-left: 50px; font-size:20px" class="fa fa-flag" aria-hidden="true"></i></a>                       
+                                            </c:if>           
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <form action="ReportController" method="POST">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Your Report</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="message-text" class="col-form-label">Reason:</label>
+                                                                    <textarea name="content" class="form-control" id="message-text" rows="3"></textarea>
+                                                                    <input type="hidden" name="jobId" value="${job.idJob}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-center">
+                                                                <button type="submit" class="btn" style="background-color:#e53805d6">Send Report</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>                                       
                                     </div>
                                     <div class="job-tittle">
-                                        <a href="#">
-                                            <h4>${job.title}</h4>
-                                        </a>
                                         <ul>
                                             <li>${job.nameEmployer}</li>
                                             <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>
@@ -91,7 +119,7 @@
                                     <div class="small-section-tittle">
                                         <h4 class="text-monospace">Job Description</h4>
                                     </div>
-                                    <p>${job.description}</p>
+                                    ${job.description}
                                 </div>
                                 <div class="post-details1 mb-50">
                                     <!-- Small Section Tittle -->
@@ -117,27 +145,59 @@
                                 </div>
                                 <ul>
                                     <li>Start Date : <span>${job.startDate}</span></li>
+                                    <li>End Date : <span>${job.endDate}</span></li>
                                     <li>Create date : <span>${job.createDate}</span></li>
                                     <li>Salary :  <span>${job.showPrice(salary)}VNĐ</span></li>
                                 </ul>
                                 <div class="apply-btn2">
                                     <c:choose>
                                         <c:when test="${sessionScope.LOGIN_USER == null}">
-                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
-                                               &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" 
-                                               class="btn rounded">Apply Now</a>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                                       &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" 
+                                                       class="btn" style="padding-left:25px;padding-right:25px;">Apply Now</a>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                </div>
+                                            </div>
                                         </c:when>
-                                        <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">
-                                            <a href="ApplyJobController?jobId=${job.idJob}" class="btn rounded">Apply Now</a>
+                                        <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
+                                            <button class="btn" onclick="history.back()">Previous</button>
                                         </c:when>
-                                        <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE != 'EMPLOYER'}">
-                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Processing...</a>
+                                        <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">                
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <a class="btn rounded" style="padding-left:25px;padding-right:25px;" href="ApplyJobController?jobId=${job.idJob}">Apply Now</a>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <a href="JobListingController?selectedMajor=All Major" class="btn" style="margin-left: 60px;">Previous</a>
+                                                </div>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${requestScope.APPLY_SUCCESS != null  && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID != 0}">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <a href="JobListingController?selectedMajor=All Major" class="btn" style="margin-left: 60px;">Previous</a>
+                                                </div>
+                                            </div>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE == 'EMPLOYER'}">
-                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Apply Now</a>
+                                            <button class="btn" onclick="history.back()">Previous</button>
                                         </c:when>
                                         <c:when test="${requestScope.JOB_APPLICATION_ID != 0}">
-                                            <a class="btn" style="pointer-events: none; background-color: #f2722970">Processsing...</a>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                </div>
+                                            </div>
                                         </c:when>
                                     </c:choose>
                                 </div>
@@ -152,7 +212,13 @@
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
-
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                    $(this).remove();
+                });
+            }, 3000)
+        </script> 
         <!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->

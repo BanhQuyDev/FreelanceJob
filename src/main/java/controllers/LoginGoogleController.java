@@ -53,10 +53,10 @@ public class LoginGoogleController extends HttpServlet {
                 if (email[1].equals("fpt.edu.vn")) {
                     boolean check = dao.checkDuplicate(user.getEmail());
                     if (check) {
-                        user = dao.getUserByEmail(user.getEmail());
-                        user.setPicture(googleUser.getPicture());
+                        user = dao.getUserByEmail(user.getEmail());                    
                         if (user != null) {
                             boolean checkRole = dao.checkRole(user.getId());
+                            user.setPicture(googleUser.getPicture());
                             if (checkRole) {
                                 session.setAttribute("LOGIN_USER", user);
                                 session.setAttribute("TYPE", "admin");
@@ -77,6 +77,7 @@ public class LoginGoogleController extends HttpServlet {
                         if (checkCreate) {
                             session.setAttribute("LOGIN_USER", user);
                             session.setAttribute("TYPE", "user");
+                            session.setAttribute("MODE", "FREELANCER");
                             request.setAttribute("SUCCESS_MESSAGE", "Login Successfully !!!");
                             url = INDEX_PAGE;
                         }

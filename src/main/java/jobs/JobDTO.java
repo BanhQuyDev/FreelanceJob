@@ -12,12 +12,12 @@ import utils.Utils;
  * @author QUANG HUY
  */
 public class JobDTO {
-
     private int idJob;
     private String title;
     private double salary;
     private String description;
     private double duration;
+    private String endDate;
     private String startDate;
     private String status;
     private int idEmployer;
@@ -140,6 +140,21 @@ public class JobDTO {
         this.nameMajor = nameMajor;
         this.createDate = createDate;
     }
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, int idEmployer, String nameEmployer, String idMajor, String nameMajor, String createDate,String endDate) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.idEmployer = idEmployer;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = idMajor;
+        this.nameMajor = nameMajor;
+        this.createDate = createDate;
+        this.endDate = endDate;
+    }
 
     public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String nameMajor, int jobApplication, String createDateJobApplication, int statusJobApplication, int appliedTimeJobApplication, int executionTimeJobApplication) {
         this.idJob = idJob;
@@ -156,6 +171,37 @@ public class JobDTO {
         this.executionTimeJobApplication = executionTimeJobApplication;
     }
 
+    public JobDTO(int idJob, String title, String status, String nameMajor, int freelancerQuantity) {
+        this.idJob = idJob;
+        this.title = title;
+        this.status = status;
+        this.nameMajor = nameMajor;
+        this.freelancerQuantity = freelancerQuantity;
+    }
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String status, String nameEmployer, String id_major, String major_name, String createDate) {
+        this.idJob = idJob;
+        this.title = title;
+        this.salary = salary;
+        this.description = description;
+        this.duration = duration;
+        this.startDate = startDate;
+        this.status = status;
+        this.nameEmployer = nameEmployer;
+        this.idMajor = id_major;
+        this.nameMajor = major_name;
+        this.createDate = createDate;
+    }
+
+    public JobDTO(int idJob, String title, double salary, String description, double duration, String startDate, String major) {
+       this.idJob = idJob;
+       this.title = title;
+       this.salary = salary;
+       this.description = description;
+       this.duration = duration;
+       this.startDate = startDate;
+       this.idMajor = major;
+    }
     public int getIdJob() {
         return idJob;
     }
@@ -253,7 +299,6 @@ public class JobDTO {
     }
 
     public String[] getSkillJob() {
-
         return skillJob;
     }
 
@@ -316,5 +361,14 @@ public class JobDTO {
     public void setExecutionTimeJobApplication(int executionTimeJobApplication) {
         this.executionTimeJobApplication = executionTimeJobApplication;
     }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+    
 
 }
