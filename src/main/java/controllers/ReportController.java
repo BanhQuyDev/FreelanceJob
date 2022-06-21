@@ -11,8 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import notifications.NotificationDAO;
-import notifications.NotificationDTO;
+import javax.servlet.http.HttpSession;
+import jobs.JobDTO;
+import reports.JobReportDAO;
+import reports.JobReportDTO;
+import users.UserDTO;
 
 /**
  *
@@ -31,12 +34,17 @@ public class ReportController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             String content = request.getParameter("content");
-            NotificationDAO noti = new NotificationDAO();
-            NotificationDTO notiDto = new NotificationDTO(8, content, 3);
-            boolean check = noti.createNotification(notiDto);
+            String job_title = request.getParameter("title");
+            int idJob = Integer.parseInt(request.getParameter("id_job"));
+            JobDTO job_report = new JobDTO(idJob, job_title);
+            UserDTO user_report = (UserDTO) session.getAttribute("LOGIN_USER");
+            int id_user_report = user_report.getId();
+            JobReportDTO report = new JobReportDTO(job_report, content, id_user_report);
+            boolean check = new JobReportDAO().createReport(report);
             if (check) {
-                request.setAttribute("SUCCESS_MESSAGE", "Report Successfully!! Waiting for admin to handle");
+                request.setAttribute("SUCCESS_MESSAGE", "Report this job successfully!");
                 url = SUCCESS;
             }
         } catch (Exception e) {

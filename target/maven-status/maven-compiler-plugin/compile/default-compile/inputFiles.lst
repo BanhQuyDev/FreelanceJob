@@ -21,7 +21,9 @@ D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\utils\GoogleUtils.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\FreeLancerDetailController.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\UpdateUserSkillController.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\GetAllUser.java
+D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\GetAllReport.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\UnbanUserController.java
+D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\reports\JobReportDAO.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\UpdateProfileUserController.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\jobs\JobApplicationDTO.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\common\Key.java
@@ -30,6 +32,7 @@ D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\users\UserDTO.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\contracts\ContractDTO.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\ChangeModeController.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\home\ApplyJobController.java
+D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\reports\JobReportDTO.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\utils\DBUtils.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\notifications\NotificationDTO.java
 D:\FPTU\Sem5\SWP391\FreelanceJob\src\main\java\controllers\GetAllFreelancerApplyController.java

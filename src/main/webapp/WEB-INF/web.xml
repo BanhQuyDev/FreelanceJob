@@ -12,6 +12,10 @@
         <servlet-name>UpdateJobController</servlet-name>
         <servlet-class>controllers.UpdateJobController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllReport</servlet-name>
+        <servlet-class>controllers.GetAllReport</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PostJobController</servlet-name>
         <url-pattern>/PostJobController</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>UpdateJobController</servlet-name>
         <url-pattern>/UpdateJobController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllReport</servlet-name>
+        <url-pattern>/GetAllReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

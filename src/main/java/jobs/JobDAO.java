@@ -47,7 +47,7 @@ public class JobDAO {
 
     private static final String GET_TOP_4_LATEST_JOB = "SELECT TOP 4 Jj.id_job, Jj.title, Jj.duration, Jj.salary, U.fullname, Jj.create_date, \n"
             + "	(SELECT COUNT(JA.id_job) as freelancerQuantity FROM tblJob J, tblJobApplication JA, tblFreelancer F\n"
-            + "     WHERE JA.id_job = J.id_job AND JA.id_freelancer = F.id_freelancer AND J.id_job = Jj.id_job  GROUP BY JA.id_job) as freelancerQuantity\n"
+            + "  WHERE JA.id_job = J.id_job AND JA.id_freelancer = F.id_freelancer AND J.id_job = Jj.id_job  GROUP BY JA.id_job) as freelancerQuantity\n"
             + "FROM tblJob Jj, tblEmployer E, tblUser U WHERE E.id_employer = U.id_user AND E.id_employer = Jj.id_employer AND id_status = 2 \n"
             + "ORDER BY create_date DESC";
 

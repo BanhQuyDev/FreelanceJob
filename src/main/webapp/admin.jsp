@@ -36,6 +36,7 @@
         <!-- BEGIN Page Level CSS-->
         <link rel="stylesheet" type="text/css" href="theme-assets/css/core/menu/menu-types/vertical-menu.css"/>
         <link rel="stylesheet" type="text/css" href="theme-assets/css/core/colors/palette-gradient.css"/>
+        <script src="//cdn.ckeditor.com/4.19.0/basic/ckeditor.js"></script>
         <!-- END Page Level CSS-->
         <!-- BEGIN Custom CSS-->
         <!-- END Custom CSS-->
@@ -107,7 +108,7 @@
                                                  src="${sessionScope.LOGIN_USER.picture}" alt="avatar"/>
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="LogoutController"><i class="ft-power"></i> Logout</a>
+                                        <a class="dropdown-item" href="LogoutController"><i class="ft-power"></i>Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -150,6 +151,23 @@
                                 <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
                                         management</span></a>
                             </li>
+                            <li id="report_management" class="mt-2">
+                                <a href="GetAllReport"><i class="ft-book"></i><span class="menu-title" data-i18n="">Report
+                                    </span></a>
+                            </li>
+                        </c:when>
+                        <c:when test="${requestScope.LIST_JOB_REPORT != null}">
+                            <li id="job_management">
+                                <a href="GetAllJob"><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
+                                        management</span></a>
+                            </li>
+                            <li id="user_management" class="mt-2">
+                                <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
+                                        management</span></a>
+                            </li>
+                            <li id="report_management" class="mt-2 active">
+                                <a href="GetAllReport"><i class="ft-book"></i><span class="menu-title" data-i18n="">Report</span></a>
+                            </li>
                         </c:when>
                         <c:otherwise>
                             <li id="job_management">
@@ -159,6 +177,10 @@
                             <li id="user_management" class="mt-2 active">
                                 <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
                                         management</span></a>
+                            </li>
+                            <li id="report_management" class="mt-2">
+                                <a href="GetAllReport"><i class="ft-book"></i><span class="menu-title" data-i18n="">Report
+                                    </span></a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -328,7 +350,7 @@
                                                                                             </div>
                                                                                             <div class="form-group">
                                                                                                 <label for="job_description">Job Description</label>
-                                                                                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
+                                                                                                <textarea id="description" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
                                                                                             </div>
                                                                                             <div class="d-flex justify-content-end">
                                                                                                 <c:choose>
@@ -529,6 +551,78 @@
                     </div>
                 </div>
             </c:when>
+
+
+            <c:when test="${requestScope.LIST_JOB_REPORT != null}">
+                <div class="app-content content">
+                    <div class="content-wrapper">
+                        <div class="content-wrapper-before"></div>
+                        <div class="content-header row">
+                            <div class="content-header-left col-md-4 col-12 mb-2">
+                                <h3 class="content-header-title">Report management</h3>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <!-- Basic Tables start -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">List of jobs with reports</h4>
+                                            <c:if test="${requestScope.SUCCESS != null}">
+                                                <div style="margin-top: 20px" class="alert alert-success">
+                                                    <center>
+                                                        <strong>Success! </strong> ${requestScope.SUCCESS}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${requestScope.FAIL != null}">
+                                                <div style="margin-top: 20px" class="alert alert-danger">
+                                                    <center>
+                                                        <strong>Alert! </strong> ${requestScope.FAIL}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead style="text-align: center">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Job Title</th>
+                                                                <th>Number of Report</th>
+                                                                <th>View Report</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody style="text-align: center">
+                                                            <c:forEach var="job" items="${requestScope.LIST_JOB_REPORT}"
+                                                                       varStatus="counter">
+                                                                <tr>
+                                                                    <th scope="row">${counter.count}</th>
+                                                                    <th>${job.jobReport.title}</th>
+                                                                    <th>${job.numOfReport}</th>
+                                                                    <th>
+                                                                        <a href="GetAllReport?action=render&id_job=${job.jobReport.idJob}">
+                                                                            <button class="btn btn-success">View</button>
+                                                                        </a>
+                                                                    </th>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:when>
+
             <c:otherwise>
                 <div class="app-content content">
                     <div class="content-wrapper">
@@ -752,6 +846,9 @@
                 </ul>
             </div>
         </footer>
+        <script>
+            CKEDITOR.replace('description');
+        </script>
         <script>
             window.setTimeout(function () {
                 $(".alert").fadeTo(400, 0).slideUp(400, function () {
