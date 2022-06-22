@@ -36,6 +36,7 @@
         <!-- BEGIN Page Level CSS-->
         <link rel="stylesheet" type="text/css" href="theme-assets/css/core/menu/menu-types/vertical-menu.css"/>
         <link rel="stylesheet" type="text/css" href="theme-assets/css/core/colors/palette-gradient.css"/>
+        <script src="//cdn.ckeditor.com/4.19.0/basic/ckeditor.js"></script>
         <!-- END Page Level CSS-->
         <!-- BEGIN Custom CSS-->
         <!-- END Custom CSS-->
@@ -107,7 +108,7 @@
                                                  src="${sessionScope.LOGIN_USER.picture}" alt="avatar"/>
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="LogoutController"><i class="ft-power"></i> Logout</a>
+                                        <a class="dropdown-item" href="LogoutController"><i class="ft-power"></i>Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -150,6 +151,23 @@
                                 <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
                                         management</span></a>
                             </li>
+                            <li id="report_management" class="mt-2">
+                                <a href="GetAllReport"><i class="ft-book"></i><span class="menu-title" data-i18n="">Report
+                                    </span></a>
+                            </li>
+                        </c:when>
+                        <c:when test="${requestScope.LIST_JOB_REPORT != null}">
+                            <li id="job_management">
+                                <a href="GetAllJob"><i class="ft-book"></i><span class="menu-title" data-i18n="">Job
+                                        management</span></a>
+                            </li>
+                            <li id="user_management" class="mt-2">
+                                <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
+                                        management</span></a>
+                            </li>
+                            <li id="report_management" class="mt-2 active">
+                                <a href="GetAllReport"><i class="ft-book"></i><span class="menu-title" data-i18n="">Report</span></a>
+                            </li>
                         </c:when>
                         <c:otherwise>
                             <li id="job_management">
@@ -159,6 +177,10 @@
                             <li id="user_management" class="mt-2 active">
                                 <a href="GetAllUser"><i class="ft-book"></i><span class="menu-title" data-i18n="">User
                                         management</span></a>
+                            </li>
+                            <li id="report_management" class="mt-2">
+                                <a href="GetAllReport"><i class="ft-book"></i><span class="menu-title" data-i18n="">Report
+                                    </span></a>
                             </li>
                         </c:otherwise>
                     </c:choose>
@@ -220,20 +242,142 @@
                                                                 <tr>
                                                                     <th scope="row">${counter.count}</th>
                                                                     <th>
-                                                                        <a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a>
+                                                                        <a class="text-primary" data-toggle="modal" data-target="#job_accepted_detail${counter.count}">${job.title}</a>
                                                                     </th>
                                                                     <th>${job.nameEmployer}</th>
                                                                     <th>${job.startDate}</th>
                                                                     <th>${job.createDate}</th>
                                                                     <th>${job.idMajor}</th>
-                                                                    <th style="color: green">${job.status}</th>
+                                                                        <c:if test="${job.status == 'Posted'}">
+                                                                        <th style="color: green">${job.status}</th>
+                                                                        </c:if>
+                                                                        <c:if test="${job.status == 'Applied'}">
+                                                                        <th style="color: #008cffcf">${job.status}</th>
+                                                                        </c:if>
                                                                     <th>
-                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}">
-                                                                            <button class="btn btn-danger">Spam</button>
-                                                                        </a>
+                                                                        <c:if test="${job.status == 'Posted'}">
+                                                                            <a href="UnappropriatedJobController?idJob=${job.idJob}">
+                                                                                <button class="btn btn-danger">Spam</button>
+                                                                            </a> 
+                                                                        </c:if>
+                                                                        <c:if test="${job.status == 'Applied'}">
+                                                                            <a href="UnappropriatedJobController?idJob=${job.idJob}">
+                                                                                <button class="btn btn-secondary" disabled>Spam</button>
+                                                                            </a> 
+                                                                        </c:if>
                                                                     </th>
                                                                 </tr>
                                                             </c:forEach>
+                                                            <!--Popup start here-->
+                                                            <c:forEach var="job" items="${requestScope.JOB_ACCEPTED_DETAIL}" varStatus="counting">    
+                                                            <div class="modal fade" id="job_accepted_detail${counting.count}">
+                                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                    <div class="modal-content ">
+                                                                        <section class="site-section">
+                                                                            <div class="container">
+                                                                                <div class="row mb-5">
+                                                                                    <div class="col-lg-12">
+                                                                                        <form method="post" style="width: 70%; margin: auto; margin-top: 4%">
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                            <h2 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">JOB INFORMATION</h2>
+                                                                                            <div class="form-group">
+                                                                                                <label for="job-title">Job Title</label>
+                                                                                                <input
+                                                                                                    type="text"
+                                                                                                    name="title"
+                                                                                                    class="form-control"
+                                                                                                    value="${job.title}"
+                                                                                                    readonly=""
+                                                                                                    />
+                                                                                            </div>
+                                                                                            <div class="form-row" style="margin-bottom: 15px">
+                                                                                                <div class="col">
+                                                                                                    <label for="job-price">Price</label>
+                                                                                                    <c:set var="salary" value="${job.salary}"/>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="salary"
+                                                                                                        class="form-control"
+                                                                                                        readonly=""
+                                                                                                        value="${job.showPrice(salary)} VND"
+                                                                                                        />
+                                                                                                </div>
+                                                                                                <div class="col">
+                                                                                                    <label for="job-duration">Duration (by day)</label>
+                                                                                                    <input
+                                                                                                        type="number"
+                                                                                                        name="duration"
+                                                                                                        class="form-control"
+                                                                                                        value="${job.showDuration(job.duration)}"
+                                                                                                        readonly=""
+                                                                                                        />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-row">
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label for="job-major">Major</label>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="major"
+                                                                                                        class="form-control"
+                                                                                                        value="${job.idMajor}"
+                                                                                                        readonly=""
+                                                                                                        />
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Start Date</label>
+                                                                                                    <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.startDate}" readonly="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-row">
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label for="job-created">Created By</label>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="employer"
+                                                                                                        class="form-control"
+                                                                                                        value="${job.nameEmployer}"
+                                                                                                        readonly=""
+                                                                                                        />
+                                                                                                </div>
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Create Date</label>
+                                                                                                    <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.createDate}" readonly="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="job_description">Job Description</label>
+                                                                                                <textarea id="description" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
+                                                                                            </div>
+                                                                                            <div class="d-flex justify-content-end">
+                                                                                                <c:choose>
+                                                                                                    <c:when test="${job.status == 'Spam' || job.status == 'Updated'}">
+                                                                                                        <a href="AcceptJobController?idJob=${job.idJob}" class="btn" style="background-color:#28a745;  color: white; text-align: center;  margin: 10px 8px 10px 0px">Recovery</a>
+                                                                                                        <a href="DenyJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Delete</a>
+                                                                                                    </c:when>  
+                                                                                                    <c:when test="${job.status == 'Applied'}">
+                                                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}">
+                                                                                                            <button class="btn btn-secondary" disabled>Spam</button>
+                                                                                                        </a> 
+                                                                                                    </c:when>
+                                                                                                    <c:otherwise>
+                                                                                                        <a href="UnappropriatedJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Spam</a>
+                                                                                                    </c:otherwise>
+                                                                                                </c:choose>
+                                                                                            </div>                          
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                        <!--Popup close here-->
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -264,12 +408,12 @@
                                                             <th>Delete</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody style="text-align: center">
                                                         <c:forEach var="job" items="${requestScope.LIST_JOB_UNAPPROPRIATED}"
                                                                    varStatus="counter">
                                                             <tr>
                                                                 <th scope="row">${counter.count}</th>
-                                                                <th><a href="RenderJobDetail?idJob=${job.idJob}">${job.title}</a>
+                                                                <th><a class="text-primary" data-toggle="modal" data-target="#job_unappropriated_detail${counter.count}">${job.title}</a>
                                                                 </th>
                                                                 <th>${job.nameEmployer}</th>
                                                                 <th>${job.startDate}</th>
@@ -293,6 +437,109 @@
                                                                 </th>
                                                             </tr>
                                                         </c:forEach>
+                                                        <c:forEach var="job" items="${requestScope.JOB_UNAPPROPRIATED_DETAIL}" varStatus="counting">    
+                                                        <div class="modal fade" id="job_unappropriated_detail${counting.count}">
+                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                <div class="modal-content ">
+                                                                    <section class="site-section">
+                                                                        <div class="container">
+                                                                            <div class="row mb-5">
+                                                                                <div class="col-lg-12">
+                                                                                    <form class="" method="post" style="width: 70%; margin: auto; margin-top: 4%">
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                        <h2 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">JOB INFORMATION</h2>
+                                                                                        <div class="form-group">
+                                                                                            <label for="job-title">Job Title</label>
+                                                                                            <input
+                                                                                                type="text"
+                                                                                                name="title"
+                                                                                                class="form-control"
+                                                                                                value="${job.title}"
+                                                                                                readonly=""
+                                                                                                />
+                                                                                        </div>
+                                                                                        <div class="form-row" style="margin-bottom: 15px">
+                                                                                            <div class="col">
+                                                                                                <label for="job-price">Price</label>
+                                                                                                <c:set var="salary" value="${job.salary}"/>
+                                                                                                <input
+                                                                                                    type="text"
+                                                                                                    name="salary"
+                                                                                                    class="form-control"
+                                                                                                    readonly=""
+                                                                                                    value="${job.showPrice(salary)} VND"
+                                                                                                    />
+                                                                                            </div>
+                                                                                            <div class="col">
+                                                                                                <label for="job-duration">Duration (by day)</label>
+                                                                                                <input
+                                                                                                    type="number"
+                                                                                                    name="duration"
+                                                                                                    class="form-control"
+                                                                                                    value="${job.showDuration(job.duration)}"
+                                                                                                    readonly=""
+                                                                                                    />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-row">
+                                                                                            <div class="form-group col-md-6">
+                                                                                                <label for="job-major">Major</label>
+                                                                                                <input
+                                                                                                    type="text"
+                                                                                                    name="major"
+                                                                                                    class="form-control"
+                                                                                                    value="${job.idMajor}"
+                                                                                                    readonly=""
+                                                                                                    />
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div class="form-group col-md-6">
+                                                                                                <label>Start Date</label>
+                                                                                                <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.startDate}" readonly="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-row">
+                                                                                            <div class="form-group col-md-6">
+                                                                                                <label for="job-created">Created By</label>
+                                                                                                <input
+                                                                                                    type="text"
+                                                                                                    name="employer"
+                                                                                                    class="form-control"
+                                                                                                    value="${job.nameEmployer}"
+                                                                                                    readonly=""
+                                                                                                    />
+                                                                                            </div>
+                                                                                            <div class="form-group col-md-6">
+                                                                                                <label>Create Date</label>
+                                                                                                <input type="date" name="startDate" class="form-control" id="date_picker" value="${job.createDate}" readonly="">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="job_description">Job Description</label>
+                                                                                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
+                                                                                        </div>
+                                                                                        <div class="d-flex justify-content-end">
+                                                                                            <c:choose>
+                                                                                                <c:when test="${job.status == 'Spam' || job.status == 'Updated'}">
+                                                                                                    <a href="AcceptJobController?idJob=${job.idJob}" class="btn" style="background-color:#28a745;  color: white; text-align: center;  margin: 10px 8px 10px 0px">Recovery</a>
+                                                                                                    <a href="DenyJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Delete</a>
+                                                                                                </c:when>                         
+                                                                                                <c:otherwise>
+                                                                                                    <a href="UnappropriatedJobController?idJob=${job.idJob}" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Spam</a>
+                                                                                                </c:otherwise>
+                                                                                            </c:choose>
+                                                                                        </div>                          
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </section>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -304,6 +551,78 @@
                     </div>
                 </div>
             </c:when>
+
+
+            <c:when test="${requestScope.LIST_JOB_REPORT != null}">
+                <div class="app-content content">
+                    <div class="content-wrapper">
+                        <div class="content-wrapper-before"></div>
+                        <div class="content-header row">
+                            <div class="content-header-left col-md-4 col-12 mb-2">
+                                <h3 class="content-header-title">Report management</h3>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <!-- Basic Tables start -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">List of jobs with reports</h4>
+                                            <c:if test="${requestScope.SUCCESS != null}">
+                                                <div style="margin-top: 20px" class="alert alert-success">
+                                                    <center>
+                                                        <strong>Success! </strong> ${requestScope.SUCCESS}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${requestScope.FAIL != null}">
+                                                <div style="margin-top: 20px" class="alert alert-danger">
+                                                    <center>
+                                                        <strong>Alert! </strong> ${requestScope.FAIL}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                        <div class="card-content collapse show">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead style="text-align: center">
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Job Title</th>
+                                                                <th>Number of Report</th>
+                                                                <th>View Report</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody style="text-align: center">
+                                                            <c:forEach var="job" items="${requestScope.LIST_JOB_REPORT}"
+                                                                       varStatus="counter">
+                                                                <tr>
+                                                                    <th scope="row">${counter.count}</th>
+                                                                    <th>${job.jobReport.title}</th>
+                                                                    <th>${job.numOfReport}</th>
+                                                                    <th>
+                                                                        <a href="GetAllReport?action=render&id_job=${job.jobReport.idJob}">
+                                                                            <button class="btn btn-success">View</button>
+                                                                        </a>
+                                                                    </th>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:when>
+
             <c:otherwise>
                 <div class="app-content content">
                     <div class="content-wrapper">
@@ -361,12 +680,89 @@
                                                                     <th>${user.phone}</th>
                                                                     <th>${user.numOfSpam}</th>
                                                                     <th>
-                                                                        <a href="BanUserController?idUser=${user.id}">
+                                                                        <a data-toggle="modal" data-target="#user_ban${counter.count}">
                                                                             <button class="btn btn-danger">Ban</button>
                                                                         </a>
                                                                     </th>
                                                                 </tr>
                                                             </c:forEach>
+
+                                                            <!--Popup User Management start here-->
+                                                            <c:forEach var="user" items="${requestScope.LIST_USER}" varStatus="counting">    
+                                                            <div class="modal fade" id="user_ban${counting.count}">
+                                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                    <div class="modal-content ">
+                                                                        <section class="site-section">
+                                                                            <div class="container">
+                                                                                <div class="row mb-5">
+                                                                                    <div class="col-lg-12">
+                                                                                        <form action="BanUserController" method="POST" style="width: 70%; margin: auto; margin-top: 4%">
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                            <h2 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">USER INFORMATION</h2>
+                                                                                            <div class="form-row">
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Full Name</label>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="fullName"
+                                                                                                        class="form-control"
+                                                                                                        value="${user.name}"
+                                                                                                        readonly=""
+                                                                                                        />
+                                                                                                </div>
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Email</label>
+                                                                                                    <input 
+                                                                                                        type="text" 
+                                                                                                        name="email" 
+                                                                                                        class="form-control" 
+                                                                                                        id="date_picker" 
+                                                                                                        value="${user.email}" 
+                                                                                                        readonly="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-row">
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Date of Birth</label>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="dob"
+                                                                                                        class="form-control"
+                                                                                                        value="${user.dob}"
+                                                                                                        readonly=""
+                                                                                                        />
+                                                                                                </div>
+                                                                                                <div class="form-group col-md-6">
+                                                                                                    <label>Phone</label>
+                                                                                                    <input 
+                                                                                                        type="text" 
+                                                                                                        name="phone" 
+                                                                                                        class="form-control" 
+                                                                                                        id="date_picker" 
+                                                                                                        value="${user.phone}" 
+                                                                                                        readonly="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="job_description">Reason Ban: </label>
+                                                                                                <textarea name="reason" class="form-control" id="exampleFormControlTextarea1" rows="4" required="" title="You must enter the reason why this account is disabled"></textarea>
+                                                                                            </div>
+                                                                                            <div class="d-flex justify-content-end">
+                                                                                                <input type="hidden" name="idUser" value="${user.id}"/>
+                                                                                                <button type="submit" class="btn" style="background-color:#dc3545; color: white; text-align: center; margin: 10px 0px">Ban</button>                                                                                               
+                                                                                            </div>                          
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                        <!--Popup User Management close here-->
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -406,7 +802,7 @@
                                                                 <th>${user.phone}</th>
                                                                 <th>${user.numOfSpam}</th>
                                                                 <th>
-                                                                    <a href="UnbanUserController?idUser=${user.id}">
+                                                                    <a href="UnbanUserController?idUser=${user.id}&fullName=${user.name}&email=${user.email}">
                                                                         <button class="btn btn-success">Unban</button>
                                                                     </a>
                                                                 </th>
@@ -450,6 +846,9 @@
                 </ul>
             </div>
         </footer>
+        <script>
+            CKEDITOR.replace('description');
+        </script>
         <script>
             window.setTimeout(function () {
                 $(".alert").fadeTo(400, 0).slideUp(400, function () {

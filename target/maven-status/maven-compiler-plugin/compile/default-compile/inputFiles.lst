@@ -1,6 +1,6 @@
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillDAO.java
-D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\RenderJobDetail.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillFreelancerDTO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\reports\JobReportDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\DenyJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\PostJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\notifications\NotificationDAO.java
@@ -26,7 +26,9 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UpdateJobContro
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UpdateProfileUserController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\UserDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\Utils.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllReport.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\contracts\ContractDTO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\ReportController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\notifications\NotificationDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobApplyController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobListingController.java
@@ -49,5 +51,6 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\ChangeModeContr
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\AcceptJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\GoogleUtils.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\reports\JobReportDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\FilterMajorController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobApplicationDTO.java

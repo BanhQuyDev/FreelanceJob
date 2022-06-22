@@ -38,11 +38,10 @@ public class GetAllFreelancerApplyController extends HttpServlet {
         try {
             UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
             List<JobApplicationDTO> listJoblistJobProcessing;
-
             JobDAO dao = new JobDAO();
             listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
             request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
-            List<JobDTO> listJobByEmployeer = new JobDAO().getAllJobByEmployeer(user.getId());
+            List<JobDTO> listJobByEmployeer = new JobDAO().getAllJobByEmployeerApply(user.getId());
             session.setAttribute("LIST_JOB_EMPLOYEER", listJobByEmployeer);
             url = SUCCESS;
         } catch (Exception e) {

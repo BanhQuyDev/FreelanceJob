@@ -167,6 +167,11 @@
                                                                         <span style="background-color: #fffe91; width: 60px; height: 25px; padding-bottom: 3px; border-radius: 5px; display: flex; color: #cccb00; justify-content: center; align-items: center">${status}</span>
                                                                     </div>
                                                                 </c:when>
+                                                                <c:when test="${status eq 'Applied'}">
+                                                                    <div class="badge">
+                                                                        <span style="background-color: #008cffcf; width: 60px; height: 25px; padding-bottom: 3px; border-radius: 5px; display: flex; justify-content: center; align-items: center">${status}</span>
+                                                                    </div>
+                                                                </c:when>
                                                             </c:choose>
 
                                                         </div>
@@ -174,11 +179,29 @@
                                                             <a href="UpdateJobController?id_job=${p.idJob}&action=render">
                                                                 <h5 class="heading"><strong>${p.title}</strong></h5>
                                                             </a>
-                                                            <div class="mt-5">
-                                                                <div class="mt-3">
-                                                                    <span class="text1">${p.freelancerQuantity} Applied</span>
-                                                                </div>
-                                                            </div>
+                                                            <c:choose>
+                                                                <c:when test="${status eq 'Applied'}">
+                                                                    <div class="mt-5">
+                                                                        <a style="color: #1a8df4;" href="HistoryController?selectedContractStatus=2">
+                                                                            <span class="text1 font-weight-bold">Go Contract</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </c:when>
+                                                                <c:when test="${status eq 'Spam'}">
+                                                                    <div class="mt-5">
+                                                                        <a class="text-danger" href="UpdateJobController?id_job=${p.idJob}&action=render">
+                                                                            <span class="text1 font-weight-bold">Update Your Post</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <div class="mt-5">
+                                                                        <a class="text-success" href="FilterFreelancerApplyController?selectedJob=${p.idJob}">
+                                                                            <span class="text1 font-weight-bold">${p.freelancerQuantity} Applied</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </c:otherwise>
+                                                            </c:choose>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -220,13 +243,13 @@
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
-    <script>
-        window.setTimeout(function () {
-            $(".alert").fadeTo(400, 0).slideUp(400, function () {
-                $(this).remove();
-            });
-        }, 3000)
-    </script> 
+        <script>
+            window.setTimeout(function () {
+                $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                    $(this).remove();
+                });
+            }, 3000)
+        </script> 
 
         <!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>

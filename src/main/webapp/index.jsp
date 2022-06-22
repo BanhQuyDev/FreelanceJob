@@ -19,9 +19,7 @@
             type="image/x-icon"
             href="assets/img/favicon.ico"
             />
-
         <link rel="stylesheet" href="./home/home.css"/>
-
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
@@ -218,7 +216,6 @@
             src="https://kit.fontawesome.com/b36bcbb61e.js"
             crossorigin="anonymous"
         ></script>
-
         <script>
             $(function () {
                 $('[data-toggle="popover"]').popover(),

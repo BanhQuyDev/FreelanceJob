@@ -37,7 +37,6 @@ public class JobDetailController extends HttpServlet {
             JobDAO jobDao = new JobDAO();
             JobDTO jobDetail = jobDao.getDetailJob(jobId);
             List<String> listSkill = jobDao.getSkillJob(jobId);
-
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             if (loginUser != null) {
