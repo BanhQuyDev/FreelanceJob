@@ -8,7 +8,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import users.GoogleUserDTO;
-import users.UserDTO;
 
 public class GoogleUtils {
      public static String getToken(final String code) throws ClientProtocolException, IOException {

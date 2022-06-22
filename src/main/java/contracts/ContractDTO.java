@@ -21,6 +21,11 @@ public class ContractDTO {
     private double contract_job_price;
     private String contract_job_description;
     private double contract_job_duration;
+    private String contract_job_start_date;
+    private String contract_user_avatar;
+    private double contract_remaining_time;
+    private int contract_job_id;
+    private String contract_job_end_date;
 
     public ContractDTO() {
     }
@@ -54,6 +59,27 @@ public class ContractDTO {
         this.contract_job_price = contract_job_price;
         this.contract_job_description = contract_job_description;
         this.contract_job_duration = contract_job_duration;
+    }
+
+    public ContractDTO(String contract_freelancer_name, String contract_employer_name, String contract_job_tittle, double contract_job_duration, String contract_job_start_date, String contract_user_avatar, double contract_remaining_time, int contract_job_id) {
+        this.contract_freelancer_name = contract_freelancer_name;
+        this.contract_employer_name = contract_employer_name;
+        this.contract_job_tittle = contract_job_tittle;
+        this.contract_job_duration = contract_job_duration;
+        this.contract_job_start_date = contract_job_start_date;
+        this.contract_user_avatar = contract_user_avatar;
+        this.contract_remaining_time = contract_remaining_time;
+        this.contract_job_id = contract_job_id;
+    }
+
+    public ContractDTO(String contract_job_tittle, double contract_job_price, String contract_job_description, String contract_job_start_date, String contract_job_end_date, String contract_freelancer_name, String contract_employer_name) {
+        this.contract_job_tittle = contract_job_tittle;
+        this.contract_job_price = contract_job_price;
+        this.contract_job_description = contract_job_description;
+        this.contract_job_start_date = contract_job_start_date;
+        this.contract_job_end_date = contract_job_end_date;
+        this.contract_freelancer_name = contract_freelancer_name;
+        this.contract_employer_name = contract_employer_name;
     }
 
     public int getId_contract() {
@@ -126,6 +152,46 @@ public class ContractDTO {
 
     public void setContract_job_duration(double contract_job_duration) {
         this.contract_job_duration = contract_job_duration;
+    }
+
+    public String getContract_job_start_date() {
+        return contract_job_start_date;
+    }
+
+    public void setContract_job_start_date(String contract_job_start_date) {
+        this.contract_job_start_date = contract_job_start_date;
+    }
+
+    public String getContract_user_avatar() {
+        return contract_user_avatar;
+    }
+
+    public void setContract_user_avatar(String contract_user_avatar) {
+        this.contract_user_avatar = contract_user_avatar;
+    }
+
+    public double getContract_remaining_time() {
+        return contract_remaining_time;
+    }
+
+    public void setContract_remaining_time(double contract_remaining_time) {
+        this.contract_remaining_time = contract_remaining_time;
+    }
+
+    public int getContract_job_id() {
+        return contract_job_id;
+    }
+
+    public void setContract_job_id(int contract_job_id) {
+        this.contract_job_id = contract_job_id;
+    }
+
+    public String getContract_job_end_date() {
+        return contract_job_end_date;
+    }
+
+    public void setContract_job_end_date(String contract_job_end_date) {
+        this.contract_job_end_date = contract_job_end_date;
     }
 
     public String showPrice(double price) {
