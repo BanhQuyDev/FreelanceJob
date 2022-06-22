@@ -68,7 +68,8 @@
                                             <c:set var="user_name" value="${sessionScope.LOGIN_USER.name}"/>
                                             <c:if test="${job.nameEmployer ne user_name}">
                                                 <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" ><i style="color:#e50505; margin-left: 50px; font-size:20px" class="fa fa-flag" aria-hidden="true"></i></a>                       
-                                            </c:if>           
+                                                </c:if>  
+                                            <!--Report job post popup start here-->
                                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -81,18 +82,32 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <label for="message-text" class="col-form-label">Reason:</label>
-                                                                    <textarea name="content" class="form-control" id="message-text" rows="3"></textarea>
+                                                                    <label for="job-title"><strong>Job Title</strong></label>
+                                                                    <input type="text"
+                                                                           name="title"
+                                                                           class="form-control"
+                                                                           id="tile"
+                                                                           placeholder="Title"
+                                                                           readonly=""
+                                                                           value="${job.title}"
+                                                                           />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="message-text" class="col-form-label"><strong>Reason:</strong></label>
+                                                                    <textarea name="content" class="form-control" id="message-text content" rows="3"></textarea>
                                                                     <input type="hidden" name="jobId" value="${job.idJob}">
                                                                 </div>
+
                                                             </div>
                                                             <div class="modal-footer d-flex justify-content-center">
+                                                                <input type="hidden" name="id_job" value="${job.idJob}"/>
                                                                 <button type="submit" class="btn" style="background-color:#e53805d6">Send Report</button>
                                                             </div>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--Report job post popup end here-->
                                         </c:if>                                       
                                     </div>
                                     <div class="job-tittle">
