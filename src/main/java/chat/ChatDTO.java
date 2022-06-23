@@ -5,6 +5,8 @@
  */
 package chat;
 
+import utils.Utils;
+
 /**
  *
  * @author QUANG HUY
@@ -91,6 +93,8 @@ public class ChatDTO {
     public void setNameReceive(String nameReceive) {
         this.nameReceive = nameReceive;
     }
-    
+    public String showTime(String time) {
+        return Utils.convertTime(time);
+    }
 
 }

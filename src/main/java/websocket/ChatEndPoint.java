@@ -22,7 +22,7 @@ public final class ChatEndPoint {
             if (ChatSessionManager.register(session)) {
                 System.out.printf("Session opened for %s\n", userName);
 
-                ChatSessionManager.publish(new Message((String) session.getUserProperties().get(Constants.USER_NAME_KEY), "***joined the chat***",""), session);
+                ChatSessionManager.publish(new Message((String) session.getUserProperties().get(Constants.USER_NAME_KEY), "***joined the chat***","",""), session);
             } else {
                 throw new RegistrationFailedException("Unable to register, username already exists, try another");
             }
@@ -46,7 +46,7 @@ public final class ChatEndPoint {
         if (ChatSessionManager.remove(session)) {
             System.out.printf("Session closed for %s\n", session.getUserProperties().get(Constants.USER_NAME_KEY));
 
-            ChatSessionManager.publish(new Message((String) session.getUserProperties().get(Constants.USER_NAME_KEY), "***left the chat***",""), session);
+            ChatSessionManager.publish(new Message((String) session.getUserProperties().get(Constants.USER_NAME_KEY), "***left the chat***","",""), session);
         }
     }
 

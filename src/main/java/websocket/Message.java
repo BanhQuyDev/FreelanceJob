@@ -12,15 +12,19 @@ public final class Message {
     private final String message;
     @JsonProperty
     private final String time;
+    @JsonProperty
+    private final String picture;
 
     @JsonCreator
-    public Message(@JsonProperty("username") final String userName, @JsonProperty("message") final String message, @JsonProperty("time") final String time) {
+    public Message(@JsonProperty("username") final String userName, @JsonProperty("message") final String message, @JsonProperty("time") final String time,@JsonProperty("picture") final String picture) {
         Objects.requireNonNull(userName);
         Objects.requireNonNull(message);
         Objects.requireNonNull(time);
+        Objects.requireNonNull(picture);
         this.userName = userName;
         this.message = message;
         this.time = time;
+        this.picture = picture;
     }
 
     String getUserName() {
@@ -33,5 +37,8 @@ public final class Message {
 
     String getTime() {
         return this.time;
+    }
+    String getPicture() {
+        return this.picture;
     }
 }

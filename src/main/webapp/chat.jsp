@@ -73,7 +73,7 @@
             border-top: 1px solid #dee2e6!important;
         }
     </style>
-    <body onload="init('${sessionScope.LOGIN_USER.name}')">
+    <body onload="init('${sessionScope.LOGIN_USER.name}', '${sessionScope.LOGIN_USER.picture}')">
         <main class="content">
             <div class="container p-0">
                 <h1 class="h3 mb-3">Messages</h1>
@@ -82,7 +82,7 @@
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                             <div class="d-flex align-items-center py-1">
                                 <div class="position-relative">
-                                    <img src="${requestScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                    <img src="${requestScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" width="40" height="40">
                                 </div>
                                 <div class="flex-grow-1 pl-3">
                                     <strong>${requestScope.CHAT_PATNER.name}</strong>
@@ -96,29 +96,29 @@
                                 <div id="scrolling-messages" class="scrolling-messages"> 
                                     <c:forEach var="mess" items="${requestScope.LIST_MESSAGE}">
                                         <c:choose>
-                                            <c:when test="${mess.idSend == request.CHAT_PATNER.getId}">
-                                                <div class="chat-message-left pb-4">
-                                                    <div>
-                                                        <img src="${requestScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">${mess.time}</div>
-                                                    </div>
-                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                        <div class="font-weight-bold mb-1">${mess.nameSend}</div>
-                                                        ${mess.message}
-                                                    </div>
-                                                </div>
-                                            </c:when>
-                                            <c:otherwise>
+                                            <c:when test="${sessionScope.LOGIN_USER.id == mess.getIdSend()}">
                                                 <div class="chat-message-right pb-4">
                                                     <div>
                                                         <img src="${sessionScope.LOGIN_USER.picture}" class="rounded-circle mr-1" width="40" height="40">
-                                                        <div class="text-muted small text-nowrap mt-2">${mess.time}</div>
+                                                        <div class="text-muted small text-nowrap mt-2">${mess.showTime(mess.time)}</div>
                                                     </div>
                                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                                         <div class="font-weight-bold mb-1">You</div>
                                                         ${mess.message}
                                                     </div>
                                                 </div> 
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="chat-message-left pb-4">
+                                                    <div>
+                                                        <img src="${requestScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" width="40" height="40">
+                                                        <div class="text-muted small text-nowrap mt-2">${mess.showTime(mess.time)}</div>
+                                                    </div>
+                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                                        <div class="font-weight-bold mb-1">${mess.nameSend}</div>
+                                                        ${mess.message}
+                                                    </div>
+                                                </div>
                                             </c:otherwise>
                                         </c:choose>
 
@@ -130,7 +130,7 @@
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Type your message" name="msg" id="msg">
-                                <button type="submit" onclick="sendMessage();" class="btn btn-primary">Send</button>
+                                <button type="submit" onclick="sendMessage();" id="send" class="btn btn-primary">Send</button>
                             </div>
                         </div>
                     </div>
@@ -138,4 +138,13 @@
             </div>
         </main>
     </body>
+    <script>
+        var input = document.getElementById("msg");
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("send").click();
+            }
+        });
+    </script>
 </html>
