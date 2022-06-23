@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
         <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
-
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
@@ -57,16 +57,16 @@
 
                             <div class="form-row" style="margin-bottom: 15px">
                                 <div class="col">
-                                    <label><strong>Price</strong></label>
-                                     <input type="text" 
-                                               id="amount"
-                                               name="salary" 
-                                               class="form-control" 
-                                               title="The price of project must be greater than 100.000 VN?"
-                                               required=""
-                                               maxlength="15"
-                                               minlength="7"
-                                               value="${job.showPrice(job.salary)}">
+                                    <label for="job-title">Price</label>
+                                    <input type="text" 
+                                           id="amount"
+                                           name="salary" 
+                                           class="form-control" 
+                                           title="The price of project must be greater than 100.000 VN?"
+                                           required=""
+                                           maxlength="15"
+                                           minlength="7"
+                                           value="${job.showPrice(job.salary)}">
                                 </div>
                                 <div class="col">
                                     <label><strong>Duration (by day)</strong></label>
@@ -158,7 +158,7 @@
             });
         }, 3000);
     </script>
-        <script>
+    <script>
         (function ($, undefined) {
 
             "use strict";

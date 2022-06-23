@@ -46,12 +46,12 @@ public class ChangeModeController extends HttpServlet {
             List<SkillDTO> listSkill = dao.getListSkillDifference(user.getId());
             session.setAttribute("LIST_SKILL", listSkill);
             List<MajorDTO> listMajor = majorDao.getAllMajor();
-            session.setAttribute("LIST_MAJOR", listMajor);
+            session.setAttribute("LIST_MAJOR", listMajor);     
             if (type == null) {
                 url = SUCCESS;
             } else {
                 if (type.equals("freelancer")) {
-                    session.setAttribute("MODE", "FREELANCER");
+                    session.setAttribute("MODE", "FREELANCER");                  
                     url = SUCCESS;
                 } else {
                     session.setAttribute("MODE", "EMPLOYER");

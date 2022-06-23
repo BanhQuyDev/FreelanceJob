@@ -35,6 +35,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
@@ -72,7 +73,7 @@
                                                         <p>${date[2]}/${date[1]}</p>
                                                         <small>${date[0]}</small>
                                                     </div>
-                                                        <h2 style="font-family:none!important;" class="news-title"> ${job.title} <i style="" class="fas fa-check-circle"></i></h2>
+                                                    <h2 style="font-family:none!important;" class="news-title"> ${job.title} <i style="" class="fas fa-check-circle"></i></h2>
                                                         <c:if test="${job.executionTimeJobApplication < 0}">
                                                         <h5><i class="far fa-lightbulb"></i> This job will start in <strong>${job.showDuration(Math.floor((job.executionTimeJobApplication*(-1))/24))}</strong> day(s)</h5>
                                                         <p>Prepare yourself</p>

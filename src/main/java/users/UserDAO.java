@@ -43,9 +43,9 @@ public class UserDAO {
             + "FROM tblUser U, tblEmployer E ,tblFreelancer F\n"
             + "WHERE U.id_user = E.id_employer AND U.id_user = F.id_freelancer AND U.email like ? AND U.status = 0";
 
-    private final String GET_USER_BY_ID_JOB = "SELECT U.email, U.fullname\n" +
-            "FROM tblUser U, tblEmployer E, tblJob J\n" +
-            "WHERE U.id_user = E.id_employer AND E.id_employer = J.id_employer AND J.id_job = ?";
+    private final String GET_USER_BY_ID_JOB = "SELECT U.email, U.fullname\n"
+            + "FROM tblUser U, tblEmployer E, tblJob J\n"
+            + "WHERE U.id_user = E.id_employer AND E.id_employer = J.id_employer AND J.id_job = ?";
 
     public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
@@ -366,6 +366,7 @@ public class UserDAO {
         }
         return list;
     }
+
     public UserDTO getUserByID(int id_freelancer) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -406,6 +407,7 @@ public class UserDAO {
         }
         return user;
     }
+
     public boolean updateUser(int id, String fullName, String email, String phone, String bio, String dob, String address) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -464,6 +466,5 @@ public class UserDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return user;
-
     }
 }
