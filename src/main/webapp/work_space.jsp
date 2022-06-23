@@ -119,32 +119,46 @@
                                             <div class="dropdown-item">
                                                 <div class="widget_progress_bar">
                                                     <p class="progress_no dropdown-header"><strong>Work Progress</strong></p>
-                                                    <c:if test="${Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) <= 50}">
-                                                        <p class="progress_head">You have plenty of time </br> Happy Code Happy Life</p>
+                                                    <c:if test="${contract.contract_remaining_time > contract.contract_job_duration*24}">
+                                                        <p class="progress_head">Not started yet </br> Prepare well</p>
                                                     </c:if>
-                                                    <c:if test="${Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) > 50 && Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) <= 85}">
-                                                        <p class="progress_head">Half of the time has passed </br> Try Harder !!</p>
-                                                    </c:if>
-                                                    <c:if test="${Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) > 85 && Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) <= 100}">
-                                                        <p class="progress_head">Time is running out </br> Prepare to submit !!</p>
-                                                    </c:if>
-                                                    <c:if test="${Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) == 100}">
-                                                        <p class="progress_head">You die !</p>
+                                                    <c:if test="${contract.contract_remaining_time < contract.contract_job_duration*24}">
+                                                        <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 50}">
+                                                            <p class="progress_head">You have plenty of time </br> Happy Code Happy Life</p>
+                                                        </c:if>
+                                                        <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) > 50 && Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 85}">
+                                                            <p class="progress_head">Half of the time has passed </br> Try Harder !!</p>
+                                                        </c:if>
+                                                        <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) > 85 && Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 100}">
+                                                            <p class="progress_head">Time is running out </br> Prepare to submit !!</p>
+                                                        </c:if>
+                                                        <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) == 100}">
+                                                            <p class="progress_head">You die !</p>
+                                                        </c:if>
                                                     </c:if>
                                                     <div class="dropdown-divider"></div>
                                                     <div class="progress_bar">
                                                         <p class="mb-0">Deadline <i class="fas fa-clock"></i></p>
-                                                            <c:if test="${Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) <= 100}">
-                                                            <span class="skill" style="width: ${contract.showDuration(Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100))}%;"><span class="info_valume">${contract.showDuration(Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100))}% </span></span>                
+                                                            <c:if test="${contract.contract_remaining_time > contract.contract_job_duration*24}">
+                                                            <span class="skill" style="width: 0%;"><span class="info_valume">0%</span></span>                
                                                             <div class="progress skill-bar ">
-                                                                <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: ${contract.showDuration(Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100))}%;"></div>
+                                                                <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                                                             </div>
                                                         </c:if>
-                                                        <c:if test="${Math.floor((contract.contract_remaining_time/(contract.contract_job_duration*24))*100) > 100}">
-                                                            <span class="skill" style="width: 100%;"><span class="info_valume text-danger">100% (end)</span></span>                
-                                                            <div class="progress skill-bar ">
-                                                                <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                                                            </div>
+
+                                                        <c:if test="${contract.contract_remaining_time < contract.contract_job_duration*24}">
+                                                            <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 100}">
+                                                                <span class="skill" style="width: ${contract.showDuration(Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)))}%;"><span class="info_valume">${contract.showDuration(Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)))}% </span></span>                
+                                                                <div class="progress skill-bar ">
+                                                                    <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: ${contract.showDuration(Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)))}%;"></div>
+                                                                </div>
+                                                            </c:if>
+                                                            <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) > 100}">
+                                                                <span class="skill" style="width: 100%;"><span class="info_valume text-danger">100% (end)</span></span>                
+                                                                <div class="progress skill-bar ">
+                                                                    <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                                                </div>
+                                                            </c:if>
                                                         </c:if>
                                                     </div>
                                                 </div>
