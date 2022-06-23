@@ -191,7 +191,7 @@
                                                 </c:if>
                                                 <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
                                                     <h5 style="font-family: serif; margin-top: 10px">
-                                                        <strong>Finish Check :</strong>
+                                                        <strong>Ready to Finish :</strong>
                                                         <button class="btn btn-success border-0 ml-4"><i class="fas fa-check-double"></i></button>
                                                     </h5>
                                                 </c:if>
