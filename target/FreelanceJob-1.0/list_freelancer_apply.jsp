@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body>
@@ -99,7 +99,7 @@
                                             </div>
                                         </c:when>
                                         <c:when test="${requestScope.LIST_FREELANCER_APPLY != NULL}">
-                                            <c:if test="${requestScope.SUCCESS_MESSAGE_APPROVE != null}">
+                                            <c:if test="${requestScope.SUCCESS_MESSAGE_APPROVE != NULL}">
                                                 <div class="alert alert-success">
                                                     <center>
                                                         <strong>Success!</strong> ${requestScope.SUCCESS_MESSAGE_APPROVE}
@@ -112,7 +112,8 @@
                                                         <div class="w-100 h-100 p-3" style="border-radius: 8px; border: 1px solid #007bff">
                                                             <div class="freelancer d-flex border-bottom" style="gap: 10px; padding-bottom: 10px;">
                                                                 <div class="freelancer_img ">
-                                                                    <img class="border rounded-circle" style="object-fit: cover; flex-shrink: 0" src=${LF.picture} alt=${LF.fullName}/>
+                                                                    <img class="border rounded-circle" style="object-fit: cover; flex-shrink: 0" src="${LF.picture != null ? LF.picture : 
+                                                                                               'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="${LF.fullName}"/>
                                                                 </div>
                                                                 <div class="freelancer_info d-flex flex-column" style="row-gap: 20px;">
                                                                     <div class="freelancer_info_name font-weight-bold text-primary">
@@ -132,7 +133,7 @@
                                                                     <a class="btn btn-outline-primary mb-2 p-4 border" style="border-radius: 16px" href="FreeLancerDetailController?id_freelancer=${LF.id_freelancer}">View Profile</a>
                                                                 </div>
                                                                 <div class="text-center mt-4 mx-auto" >
-                                                                    <button type="submit"  class="btn-outline-success mb-2 border" style="padding: 10px;border-radius: 16px;display: flex;justify-content: center; cursor: pointer">
+                                                                    <button type="submit"  class="btn-outline-success mb-2 border" style="padding: 10px;border-radius: 16px;display: flex;justify-content: center; cursor: pointer; align-items: center">
                                                                         <img style="width: 30px; height: 30px; border-radius: 100rem; object-fit: cover; margin-right: 10px" src="https://icon-library.com/images/check-image-icon/check-image-icon-5.jpg" alt="alt"/>
                                                                         Approve
                                                                     </button>

@@ -5,7 +5,6 @@
 package home;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +16,8 @@ import jobs.JobDAO;
 import jobs.JobDTO;
 import majors.MajorDAO;
 import majors.MajorDTO;
+import notifications.NotificationDAO;
+import notifications.NotificationDTO;
 import users.UserDTO;
 
 /**
@@ -40,11 +41,24 @@ public class HomeController extends HttpServlet {
             List<MajorDTO> listMajor = majorDao.getAllMajorList();
             request.setAttribute("LIST_MAJOR", listMajor);
             JobDAO jobDao = new JobDAO();
+            String mode = (String) session.getAttribute("MODE");
+            if (mode.equals("FREELANCER")) {
+                List<NotificationDTO> listNotificationsFreelancerUnread = new NotificationDAO().showAllNotificationFreelancerUnread(loginUser.getId());
+                List<NotificationDTO> listNotificationsFreelancerRead = new NotificationDAO().showAllNotificationFreelancerRead(loginUser.getId());
+                session.setAttribute("LIST_NOTIFICATIONS_FREELANCER_UNREAD", listNotificationsFreelancerUnread);
+                session.setAttribute("LIST_NOTIFICATIONS_FREELANCER_READ", listNotificationsFreelancerRead);
+            }
+            if (mode.equals("EMPLOYER")) {
+                List<NotificationDTO> listNotificationsEmployerUnread = new NotificationDAO().showAllNotificationEmployerUnread(loginUser.getId());
+                List<NotificationDTO> listNotificationsEmployerRead = new NotificationDAO().showAllNotificationEmployerRead(loginUser.getId());
+                session.setAttribute("LIST_NOTIFICATIONS_EMPLOYER_UNREAD", listNotificationsEmployerUnread);
+                session.setAttribute("LIST_NOTIFICATIONS_EMPLOYER_READ", listNotificationsEmployerRead);
+            }
             if (loginUser != null) {
                 List<JobDTO> listJob = jobDao.getTop4LatestJob(loginUser.getId());
                 request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
                 url = SUCCESS;
-            }else{
+            } else {
                 List<JobDTO> listJob = jobDao.getTop4LatestJob();
                 request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
                 url = SUCCESS;

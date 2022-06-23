@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import jobs.JobApplicationDTO;
 import jobs.JobDAO;
 import jobs.JobDTO;
+import notifications.NotificationDAO;
+import notifications.NotificationDTO;
 
 import users.UserDTO;
 
@@ -40,10 +42,25 @@ public class GetAllFreelancerApplyController extends HttpServlet {
             List<JobApplicationDTO> listJoblistJobProcessing;
             JobDAO dao = new JobDAO();
             listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
-            request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
-            List<JobDTO> listJobByEmployeer = new JobDAO().getAllJobByEmployeerApply(user.getId());
-            session.setAttribute("LIST_JOB_EMPLOYEER", listJobByEmployeer);
-            url = SUCCESS;
+            if (request.getParameter("id_noti") != null) {
+                boolean setStatusNoti = new NotificationDAO().setStatus(Integer.parseInt(request.getParameter("id_noti")));
+                if (setStatusNoti) {
+                    request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
+                    List<JobDTO> listJobByEmployeer = new JobDAO().getAllJobByEmployeerApply(user.getId());
+                    session.setAttribute("LIST_JOB_EMPLOYEER", listJobByEmployeer);
+                    List<NotificationDTO> listNotificationsEmployerUnread = new NotificationDAO().showAllNotificationEmployerUnread(user.getId());
+                    List<NotificationDTO> listNotificationsEmployerRead = new NotificationDAO().showAllNotificationEmployerRead(user.getId());
+                    session.setAttribute("LIST_NOTIFICATIONS_EMPLOYER_UNREAD", listNotificationsEmployerUnread);
+                    session.setAttribute("LIST_NOTIFICATIONS_EMPLOYER_READ", listNotificationsEmployerRead);
+                    url = SUCCESS;
+                }
+            }
+            if (request.getParameter("id_noti") == null) {
+                request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
+                List<JobDTO> listJobByEmployeer = new JobDAO().getAllJobByEmployeerApply(user.getId());
+                session.setAttribute("LIST_JOB_EMPLOYEER", listJobByEmployeer);
+                url = SUCCESS;
+            }
         } catch (Exception e) {
             log("Error at GetAllJob:" + e.toString());
         } finally {

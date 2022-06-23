@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body>
@@ -66,7 +66,7 @@
                                         <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""></a>
                                         <span style="font-size: 30px">${job.title}</span>
                                         <c:if test="${sessionScope.LOGIN_USER != null}">
-                                            <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" ><i style="color:#e50505; margin-left: 50px; font-size:20px" class="fa fa-flag" aria-hidden="true"></i></a>                                    
+                                            <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" style="margin-left: 50px; cursor: pointer" ><i style="color:#e50505; font-size:20px; " class="fa fa-flag" aria-hidden="true"></i></a>                                    
                                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">

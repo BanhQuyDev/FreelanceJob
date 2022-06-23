@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jobs.JobApplicationDTO;
 import jobs.JobDAO;
+import jobs.JobDTO;
+import notifications.NotificationDAO;
+import users.UserDAO;
 import users.UserDTO;
 
 /**
@@ -38,16 +41,21 @@ public class ApproveFreelancerController extends HttpServlet {
             int id_job = Integer.parseInt(request.getParameter("id_job"));
             int id_freelancer = Integer.parseInt(request.getParameter("id_freelancer"));
             boolean checkApprove = new JobDAO().updateFreelancerAppy(id_job, id_freelancer);
+            JobDTO name_job = new JobDAO().getAJobByEmployeer(user.getId(), id_job);
             List<JobApplicationDTO> listFreelancerApplyByJob = new JobDAO().getFreelancerApplyByJob(id_job);
             if (checkApprove && listFreelancerApplyByJob.size() == 1) {
                 List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
                 request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
                 boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                boolean changeStausJob = new JobDAO().appliedJob(id_job);
-                if (checkAddContract && changeStausJob ) {
-                    request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
-                    url = SUCCESS;
+                boolean checkAddNotification = new NotificationDAO().addANotificationApprove(id_freelancer, name_job.getTitle(), user.getId());
+                if (checkAddNotification) {
+                    boolean changeStausJob = new JobDAO().appliedJob(id_job);
+                    if (checkAddContract && changeStausJob) {
+                        request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
+                        url = SUCCESS;
+                    }
                 }
+
             }
             if (checkApprove && listFreelancerApplyByJob.size() != 1) {
                 boolean checkDeny = new JobDAO().updateFreelancerDeny(id_job, id_freelancer);
@@ -55,11 +63,18 @@ public class ApproveFreelancerController extends HttpServlet {
                     List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
                     request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
                 }
-                boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                boolean changeStausJob = new JobDAO().appliedJob(id_job);
-                if (checkAddContract && changeStausJob) {
-                    request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
-                    url = SUCCESS;
+                boolean checkAddNotification = new NotificationDAO().addANotificationApprove(id_freelancer, name_job.getTitle(), user.getId());
+                if (checkAddNotification) {
+                    List<JobApplicationDTO> listUserIdDeny = new JobDAO().getUserDeny(id_freelancer, id_job);
+                    for (JobApplicationDTO list : listUserIdDeny) {
+                        new NotificationDAO().addANotificationDeny(list.getId_freelancer(), name_job.getTitle(), user.getId());
+                    }
+                    boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
+                    boolean changeStausJob = new JobDAO().appliedJob(id_job);
+                    if (checkAddContract && changeStausJob) {
+                        request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
+                        url = SUCCESS;
+                    }
                 }
             }
 
