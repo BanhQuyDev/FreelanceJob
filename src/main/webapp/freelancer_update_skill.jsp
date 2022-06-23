@@ -35,6 +35,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/editlogin.css" />
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
 
     </head>
     <body>
@@ -62,26 +63,26 @@
                 <!-- /Breadcrumb -->
 
                 <div>
-                  <div class="d-flex align-center mb-2" style="gap: 20px;
-                                 align-items: center">
-                                <div class="font-weight-bold">Skills: </div></br>
-                                <div class="dropdown">
-                                    <button type="button" class="dropdown-toggle bg-danger border-0 w-100" style="border-radius: 8px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <c:if test="${requestScope.MAJOR  != NULL}">${requestScope.MAJOR.major_name}</c:if>
-                                        <c:if test="${requestScope.MAJOR  == NULL}">Major</c:if>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="height: 150px;
-                                             overflow-y: scroll;">
-                                            <a class="dropdown-item" href="freelancer_update_skill.jsp">All majors</a>
-                                        <c:forEach items="${sessionScope.LIST_MAJOR}" var="LM">
-                                            <a class="dropdown-item" href="FilterMajorController?majorID=${LM.id_major}">${LM.major_name}</a>
-                                        </c:forEach>
-                                    </div>
-                                </div>
+                    <div class="d-flex align-center mb-2" style="gap: 20px;
+                         align-items: center">
+                        <div class="font-weight-bold">Skills: </div></br>
+                        <div class="dropdown">
+                            <button type="button" class="dropdown-toggle bg-danger border-0 w-100" style="border-radius: 8px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <c:if test="${requestScope.MAJOR  != NULL}">${requestScope.MAJOR.major_name}</c:if>
+                                <c:if test="${requestScope.MAJOR  == NULL}">Major</c:if>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="height: 150px;
+                                     overflow-y: scroll;">
+                                    <a class="dropdown-item" href="freelancer_update_skill.jsp">All majors</a>
+                                <c:forEach items="${sessionScope.LIST_MAJOR}" var="LM">
+                                    <a class="dropdown-item" href="FilterMajorController?majorID=${LM.id_major}">${LM.major_name}</a>
+                                </c:forEach>
                             </div>
-                      
-                        <div class="row" style="height: 200px; overflow: auto;height: 200px; margin: 20px;"> 
-                            <div class="card-body">
+                        </div>
+                    </div>
+
+                    <div class="row" style="height: 200px; overflow: auto;height: 200px; margin: 20px;"> 
+                        <div class="card-body">
                             <c:if test="${sessionScope.SKILL.size() == 0 && sessionScope.LIST_SKILL.size() == 0
                                           &&requestScope.LIST_SKILL_MAJOR.size() == 0 && requestScope.SKILL_MAJOR.size() == 0 }">
                                   <div class="col-sm-12" style="margin: auto;
@@ -109,9 +110,9 @@
                                                             </div>
                                                             <a class="m-3  text-center" href="UpdateUserSkillController?skillId=${S.skillId}&delete">
                                                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Flat_minus_icon_-_red.svg/1200px-Flat_minus_icon_-_red.svg.png" style="width: 20px;
-                                                     height: 20px;
-                                                     border-radius: 100rem;
-                                                     object-fit: cover;" alt="alt"/>
+                                                                     height: 20px;
+                                                                     border-radius: 100rem;
+                                                                     object-fit: cover;" alt="alt"/>
                                                             </a>
                                                         </div>
                                                     </c:forEach>
@@ -127,10 +128,10 @@
 
                                                             </div>
                                                             <a class="m-3 text-center" href="UpdateUserSkillController?skillId=${S.skillId}&delete">
-                                                              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Flat_minus_icon_-_red.svg/1200px-Flat_minus_icon_-_red.svg.png" style="width: 20px;
-                                                     height: 20px;
-                                                     border-radius: 100rem;
-                                                     object-fit: cover;" alt="alt"/>
+                                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Flat_minus_icon_-_red.svg/1200px-Flat_minus_icon_-_red.svg.png" style="width: 20px;
+                                                                     height: 20px;
+                                                                     border-radius: 100rem;
+                                                                     object-fit: cover;" alt="alt"/>
                                                             </a>
                                                         </div>
                                                     </c:forEach>
@@ -146,10 +147,10 @@
 
                                                             </div>
                                                             <a class="m-3 text-center" href="UpdateUserSkillController?skillId=${LS.skillId}&add">
-                                                                 <img src="https://icon-library.com/images/add-icon/add-icon-4.jpg" style="width: 20px;
-                                                     height: 20px;
-                                                     border-radius: 100rem;
-                                                     object-fit: cover;" alt="alt"/>
+                                                                <img src="https://icon-library.com/images/add-icon/add-icon-4.jpg" style="width: 20px;
+                                                                     height: 20px;
+                                                                     border-radius: 100rem;
+                                                                     object-fit: cover;" alt="alt"/>
                                                             </a>
                                                         </div>
                                                     </c:forEach>
@@ -165,10 +166,10 @@
 
                                                             </div>
                                                             <a class="m-3 text-center" href="UpdateUserSkillController?skillId=${LS.skillId}&add">
-                                                                 <img src="https://icon-library.com/images/add-icon/add-icon-4.jpg" style="width: 20px;
-                                                     height: 20px;
-                                                     border-radius: 100rem;
-                                                     object-fit: cover;" alt="alt"/>    
+                                                                <img src="https://icon-library.com/images/add-icon/add-icon-4.jpg" style="width: 20px;
+                                                                     height: 20px;
+                                                                     border-radius: 100rem;
+                                                                     object-fit: cover;" alt="alt"/>    
                                                             </a>
                                                         </div>
                                                     </c:forEach>
@@ -183,45 +184,45 @@
 
                             <hr />
                         </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <jsp:include page="component/footer.jsp"></jsp:include>
-        <!-- JS here -->
+            <jsp:include page="component/footer.jsp"></jsp:include>
+            <!-- JS here -->
 
-        <!-- All JS Custom Plugins Link Here here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-        <!-- Jquery, Popper, Bootstrap -->
-        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
-        <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+            <!-- All JS Custom Plugins Link Here here -->
+            <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+            <!-- Jquery, Popper, Bootstrap -->
+            <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+            <script src="./assets/js/popper.min.js"></script>
+            <script src="./assets/js/bootstrap.min.js"></script>
+            <!-- Jquery Mobile Menu -->
+            <script src="./assets/js/jquery.slicknav.min.js"></script>
 
-        <!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-        <script src="./assets/js/slick.min.js"></script>
-        <script src="./assets/js/price_rangs.js"></script>
+            <!-- Jquery Slick , Owl-Carousel Plugins -->
+            <script src="./assets/js/owl.carousel.min.js"></script>
+            <script src="./assets/js/slick.min.js"></script>
+            <script src="./assets/js/price_rangs.js"></script>
 
-        <!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-        <script src="./assets/js/animated.headline.js"></script>
-        <script src="./assets/js/jquery.magnific-popup.js"></script>
+            <!-- One Page, Animated-HeadLin -->
+            <script src="./assets/js/wow.min.js"></script>
+            <script src="./assets/js/animated.headline.js"></script>
+            <script src="./assets/js/jquery.magnific-popup.js"></script>
 
-        <!-- Scrollup, nice-select, sticky -->
-        <script src="./assets/js/jquery.scrollUp.min.js"></script>
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-        <script src="./assets/js/jquery.sticky.js"></script>
+            <!-- Scrollup, nice-select, sticky -->
+            <script src="./assets/js/jquery.scrollUp.min.js"></script>
+            <script src="./assets/js/jquery.nice-select.min.js"></script>
+            <script src="./assets/js/jquery.sticky.js"></script>
 
-        <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+            <!-- contact js -->
+            <script src="./assets/js/contact.js"></script>
+            <script src="./assets/js/jquery.form.js"></script>
+            <script src="./assets/js/jquery.validate.min.js"></script>
+            <script src="./assets/js/mail-script.js"></script>
+            <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
 
-        <!-- Jquery Plugins, main Jquery -->
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
+            <!-- Jquery Plugins, main Jquery -->
+            <script src="./assets/js/plugins.js"></script>
+            <script src="./assets/js/main.js"></script>
     </body>
 </html>

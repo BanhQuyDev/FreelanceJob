@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
+import notifications.NotificationDAO;
 import users.UserDTO;
 
 /**
@@ -46,7 +47,11 @@ public class ApplyJobController extends HttpServlet {
                 List<String> listSkill = jobDao.getSkillJob(Integer.parseInt(jobId));
                 request.setAttribute("JOB_DETAIL", jobDetail);
                 request.setAttribute("SKILL_JOB", listSkill);
-                url = SUCCESS;
+                JobDTO job = jobDao.getAJobByIDV2(Integer.parseInt(jobId));
+                boolean checkAddNotification = new NotificationDAO().addANotificationApply(user.getId(), job.getTitle(), job.getIdEmployer());
+                if (checkAddNotification) {
+                    url = SUCCESS;
+                }
             }
 
         } catch (Exception e) {

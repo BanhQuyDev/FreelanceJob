@@ -22,7 +22,7 @@ public class UserDTO {
 
     public UserDTO() {
     }
-
+    
     public UserDTO(int id, String name, String email, String dob, String address, String bio, String phone, String picture) {
         this.id = id;
         this.name = name;

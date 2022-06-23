@@ -34,6 +34,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/editlogin.css" />
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body> 
@@ -43,35 +44,138 @@
         <jsp:include page="component/header.jsp"></jsp:include>
             <main>
                 <!-- slider Area Start-->
-                <div class="slider-area">
-                    <!-- Mobile Menu -->
-                    <div class="slider-active">
-                        <div
-                            class="single-slider slider-height d-flex align-items-center"
-                            style="
-                            background-image: url(assets/img/logo/remote-work-part-2.png);
-                            background-position: initial;
-                            background-repeat: no-repeat;
-                            background-size: cover;
-                            min-height: 500px;
-                            "
-                            ></div>
+                <!--                <div class="slider-area">
+                                     Mobile Menu 
+                                    <div class="slider-active">
+                                        <div
+                                            class="single-slider slider-height d-flex align-items-center"
+                                            style="
+                                            background-image: url(assets/img/logo/remote-work-part-2.png);
+                                            background-position: initial;
+                                            background-repeat: no-repeat;
+                                            background-size: cover;
+                                            min-height: 500px;
+                                            "
+                                            ></div>
+                                    </div>
+                                </div>-->
+                <div class="row row-content">
+                    <div class="col">
+                        <div id="mycarousel" class="carousel slide carousel-fade" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#mycarousel" style="height: 10px;
+                                    width: 10px;
+                                    border-radius: 999rem;" data-slide-to="0" class="active"></li>
+                                <li data-target="#mycarousel" style="height: 10px;
+                                    width: 10px;
+                                    border-radius: 999rem;" data-slide-to="1"></li>
+                                <li data-target="#mycarousel" style="height: 10px;
+                                    width: 10px;
+                                    border-radius: 999rem;" data-slide-to="2"></li>
+                            </ol>   
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active" >
+                                    <form action="JobListingController" method="POST">
+                                        <div style="position: relative">
+                                            <img class="d-block img-thumbnail carousel-img" style="padding: 0; position: absolute"
+                                                 src="assets/img/logo/bannerguy.avif" alt="Uthappizza">
+                                            <img src="assets/img/logo/banner.svg" alt="alt"/>
+                                        </div>
+                                        <div class="carousel-caption d-none d-md-block carousel-content">
+                                            <p>Find & Hire <br>Expert Freelancers 
+                                            </p>
+                                            <p class="carousel-content-p">Work with the best freelance talent from around the world on our secure,<br>
+                                                flexible and cost-effective platform.</p>
+                                            <c:if test="${sessionScope.LOGIN_USER == null}">                      
+                                            <div style="margin-top: 2rem; position: relative">
+                                                <input class="carousel-search position-relative" type="text" name="search" value="" placeholder="What job are you looking for ?" autocomplete="off">
+                                                <button class="carousel-search-button position-absolute">
+                                                    <svg viewBox="0 0 20 16" height="48" width="18" role="img" style="color: #2777C6"
+                                                         class="u-svg-ico" aria-labelledby="searchGuru">
+                                                    <title id="searchGuru">Search Freelancers</title>
+                                                    <path d="M19.76 18.58l-4.81-4.8a8.43 8.43 0 10-1.18 1.18l4.8 4.8a.83.83 0 001.19-1.18zM8.5 15a6.5 6.5 0 11.01-13.01A6.5 6.5 0 018.5 15z"></path>
+                                                    </svg>
+                                                </button>
+                                                <span style="margin: 0 12px">Or</span>
+                                                <c:if test="${sessionScope.LOGIN_USER == null}">
+                                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                                       &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" class="carousel-button">Post a Job - It's Free</a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.LOGIN_USER != null}">
+                                                    <a href="RenderSkillPostJob" class="carousel-button">Post a Job - It's Free</a>
+                                                </c:if>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${sessionScope.LOGIN_USER != null && sessionScope.MODE eq 'FREELANCER'}">                      
+                                            <div style="margin-top: 2rem; position: relative">
+                                                <input class="carousel-search position-relative" type="text" name="search" value="" placeholder="What job are you looking for ?" autocomplete="off">
+                                                <button class="carousel-search-button position-absolute">
+                                                    <svg viewBox="0 0 20 16" height="48" width="18" role="img" style="color: #2777C6"
+                                                         class="u-svg-ico" aria-labelledby="searchGuru">
+                                                    <title id="searchGuru">Search Freelancers</title>
+                                                    <path d="M19.76 18.58l-4.81-4.8a8.43 8.43 0 10-1.18 1.18l4.8 4.8a.83.83 0 001.19-1.18zM8.5 15a6.5 6.5 0 11.01-13.01A6.5 6.5 0 018.5 15z"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${sessionScope.LOGIN_USER != null && sessionScope.MODE eq 'EMPLOYER'}">                      
+                                            <div style="margin-top: 2rem; position: relative">
+
+                                                <c:if test="${sessionScope.LOGIN_USER == null}">
+                                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                                       &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force" class="carousel-button">Post a Job - It's Free</a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.LOGIN_USER != null}">
+                                                    <a href="RenderSkillPostJob" class="carousel-button">Post a Job - It's Free</a>
+                                                </c:if>
+                                            </div>
+                                        </c:if>
+                                    </div>
+                                </form>
+                            </div>
+                            <c:if test="${sessionScope.LOGIN_USER == null}">
+                                <div class="carousel-item carousel-item-2">
+                                    <div style="position: relative; width: full; height: 422px; background: #F9F8FD;">   
+                                        <img class="position-absolute carousel-item-2__img" style="right: 0" src="assets/img/logo/carousel_3.webp" alt="alt"/>
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block carousel-content-item-2 carousel-item-2__p">
+                                        <p>Find talent
+                                            <br>your way 
+                                        </p>
+                                        <p class="carousel-content-p">Work with the largest network of independent professionals and <br> get things done—from quick turnarounds to big transformations.</p>
+                                        <div class="carousel-item-2_button">
+                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                               &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force"
+                                               role="button">Login</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </div>
+                        <a class="carousel-control-prev"  href="#mycarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+
                     </div>
                 </div>
-                <!-- slider Area End-->
-                <!-- Our Services Start -->
-                <div class="our-services section-pad-t30">
-                    <div class="container">
-                        <!-- Section Tittle -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-tittle text-center">
-                                    <span>FEATURED TOURS Packages</span>
-                                    <h2>Browse Top Categories</h2>
-                                </div>
+            </div>
+            <!-- slider Area End-->
+            <!-- Our Services Start -->
+            <div class="our-services section-pad-t30" style="padding-top: 100px">
+                <div class="container">
+                    <!-- Section Tittle -->
+                    <div class="row reveal">
+                        <div class="col-lg-12">
+                            <div class="section-tittle text-center">
+                                <span>FEATURED TOURS Packages</span>
+                                <h2>Browse Top Categories</h2>
                             </div>
                         </div>
-                        <div class="row d-flex justify-contnet-center">
+                    </div>
+                    <div class="row d-flex justify-contnet-center reveal">
                         <c:forEach var="major" items="${requestScope.LIST_MAJOR}">
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                                 <div class="single-services text-center mb-30">
@@ -93,7 +197,7 @@
                     <!-- Section Button -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="browse-btn2 text-center mt-50">
+                            <div class="browse-btn2 text-center">
                                 <a href="JobListingController" class="border-btn2"
                                    >Browse All Sectors</a
                                 >
@@ -107,7 +211,7 @@
             <section class="featured-job-area feature-padding">
                 <div class="container">
                     <!-- Section Tittle -->
-                    <div class="row">
+                    <div class="row reveal fade-left">
                         <div class="col-lg-12">
                             <div class="section-tittle text-center">
                                 <span>Recent Job</span>
@@ -115,7 +219,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center reveal fade-left">
                         <div class="col-xl-10">
                             <!-- single-job-content -->
                             <c:forEach var="job" items="${requestScope.LIST_TOP_4_LATEST_JOB}">
@@ -216,6 +320,7 @@
             src="https://kit.fontawesome.com/b36bcbb61e.js"
             crossorigin="anonymous"
         ></script>
+        <script src="./assets/js/animation.js"></script>
         <script>
             $(function () {
                 $('[data-toggle="popover"]').popover(),
