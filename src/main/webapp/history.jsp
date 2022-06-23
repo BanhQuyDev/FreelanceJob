@@ -20,7 +20,6 @@
 
         <link rel="stylesheet" href="./history/history.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
@@ -35,7 +34,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+        <link rel="stylesheet" href="assets/css/header_notification.css"/>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
@@ -60,14 +59,43 @@
                             <div class="small-section-tittle2">
                                 <h4>Filter</h4>
                             </div>
-                            <select name="selectedContractStatus" onchange="this.form.submit()">
-                                <option value="2">All</option>
+                        <c:set var="selectedContractStatus" value="${param.selectedContractStatus}"/>
+                        <select name="selectedContractStatus" onchange="this.form.submit()">
+                            <c:choose>
+                                <c:when test="${empty selectedContractStatus}">
+                                    <option value="2">All</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:if test="${selectedContractStatus != 2}">
+                                        <c:if test="${selectedContractStatus == 0}">
+                                            <option value="${selectedContractStatus}">On working</option>
+                                        </c:if>
+                                        <c:if test="${selectedContractStatus == 1}">
+                                            <option value="${selectedContractStatus}">Complete</option>
+                                        </c:if>
+                                        <option value="2">All</option>
+                                    </c:if>
+                                    <c:if test="${selectedContractStatus == 2}">
+                                        <c:if test="${selectedContractStatus == 0}">
+                                            <option value="${selectedContractStatus}">On working</option>
+                                        </c:if>
+                                        <c:if test="${selectedContractStatus == 1}">
+                                            <option value="${selectedContractStatus}">Complete</option>
+                                        </c:if>
+                                    </c:if>
+                                </c:otherwise>
+                            </c:choose>
+                            <!--<option value="2">All</option>-->
+                            <c:if test="${selectedContractStatus != 1}">
                                 <option value="1">Complete</option>
+                            </c:if>
+                            <c:if test="${selectedContractStatus != 0}">
                                 <option value="0">On working</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
+                            </c:if>
+                        </select>
+                    </div>
+                </form>
+            </div>
             <c:forEach var="contract" items="${requestScope.LIST_CONTRACT}" varStatus="counting">
                 <c:if test="${counting.count % 2 != 0}">
                     <c:if test="${contract.contract_status == 1}">                

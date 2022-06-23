@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/editlogin.css" />
-        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+        <link rel="stylesheet" href="assets/css/header_notification.css"/>
     </head>
 
     <body> 
@@ -167,7 +167,7 @@
             <div class="our-services section-pad-t30" style="padding-top: 100px">
                 <div class="container">
                     <!-- Section Tittle -->
-                    <div class="row reveal">
+                    <div class="row">
                         <div class="col-lg-12">
                             <div class="section-tittle text-center">
                                 <span>FEATURED TOURS Packages</span>
@@ -199,7 +199,7 @@
                         <div class="col-lg-12">
                             <div class="browse-btn2 text-center">
                                 <a href="JobListingController" class="border-btn2"
-                                   >Browse All Sectors</a
+                                   >Browse All Jobs</a
                                 >
                             </div>
                         </div>
@@ -214,8 +214,8 @@
                     <div class="row reveal fade-left">
                         <div class="col-lg-12">
                             <div class="section-tittle text-center">
-                                <span>Recent Job</span>
-                                <h2>Featured Jobs</h2>
+                                <span>Top 4 latest jobs</span>
+                                <h2>Latest Jobs</h2>
                             </div>
                         </div>
                     </div>
