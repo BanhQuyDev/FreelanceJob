@@ -54,6 +54,7 @@
                                                     <a style="color: black" href="#">Job Management</a>
                                                     <ul class="submenu">
                                                         <li><a href="JobApplyController">List Job Apply</a></li>
+                                                        <li><a href="WorkspaceController">Work Space</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="HistoryController">History</a></li>
@@ -61,14 +62,16 @@
                                                     <a class="nav-link dropdown-toggle" href="#"
                                                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                                        aria-expanded="false">
-                                                        <i class="fa fa-bell"></i>
-                                                        <c:if test="${sessionScope.LIST_NOTIFICATIONS_FREELANCER_UNREAD.size() == 0}">
-                                                        </c:if>  
-                                                        <c:if test="${sessionScope.LIST_NOTIFICATIONS_FREELANCER_UNREAD.size() != 0}">
-                                                            <span class="notification--count">
-                                                                ${sessionScope.LIST_NOTIFICATIONS_FREELANCER_UNREAD.size() }
-                                                            </span>
-                                                        </c:if>
+                                                        <i class="fa fa-bell" style="position: relative">
+                                                            <c:if test="${sessionScope.LIST_NOTIFICATIONS_FREELANCER_UNREAD.size() == 0}">
+                                                            </c:if>  
+                                                            <c:if test="${sessionScope.LIST_NOTIFICATIONS_FREELANCER_UNREAD.size() != 0}">
+                                                                <span class="notification--count">
+                                                                    ${sessionScope.LIST_NOTIFICATIONS_FREELANCER_UNREAD.size() }
+                                                                </span>
+                                                            </c:if>
+                                                        </i>
+
                                                     </a>
                                                     <div class="dropdown-menu dropdown-notification"
                                                          aria-labelledby="navbarDropdown">                                                        
@@ -87,7 +90,7 @@
                                                                 <div class="notification--list">
                                                                     <div class="notification-list_img">
                                                                         <img class="notification--img" src="${LN.avatar != null ? LN.avatar : 
-                                                                                               'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
+                                                                                                              'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
                                                                     </div>
                                                                     <div class="notification-list_detail">
                                                                         <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
@@ -102,7 +105,7 @@
                                                                 <div class="notification--list">
                                                                     <div class="notification-list_img">
                                                                         <img class="notification--img" src="${LN.avatar != null ? LN.avatar : 
-                                                                                               'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
+                                                                                                              'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
                                                                     </div>
                                                                     <div class="notification-list_detail">
                                                                         <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
@@ -122,6 +125,7 @@
                                                     <ul class="submenu">
                                                         <li><a href="RenderJobPostController">Your Post</a></li>
                                                         <li><a href="GetAllFreelancerApplyController">List Freelancer Apply</a></li>
+                                                        <li><a href="WorkspaceController">Work Space</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="HistoryController">History</a></li>
@@ -155,7 +159,7 @@
                                                                 <div class="notification--list">
                                                                     <div class="notification-list_img">
                                                                         <img class="notification--img" src="${LN.avatar != null ? LN.avatar : 
-                                                                                               'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
+                                                                                                              'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
                                                                     </div>
                                                                     <div class="notification-list_detail">
                                                                         <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
@@ -170,7 +174,7 @@
                                                                 <div class="notification--list">
                                                                     <div class="notification-list_img">
                                                                         <img class="notification--img" src="${LN.avatar != null ? LN.avatar : 
-                                                                                               'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
+                                                                                                              'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
                                                                     </div>
                                                                     <div class="notification-list_detail">
                                                                         <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
@@ -203,13 +207,13 @@
                                                     <div class="row mt-2" style="display: flex;
                                                          justify-content: center;
                                                          align-items: center;">
-                                                        <div class="col-7 mt-4">
+                                                        <div class="col-9 mt-4">
                                                             <p style="color: black;font-size: 19px; text-align: center; margin-bottom: 0"
                                                                class="user-name text-bold-700">${sessionScope.LOGIN_USER.name}
                                                             </p>
                                                             <p style="color: black; text-align: center; font-size: 14px;" class="user-name text-bold-700 ml-1">(${sessionScope.MODE})</p>                              
                                                         </div>
-                                                        <div class="col-5">
+                                                        <div class="col-3">
                                                             <img style="border-radius: 50%;border: 1px solid #363E51; height: 60px; width: 60px; object-fit: cover" src="${sessionScope.LOGIN_USER.picture != null ? sessionScope.LOGIN_USER.picture : 'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}"
                                                                  alt="avatar" />
                                                         </div>

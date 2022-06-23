@@ -38,7 +38,7 @@ public class JobApplyController extends HttpServlet {
             JobDAO jobDao = new JobDAO();
             List<JobDTO> listJob = jobDao.getAppliedJobForFreelancer(loginUser.getId());
             request.setAttribute("LIST_APPLIED_JOB", listJob);
-
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at JobApplyController : " + e.toString());
         } finally {
