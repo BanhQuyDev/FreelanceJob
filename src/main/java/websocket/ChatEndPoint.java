@@ -1,6 +1,5 @@
 package websocket;
 
-import java.util.Objects;
 import javax.websocket.CloseReason.CloseCodes;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -15,17 +14,12 @@ public final class ChatEndPoint {
 
     @OnOpen
     public void onOpen(@PathParam(Constants.USER_NAME_KEY) final String userName, final Session session) {
-        if (Objects.isNull(userName) || userName.isEmpty()) {
-            throw new RegistrationFailedException("User name is required");
+        session.getUserProperties().put(Constants.USER_NAME_KEY, userName);
+        if (ChatSessionManager.register(session)) {
+            System.out.printf("Session opened for %s\n", userName);
+//            ChatSessionManager.publish(new Message("", "", "", "", "Online"), session);
         } else {
-            session.getUserProperties().put(Constants.USER_NAME_KEY, userName);
-            if (ChatSessionManager.register(session)) {
-                System.out.printf("Session opened for %s\n", userName);
-
-                ChatSessionManager.publish(new Message((String) session.getUserProperties().get(Constants.USER_NAME_KEY), "***joined the chat***","",""), session);
-            } else {
-                throw new RegistrationFailedException("Unable to register, username already exists, try another");
-            }
+            throw new RegistrationFailedException("Unable to register, username already exists, try another");
         }
     }
 
@@ -45,8 +39,7 @@ public final class ChatEndPoint {
     public void onClose(final Session session) {
         if (ChatSessionManager.remove(session)) {
             System.out.printf("Session closed for %s\n", session.getUserProperties().get(Constants.USER_NAME_KEY));
-
-            ChatSessionManager.publish(new Message((String) session.getUserProperties().get(Constants.USER_NAME_KEY), "***left the chat***","",""), session);
+//            ChatSessionManager.publish(new Message((String) session.getUserProperties().get(Constants.USER_NAME_KEY), "***left the chat***","",""), session);
         }
     }
 

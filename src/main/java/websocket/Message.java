@@ -8,15 +8,16 @@ public final class Message {
 
     @JsonProperty("username")
     private final String userName;
-    @JsonProperty
+    @JsonProperty("message")
     private final String message;
-    @JsonProperty
+    @JsonProperty("time")
     private final String time;
-    @JsonProperty
+    @JsonProperty("picture")
     private final String picture;
 
     @JsonCreator
-    public Message(@JsonProperty("username") final String userName, @JsonProperty("message") final String message, @JsonProperty("time") final String time,@JsonProperty("picture") final String picture) {
+    public Message(@JsonProperty("username") final String userName, @JsonProperty("message") final String message, 
+            @JsonProperty("time") final String time,@JsonProperty("picture") final String picture) {
         Objects.requireNonNull(userName);
         Objects.requireNonNull(message);
         Objects.requireNonNull(time);

@@ -35,7 +35,6 @@ public class UpdateJobController extends HttpServlet {
             return false;
         } else {
             for (int i = 0; i < listSkillOfJob.size(); i++) {
-                System.out.println(listSkillOfJob.get(i).getSkillId());
                 if (listSkillOfJob.get(i).getSkillId() == d) {
                     return true;
                 }
