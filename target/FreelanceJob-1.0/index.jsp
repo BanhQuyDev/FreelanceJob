@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css" />
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/editlogin.css" />
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body> 
@@ -59,9 +59,9 @@
                                             ></div>
                                     </div>
                                 </div>-->
-                <div class="row row-content">
-                    <div class="col">
-                        <div id="mycarousel" class="carousel slide carousel-fade" data-ride="carousel">
+                <div style="width: 100%">
+                    <div>
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#mycarousel" style="height: 10px;
                                     width: 10px;
@@ -88,14 +88,17 @@
                                                 flexible and cost-effective platform.</p>
                                             <c:if test="${sessionScope.LOGIN_USER == null}">                      
                                             <div style="margin-top: 2rem; position: relative">
-                                                <input class="carousel-search position-relative" type="text" name="search" value="" placeholder="What job are you looking for ?" autocomplete="off">
-                                                <button class="carousel-search-button position-absolute">
-                                                    <svg viewBox="0 0 20 16" height="48" width="18" role="img" style="color: #2777C6"
-                                                         class="u-svg-ico" aria-labelledby="searchGuru">
-                                                    <title id="searchGuru">Search Freelancers</title>
-                                                    <path d="M19.76 18.58l-4.81-4.8a8.43 8.43 0 10-1.18 1.18l4.8 4.8a.83.83 0 001.19-1.18zM8.5 15a6.5 6.5 0 11.01-13.01A6.5 6.5 0 018.5 15z"></path>
-                                                    </svg>
-                                                </button>
+                                                <!-- <input class="carousel-search position-relative" type="text" name="search" value="" placeholder="What skill are you looking for ?" autocomplete="off">
+                                              <button class="carousel-search-button position-absolute">
+                                                <svg viewBox="0 0 20 16" height="48" width="18" role="img" style="color: #2777C6"
+                                                  class="u-svg-ico" aria-labelledby="searchGuru">
+                                                   <title id="searchGuru">Search Freelancers</title>
+                                                  <path d="M19.76 18.58l-4.81-4.8a8.43 8.43 0 10-1.18 1.18l4.8 4.8a.83.83 0 001.19-1.18zM8.5 15a6.5 6.5 0 11.01-13.01A6.5 6.5 0 018.5 15z"></path>
+                                               </svg>
+                                                </button>-->
+                                                <c:if test="${sessionScope.LOGIN_USER == null}">
+                                                    <a href="JobListingController" class="carousel-button">Find a Job - It's Free</a>
+                                                </c:if>
                                                 <span style="margin: 0 12px">Or</span>
                                                 <c:if test="${sessionScope.LOGIN_USER == null}">
                                                     <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
@@ -108,14 +111,15 @@
                                         </c:if>
                                         <c:if test="${sessionScope.LOGIN_USER != null && sessionScope.MODE eq 'FREELANCER'}">                      
                                             <div style="margin-top: 2rem; position: relative">
-                                                <input class="carousel-search position-relative" type="text" name="search" value="" placeholder="What job are you looking for ?" autocomplete="off">
+                                                <!--    <input class="carousel-search position-relative" type="text" name="search" value="" placeholder="What job are you looking for ?" autocomplete="off">
                                                 <button class="carousel-search-button position-absolute">
                                                     <svg viewBox="0 0 20 16" height="48" width="18" role="img" style="color: #2777C6"
                                                          class="u-svg-ico" aria-labelledby="searchGuru">
                                                     <title id="searchGuru">Search Freelancers</title>
                                                     <path d="M19.76 18.58l-4.81-4.8a8.43 8.43 0 10-1.18 1.18l4.8 4.8a.83.83 0 001.19-1.18zM8.5 15a6.5 6.5 0 11.01-13.01A6.5 6.5 0 018.5 15z"></path>
                                                     </svg>
-                                                </button>
+                                                </button>-->
+                                                <a href="JobListingController" class="carousel-button">Find a Job - It's Free</a>
                                             </div>
                                         </c:if>
                                         <c:if test="${sessionScope.LOGIN_USER != null && sessionScope.MODE eq 'EMPLOYER'}">                      
@@ -135,28 +139,116 @@
                             </div>
                             <c:if test="${sessionScope.LOGIN_USER == null}">
                                 <div class="carousel-item carousel-item-2">
-                                    <div style="position: relative; width: full; height: 422px; background: #F9F8FD;">   
-                                        <img class="position-absolute carousel-item-2__img" style="right: 0" src="assets/img/logo/carousel_3.webp" alt="alt"/>
+                                    <div class="hero-area" style="position: relative; width: 100%; height: 422px; background: #4353FF;">   
+                                        <img class="position-absolute carousel-item-2__img" style="left: 60%" src="assets/img/logo/hero-image.png" alt="alt"/>
+                                        <img class="position-absolute" style="right: 0;
+                                             position: absolute;
+                                             left: 50%;
+                                             top: 30%;
+                                             height: 50px;
+                                             width: 50px;
+                                             margin-left: -25px;" 
+                                             src="assets/img/logo/shape1.svg" alt="alt"/>
+                                        <img class="position-absolute" style="
+                                             position: absolute;
+                                             right: 10%;
+                                             bottom: 0%;
+                                             height: 50px;
+                                             width: 50px;
+                                             margin-left: -25px;" 
+                                             src="assets/img/logo/shape4.svg" alt="alt"/>
                                     </div>
                                     <div class="carousel-caption d-none d-md-block carousel-content-item-2 carousel-item-2__p">
                                         <p>Find talent
                                             <br>your way 
                                         </p>
                                         <p class="carousel-content-p">Work with the largest network of independent professionals and <br> get things done—from quick turnarounds to big transformations.</p>
-                                        <div class="carousel-item-2_button">
-                                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
-                                               &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force"
-                                               role="button">Login</a>
+                                        <div class="carousel-item-2_button button-login">
+                                            <a  href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                                &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force"
+                                                role="button">Login</a>
                                         </div>
                                     </div>
                                 </div>
                             </c:if>
+                            <c:if test="${sessionScope.LOGIN_USER == null}">
+                                <div class="carousel-item">
+                                    <div style="width: 100%">
+                                        <img style="height: 422px; width: 100%; object-fit: cover" src="assets/img/logo/slide_3.jpg" alt="alt"/>
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block carousel-content-item-3 carousel-item-2__p" style="margin-top: 30px">
+                                        <p>WE ARE READY TO HELP YOU    
+                                        </p>
+                                        <p class="carousel-content-p">You are allowed to use this template for your company websites.
+                                            <br>You are NOT allowed to re-distribute this template ZIP file on any template download website. Please contact TemplateMo for more detail.</p>
+                                        <div class="carousel-item-3_button button-login">
+                                            <a  href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/FreelanceJob/LoginGoogleController&response_type=code
+                                                &client_id=834451449766-1ckcd4te1p20miirpljhmdc2t3ae1m5b.apps.googleusercontent.com&approval_prompt=force"
+                                                role="button">OUR SERVICES</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+                            <c:if test="${sessionScope.MODE eq 'FREELANCER'}">
+                                <div class="carousel-item">
+                                    <div style="width: 100%">
+                                        <img style="height: 422px; width: 100%; object-fit: cover" src="assets/img/logo/slide_02(freelancer).jpg" alt="alt"/>
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block carousel-content-item-3 carousel-item-2__p" style="margin-top: 30px;">
+                                        <p style=" font-size: 30px; font-weight:800; color: white">HELLO 
+                                            <br>FREELANCER   
+                                        </p>
+
+                                        <form action="JobApplyController" method="POST">
+                                            <button type="submit" class="button_slide-item-2"><span>List Job Apply</span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </c:if>
+                            <c:if test="${sessionScope.MODE eq 'EMPLOYER'}">
+                                <div class="carousel-item">
+                                    <div style="width: 100%">
+                                        <img style="height: 422px; width: 100%; object-fit: cover" src="assets/img/logo/slide02(employer).webp" alt="alt"/>
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block carousel-content-item-3 carousel-item-2__p" style="margin-top: 30px;">
+                                        <p style=" font-size: 55px; font-weight:800; color: white">Top Recruiting Website
+                                            <br>For Employers   
+                                        </p>
+
+                                        <form action="RenderJobPostController" method="POST">
+                                            <button type="submit" class="button_slide-item-2"><span>Your Post</span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </c:if>
+                            <c:if test="${sessionScope.MODE eq 'FREELANCER' || sessionScope.MODE eq 'EMPLOYER'}">
+                                <div class="carousel-item carousel-item-2">
+                                    <div class="hero-area_slide3" style="position: relative; width: 100%; height: 422px; background: #ccc">   
+                                        <img class="position-absolute carousel-item-3__img" style="left: 65%" src="assets/img/logo/slide_03(freelancer).png" alt="alt"/>
+                                        <img class="position-absolute shape1" style="right: 0" src="assets/img/logo/shape1.svg" alt="alt"/>
+                                    </div>
+                                    <div class="carousel-caption d-none d-md-block carousel-content-item-3 carousel-item-3__p">
+                                        <p style="color: white">UPDATE YOUR SKILL
+                                        </p>
+                                        <p class="carousel-content-p" style="color: #293651">
+                                            To show off your skills developed throughout your
+                                            <br>work history instead of the specific positions you have held.</p>
+                                        <div class="button_slide-item-3" style="background-color: #ccc">
+                                            <a href="freelancer_detail.jsp">Edit Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+
+
                         </div>
-                        <a class="carousel-control-prev"  href="#mycarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
+                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon"></span>
+                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
                         </a>
 
                     </div>
@@ -265,6 +357,53 @@
                                     </div>
                                 </div>
                             </c:forEach>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="featured-job-area feature-padding">
+                <div class="container">
+                    <!-- Section Tittle -->
+                    <div class="row reveal fade-right" style="margin-bottom: 60px">
+                        <div class="col-lg-12">
+                            <div class="section-tittle text-center">
+                                <span style="color: #fb246a; font-size: 37px; font-family: 700">OUR AWESOME TEAM</span>
+                                <span style="color: black; font-size: 15px; margin: auto; width: 50%">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+                                    in some form.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row reveal fade-right">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div style="width: 200px; margin:auto">
+                                <!-- Image -->
+                                <div class="shapes position-relative">
+                                    <div class="image">
+                                        <img style="border-radius: 999rem" src="http://wpthemesgrid.com/themes/polio/assets/images/team/t1.jpg" alt="#">
+                                        <img class="shape1 position-absolute" style="width: 50px; height: 50px; top: 25%; left: 5%" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape1.svg" alt="#">
+                                        <img class="shape2 position-absolute" style="width: 35px; height: 35px; bottom: 0; right: 0" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape2.svg" alt="#">
+                                    </div>
+                                </div>
+                                <!-- End Image -->
+                                <div class="info-head" style="text-align: center">
+                                    <!-- User Box -->
+                                    <div class="info-box">
+                                        <h4 class="name"><a class="section-honorable__name" href="#">Dahlia Moore</a></h4>
+                                        <span class="designation">Senior Manager</span>
+                                    </div>
+                                    <!-- End Info Box -->
+                                    <!-- Review -->
+                                    <div class="social-links">
+                                        <ul class="social">
+                                            <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                            <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
+                                            <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                            <li><a href="#"><i class="lni lni-behance-original"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- End Social -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

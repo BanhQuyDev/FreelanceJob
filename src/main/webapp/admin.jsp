@@ -32,10 +32,12 @@
         <!-- END VENDOR CSS-->
         <!-- BEGIN CHAMELEON  CSS-->
         <link rel="stylesheet" type="text/css" href="theme-assets/css/app-lite.css"/>
+
         <!-- END CHAMELEON  CSS-->
         <!-- BEGIN Page Level CSS-->
         <link rel="stylesheet" type="text/css" href="theme-assets/css/core/menu/menu-types/vertical-menu.css"/>
         <link rel="stylesheet" type="text/css" href="theme-assets/css/core/colors/palette-gradient.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
         <script src="//cdn.ckeditor.com/4.19.0/basic/ckeditor.js"></script>
         <!-- END Page Level CSS-->
         <!-- BEGIN Custom CSS-->
@@ -93,6 +95,47 @@
                                         </c:choose>
                                     </li>
                                 </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item dropdown" style="position: relative">
+                                <a class="nav-link dropdown-toggle" href="#"
+                                   id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <img style="width: 20px; height: 20px" src="assets/img/logo/bell.svg" alt="alt"/>
+                                    <c:if test="${sessionScope.LIST_NOTIFICATIONS_ADMIN_UNREAD.size() == 0}">
+                                    </c:if>  
+                                    <c:if test="${sessionScope.LIST_NOTIFICATIONS_ADMIN_UNREAD.size() != 0}">
+                                        <span class="notification--count" style="top: 18px; left: 24px">
+                                            ${sessionScope.LIST_NOTIFICATIONS_ADMIN_UNREAD.size() }
+                                        </span>
+                                    </c:if>                             
+                                </a>
+                                <div class="dropdown-menu dropdown-notification" style="transform: translateX(-66%);"
+                                     aria-labelledby="navbarDropdown">                                                        
+                                    <div class="text-center arrow_box_right notification--header" style="display: flex;
+                                         justify-content: space-around;
+                                         align-items: center">
+                                        <div>
+                                            <span>Notifications</span>
+                                        </div>
+
+                                    </div>
+                                    <c:forEach items="${sessionScope.LIST_NOTIFICATIONS_ADMIN_UNREAD}" var="LN">
+                                        <a onclick='scrollWin()' class="notification_unread" style="padding: 0">
+                                            <div class="notification--list-admin">
+                                                <div class="notification-list_img">
+                                                    <img class="notification--img" src="${LN.avatar}" alt="user">
+                                                </div>
+
+                                                <div class="notification-list_detail">
+                                                    <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
+                                                    <p style="text-align: left"><small>${LN.timeAgo}</small></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </c:forEach>
+                                </div>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav float-right">
@@ -855,6 +898,9 @@
                     $(this).remove();
                 });
             }, 3000);
+            function scrollWin() {
+                window.scrollBy(0, document.documentElement.scrollHeight);
+            }
         </script>
         <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>

@@ -39,40 +39,47 @@ public class ApproveFreelancerController extends HttpServlet {
             UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
             int id_job = Integer.parseInt(request.getParameter("id_job"));
             int id_freelancer = Integer.parseInt(request.getParameter("id_freelancer"));
-            boolean checkApprove = new JobDAO().updateFreelancerAppy(id_job, id_freelancer);
+            int id_status = 1;
             JobDTO name_job = new JobDAO().getAJobByEmployeer(user.getId(), id_job);
             List<JobApplicationDTO> listFreelancerApplyByJob = new JobDAO().getFreelancerApplyByJob(id_job);
-            if (checkApprove && listFreelancerApplyByJob.size() == 1) {
-                List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
-                request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
-                boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                boolean checkAddNotification = new NotificationDAO().addANotificationApprove(id_freelancer, name_job.getTitle(), user.getId());
-                if (checkAddNotification) {
-                    boolean changeStausJob = new JobDAO().appliedJob(id_job);
-                    if (checkAddContract && changeStausJob) {
-                        request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
-                        url = SUCCESS;
-                    }
-                }
-
-            }
-            if (checkApprove && listFreelancerApplyByJob.size() != 1) {
-                boolean checkDeny = new JobDAO().updateFreelancerDeny(id_job, id_freelancer);
-                if (checkDeny) {
+            int numberJobByFreelancer = new JobDAO().getCountJobByFreelancer(id_freelancer, id_status);
+            if (numberJobByFreelancer >= 3) {
+                request.setAttribute("SUCCESS_MESSAGE_DENY", "This freelancer has more 3 jobs!!!");
+                url = SUCCESS;
+            } else {
+                boolean checkApprove = new JobDAO().updateFreelancerAppy(id_job, id_freelancer);
+                if (checkApprove && listFreelancerApplyByJob.size() == 1) {
                     List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
                     request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
-                }
-                boolean checkAddNotification = new NotificationDAO().addANotificationApprove(id_freelancer, name_job.getTitle(), user.getId());
-                if (checkAddNotification) {
-                    List<JobApplicationDTO> listUserIdDeny = new JobDAO().getUserDeny(id_freelancer, id_job);
-                    for (JobApplicationDTO list : listUserIdDeny) {
-                        new NotificationDAO().addANotificationDeny(list.getId_freelancer(), name_job.getTitle(), user.getId());
-                    }
                     boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
-                    boolean changeStausJob = new JobDAO().appliedJob(id_job);
-                    if (checkAddContract && changeStausJob) {
-                        request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
-                        url = SUCCESS;
+                    boolean checkAddNotification = new NotificationDAO().addANotificationApprove(id_freelancer, name_job.getTitle(), user.getId());
+                    if (checkAddNotification) {
+                        boolean changeStausJob = new JobDAO().appliedJob(id_job);
+                        if (checkAddContract && changeStausJob) {
+                            request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
+                            url = SUCCESS;
+                        }
+                    }
+
+                }
+                if (checkApprove && listFreelancerApplyByJob.size() != 1) {
+                    boolean checkDeny = new JobDAO().updateFreelancerDeny(id_job, id_freelancer);
+                    if (checkDeny) {
+                        List<JobApplicationDTO> listJoblistJobProcessing = new JobDAO().getAllFreelancerApply(user.getId());
+                        request.setAttribute("LIST_FREELANCER_APPLY", listJoblistJobProcessing);
+                    }
+                    boolean checkAddNotification = new NotificationDAO().addANotificationApprove(id_freelancer, name_job.getTitle(), user.getId());
+                    if (checkAddNotification) {
+                        List<JobApplicationDTO> listUserIdDeny = new JobDAO().getUserDeny(id_freelancer, id_job);
+                        for (JobApplicationDTO list : listUserIdDeny) {
+                            new NotificationDAO().addANotificationDeny(list.getId_freelancer(), name_job.getTitle(), user.getId());
+                        }
+                        boolean checkAddContract = new ContractDAO().addAContract(id_freelancer, user.getId(), id_job);
+                        boolean changeStausJob = new JobDAO().appliedJob(id_job);
+                        if (checkAddContract && changeStausJob) {
+                            request.setAttribute("SUCCESS_MESSAGE_APPROVE", "Approve!!!");
+                            url = SUCCESS;
+                        }
                     }
                 }
             }
