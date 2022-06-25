@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body>
@@ -64,11 +64,11 @@
                                 <div class="job-items">
                                     <div class="company-img company-img-details mb-3">
                                         <a href="#"><img style="width: 85px" src="assets/img/icon/job-list.png" alt=""></a>
-                                        <span style="font-size: 30px">${job.title}</span>
+                                        <span style="font-size: 30px;margin-right: 20px">${job.title}</span>
                                         <c:if test="${sessionScope.LOGIN_USER != null}">
                                             <c:set var="user_name" value="${sessionScope.LOGIN_USER.name}"/>
                                             <c:if test="${job.nameEmployer ne user_name}">
-                                                <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo" ><i style="color:#e50505; margin-left: 50px; font-size:20px" class="fa fa-flag" aria-hidden="true"></i></a>                       
+                                                <a data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo"><i style="color:#e50505; font-size:20px; cursor: pointer" class="fa fa-flag" aria-hidden="true"></i></a>                       
                                                 </c:if>  
                                             <!--Report job post popup start here-->
                                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

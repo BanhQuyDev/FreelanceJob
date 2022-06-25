@@ -133,14 +133,15 @@
                                                     <a class="nav-link dropdown-toggle" href="#"
                                                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                                                        aria-expanded="false">
-                                                        <i class="fa fa-bell"></i>
-                                                        <c:if test="${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_UNREAD.size() == 0}">
-                                                        </c:if>  
-                                                        <c:if test="${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_UNREAD.size() != 0}">
-                                                            <span class="notification--count">
-                                                                ${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_UNREAD.size() }
-                                                            </span>
-                                                        </c:if>
+                                                        <i class="fa fa-bell" style="position: relative">
+                                                            <c:if test="${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_UNREAD.size() == 0}">
+                                                            </c:if>  
+                                                            <c:if test="${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_UNREAD.size() != 0}">
+                                                                <span class="notification--count">
+                                                                    ${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_UNREAD.size() }
+                                                                </span>
+                                                            </c:if>
+                                                        </i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-notification"
                                                          aria-labelledby="navbarDropdown">                                                        
@@ -155,18 +156,35 @@
                                                             </div>                                                        
                                                         </div>
                                                         <c:forEach items="${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_UNREAD}" var="LN">
-                                                            <a href="GetAllFreelancerApplyController?id_noti=${LN.id_noti}" class="notification_unread" style="padding: 0">
-                                                                <div class="notification--list">
-                                                                    <div class="notification-list_img">
-                                                                        <img class="notification--img" src="${LN.avatar != null ? LN.avatar : 
-                                                                                                              'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
+                                                            <c:if test="${LN.content.contains('recovered')}">
+                                                                <a href="RenderJobPostController?id_noti=${LN.id_noti}" class="notification_unread" style="padding: 0">
+                                                                    <div class="notification--list">
+                                                                        <div class="notification-list_img">
+                                                                            <img class="notification--img" src="${LN.avatar != null ? LN.avatar : 
+                                                                                                                  'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
+                                                                        </div>
+                                                                        <div class="notification-list_detail">
+                                                                            <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
+                                                                            <p style="text-align: right"><small>${LN.timeAgo}</small></p>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="notification-list_detail">
-                                                                        <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
-                                                                        <p style="text-align: right"><small>${LN.timeAgo}</small></p>
+                                                                </a>
+                                                            </c:if>
+                                                            <c:if test="${LN.content.contains('applied')}">
+                                                                <a href="GetAllFreelancerApplyController?id_noti=${LN.id_noti}" class="notification_unread" style="padding: 0">
+                                                                    <div class="notification--list">
+                                                                        <div class="notification-list_img">
+                                                                            <img class="notification--img" src="${LN.avatar != null ? LN.avatar : 
+                                                                                                                  'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="user">
+                                                                        </div>
+                                                                        <div class="notification-list_detail">
+                                                                            <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${LN.employerName}</b> <strong>${LN.content}</strong></p>
+                                                                            <p style="text-align: right"><small>${LN.timeAgo}</small></p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </a>
+                                                                </a>
+                                                            </c:if>
+
                                                         </c:forEach>
 
                                                         <c:forEach items="${sessionScope.LIST_NOTIFICATIONS_EMPLOYER_READ}" var="LN">
@@ -214,7 +232,7 @@
                                                             <p style="color: black; text-align: center; font-size: 14px;" class="user-name text-bold-700 ml-1">(${sessionScope.MODE})</p>                              
                                                         </div>
                                                         <div class="col-3">
-                                                            <img style="border-radius: 50%;border: 1px solid #363E51; height: 60px; width: 60px; object-fit: cover" src="${sessionScope.LOGIN_USER.picture != null ? sessionScope.LOGIN_USER.picture : 'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}"
+                                                            <img style="border-radius: 50%;border: 1px solid #363E51; height: 60px; width: 60px; object-fit: cover" src="${sessionScope.LOGIN_USER.picture}"
                                                                  alt="avatar" />
                                                         </div>
                                                     </div>                                                       

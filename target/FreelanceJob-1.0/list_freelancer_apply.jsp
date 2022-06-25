@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body>
@@ -103,6 +103,13 @@
                                                 <div class="alert alert-success">
                                                     <center>
                                                         <strong>Success!</strong> ${requestScope.SUCCESS_MESSAGE_APPROVE}
+                                                    </center>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${requestScope.SUCCESS_MESSAGE_DENY != NULL}">
+                                                <div class="alert alert-danger">
+                                                    <center>
+                                                        <strong>Not Success!</strong> ${requestScope.SUCCESS_MESSAGE_DENY}
                                                     </center>
                                                 </div>
                                             </c:if>

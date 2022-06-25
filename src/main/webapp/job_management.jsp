@@ -19,7 +19,7 @@
         <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-        <<link rel="stylesheet" href="./job-management/job-management.css"/>
+        <link rel="stylesheet" href="./job-management/job-management.css"/>
 
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
