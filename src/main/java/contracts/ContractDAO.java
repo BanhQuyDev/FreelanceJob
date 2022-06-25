@@ -287,7 +287,7 @@ public class ContractDAO {
                     Double remainingtime = Double.valueOf(rs.getInt("remainingtime"));
                     int id_job = rs.getInt("id_job");
                     int idPartner = rs.getInt("idFreelancer");
-                    list.add(new ContractDTO(fullname, freelancerName, title, duration, start_date, freelancerAvatar, remainingtime, id_job,idPartner));
+                    list.add(new ContractDTO(freelancerName, fullname, title, duration, start_date, freelancerAvatar, remainingtime, id_job,idPartner));
                 }
             }
         } catch (Exception e) {
