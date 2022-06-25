@@ -67,6 +67,118 @@
       
         <![endif]-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <style>
+            .modal-dialog {
+                width: 600px;
+            }
+
+            .modal-content{
+                border-radius: 20px;
+            }
+
+            .card {
+                border: none;
+                border-radius: 20px;
+            }
+
+            .circle-image img {
+                border: 6px solid #fff;
+                border-radius: 100%;
+                padding: 0px;
+                top: -55px;
+                position: relative;
+                width: 120px;
+                height: 120px;
+                border-radius: 100%;
+                z-index: 1;
+                background: #e7d184;
+                cursor: pointer;
+            }
+
+            .dot {
+                height: 23px;
+                width: 23px;
+                background-color: blue;
+                border-radius: 50%;
+                display: inline-block;
+                position: relative;
+                border: 3px solid #fff;
+                top: -84px;
+                left: 320px;
+                z-index: 1000;
+            }
+
+            .name {
+                margin-top: -65px;
+                font-size: 24px;
+            }
+
+            .rate {
+                border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+                height: 130px;
+            }
+
+            .buttons {
+                padding: 0 30%;
+                top: 5px;
+                position: relative;
+                cursor: pointer;
+            }
+
+            .rating-submit {
+                border-radius: 15px;
+                color: #fff;
+                height: 50px;
+                cursor: pointer;
+            }
+
+            .rating-submit:hover {
+                color: #fff;
+            }
+
+            .rating-wrapper {
+                border-radius: 5rem;
+                padding: 0rem 2.5rem;
+                flex-direction: row-reverse;
+            }
+
+            .rating-wrapper label {
+                color: #E1E6F6;
+                cursor: pointer;
+                display: inline-flex;
+                font-size: 1.5rem;
+                padding: 0rem .3rem;
+                transition: color 0.5s;
+            }
+
+            .rating-wrapper svg {
+                -webkit-text-fill-color: transparent;
+                -webkit-filter: drop-shadow (4px 1px 6px rgba(198, 206, 237, 1));
+                filter: drop-shadow(5px 1px 3px rgba(198, 206, 237, 1));
+            }
+
+            .rating-wrapper input {
+                appearance: none;
+            }
+
+            .rating-wrapper label:hover,
+            label:hover~label,
+            input:checked~label {
+                color: #FFD600;
+            }
+
+            .rating-wrapper label:hover,
+            label:hover~label,
+            input:checked~label {
+                color: #FFD600;
+            }
+
+            body.modal-open[style] {
+                padding-right: 0px !important;
+            }
+        </style>
     </head>
     <body class="inner_page widgets">
         <div class="full_container">
@@ -102,13 +214,13 @@
                                                 <p><strong>Hired by :</strong> ${contract.contract_employer_name}</p>
                                             </c:if>
                                             <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                <p><strong>Hiring :</strong> ${contract.contract_employer_name}</p>
+                                                <p><strong>Hiring :</strong> ${contract.contract_freelancer_name}</p>
                                             </c:if>
                                             <p><strong>Start date :</strong> ${contract.contract_job_start_date}</p>
                                             <p class="p_status"><strong>Duration :</strong> ${contract.showDuration(contract.contract_job_duration)} day(s)</p>
                                         </div>
                                         <div class="info_button pt-3">
-                                            <button class="buttonVip border-0" onclick="showJobDetail_${count.count}()">View Detail</button><button class="buttonVip border-0 ml-4">Chat</button>
+                                            <button class="buttonVip border-0" onclick="showJobDetail_${count.count}()">View Detail</button> <a href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}"><button class="buttonVip border-0 ml-4">Chat</button></a>
                                         </div>
                                     </div>
 
@@ -169,6 +281,63 @@
                                     </div>
                                 </div>
                             </div>
+                            <form action="FeedbackController" method="POST">
+                                <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content">
+                                            <div class="card text-center">
+                                                <div class="circle-image">
+                                                    <img src="${contract.contract_user_avatar}" width="40" />
+                                                </div>
+                                                <span class="dot"></span>
+                                                <span class="name mb-1"><strong>Feedback</strong></span>
+                                                <div class="mt-4">
+                                                    <h5 class="mb-3">Write feedback to ${contract.contract_freelancer_name} : </h5>
+                                                    <textarea style="width: 70%; border-radius: 6px; padding: 10px;" class="" name="" rows="3"
+                                                              placeholder="Typing...."></textarea>
+                                                </div>
+                                                <div class="rate bg-success text-white mt-3">
+                                                    <h6 class="m-4">Rate your Freelancer</h6>
+                                                    <div class="rating-wrapper row justify-content-center m-3">
+                                                        <!-- star 1 -->
+                                                        <input type="radio" id="1-star-rating" name="star-rating" value="1" />
+                                                        <label for="1-star-rating" class="star-rating star">
+                                                            <i class="fas fa-star d-inline-block"></i>
+                                                        </label>
+
+                                                        <!-- star 2 -->
+                                                        <input type="radio" id="2-star-rating" name="star-rating" value="2" />
+                                                        <label for="2-star-rating" class="star-rating star">
+                                                            <i class="fas fa-star"></i>
+                                                        </label>
+                                                        <!-- star 3 -->
+                                                        <input type="radio" id="3-star-rating" name="star-rating" value="3" />
+                                                        <label for="3-star-rating" class="star-rating star">
+                                                            <i class="fas fa-star"></i>
+                                                        </label>
+                                                        <!-- star 4 -->
+                                                        <input type="radio" id="4-star-rating" name="star-rating" value="4" />
+                                                        <label for="4-star-rating" class="star-rating star">
+                                                            <i class="fas fa-star"></i>
+                                                        </label>
+
+                                                        <!-- star 5 -->
+                                                        <input type="radio" id="5-star-rating" name="star-rating" value="5" />
+                                                        <label for="5-star-rating" class="star-rating">
+                                                            <i class="fas fa-star"></i>
+                                                        </label>
+                                                    </div>
+                                                    <div class="buttons mt-0">
+                                                        <button class="btn-warning btn-block rating-submit">
+                                                            Finish
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </c:forEach>
                     </div>
                     <!-- end row -->
@@ -212,7 +381,7 @@
                                                     </h5>
                                                     <h5 style="font-family: serif; margin-top: 10px">
                                                         <strong>Ready to Finish :</strong>
-                                                        <button class="btn btn-success border-0 ml-4"><i class="fas fa-check-double"></i></button>
+                                                        <button class="btn btn-success border-0 ml-4" data-toggle="modal" data-target="#feedbackModal"><i class="fas fa-check-double"></i></button>
                                                     </h5>
                                                 </c:if>
                                                 <footer class="blockquote-footer pt-4 mt-4 border-top font-italic">Handled by <span class="font-weight-bold">${contractDetail.contract_freelancer_name}</span></footer>
@@ -220,6 +389,62 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!--                                <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                        <div class="modal-content">
+                                                                            <div class="card text-center">
+                                                                                <div class="circle-image">
+                                                                                    <img src="https://i.ex-cdn.com/mgn.vn/files/content/2021/11/03/toc-goku_1-2117.jpg" width="40" />
+                                                                                </div>
+                                                                                <span class="dot"></span>
+                                                                                <span class="name mb-1"><strong>Feedback</strong></span>
+                                                                                <div class="mt-4">
+                                                                                    <h5 style="text-align: left; padding-left: 20%;">Write some fb to ... : </h5>
+                                                                                    <textarea style="width: 70%; border-radius: 6px; padding: 10px;" class="" name="" rows="3"
+                                                                                              placeholder="Typing...."></textarea>
+                                                                                </div>
+                                                                                <div class="rate bg-success text-white mt-3">
+                                                                                    <h6 class="m-4">Rate your Freelancer</h6>
+                                                                                    <div class="rating-wrapper row justify-content-center m-3">
+                                                                                         star 1 
+                                                                                        <input type="radio" id="1-star-rating" name="star-rating" value="1" />
+                                                                                        <label for="1-star-rating" class="star-rating star">
+                                                                                            <i class="fas fa-star d-inline-block"></i>
+                                                                                        </label>
+                                
+                                                                                         star 2 
+                                                                                        <input type="radio" id="2-star-rating" name="star-rating" value="2" />
+                                                                                        <label for="2-star-rating" class="star-rating star">
+                                                                                            <i class="fas fa-star"></i>
+                                                                                        </label>
+                                                                                         star 3 
+                                                                                        <input type="radio" id="3-star-rating" name="star-rating" value="3" />
+                                                                                        <label for="3-star-rating" class="star-rating star">
+                                                                                            <i class="fas fa-star"></i>
+                                                                                        </label>
+                                                                                         star 4 
+                                                                                        <input type="radio" id="4-star-rating" name="star-rating" value="4" />
+                                                                                        <label for="4-star-rating" class="star-rating star">
+                                                                                            <i class="fas fa-star"></i>
+                                                                                        </label>
+                                
+                                                                                         star 5 
+                                                                                        <input type="radio" id="5-star-rating" name="star-rating" value="5" />
+                                                                                        <label for="5-star-rating" class="star-rating">
+                                                                                            <i class="fas fa-star"></i>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="buttons mt-0">
+                                                                                        <button class="btn-warning btn-block rating-submit">
+                                                                                            Finish
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
                             </c:forEach>
 
                             <div class="col-md-4">
