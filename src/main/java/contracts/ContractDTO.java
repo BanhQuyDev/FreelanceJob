@@ -25,6 +25,7 @@ public class ContractDTO {
     private String contract_user_avatar;
     private double contract_remaining_time;
     private int contract_job_id;
+    private int idPartner;
     private String contract_job_end_date;
 
     public ContractDTO() {
@@ -61,7 +62,7 @@ public class ContractDTO {
         this.contract_job_duration = contract_job_duration;
     }
 
-    public ContractDTO(String contract_freelancer_name, String contract_employer_name, String contract_job_tittle, double contract_job_duration, String contract_job_start_date, String contract_user_avatar, double contract_remaining_time, int contract_job_id) {
+    public ContractDTO(String contract_freelancer_name, String contract_employer_name, String contract_job_tittle, double contract_job_duration, String contract_job_start_date, String contract_user_avatar, double contract_remaining_time, int contract_job_id,int idPartner) {
         this.contract_freelancer_name = contract_freelancer_name;
         this.contract_employer_name = contract_employer_name;
         this.contract_job_tittle = contract_job_tittle;
@@ -70,6 +71,7 @@ public class ContractDTO {
         this.contract_user_avatar = contract_user_avatar;
         this.contract_remaining_time = contract_remaining_time;
         this.contract_job_id = contract_job_id;
+        this.idPartner = idPartner;
     }
 
     public ContractDTO(String contract_job_tittle, double contract_job_price, String contract_job_description, String contract_job_start_date, String contract_job_end_date, String contract_freelancer_name, String contract_employer_name, int contract_job_id) {
@@ -202,5 +204,14 @@ public class ContractDTO {
     public String showDuration(double duration) {
         return Utils.convertPrice(duration);
     }
+
+    public int getIdPartner() {
+        return idPartner;
+    }
+
+    public void setIdPartner(int idPartner) {
+        this.idPartner = idPartner;
+    }
+    
 
 }

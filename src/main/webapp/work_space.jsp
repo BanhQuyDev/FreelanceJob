@@ -220,7 +220,7 @@
                                             <p class="p_status"><strong>Duration :</strong> ${contract.showDuration(contract.contract_job_duration)} day(s)</p>
                                         </div>
                                         <div class="info_button pt-3">
-                                            <button class="buttonVip border-0" onclick="showJobDetail_${count.count}()">View Detail</button><button class="buttonVip border-0 ml-4">Chat</button>
+                                            <button class="buttonVip border-0" onclick="showJobDetail_${count.count}()">View Detail</button> <a href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}"><button class="buttonVip border-0 ml-4">Chat</button></a>
                                         </div>
                                     </div>
 
