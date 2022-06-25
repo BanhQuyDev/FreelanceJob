@@ -283,7 +283,7 @@ public class ContractDAO {
                     String freelancerAvatar = rs.getString("freelancerAvatar");
                     Double remainingtime = Double.valueOf(rs.getInt("remainingtime"));
                     int id_job = rs.getInt("id_job");
-                    list.add(new ContractDTO(fullname, freelancerName, title, duration, start_date, freelancerAvatar, remainingtime, id_job));
+                    list.add(new ContractDTO(freelancerName, fullname, title, duration, start_date, freelancerAvatar, remainingtime, id_job));
                 }
             }
         } catch (Exception e) {
@@ -314,7 +314,7 @@ public class ContractDAO {
                     String end_date = rs.getString("end_date");
                     String fullname = rs.getString("fullname");
                     String employerName = rs.getString("employerName");
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName);
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job);
                 }
             }
         } catch (Exception e) {
@@ -345,7 +345,7 @@ public class ContractDAO {
                     String end_date = rs.getString("end_date");
                     String fullname = rs.getString("fullname");
                     String employerName = rs.getString("employerName");
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName);
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job);
                 }
             }
         } catch (Exception e) {
