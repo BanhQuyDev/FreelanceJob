@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body>
@@ -193,6 +193,11 @@
                                                                         <a class="text-danger" href="UpdateJobController?id_job=${p.idJob}&action=render">
                                                                             <span class="text1 font-weight-bold">Update Your Post</span>
                                                                         </a>
+                                                                    </div>
+                                                                </c:when>
+                                                                <c:when test="${status eq 'Updated'}">
+                                                                    <div class="mt-5">
+                                                                            <span style="color: #cecd4a" class="text1 font-weight-bold">Waiting admin to approve</span>
                                                                     </div>
                                                                 </c:when>
                                                                 <c:otherwise>

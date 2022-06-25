@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
         <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>

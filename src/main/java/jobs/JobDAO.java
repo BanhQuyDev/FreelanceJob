@@ -15,47 +15,47 @@ import utils.DBUtils;
  * @author QUANG HUY
  */
 public class JobDAO {
-    
+
     private static final String GET_ALL_JOB_UNAPPROPRIATED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major, j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status != 2 AND j.id_status != 4 ";
-    
+
     private static final String GET_ALL_JOB_ACCEPTED = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status != 1 AND j.id_status != 3";
-    
+
     private static final String GET_A_JOB_BY_ID = "SELECT j.id_job, j.title, j.salary, j.description, j.duration, j.start_date, s.status_name, u.fullname, j.id_major, j.create_date\n"
             + "FROM tblJob j, tblJobStatus s, tblEmployer e, tblUser u\n"
             + "WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_job = ?";
-    
+
     private static final String UPDATE_STATUS_JOB = "UPDATE tblJob SET id_status = 2 WHERE id_job = ?";
-    
+
     private static final String UPDATE_STATUS_JOB_UNAPPROPRIATED = "UPDATE tblJob SET id_status = 1 WHERE id_job = ?";
     private static final String UPDATE_STATUS_JOB_APPLIED = "UPDATE tblJob SET id_status = 4 WHERE id_job = ?";
     ///////////////Delete Job
     private static final String DELETE_JOB = "DELETE tblJob WHERE id_job = ?";
-    
+
     private static final String DELETE_CONTRACT_JOB = "DELETE tblContract WHERE id_job = ?";
-    
+
     private static final String DELETE_JOB_SKILL = "DELETE tblJobSkill WHERE id_job = ?";
-    
+
     private static final String DELETE_JOB_APPLICATION = "DELETE tblJobApplication WHERE id_job = ?";
     /////////////////////////////////////////////////
 
     private static final String INSERT_JOB = "INSERT INTO tblJob(title, salary, description, duration, start_date, id_status, id_employer, id_major)\n"
             + "VALUES (?,?,?,?,?,?,?,?)";
-    
+
     private static final String GET_TOP_4_LATEST_JOB = "SELECT TOP 4 Jj.id_job, Jj.title, Jj.duration, Jj.salary, U.fullname, Jj.create_date, \n"
             + "	(SELECT COUNT(JA.id_job) as freelancerQuantity FROM tblJob J, tblJobApplication JA, tblFreelancer F\n"
             + "  WHERE JA.id_job = J.id_job AND JA.id_freelancer = F.id_freelancer AND J.id_job = Jj.id_job  GROUP BY JA.id_job) as freelancerQuantity\n"
             + "FROM tblJob Jj, tblEmployer E, tblUser U WHERE E.id_employer = U.id_user AND E.id_employer = Jj.id_employer AND id_status = 2 \n"
             + "ORDER BY create_date DESC";
-    
+
     private static final String GET_ALL_JOB = "SELECT Jj.id_job, Jj.title, Jj.duration, Jj.salary, U.fullname, Jj.create_date,(SELECT COUNT(JA.id_job) as freelancerQuantity FROM tblJob J, tblJobApplication JA, tblFreelancer F\n"
             + "WHERE JA.id_job = J.id_job AND JA.id_freelancer = F.id_freelancer AND J.id_job = Jj.id_job  GROUP BY JA.id_job) as freelancerQuantity\n"
             + "FROM tblJob Jj, tblEmployer E, tblUser U \n"
             + "WHERE E.id_employer = U.id_user AND E.id_employer = Jj.id_employer AND id_status = 2";
-    
+
     private static final String GET_JOB_BY_MAJOR = "SELECT Ji.id_job, Ji.title, Ji.duration, Ji.salary, U.fullname, Ji.create_date,(SELECT COUNT(JA.id_job) as freelancerQuantity FROM tblJob J, tblJobApplication JA, tblFreelancer F\n"
             + "WHERE JA.id_job = J.id_job AND JA.id_freelancer = F.id_freelancer AND J.id_job = Ji.id_job  GROUP BY JA.id_job) as freelancerQuantity\n"
             + "FROM tblJob Ji, tblEmployer E, tblUser U, tblMajor M\n"
@@ -82,7 +82,7 @@ public class JobDAO {
             + "(SELECT M.major_name FROM tblMajor M WHERE M.id_major = J.id_major) AS major_name FROM tblJobApplication JA, tblFreelancer F, tblJob J, tblUser U\n"
             + "WHERE JA.id_freelancer = F.id_freelancer AND JA.id_job = J.id_job AND F.id_freelancer = U.id_user AND JA.status = 1 AND U.id_user = ?\n"
             + "ORDER BY JA.status DESC, JA.create_date DESC";
-    
+
     private final String GET_ALL_POST_OF_EMPLOYER_APPLY = "SELECT J.id_job, J.title, M.major_name, JS.status_name\n"
             + "FROM tblMajor M inner join tblJob J on M.id_major = J.id_major inner join tblJobStatus JS ON J.id_status = JS.id_status\n"
             + "WHERE J.id_employer = ? AND J.id_status = 2";
@@ -95,7 +95,7 @@ public class JobDAO {
     private final String UPDATE_JOB = "UPDATE tblJob\n"
             + "SET title = ?, salary = ?, duration = ?, id_major = ?, description = ?, start_date = ?, id_status = ?\n"
             + "WHERE id_job = ?";
-    
+
     public boolean updateJob(JobDTO job, int status) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -128,7 +128,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public List<JobDTO> getAllJobUnappropriated() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -161,7 +161,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> getAllJobAccepted() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -194,7 +194,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public JobDTO getAJobByID(int id) throws SQLException {
         JobDTO job = null;
         Connection conn = null;
@@ -229,7 +229,7 @@ public class JobDAO {
         }
         return job;
     }
-    
+
     public boolean recoverJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -249,7 +249,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean unappropriatedJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -269,7 +269,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean appliedJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -289,7 +289,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean deleteJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -309,7 +309,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean deleteContractJob(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -329,7 +329,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean deleteJobSkill(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -349,7 +349,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean deleteJobApplication(int idJob) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -369,7 +369,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean createJob(JobDTO job) throws SQLException {
         boolean result = false;
         Connection conn = null;
@@ -413,7 +413,7 @@ public class JobDAO {
         }
         return result;
     }
-    
+
     public boolean createSkillJob(String[] skillJob, int idJob) throws SQLException {
         int effectedRow = 0;
         Connection conn = null;
@@ -444,7 +444,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public List<JobDTO> getTop4LatestJob(int idUser) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -476,7 +476,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> getTop4LatestJob() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -506,7 +506,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> getAllJob() throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -536,7 +536,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> getAllJob(int idUser) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -568,7 +568,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> getJobByMajor(String major_name, int idUser) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -601,7 +601,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> getJobByMajor(String major_name) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -632,7 +632,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public JobDTO getDetailJob(int idJob) throws SQLException {
         JobDTO job = null;
         Connection conn = null;
@@ -668,7 +668,7 @@ public class JobDAO {
         }
         return job;
     }
-    
+
     public List<String> getSkillJob(int idJob) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -694,7 +694,7 @@ public class JobDAO {
         }
         return list;
     }
-    
+
     public List<JobApplicationDTO> getAllFreelancerApply(int id) throws SQLException {
         List<JobApplicationDTO> listUser = new ArrayList<>();
         Connection conn = null;
@@ -727,7 +727,7 @@ public class JobDAO {
         }
         return listUser;
     }
-    
+
     public boolean updateFreelancerAppy(int id_job, int id_freelancer) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -751,7 +751,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public boolean updateFreelancerDeny(int id_job, int id_freelancer) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -775,7 +775,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public List<JobDTO> getAllJobByEmployeer(int id) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -803,7 +803,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> getAllJobByEmployeerApply(int id) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -831,7 +831,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> gettAllPostJobByMajor(int id_employer, String major) throws SQLException {
         List<JobDTO> listPost = new ArrayList<>();
         Connection conn = null;
@@ -860,7 +860,7 @@ public class JobDAO {
         }
         return listPost;
     }
-    
+
     public JobDTO getAJobByEmployeer(int id, int id_job) throws SQLException {
         JobDTO job = null;
         Connection conn = null;
@@ -889,7 +889,7 @@ public class JobDAO {
         }
         return job;
     }
-    
+
     public List<JobApplicationDTO> getFreelancerApplyByJob(int id, int id_job) throws SQLException {
         List<JobApplicationDTO> listUser = new ArrayList<>();
         Connection conn = null;
@@ -924,7 +924,7 @@ public class JobDAO {
         }
         return listUser;
     }
-    
+
     public List<JobDTO> getListJobByEmail(String search) throws SQLException {
         List<JobDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -958,7 +958,7 @@ public class JobDAO {
         }
         return list;
     }
-    
+
     public List<JobDTO> getListJobSpamByEmail(String search) throws SQLException {
         List<JobDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -992,7 +992,7 @@ public class JobDAO {
         }
         return list;
     }
-    
+
     public boolean insertJobApplication(int idFreelancer, int idJob) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -1012,7 +1012,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public int getJobApplicationId(int idFreelancer, int idJob) throws SQLException {
         int check = 0;
         Connection conn = null;
@@ -1036,7 +1036,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public int countFreelancerIn1Job(int idJob) throws SQLException {
         int check = 0;
         Connection conn = null;
@@ -1059,7 +1059,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public List<JobDTO> getAppliedJobForFreelancer(int idFreelancer) throws SQLException {
         List<JobDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -1098,7 +1098,7 @@ public class JobDAO {
         }
         return list;
     }
-    
+
     public List<JobApplicationDTO> getFreelancerApplyByJob(int id_job) throws SQLException {
         List<JobApplicationDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -1126,7 +1126,7 @@ public class JobDAO {
         }
         return list;
     }
-    
+
     public int getApplicationTime(int idJob, int idFreelancer) throws SQLException {
         int check = 0;
         Connection conn = null;
@@ -1152,7 +1152,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public int getExecutionTime(int idJob, int idFreelancer) throws SQLException {
         int check = 0;
         Connection conn = null;
@@ -1178,7 +1178,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public List<JobDTO> getAllJobPostOfEmployerByStatus(int id, String[] status) throws SQLException {
         List<JobDTO> listJob = new ArrayList<>();
         Connection conn = null;
@@ -1195,7 +1195,7 @@ public class JobDAO {
             sql = sql.substring(0, sql.length() - 1);
         }
         sql += ")";
-        
+
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -1218,7 +1218,7 @@ public class JobDAO {
         }
         return listJob;
     }
-    
+
     public List<JobDTO> gettAllPostJobByMajorAndStatus(int id_employer, String major, String[] status) throws SQLException {
         List<JobDTO> listPost = new ArrayList<>();
         Connection conn = null;
@@ -1235,7 +1235,7 @@ public class JobDAO {
             sql = sql.substring(0, sql.length() - 1);
         }
         sql += ")";
-        
+
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -1259,7 +1259,7 @@ public class JobDAO {
         }
         return listPost;
     }
-    
+
     public List<JobApplicationDTO> getUserDeny(int id_freelancer, int id_job) throws SQLException {
         List<JobApplicationDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -1285,11 +1285,11 @@ public class JobDAO {
         } finally {
             DBUtils.closeConnection(conn, ptm, rs);
         }
-        return list;    
+        return list;
     }
 
     public JobDTO getAJobByIDV2(int parseInt) throws SQLException {
-       JobDTO job = null;
+        JobDTO job = null;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -1315,5 +1315,32 @@ public class JobDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return job;
+    }
+
+    public int getCountJobByFreelancer(int id_freelancer, int id_status) throws SQLException {
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT (id_freelancer) AS number_job\n"
+                + "     FROM tblJobApplication \n"
+                + "     WHERE id_freelancer = ? AND [status] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id_freelancer);
+                ptm.setInt(2, id_status);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("number_job");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return count;
     }
 }

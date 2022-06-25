@@ -54,12 +54,36 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 align-self-center">
                     <img
                         style="width: 100%"
                         src="./assets/img/logo/Logo_Đại_học_FPT.png"
                         alt=""
                         />
+                </div>
+                <div class="w-100" style="padding-left:15px">
+                    <div class="mb-2">
+                        <span style="color: #ffffff;
+                              font-size: 20px;
+                              margin-bottom: 29px;
+                              font-weight: 400;
+                              text-transform: uppercase;"
+                              >Policy</span>
+                    </div>
+                    <div class="footer-tittle">
+                        <ul class="d-flex " style="
+                            font-weight: 300;
+                            font-size: 14px">
+                            <li><a href="terms_of_use.jsp" title="Terms of Use">Terms of Use |</a></li>
+                            <li><a href="customer_terms.jsp" title="Customer Terms">Customer Terms |</a></li>
+                            <li><a href="freelancer_terms.jsp" title="Freelance Terms">Freelance Terms |</a></li>
+                            <li><a href="payment_terms.jsp" title="Payment Terms">Payment Terms |</a></li>
+                            <li><a href="operational_regulations.jsp" title="Operational Regulations">Operational Regulations |</a></li>
+                            <li><a href="privacy_policy.jsp" title="Privacy Policy">Privacy Policy |</a></li>
+                            <li><a href="resolve_complaints.jsp" title="Resolve complaints">Resolve complaints</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!--  -->

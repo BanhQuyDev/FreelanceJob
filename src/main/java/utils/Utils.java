@@ -28,4 +28,9 @@ public class Utils {
         }
         return convertPrice;
     }
+    public static String convertTime(String time) {
+        String[]array = time.split(":");  
+        String newTime = array[0]+":"+array[1];
+        return newTime;
+    }
 }

@@ -100,7 +100,6 @@ public class UserDAO {
         }
         return user;
     }
-
     public List<UserDTO> getAllUser() throws SQLException {
         List<UserDTO> listUser = new ArrayList<>();
         Connection conn = null;
@@ -381,7 +380,7 @@ public class UserDAO {
                 + "      ,[phone]\n"
                 + "      ,[avatar]\n"
                 + "      ,[status]\n"
-                + "  FROM [dbo].[tblUser] WHERE [id_user] = ?";
+                + "  FROM [dbo].[tblUser] WHERE [id_user] = ? AND status = 1";
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {

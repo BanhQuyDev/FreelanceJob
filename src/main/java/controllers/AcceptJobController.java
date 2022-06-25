@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jobs.JobDAO;
+import jobs.JobDTO;
+import notifications.NotificationDAO;
 
 /**
  *
@@ -31,7 +33,10 @@ public class AcceptJobController extends HttpServlet {
             int idJob = Integer.parseInt(request.getParameter("idJob"));
             JobDAO dao = new JobDAO();
             boolean checkAccept = dao.recoverJob(idJob); 
-            if(checkAccept){
+            JobDTO job = dao.getAJobByIDV2(idJob);
+            String content = " was recovered your job " + job.getTitle();
+            boolean check_noti = new NotificationDAO().createNotificationV2(job.getIdEmployer(), content,3, 8, 2);
+            if(checkAccept && check_noti){
                 request.setAttribute("SUCCESS", "Recover Successfully!!");
                 url = SUCCESS;
             }else{

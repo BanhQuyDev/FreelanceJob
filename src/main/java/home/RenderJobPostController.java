@@ -14,25 +14,28 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import notifications.NotificationDAO;
+import notifications.NotificationDTO;
 
 @WebServlet(name = "RenderJobPostController", value = "/RenderJobPostController")
 public class RenderJobPostController extends HttpServlet {
 
     private final String SUCCESS = "post_management_employer.jsp";
     private final String ERROR = "HomeController";
-    private boolean isCheck(int d, String [] selectedStatus) {
+
+    private boolean isCheck(int d, String[] selectedStatus) {
         if (selectedStatus == null) {
             return false;
         } else {
             for (int i = 0; i < selectedStatus.length; i++) {
-                if(Integer.parseInt(selectedStatus[i]) == d) {
+                if (Integer.parseInt(selectedStatus[i]) == d) {
                     return true;
                 }
             }
         }
         return false;
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -48,8 +51,15 @@ public class RenderJobPostController extends HttpServlet {
             request.setAttribute("LIST_STATUS", listJobStatus);
             String[] selectedStatus = request.getParameterValues("chkStatus");
             boolean[] checked = new boolean[listJobStatus.size()];
+            if (request.getParameter("id_noti") != null) {
+                new NotificationDAO().setStatusV2(Integer.parseInt(request.getParameter("id_noti")));
+                List<NotificationDTO> listNotificationsEmployerUnread = new NotificationDAO().showAllNotificationEmployerUnread(employer.getId());
+                List<NotificationDTO> listNotificationsEmployerRead = new NotificationDAO().showAllNotificationEmployerRead(employer.getId());
+                session.setAttribute("LIST_NOTIFICATIONS_EMPLOYER_UNREAD", listNotificationsEmployerUnread);
+                session.setAttribute("LIST_NOTIFICATIONS_EMPLOYER_READ", listNotificationsEmployerRead);
+            }
             for (int i = 0; i < checked.length; i++) {
-                if(isCheck(listJobStatus.get(i).getId_status(), selectedStatus)) {
+                if (isCheck(listJobStatus.get(i).getId_status(), selectedStatus)) {
                     checked[i] = true;
                 } else {
                     checked[i] = false;
@@ -58,7 +68,7 @@ public class RenderJobPostController extends HttpServlet {
             if (selectedMajor == null || selectedMajor.equals("All Major")) {
                 List<JobDTO> list = new ArrayList<>();
                 if (employer != null) {
-                    if(selectedStatus == null) {
+                    if (selectedStatus == null) {
                         list = new JobDAO().getAllJobByEmployeer(employer.getId());
                         request.setAttribute("POST_LIST", list);
                         request.setAttribute("SELECTED_STATUS", checked);
