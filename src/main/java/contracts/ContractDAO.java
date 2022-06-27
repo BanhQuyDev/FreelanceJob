@@ -36,22 +36,23 @@ public class ContractDAO {
             + "	(SELECT U.fullname FROM tblContract C, tblFreelancer F, tblUser U WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = Cc.id_contract) as freelancer_name,\n"
             + "    (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
             + "FROM tblContract Cc, tblEmployer E, tblUser U WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND Cc.status = ? AND U.id_user = ?";
-    private final String GET_ALL_CONTRACT_FOR_WORKSPACE = "SELECT U.fullname, J.title, J.start_date, J.duration,Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime,\n" +
-"(SELECT U.fullname FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerName,\n" +
-"(SELECT U.id_user FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as idEmployer,\n" +
-"(SELECT U.avatar FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerAvatar\n" +
-"FROM tblContract Cc, tblJob J, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.id_job = J.id_job AND Cc.status = 0 AND F.id_freelancer = ?";
-    private final String GET_ALL_CONTRACT_FOR_WORKSPACE_FOR_EMPLOYER = "SELECT U.fullname, J.title, J.start_date, J.duration, Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime,\n" +
-"(SELECT U.fullname FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as freelancerName,\n" +
-"(SELECT U.id_user FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as idFreelancer,\n" +
-"(SELECT U.avatar FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as freelancerAvatar\n" +
-"FROM tblContract Cc, tblJob J, tblEmployer E, tblUser U WHERE Cc.id_job = J.id_job AND E.id_employer = Cc.id_employer AND E.id_employer = J.id_employer AND E.id_employer = u.id_user AND Cc.status = 0 AND Cc.id_employer = ?";
+    private final String GET_ALL_CONTRACT_FOR_WORKSPACE = "SELECT U.fullname, J.title, J.start_date, J.duration,Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime,\n"
+            + "(SELECT U.fullname FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerName,\n"
+            + "(SELECT U.id_user FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as idEmployer,\n"
+            + "(SELECT U.avatar FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerAvatar\n"
+            + "FROM tblContract Cc, tblJob J, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.id_job = J.id_job AND Cc.status = 0 AND F.id_freelancer = ?";
+    private final String GET_ALL_CONTRACT_FOR_WORKSPACE_FOR_EMPLOYER = "SELECT U.fullname, J.title, J.start_date, J.duration, Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime,\n"
+            + "(SELECT U.fullname FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as freelancerName,\n"
+            + "(SELECT U.id_user FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as idFreelancer,\n"
+            + "(SELECT U.avatar FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as freelancerAvatar\n"
+            + "FROM tblContract Cc, tblJob J, tblEmployer E, tblUser U WHERE Cc.id_job = J.id_job AND E.id_employer = Cc.id_employer AND E.id_employer = J.id_employer AND E.id_employer = u.id_user AND Cc.status = 0 AND Cc.id_employer = ?";
     private final String GET_ALL_CONTRACT_DETAIL_FOR_WORKSPACE = "SELECT J.title, J.salary, J.description, J.start_date, DATEADD(day,J.duration, J.start_date) end_date, U.fullname, \n"
             + "(SELECT U.fullname FROM tblContract C, tblEmployer E, tblUser U WHERE E.id_employer = C.id_employer AND E.id_employer = U.id_user AND C.id_contract = Cc.id_contract ) employerName\n"
             + "FROM tblContract Cc, tblJob J, tblFreelancer F, tblUser U WHERE Cc.id_job = J.id_job AND Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.id_freelancer = ? AND Cc.id_job = ?";
     private final String GET_ALL_CONTRACT_DETAIL_FOR_WORKSPACE_FOR_EMPLOYER = "SELECT J.title, J.salary, J.description, J.start_date, DATEADD(day,J.duration, J.start_date) end_date, U.fullname, \n"
             + "(SELECT U.fullname FROM tblContract C, tblEmployer E, tblUser U WHERE E.id_employer = C.id_employer AND E.id_employer = U.id_user AND C.id_contract = Cc.id_contract ) employerName\n"
             + "FROM tblContract Cc, tblJob J, tblFreelancer F, tblUser U WHERE Cc.id_job = J.id_job AND Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.id_employer = ? AND Cc.id_job = ?";
+    private final String UPDATE_CONTRACT_AFTER_FEEDBACK = "UPDATE tblContract SET status = 1 WHERE id_job = ?";
 
     public List<ContractDTO> getAllContractForHistory(int id_user) throws SQLException {
         List<ContractDTO> list = new ArrayList<>();
@@ -255,7 +256,7 @@ public class ContractDAO {
                     Double remainingtime = Double.valueOf(rs.getInt("remainingtime"));
                     int id_job = rs.getInt("id_job");
                     int idPartner = rs.getInt("idEmployer");
-                    list.add(new ContractDTO(fullname, employerName, title, duration, start_date, employerAvatar, remainingtime, id_job,idPartner));
+                    list.add(new ContractDTO(fullname, employerName, title, duration, start_date, employerAvatar, remainingtime, id_job, idPartner));
                 }
             }
         } catch (Exception e) {
@@ -287,7 +288,7 @@ public class ContractDAO {
                     Double remainingtime = Double.valueOf(rs.getInt("remainingtime"));
                     int id_job = rs.getInt("id_job");
                     int idPartner = rs.getInt("idFreelancer");
-                    list.add(new ContractDTO(freelancerName, fullname, title, duration, start_date, freelancerAvatar, remainingtime, id_job,idPartner));
+                    list.add(new ContractDTO(freelancerName, fullname, title, duration, start_date, freelancerAvatar, remainingtime, id_job, idPartner));
                 }
             }
         } catch (Exception e) {
@@ -358,5 +359,24 @@ public class ContractDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return contract;
+    }
+
+    public boolean updateContractAfterFeedback(int id_job) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_CONTRACT_AFTER_FEEDBACK);
+                ptm.setInt(1, id_job);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return check;
     }
 }
