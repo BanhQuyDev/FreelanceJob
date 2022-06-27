@@ -21,21 +21,21 @@ public class ContractDAO {
     private final String GET_ALL_CONTRACT_FOR_HISTORY = "SELECT Cc.id_contract, Cc.create_date, Cc.status, U.fullname as freelancer_name,\n"
             + "	 (SELECT U.fullname FROM tblContract C, tblEmployer E, tblUser U WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = Cc.id_contract) as employer_name,\n"
             + "	 (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
-            + "FROM tblContract Cc, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND U.id_user = ?";
+            + "FROM tblContract Cc, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND U.id_user = ? ORDER BY Cc.status DESC, Cc.create_date DESC";
     private final String GET_ALL_CONTRACT_FOR_HISTORY_FOR_EMPLOYER = "SELECT Cc.id_contract, Cc.create_date, Cc.status, U.fullname as employer_name,\n"
             + "	(SELECT U.fullname FROM tblContract C, tblFreelancer F, tblUser U WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = Cc.id_contract) as freelancer_name,\n"
             + "    (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
-            + "FROM tblContract Cc, tblEmployer E, tblUser U WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND U.id_user = ?";
+            + "FROM tblContract Cc, tblEmployer E, tblUser U WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND U.id_user = ? ORDER BY Cc.status DESC, Cc.create_date DESC";
     private final String GET_CONTRACT_BY_ID = "SELECT C.id_contract, C.create_date, C.status, J.title, J.salary, J.description, J.duration\n"
             + "FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = ?";
     private final String FILTER_CONTRACT_FOR_HISTORY = "SELECT Cc.id_contract, Cc.create_date, Cc.status, U.fullname as freelancer_name,\n"
             + "	 (SELECT U.fullname FROM tblContract C, tblEmployer E, tblUser U WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = Cc.id_contract) as employer_name,\n"
             + "	 (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
-            + "FROM tblContract Cc, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.status = ? AND U.id_user = ?";
+            + "FROM tblContract Cc, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.status = ? AND U.id_user = ? ORDER BY Cc.create_date DESC";
     private final String FILTER_CONTRACT_FOR_HISTORY_FOR_EMPLOYER = "SELECT Cc.id_contract, Cc.create_date, Cc.status, U.fullname as employer_name,\n"
             + "	(SELECT U.fullname FROM tblContract C, tblFreelancer F, tblUser U WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = Cc.id_contract) as freelancer_name,\n"
             + "    (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
-            + "FROM tblContract Cc, tblEmployer E, tblUser U WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND Cc.status = ? AND U.id_user = ?";
+            + "FROM tblContract Cc, tblEmployer E, tblUser U WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND Cc.status = ? AND U.id_user = ? ORDER BY Cc.create_date DESC";
     private final String GET_ALL_CONTRACT_FOR_WORKSPACE = "SELECT U.fullname, J.title, J.start_date, J.duration,Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime,\n"
             + "(SELECT U.fullname FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerName,\n"
             + "(SELECT U.id_user FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as idEmployer,\n"

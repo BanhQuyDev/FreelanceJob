@@ -287,7 +287,7 @@
                                     <input name="idEmployer" value="${sessionScope.LOGIN_USER.id}" hidden=""/>
                                     <input name="idJob" value="${contract.contract_job_id}" hidden=""/>
                                 </c:if>
-                                <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal">
+                                <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal${count.count}">
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
                                             <div class="card text-center">
@@ -386,7 +386,7 @@
                                                     </h5>
                                                     <h5 style="font-family: serif; margin-top: 15px">
                                                         <strong class="self-align-center">Ready to Finish :</strong>
-                                                        <button class="btn btn-success border-0 ml-4 p-2 pl-4 pr-4" data-toggle="modal" data-target="#feedbackModal">Submit <i class="fas fa-check-double ml-3"></i></button>
+                                                        <button class="btn btn-success border-0 ml-4 p-2 pl-4 pr-4" data-toggle="modal" data-target="#feedbackModal${count.count}">Submit <i class="fas fa-check-double ml-3"></i></button>
                                                     </h5>
                                                 </c:if>
                                                 <footer class="blockquote-footer pt-4 mt-4 border-top font-italic">Handled by <span class="font-weight-bold">${contractDetail.contract_freelancer_name}</span></footer>
