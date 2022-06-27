@@ -4,6 +4,8 @@
  */
 package home;
 
+import contracts.ContractDAO;
+import feedbacks.FeedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "FeedbackController", urlPatterns = {"/FeedbackController"})
 public class FeedbackController extends HttpServlet {
 
-    private static final String ERROR = "WorkspaceController";
+    private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "WorkspaceController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -27,16 +29,23 @@ public class FeedbackController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            String contentFeedback = request.getParameter("contentFeedback");
+            int starRating = 0;
+            if (request.getParameter("star-rating") != null) {
+                starRating = Integer.parseInt(request.getParameter("star-rating"));
+            }
+            int idFreelancer = Integer.parseInt(request.getParameter("idFreelancer"));
+            int idEmployer = Integer.parseInt(request.getParameter("idEmployer"));
+            int idJob = Integer.parseInt(request.getParameter("idJob"));
 
-
-
-
-
-
-
-
-
-
+            FeedbackDAO feedbackDao = new FeedbackDAO();
+            ContractDAO contractDao = new ContractDAO();
+            if (feedbackDao.createFeedback(contentFeedback, starRating, idFreelancer, idEmployer)) {
+                if (contractDao.updateContractAfterFeedback(idJob)) {
+                    request.setAttribute("SUCCESS_MESSAGE", "Your job has been finish !!");
+                    url = SUCCESS;
+                }
+            }
         } catch (Exception e) {
             log("Error at WorkspaceController : " + e.toString());
         } finally {

@@ -116,7 +116,7 @@
                     <c:if test="${contract.contract_status == 0}">                
                         <div class="item item_doing left">
                             <div class="date">Start at : ${contract.contract_create_date}</div>
-                            <i class="icon fa fa-award"></i>
+                            <i class="icon fa fa-gauge-high"></i>
                             <div class="content">
                                 <h2><strong>${contract.contract_job_tittle} <i class="fa-regular fa-bookmark ml-1"></i></strong></h2>
                                 <p>
@@ -148,7 +148,7 @@
                     <c:if test="${contract.contract_status == 1}">
                         <div class="item item_done right">
                             <div class="date">Start at : ${contract.contract_create_date}</div>
-                            <i class="icon fa fa-gauge-high"></i>
+                             <i class="icon fa fa-award"></i>
                             <div class="content">
                                 <h2><strong>${contract.contract_job_tittle} <i class="fa-solid fa-bookmark i-done" style="color: #006E51"></i></strong></h2>
                                 <p>

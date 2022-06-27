@@ -116,8 +116,8 @@
                     <div class="function-video ">
                         <i id="mic" style="background-color: white; padding: 9px;border-radius: 20px;" onclick="toggleAudio()" class="fa-solid fa-microphone-lines"></i>
                         <i id="video" style="background-color: white; padding: 9px;border-radius: 20px;" onclick="toggleVideo()" class="fa-solid fa-video"></i>
-                        <button id="start"> Start Screen Sharing</button>
-                        <button id="stop"> Stop</button>
+<!--                        <button id="start"> Start Screen Sharing</button>
+                        <button id="stop"> Stop</button>-->
                     </div>
                 </div>
                 <div class="col-3">

@@ -76,10 +76,10 @@
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active" >
                                     <form action="JobListingController" method="POST">
-                                        <div style="position: relative">
-                                            <img class="d-block img-thumbnail carousel-img" style="padding: 0; position: absolute"
+                                        <div style="position: relative; width: 100%; background-color: #363e51">
+                                            <img class="d-block img-thumbnail carousel-img" style=" position: absolute; padding: 0"
                                                  src="assets/img/logo/bannerguy.avif" alt="Uthappizza">
-                                            <img src="assets/img/logo/banner.svg" alt="alt"/>
+                                            <img style="width: 100%; height: 422px; object-fit: cover" src="assets/img/logo/banner.svg" alt="alt"/>
                                         </div>
                                         <div class="carousel-caption d-none d-md-block carousel-content">
                                             <p>Find & Hire <br>Expert Freelancers 

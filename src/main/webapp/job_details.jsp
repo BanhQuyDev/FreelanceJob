@@ -175,12 +175,12 @@
                                                        class="btn" style="padding-left:25px;padding-right:25px;">Apply Now</a>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                    <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                                 </div>
                                             </div>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE != 'EMPLOYER'}">
-                                            <button class="btn" onclick="history.back()">Previous</button>
+                                            <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                         </c:when>
                                         <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">                
                                             <div class="row">
@@ -188,7 +188,7 @@
                                                     <a class="btn rounded" style="padding-left:25px;padding-right:25px;" href="ApplyJobController?jobId=${job.idJob}">Apply Now</a>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                    <a href="JobListingController?selectedMajor=All Major" class="btn" style="margin-left: 60px;">Previous</a>
+                                                    <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                                 </div>
                                             </div>
                                         </c:when>
@@ -198,12 +198,12 @@
                                                     <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                    <a href="JobListingController?selectedMajor=All Major" class="btn" style="margin-left: 60px;">Previous</a>
+                                                    <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                                 </div>
                                             </div>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE == 'EMPLOYER'}">
-                                            <button class="btn" onclick="history.back()">Previous</button>
+                                           <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                         </c:when>
                                         <c:when test="${requestScope.JOB_APPLICATION_ID != 0}">
                                             <div class="row">
@@ -211,7 +211,7 @@
                                                     <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                    <button class="btn" style="margin-left: 60px;" onclick="history.back()">Previous</button>
+                                                   <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                                 </div>
                                             </div>
                                         </c:when>
