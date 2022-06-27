@@ -214,7 +214,7 @@
                                                 <p><strong>Hired by :</strong> ${contract.contract_employer_name}</p>
                                             </c:if>
                                             <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                <p><strong>Hiring :</strong> ${contract.contract_freelancer_name}</p>
+                                                <p><strong>Hiring :</strong> ${contract.contract_freelancer_name}</p>                                           
                                             </c:if>
                                             <p><strong>Start date :</strong> ${contract.contract_job_start_date}</p>
                                             <p class="p_status"><strong>Duration :</strong> ${contract.showDuration(contract.contract_job_duration)} day(s)</p>
@@ -282,6 +282,11 @@
                                 </div>
                             </div>
                             <form action="FeedbackController" method="POST">
+                                <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
+                                    <input name="idFreelancer" value="${contract.idPartner}" hidden=""/>
+                                    <input name="idEmployer" value="${sessionScope.LOGIN_USER.id}" hidden=""/>
+                                    <input name="idJob" value="${contract.contract_job_id}" hidden=""/>
+                                </c:if>
                                 <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal">
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
@@ -293,20 +298,20 @@
                                                 <span class="name mb-1"><strong>Feedback</strong></span>
                                                 <div class="mt-4">
                                                     <h5 class="mb-3">Write feedback to ${contract.contract_freelancer_name} : </h5>
-                                                    <textarea style="width: 70%; border-radius: 6px; padding: 10px;" class="" name="" rows="3"
-                                                              placeholder="Typing...."></textarea>
+                                                    <textarea style="width: 70%; border-radius: 6px; padding: 10px;" class="" name="contentFeedback" rows="3"
+                                                              placeholder="Typing...." required=""></textarea>
                                                 </div>
                                                 <div class="rate bg-success text-white mt-3">
                                                     <h6 class="m-4">Rate your Freelancer</h6>
                                                     <div class="rating-wrapper row justify-content-center m-3">
                                                         <!-- star 1 -->
-                                                        <input type="radio" id="1-star-rating" name="star-rating" value="1" />
+                                                        <input type="radio" id="1-star-rating" name="star-rating" value="5" />
                                                         <label for="1-star-rating" class="star-rating star">
                                                             <i class="fas fa-star d-inline-block"></i>
                                                         </label>
 
                                                         <!-- star 2 -->
-                                                        <input type="radio" id="2-star-rating" name="star-rating" value="2" />
+                                                        <input type="radio" id="2-star-rating" name="star-rating" value="4" />
                                                         <label for="2-star-rating" class="star-rating star">
                                                             <i class="fas fa-star"></i>
                                                         </label>
@@ -316,13 +321,13 @@
                                                             <i class="fas fa-star"></i>
                                                         </label>
                                                         <!-- star 4 -->
-                                                        <input type="radio" id="4-star-rating" name="star-rating" value="4" />
+                                                        <input type="radio" id="4-star-rating" name="star-rating" value="2" />
                                                         <label for="4-star-rating" class="star-rating star">
                                                             <i class="fas fa-star"></i>
                                                         </label>
 
                                                         <!-- star 5 -->
-                                                        <input type="radio" id="5-star-rating" name="star-rating" value="5" />
+                                                        <input type="radio" id="5-star-rating" name="star-rating" value="1" />
                                                         <label for="5-star-rating" class="star-rating">
                                                             <i class="fas fa-star"></i>
                                                         </label>
@@ -375,13 +380,13 @@
                                                     </h5>
                                                 </c:if>
                                                 <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                    <h5 style="font-family: serif; margin-top: 10px">
+                                                    <h5 style="font-family: serif; margin-top: 20px">
                                                         <strong>File Submission :</strong>
                                                         <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4"><i class="fas fa-file-upload text-light"></i></button>
                                                     </h5>
-                                                    <h5 style="font-family: serif; margin-top: 10px">
-                                                        <strong>Ready to Finish :</strong>
-                                                        <button class="btn btn-success border-0 ml-4" data-toggle="modal" data-target="#feedbackModal"><i class="fas fa-check-double"></i></button>
+                                                    <h5 style="font-family: serif; margin-top: 15px">
+                                                        <strong class="self-align-center">Ready to Finish :</strong>
+                                                        <button class="btn btn-success border-0 ml-4 p-2 pl-4 pr-4" data-toggle="modal" data-target="#feedbackModal">Submit <i class="fas fa-check-double ml-3"></i></button>
                                                     </h5>
                                                 </c:if>
                                                 <footer class="blockquote-footer pt-4 mt-4 border-top font-italic">Handled by <span class="font-weight-bold">${contractDetail.contract_freelancer_name}</span></footer>
@@ -389,62 +394,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--                                <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal">
-                                                                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                                        <div class="modal-content">
-                                                                            <div class="card text-center">
-                                                                                <div class="circle-image">
-                                                                                    <img src="https://i.ex-cdn.com/mgn.vn/files/content/2021/11/03/toc-goku_1-2117.jpg" width="40" />
-                                                                                </div>
-                                                                                <span class="dot"></span>
-                                                                                <span class="name mb-1"><strong>Feedback</strong></span>
-                                                                                <div class="mt-4">
-                                                                                    <h5 style="text-align: left; padding-left: 20%;">Write some fb to ... : </h5>
-                                                                                    <textarea style="width: 70%; border-radius: 6px; padding: 10px;" class="" name="" rows="3"
-                                                                                              placeholder="Typing...."></textarea>
-                                                                                </div>
-                                                                                <div class="rate bg-success text-white mt-3">
-                                                                                    <h6 class="m-4">Rate your Freelancer</h6>
-                                                                                    <div class="rating-wrapper row justify-content-center m-3">
-                                                                                         star 1 
-                                                                                        <input type="radio" id="1-star-rating" name="star-rating" value="1" />
-                                                                                        <label for="1-star-rating" class="star-rating star">
-                                                                                            <i class="fas fa-star d-inline-block"></i>
-                                                                                        </label>
-                                
-                                                                                         star 2 
-                                                                                        <input type="radio" id="2-star-rating" name="star-rating" value="2" />
-                                                                                        <label for="2-star-rating" class="star-rating star">
-                                                                                            <i class="fas fa-star"></i>
-                                                                                        </label>
-                                                                                         star 3 
-                                                                                        <input type="radio" id="3-star-rating" name="star-rating" value="3" />
-                                                                                        <label for="3-star-rating" class="star-rating star">
-                                                                                            <i class="fas fa-star"></i>
-                                                                                        </label>
-                                                                                         star 4 
-                                                                                        <input type="radio" id="4-star-rating" name="star-rating" value="4" />
-                                                                                        <label for="4-star-rating" class="star-rating star">
-                                                                                            <i class="fas fa-star"></i>
-                                                                                        </label>
-                                
-                                                                                         star 5 
-                                                                                        <input type="radio" id="5-star-rating" name="star-rating" value="5" />
-                                                                                        <label for="5-star-rating" class="star-rating">
-                                                                                            <i class="fas fa-star"></i>
-                                                                                        </label>
-                                                                                    </div>
-                                                                                    <div class="buttons mt-0">
-                                                                                        <button class="btn-warning btn-block rating-submit">
-                                                                                            Finish
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>-->
                             </c:forEach>
 
                             <div class="col-md-4">

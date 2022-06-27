@@ -34,15 +34,15 @@
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
-            <section class="site-section">
+            <section class="site-section" style="background-image: url('assets/img/hero/Background_Update_Job.jpg'); background-repeat: no-repeat; background-size: cover; padding: 50px 0px; font-family: 'The Girl Next Door', cursive">
                 <div class="container">
-                    <div class="row mb-5">
-                        <div class="col-lg-12">
-                            <form action="UpdateJobController" class="p-4 p-md-5 border rounded" method="POST" style="margin: 2em 0em">
+                    <div class="row mb-5 mt-5">
+                        <div class="col-lg-12" style="border: 3px solid white; border-radius: 15px; background-color: #ffffff73">
+                            <form action="UpdateJobController" class="p-4 p-md-5" method="POST">
                             <c:set var="job" value="${requestScope.JOB_UPDATE}"/>
                             <input type="hidden" name="id_job" value="${job.idJob}"/>
                             <input type="hidden" name="status" value="${job.status}"/>
-                            <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">UPDATE JOB FORM</h3>
+                            <h3 class="text-black text-center" style="font-family: 'The Girl Next Door', cursive; font-weight: 600; background-color: whitesmoke; margin: 0 24% 50px 24%; padding: 20px; box-shadow: 0px 0px 30px black; border-radius: 10px;">WHAT DO YOU WANT TO UPDATE</h3>
                             <div class="form-group">
                                 <label><strong>Job Title</strong></label>
                                 <input type="text"
@@ -57,7 +57,7 @@
 
                             <div class="form-row" style="margin-bottom: 15px">
                                 <div class="col">
-                                    <label for="job-title">Price</label>
+                                    <label for="job-title"><strong>Price</strong></label>
                                     <input type="text" 
                                            id="amount"
                                            name="salary" 
@@ -119,19 +119,19 @@
                                     </select>
                                 </div>
                             </div>                                                    
-                            <div style="margin-top: 20px" class="row align-items-center mb-5">
+                            <div style="margin-top: 20px" class="row align-items-center mt-5 mb-3">
                                 <div class="col-lg-4 ml-auto">
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="RenderJobPostController" class="btn btn-block btn-light btn-md"
-                                               ><span class="icon-open_in_new mr-2"></span>Back</a
+                                            <a href="RenderJobPostController" class="btn btn-block btn-dark btn-md rounded" style="padding: 20px 44px"
+                                               ><span class="icon-open_in_new"></span><i class="fas fa-arrow-alt-circle-left"></i> Back</a
                                             >
                                         </div>
                                         <div class="col-6">
                                             <input 
                                                 type="submit" 
                                                 name="action"
-                                                class="btn btn-primary" 
+                                                class="btn btn-primary rounded" 
                                                 value="Update Post"
                                                 />
                                         </div>

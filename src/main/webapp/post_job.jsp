@@ -39,12 +39,12 @@
     </head>
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
-            <section class="site-section">
+        <section class="site-section" style="background-image: url('assets/img/hero/Background_Post_Job.jpg'); background-repeat: no-repeat; background-size: cover; padding: 50px 0px; font-family: 'The Girl Next Door', cursive">
                 <div class="container">
                     <div class="row mb-5">
-                        <div class="col-lg-12">
-                            <form id="form" action="PostJobController" class="p-4 p-md-5 border rounded" method="post" >
-                                <h3 class="text-black mb-5 border-bottom pb-2" style="text-align: center;">POST JOB FORM</h3>
+                        <div class="col-lg-12" style="border: 3px solid white; border-radius: 15px; background-color: #ffffff73">
+                            <form id="form" action="PostJobController" class="p-4 p-md-5" method="post" >
+                                <h3 class="text-black mb-5 pb-3 text-center" style="border-bottom: 2px solid #000000b0; font-weight: 600; font-family: 'The Girl Next Door', cursive">POST JOB FORM</h3>
                                 <div class="form-group">
                                     <label for="job-title"><strong>Job Title</strong></label>
                                     <input type="text"
@@ -116,25 +116,25 @@
                             <div class="form-group">
                                 <label for="description"><strong>Skill-Job</strong></label>
                                 <div>
-                                    <select style="width: 100%" class="js-select2" multiple="multiple" name="skillJob">
+                                    <select style="width: 50%" class="js-select2" multiple="multiple" name="skillJob">
                                         <c:forEach var="s" items="${requestScope.LIST_SKILL_POST}">
-                                            <option  value="${s.skillId}" data-badge="">${s.name}</option>
+                                            <option value="${s.skillId}" data-badge="">${s.name}</option>
                                         </c:forEach>                                      
                                     </select>
                                 </div>
                             </div>                                                    
-                            <div style="margin-top: 20px" class="row align-items-center mb-5">
+                            <div style="margin-top: 20px" class="row align-items-center">
                                 <div class="col-lg-4 ml-auto">
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="HomeController" class="btn btn-block btn-light btn-md"
-                                               ><span class="icon-open_in_new mr-2"></span>Back</a
+                                            <a href="HomeController" class="btn btn-block btn-dark btn-md rounded" style="padding: 20px 44px"
+                                               ><span class="icon-open_in_new"></span><i class="fas fa-arrow-alt-circle-left"></i> Back</a
                                             >
                                         </div>
                                         <div class="col-6">
                                             <input 
                                                 type="submit" 
-                                                class="btn btn-block btn-primary btn-md" 
+                                                class="btn btn-block btn-primary btn-md rounded" 
                                                 value="Save Job"
                                                 />
                                         </div>
