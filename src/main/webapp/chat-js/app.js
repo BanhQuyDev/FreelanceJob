@@ -173,58 +173,58 @@ function toggleAudio() {
     }
 }
 
-//const startElem = document.getElementById("start");
-//const stopElem = document.getElementById("stop");
-//// Options for getDisplayMedia()
-//var displayMediaOptions = {
-//    video: {
-//        cursor: "always",
-//        height: 1000,
-//        width: 1200
-//    },
-//    audio: false
-//};
-//// Set event listeners for the start and stop buttons
-//startElem.addEventListener("click", function (evt) {
-//    startCapture('Doan Vu Quang Huy');
-//}, false);
-//stopElem.addEventListener("click", function (evt) {
-//    stopCapture();
-//}, false);
-//async function startCapture(name) {
-//    try {
-//        await navigator.mediaDevices.getDisplayMedia(displayMediaOptions)({
-//            video: true,
-//            audio: true
-//        }).then((stream) => {
-//            myStream = stream;
-//            addLocalVideo(stream);
-//            var call = peer.call(receiverId, stream);
-//            call.on('stream', (remoteStream) => {
-//                if (!peerList.includes(call.peer)) {
-//                    addRemoteVideo(remoteStream);
-//                    peerList.push(call.peer);
-//                }
-//            });
-//        }).catch((err) => {
-//            console.log("unable to connect because " + err);
-//        });
-//        dumpOptionsInfo();
-//    } catch (err) {
-//        console.error("Error: " + err);
-//    }
-//}
-//function stopCapture(evt) {
-//    var video = document.createElement("video");
-//    let tracks = video.srcObject.getTracks();
-//    tracks.forEach(track => track.stop());
-//    video.srcObject = null;
-//}
-//function dumpOptionsInfo() {
-//    var video = document.createElement("video");
-//    const videoTrack = video.srcObject.getVideoTracks()[0];
-//    console.info("Track settings:");
-//    console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
-//    console.info("Track constraints:");
-//    console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
-//}
+const startElem = document.getElementById("start");
+const stopElem = document.getElementById("stop");
+// Options for getDisplayMedia()
+var displayMediaOptions = {
+    video: {
+        cursor: "always",
+        height: 1000,
+        width: 1200
+    },
+    audio: false
+};
+// Set event listeners for the start and stop buttons
+startElem.addEventListener("click", function (evt) {
+    startCapture('Doan Vu Quang Huy');
+}, false);
+stopElem.addEventListener("click", function (evt) {
+    stopCapture();
+}, false);
+async function startCapture(name) {
+    try {
+        await navigator.mediaDevices.getDisplayMedia(displayMediaOptions)({
+            video: true,
+            audio: true
+        }).then((stream) => {
+            myStream = stream;
+            addLocalVideo(stream);
+            var call = peer.call(receiverId, stream);
+            call.on('stream', (remoteStream) => {
+                if (!peerList.includes(call.peer)) {
+                    addRemoteVideo(remoteStream);
+                    peerList.push(call.peer);
+                }
+            });
+        }).catch((err) => {
+            console.log("unable to connect because " + err);
+        });
+        dumpOptionsInfo();
+    } catch (err) {
+        console.error("Error: " + err);
+    }
+}
+function stopCapture(evt) {
+    var video = document.createElement("video");
+    let tracks = video.srcObject.getTracks();
+    tracks.forEach(track => track.stop());
+    video.srcObject = null;
+}
+function dumpOptionsInfo() {
+    var video = document.createElement("video");
+    const videoTrack = video.srcObject.getVideoTracks()[0];
+    console.info("Track settings:");
+    console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
+    console.info("Track constraints:");
+    console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
+}

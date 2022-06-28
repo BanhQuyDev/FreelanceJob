@@ -366,7 +366,7 @@ body.modal-open[style] {
 
 /* ==================================== */
 .modal-content{
-    border: 8px solid !important;
-    	border-width: 10px !important;
-	border-image: repeating-linear-gradient(45deg, turquoise, pink 4%) 1 !important;
+/*    border: 8px solid !important;
+    border-width: 10px !important;
+    border-image: repeating-linear-gradient(45deg, turquoise, pink 4%) 1 !important;*/
 }

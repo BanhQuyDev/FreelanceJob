@@ -220,11 +220,9 @@
                                             <p class="p_status"><strong>Duration :</strong> ${contract.showDuration(contract.contract_job_duration)} day(s)</p>
                                         </div>
                                         <div class="info_button pt-3">
-                                            <button class="buttonVip border-0" onclick="showJobDetail_${count.count}()">View Detail</button> <a href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}"><button class="buttonVip border-0 ml-4">Chat</button></a>
+                                            <button class="buttonVip border-0" onclick="showJobDetail(${requestScope.CONTRACT_DETAIL_SIZE}, ${count.count})">View Detail</button> <a class="buttonVip border-0 ml-4" href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}">Chat</a>
                                         </div>
                                     </div>
-
-
                                     <div class="dropdown">
                                         <button class="col-3 bg-info border rounded rounded-pill p-2 ml-5 dropdown-toggle buttonFocus" type="button" id="dropdownMenuu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             See more  <i class="fas fa-angle-down ml-2"></i>
@@ -395,228 +393,286 @@
                                     </div>
                                 </div>
                             </c:forEach>
-
-                            <div class="col-md-4">
-                                <div class="white_shd full margin_bottom_30">
-                                    <div class="full graph_head">
-                                        <div class="heading1 margin_0">
-                                            <h2>Update</h2>
+                            <div class="row column4 graph">
+                                <div class="col-md-4">
+                                    <div class="white_shd full margin_bottom_30">
+                                        <div class="full graph_head">
+                                            <div class="heading1 margin_0">
+                                                <h2>Lis Job Doing</h2>
+                                            </div>
+                                        </div>
+                                        <div class="full progress_bar_inner">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="msg_section">
+                                                        <div class="msg_list_main">
+                                                            <ul class="msg_list">
+                                                                <li>
+                                                                    <span>
+                                                                        <span class="name_user">Job title</span>
+                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
+                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
+                                                                </li>     
+                                                                <li>
+                                                                    <span>
+                                                                        <span class="name_user">Job title</span>
+                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
+                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
+                                                                </li>  
+                                                                <li>
+                                                                    <span>
+                                                                        <span class="name_user">Job title</span>
+                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
+                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
+                                                                </li>   
+                                                                <li>
+                                                                    <span>
+                                                                        <span class="name_user">Job title</span>
+                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
+                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
+                                                                </li>                                           
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="full progress_bar_inner">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="msg_list_main">
-                                                    <ul class="msg_list">
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">Herman Beck</span>
-                                                                <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">On the other hand, we denounce.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">On the other hand, we denounce.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                    </ul>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="white_shd full margin_bottom_30">
+                                        <div class="full graph_head">
+                                            <div class="heading1 margin_0">
+                                                <h2>Job Title</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="white_shd full margin_bottom_30">
+                                        <div class="full graph_head">
+                                            <div class="heading1 margin_0">
+                                                <h2>Update</h2>
+                                            </div>
+                                        </div>
+                                        <div class="full progress_bar_inner">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="msg_list_main">
+                                                        <ul class="msg_list">
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">Herman Beck</span>
+                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">On the other hand, we denounce.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">On the other hand, we denounce.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="white_shd full margin_bottom_30">
+                                        <div class="full graph_head">
+                                            <div class="heading1 margin_0">
+                                                <h2>Daily feed</h2>
+                                            </div>
+                                        </div>
+                                        <div class="full progress_bar_inner">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="msg_list_main">
+                                                        <ul class="msg_list">
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">Herman Beck</span>
+                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">On the other hand, we denounce.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">Sales</span>
+                                                                    <span class="msg_user">On the other hand, we denounce.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="white_shd full margin_bottom_30">
+                                        <div class="full graph_head">
+                                            <div class="heading1 margin_0">
+                                                <h2>Last Comments</h2>
+                                            </div>
+                                        </div>
+                                        <div class="full progress_bar_inner">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="msg_list_main">
+                                                        <ul class="msg_list">
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">Herman Beck</span>
+                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">On the other hand, we denounce.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <span class="name_user">John Smith</span>
+                                                                    <span class="msg_user">On the other hand, we denounce.</span>
+                                                                    <span class="time_ago">12 min ago</span>
+                                                                </span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="white_shd full margin_bottom_30">
-                                    <div class="full graph_head">
-                                        <div class="heading1 margin_0">
-                                            <h2>Daily feed</h2>
-                                        </div>
-                                    </div>
-                                    <div class="full progress_bar_inner">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="msg_list_main">
-                                                    <ul class="msg_list">
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">Herman Beck</span>
-                                                                <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">On the other hand, we denounce.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">Sales</span>
-                                                                <span class="msg_user">On the other hand, we denounce.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="white_shd full margin_bottom_30">
-                                    <div class="full graph_head">
-                                        <div class="heading1 margin_0">
-                                            <h2>Last Comments</h2>
-                                        </div>
-                                    </div>
-                                    <div class="full progress_bar_inner">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="msg_list_main">
-                                                    <ul class="msg_list">
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">Herman Beck</span>
-                                                                <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">On the other hand, we denounce.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <span class="name_user">John Smith</span>
-                                                                <span class="msg_user">On the other hand, we denounce.</span>
-                                                                <span class="time_ago">12 min ago</span>
-                                                            </span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- footer -->
+                            <!-- end dashboard inner -->
                         </div>
-                        <!-- footer -->
-                        <!-- end dashboard inner -->
                     </div>
+                    <jsp:include page="component/footer.jsp"></jsp:include>
                 </div>
-                <jsp:include page="component/footer.jsp"></jsp:include>
-            </div>
-            <script src="./work-space/js/render_job_detail.js"></script>
-            <!-- jQuery -->
-            <script src="work-space/js/jquery.min.js"></script>
-            <script src="work-space/js/popper.min.js"></script>
-            <script src="work-space/js/bootstrap.min.js"></script>
-            <!-- wow animation -->
-            <script src="work-space/js/animate.js"></script>
-            <!-- select country -->
-            <script src="work-space/js/bootstrap-select.js"></script>
-            <!-- owl carousel -->
-            <script src="work-space/js/owl.carousel.js"></script> 
-            <!-- chart js -->
-            <script src="work-space/js/Chart.min.js"></script>
-            <script src="work-space/js/Chart.bundle.min.js"></script>
-            <script src="work-space/js/utils.js"></script>
-            <script src="work-space/js/analyser.js"></script>
-            <!-- nice scrollbar -->
-            <script src="work-space/js/perfect-scrollbar.min.js"></script>
-            <script>
+                <script src="./work-space/js/render_job_detail.js"></script>
+                <!-- jQuery -->
+                <script src="work-space/js/jquery.min.js"></script>
+                <script src="work-space/js/popper.min.js"></script>
+                <script src="work-space/js/bootstrap.min.js"></script>
+                <!-- wow animation -->
+                <script src="work-space/js/animate.js"></script>
+                <!-- select country -->
+                <script src="work-space/js/bootstrap-select.js"></script>
+                <!-- owl carousel -->
+                <script src="work-space/js/owl.carousel.js"></script> 
+                <!-- chart js -->
+                <script src="work-space/js/Chart.min.js"></script>
+                <script src="work-space/js/Chart.bundle.min.js"></script>
+                <script src="work-space/js/utils.js"></script>
+                <script src="work-space/js/analyser.js"></script>
+                <!-- nice scrollbar -->
+                <script src="work-space/js/perfect-scrollbar.min.js"></script>
+                <script>
                                                 var ps = new PerfectScrollbar('#sidebar');
-            </script>
-            <!-- custom js -->
-            <script src="work-space/js/custom.js"></script>
-            <!-- calendar file css -->    
-            <script src="work-space/js/semantic.min.js"></script>
-            <script></script>
-            <script>
+                </script>
+                <!-- custom js -->
+                <script src="work-space/js/custom.js"></script>
+                <!-- calendar file css -->    
+                <script src="work-space/js/semantic.min.js"></script>
+                <script></script>
+                <script>
                                                 window.setTimeout(function () {
                                                     $(".alert").fadeTo(400, 0).slideUp(400, function () {
                                                         $(this).remove();
                                                     });
                                                 }, 3000)
-            </script> 
-            <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-            <!-- Jquery, Popper, Bootstrap -->
-            <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-            <script src="./assets/js/popper.min.js"></script>
-            <script src="./assets/js/bootstrap.min.js"></script>
-            <!-- Jquery Mobile Menu -->
-            <script src="./assets/js/jquery.slicknav.min.js"></script>
+                </script> 
+                <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+                <!-- Jquery, Popper, Bootstrap -->
+                <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+                <script src="./assets/js/popper.min.js"></script>
+                <script src="./assets/js/bootstrap.min.js"></script>
+                <!-- Jquery Mobile Menu -->
+                <script src="./assets/js/jquery.slicknav.min.js"></script>
 
-            <!-- Jquery Slick , Owl-Carousel Plugins -->
-            <script src="./assets/js/owl.carousel.min.js"></script>
-            <script src="./assets/js/slick.min.js"></script>
-            <script src="./assets/js/price_rangs.js"></script>
+                <!-- Jquery Slick , Owl-Carousel Plugins -->
+                <script src="./assets/js/owl.carousel.min.js"></script>
+                <script src="./assets/js/slick.min.js"></script>
+                <script src="./assets/js/price_rangs.js"></script>
 
-            <!-- One Page, Animated-HeadLin -->
-            <script src="./assets/js/wow.min.js"></script>
-            <script src="./assets/js/animated.headline.js"></script>
-            <script src="./assets/js/jquery.magnific-popup.js"></script>
+                <!-- One Page, Animated-HeadLin -->
+                <script src="./assets/js/wow.min.js"></script>
+                <script src="./assets/js/animated.headline.js"></script>
+                <script src="./assets/js/jquery.magnific-popup.js"></script>
 
-            <!-- Scrollup, nice-select, sticky -->
-            <script src="./assets/js/jquery.scrollUp.min.js"></script>
-            <script src="./assets/js/jquery.nice-select.min.js"></script>
-            <script src="./assets/js/jquery.sticky.js"></script>
+                <!-- Scrollup, nice-select, sticky -->
+                <script src="./assets/js/jquery.scrollUp.min.js"></script>
+                <script src="./assets/js/jquery.nice-select.min.js"></script>
+                <script src="./assets/js/jquery.sticky.js"></script>
 
-            <!-- contact js -->
-            <script src="./assets/js/contact.js"></script>
-            <script src="./assets/js/jquery.form.js"></script>
-            <script src="./assets/js/jquery.validate.min.js"></script>
-            <script src="./assets/js/mail-script.js"></script>
-            <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+                <!-- contact js -->
+                <script src="./assets/js/contact.js"></script>
+                <script src="./assets/js/jquery.form.js"></script>
+                <script src="./assets/js/jquery.validate.min.js"></script>
+                <script src="./assets/js/mail-script.js"></script>
+                <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
 
-            <!-- Jquery Plugins, main Jquery -->
-            <script src="./assets/js/plugins.js"></script>
-            <script src="./assets/js/main.js"></script>
-            <script
-                src="https://kit.fontawesome.com/b36bcbb61e.js"
-                crossorigin="anonymous"
-            ></script>
-            <script>
+                <!-- Jquery Plugins, main Jquery -->
+                <script src="./assets/js/plugins.js"></script>
+                <script src="./assets/js/main.js"></script>
+                <script
+                    src="https://kit.fontawesome.com/b36bcbb61e.js"
+                    crossorigin="anonymous"
+                ></script>
+                <script>
                                                 $('.dropdown-toggle').dropdown()
-            </script>
-    </body>
-</html>
+                </script>
+                </body>
+                </html>
 

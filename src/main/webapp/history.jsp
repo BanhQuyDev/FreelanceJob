@@ -169,7 +169,7 @@
                         <div class="modal-content ">
                             <div class="">
                                 <div class="card-img">
-                                    <img class="rounded-circle" src="./assets/img/hero/detail_avar.jpg">
+                                    <img class="rounded-circle" src="https://thumbs.dreamstime.com/z/signing-contract-business-best-time-every-businessman-waiting-agreement-94397925.jpg">
                                     <p><strong>${contractDetail.contract_job_tittle}</strong></p>
                                 </div>
                                 <div class="card-text mt-4 mb-4">
