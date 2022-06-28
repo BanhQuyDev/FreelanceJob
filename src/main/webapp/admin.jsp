@@ -392,8 +392,9 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="form-group">
-                                                                                                <label for="job_description">Job Description</label>
-                                                                                                <textarea id="description" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
+                                                                                                <label for="description">Job Description</label>
+                                                                                                <textarea id="${counting.count}" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
+                                                                                                <script>CKEDITOR.replace('${counting.count}')</script>
                                                                                             </div>
                                                                                             <div class="d-flex justify-content-end">
                                                                                                 <c:choose>
@@ -561,7 +562,8 @@
                                                                                         </div>
                                                                                         <div class="form-group">
                                                                                             <label for="job_description">Job Description</label>
-                                                                                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
+                                                                                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1 ${counting.count}" rows="3" readonly="">${job.description}</textarea>
+                                                                                            <script>CKEDITOR.replace('${counting.count}')</script>
                                                                                         </div>
                                                                                         <div class="d-flex justify-content-end">
                                                                                             <c:choose>
@@ -889,9 +891,6 @@
                 </ul>
             </div>
         </footer>
-        <script>
-            CKEDITOR.replace('description');
-        </script>
         <script>
             window.setTimeout(function () {
                 $(".alert").fadeTo(400, 0).slideUp(400, function () {
