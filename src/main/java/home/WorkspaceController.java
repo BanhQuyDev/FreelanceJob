@@ -55,6 +55,7 @@ public class WorkspaceController extends HttpServlet {
             }
             request.setAttribute("LIST_CONTRACT_FREELANCER", listContract);
             request.setAttribute("LIST_CONTRACT_DETAIL_FREELANCER", listContractDetail);
+            request.setAttribute("CONTRACT_DETAIL_SIZE", listContractDetail.size());
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at WorkspaceController : " + e.toString());
