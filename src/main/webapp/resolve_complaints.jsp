@@ -42,12 +42,12 @@
                         <h1 style="text-align: center">Giải quyết khiếu nại</h1>
                         <div class="wrapper-content">
                             <div>
-                                <p>Trong khi sử dụng trang kết nối vLance.vn, nếu bạn cần khiếu nại về dịch vụ, bạn có thể thực hiện theo các bước sau:</p>
-                                <p>Bước 1: Gửi khiếu nại/yêu cầu xem xét qua email hỗ trợ của vLance hotro@vlance.vn</p>
-                                <p>Bước 2: Bộ phận chăm sóc khách hàng của vLance.vn sẽ tiếp nhận khiếu nại và phản hồi tới bạn trong tối đa 72 giờ sau khi gửi. Tùy theo tính chất và mức độ khiếu nại, sau tối đa 10 ngày làm việc, vLance.vn sẽ liên hệ trao đổi với bạn để xác nhận vấn đề và phương án xử lý. Thời gian giải quyết một khiếu nại tối đa là 10 ngày làm việc</p>
-                                <p>Bước 3: Trong trường hợp nằm ngoài khả năng và thẩm quyền của vLance.vn, vLance có quyền từ chối xử lý khiếu nại.</p>
-                                <p>vLance.vn tôn trọng và nghiêm túc thực hiện các quy định của pháp luật về bảo vệ quyền lợi của thành viên. Vì vậy, đề nghị các bên gồm Khách hàng và Freelancer cần cung cấp đầy đủ, chính xác, trung thực và chi tiết các thông tin có liên quan đến vấn đề cần khiếu nại. Mọi hành vi lừa đảo, gian lận hoặc phá hoại, gây rối sẽ chịu hoàn toàn trách nhiệm trước pháp luật.</p>
-                                <p>Trong trường hợp Khách hàng và Freelancer xảy ra mâu thuẫn. vLance.vn không có trách nhiệm giải quyết các mâu thuẫn này.&nbsp;</p>
+                                <p>Trong khi sử dụng trang kết nối FPTFreeLancerJob.vn, nếu bạn cần khiếu nại về dịch vụ, bạn có thể thực hiện theo các bước sau:</p>
+                                <p>Bước 1: Gửi khiếu nại/yêu cầu xem xét qua email hỗ trợ của FPTFreeLancerJob hotro@FPTFreeLancerJob.vn</p>
+                                <p>Bước 2: Bộ phận chăm sóc khách hàng của FPTFreeLancerJob.vn sẽ tiếp nhận khiếu nại và phản hồi tới bạn trong tối đa 72 giờ sau khi gửi. Tùy theo tính chất và mức độ khiếu nại, sau tối đa 10 ngày làm việc, FPTFreeLancerJob.vn sẽ liên hệ trao đổi với bạn để xác nhận vấn đề và phương án xử lý. Thời gian giải quyết một khiếu nại tối đa là 10 ngày làm việc</p>
+                                <p>Bước 3: Trong trường hợp nằm ngoài khả năng và thẩm quyền của FPTFreeLancerJob.vn, FPTFreeLancerJob.vn có quyền từ chối xử lý khiếu nại.</p>
+                                <p>FPTFreeLancerJob.vn tôn trọng và nghiêm túc thực hiện các quy định của pháp luật về bảo vệ quyền lợi của thành viên. Vì vậy, đề nghị các bên gồm Khách hàng và Freelancer cần cung cấp đầy đủ, chính xác, trung thực và chi tiết các thông tin có liên quan đến vấn đề cần khiếu nại. Mọi hành vi lừa đảo, gian lận hoặc phá hoại, gây rối sẽ chịu hoàn toàn trách nhiệm trước pháp luật.</p>
+                                <p>Trong trường hợp Khách hàng và Freelancer xảy ra mâu thuẫn. FPTFreeLancerJob.vn không có trách nhiệm giải quyết các mâu thuẫn này.&nbsp;</p>
                                 <p>Địa chỉ nhận thư khiếu nại:&nbsp;<br>
                                     Địa chỉ:Your address goes here, your demo address<br>
                                     Điện thoại: +8880 44338899<br>

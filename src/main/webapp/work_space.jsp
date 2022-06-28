@@ -7,10 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
-<html lang="en">
+<html class="loading" lang="en" data-textdirection="ltr">
     <head>
         <!-- basic -->
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- mobile metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -394,64 +394,6 @@
                                 </div>
                             </c:forEach>
                             <div class="row column4 graph">
-                                <div class="col-md-4">
-                                    <div class="white_shd full margin_bottom_30">
-                                        <div class="full graph_head">
-                                            <div class="heading1 margin_0">
-                                                <h2>Lis Job Doing</h2>
-                                            </div>
-                                        </div>
-                                        <div class="full progress_bar_inner">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="msg_section">
-                                                        <div class="msg_list_main">
-                                                            <ul class="msg_list">
-                                                                <li>
-                                                                    <span>
-                                                                        <span class="name_user">Job title</span>
-                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
-                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
-                                                                </li>     
-                                                                <li>
-                                                                    <span>
-                                                                        <span class="name_user">Job title</span>
-                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
-                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
-                                                                </li>  
-                                                                <li>
-                                                                    <span>
-                                                                        <span class="name_user">Job title</span>
-                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
-                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
-                                                                </li>   
-                                                                <li>
-                                                                    <span>
-                                                                        <span class="name_user">Job title</span>
-                                                                        <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                        <span style="padding-right: 18px;" class="time_ago">Start date</span>
-                                                                        <span style="padding-left: 90px;" class="time_end">End date</span>
-                                                                </li>                                           
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="white_shd full margin_bottom_30">
-                                        <div class="full graph_head">
-                                            <div class="heading1 margin_0">
-                                                <h2>Job Title</h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
                                     <div class="white_shd full margin_bottom_30">
                                         <div class="full graph_head">
