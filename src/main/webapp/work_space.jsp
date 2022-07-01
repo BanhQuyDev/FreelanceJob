@@ -69,7 +69,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <style>
-            .modal-dialog {
+            .modal-dialog.feedbackk {
                 width: 600px;
             }
 
@@ -117,7 +117,7 @@
             .rate {
                 border-bottom-right-radius: 20px;
                 border-bottom-left-radius: 20px;
-                height: 130px;
+                height: 159px;
             }
 
             .buttons {
@@ -175,12 +175,144 @@
                 color: #FFD600;
             }
 
+            body.modal-open {
+                overflow: auto !important;
+            }
+
             body.modal-open[style] {
                 padding-right: 0px !important;
             }
+            body:not(.modal-open){
+                padding-right: 0px !important;
+            }
+            /* =============================== */
+            .timeline {
+                /*width: 800px;*/
+                background-color: #072736;
+                color: #fff;
+                padding: 30px 60px;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);
+            }
+
+            .timeline ul {
+                list-style-type: none;
+                border-left: 3px solid #094a68;
+                padding: 10px 5px;
+            }
+
+            .timeline ul li {
+                padding: 20px;
+                position: relative;
+                cursor: pointer;
+                transition: .5s;
+            }
+
+            .timeline ul li span {
+                display: inline-block;
+                background-color: #1685b8;
+                border-radius: 25px;
+                padding: 5px 15px;
+                font-size: 15px;
+                text-align: center;
+                transition: 0.3s linear;
+            }
+
+            .timeline ul li .content h3 {
+                color: #34ace0;
+                font-size: 18px;
+                padding-top: 18px;
+            }
+
+            .timeline ul li .content p {
+                font-size: 15px;
+                color: #fff;
+            }
+
+            .timeline ul li:before {
+                position: absolute;
+                content: '';
+                width: 10px;
+                height: 10px;
+                background-color: #34ace0;
+                border-radius: 50%;
+                left: -12px;
+                top: 30px;
+                transition: .5s;
+            }
+
+            .timeline ul li:hover {
+                background-color: #071f2a7f;
+            }
+            .timeline ul li:hover span{
+                margin-left: 10px;
+                transition: 0.3s linear;
+            }
+            .timeline ul li:hover:before {
+                background-color: #0F0;
+                box-shadow: 0px 0px 10px 2px #0F0;
+            }
+
+            .timeline ul .overtime span{
+                opacity: 0.5;
+            }
+            .timeline ul .overtime .content{
+                opacity: 0.5;
+            }
+            .timeline ul li.overtime:hover:before {
+                background-color: rgba(249, 55, 55, 0.968);
+                box-shadow: 0px 0px 10px 4px rgba(249, 55, 55, 0.968);
+            }
+
+            @media (max-width:300px) {
+                .timeline {
+                    width: 100%;
+                    padding: 30px 5px 30px 10px;
+                }
+
+                .timeline ul li .content h3 {
+                    color: #34ace0;
+                    font-size: 15px;
+                }
+
+            }
+            /* =============================== */
+            .mileStoneModal {
+                display: flex;
+                position: absolute;
+                top: -9%;
+                right: 5%;
+            }
+            .btn_milestone {
+                border: 1px solid #5255f3;
+                border-radius: 5px;
+                position: relative;
+                overflow: hidden;
+                font-size: 18px;
+                padding: 10px;
+                color: #5255f3 !important;
+                background-color: white;
+                font-weight: 500;
+            }
+            .btn_milestone:hover {
+                box-shadow: 1px 1px 25px 5px rgba(146, 148, 248, 0.4);
+                /*color: #5255f3 !important;*/
+            }
+            .btn_milestone:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(120deg, transparent,rgba(146, 148, 248, 0.4), transparent);
+                transition: all 650ms;
+            }
+            .btn_milestone:hover:before {
+                left: 100%;
+            }
         </style>
     </head>
-    <body class="inner_page widgets">
+    <body class="" style="padding-right: 0 !important">
         <div class="full_container">
             <jsp:include page="component/header.jsp"></jsp:include>
                 <div class="slider-area">
@@ -204,7 +336,8 @@
                         <c:forEach var="contract" items="${requestScope.LIST_CONTRACT_FREELANCER}" varStatus="count">
                             <div class="col-md-6 col-lg-4">
                                 <div class="full white_shd margin_bottom_30" style="height: 300px">
-                                    <div class="info_people" style="height: 280px">
+
+                                    <div class="info_people" style="height: 280px; position: relative">
                                         <div class="p_info_img align-self-center">
                                             <img src="${contract.contract_user_avatar}" alt="#" />
                                         </div>
@@ -220,8 +353,14 @@
                                             <p class="p_status"><strong>Duration :</strong> ${contract.showDuration(contract.contract_job_duration)} day(s)</p>
                                         </div>
                                         <div class="info_button pt-3">
-                                            <button class="buttonVip border-0" onclick="showJobDetail(${requestScope.CONTRACT_DETAIL_SIZE}, ${count.count})">View Detail</button> <a class="buttonVip border-0 ml-4" href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}">Chat</a>
+                                            <button class="buttonVip border-0" onclick="showJobDetail(${requestScope.CONTRACT_DETAIL_SIZE}, ${count.count})"><a href="#contractCard${count.count}" style="color: white">View Detail</a></button> <a class="buttonVip border-0 ml-4" href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}">Chat</a>
                                         </div>
+
+                                        <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
+                                            <div class="mileStoneModal" style="cursor: pointer">
+                                                <a class="btn_milestone" style="text-decoration: none;" data-toggle="modal" data-target="#milestoneModal${count.count}">Milestone <i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </c:if>
                                     </div>
                                     <div class="dropdown">
                                         <button class="col-3 bg-info border rounded rounded-pill p-2 ml-5 dropdown-toggle buttonFocus" type="button" id="dropdownMenuu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -236,16 +375,16 @@
                                                     </c:if>
                                                     <c:if test="${contract.contract_remaining_time < contract.contract_job_duration*24}">
                                                         <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 50}">
-                                                            <p class="progress_head">You have plenty of time </br> Happy Code Happy Life</p>
+                                                            <p class="progress_head">You have plenty of time </br> Happy Code Happy Life <3</p>
                                                         </c:if>
                                                         <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) > 50 && Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 85}">
                                                             <p class="progress_head">Half of the time has passed </br> Try Harder !!</p>
                                                         </c:if>
                                                         <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) > 85 && Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 100}">
-                                                            <p class="progress_head">Time is running out </br> Prepare to submit !!</p>
+                                                            <p class="progress_head">Time is running out </br> Hurry up !!</p>
                                                         </c:if>
                                                         <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) == 100}">
-                                                            <p class="progress_head">You die !</p>
+                                                            <p class="progress_head">Prepare to submit !</p>
                                                         </c:if>
                                                     </c:if>
                                                     <div class="dropdown-divider"></div>
@@ -260,13 +399,24 @@
 
                                                         <c:if test="${contract.contract_remaining_time < contract.contract_job_duration*24}">
                                                             <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) <= 100}">
-                                                                <span class="skill" style="width: ${contract.showDuration(Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)))}%;"><span class="info_valume">${contract.showDuration(Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)))}% </span></span>                
+                                                                <span class="skill" style="width: ${contract.showDuration(Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)))}%;">
+                                                                    <c:if test="${contract.showDuration(Math.floor(contract.contract_remaining_time/24)) == 1}">
+                                                                        <span class="info_valume">
+                                                                            <strong class="text-danger">${contract.showDuration(Math.ceil(contract.contract_remaining_time/24))}</strong> day left !
+                                                                        </span>
+                                                                    </c:if>
+                                                                    <c:if test="${contract.showDuration(Math.floor(contract.contract_remaining_time/24)) != 1}">
+                                                                        <span class="info_valume">
+                                                                            <strong class="text-danger">${contract.showDuration(Math.ceil(contract.contract_remaining_time/24))}</strong> days left !
+                                                                        </span>
+                                                                    </c:if>
+                                                                </span>                
                                                                 <div class="progress skill-bar ">
                                                                     <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: ${contract.showDuration(Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)))}%;"></div>
                                                                 </div>
                                                             </c:if>
                                                             <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) > 100}">
-                                                                <span class="skill" style="width: 100%;"><span class="info_valume text-danger">100% (end)</span></span>                
+                                                                <span class="skill" style="width: 100%;"><span class="info_valume text-danger">Overtime (end)</span></span>                
                                                                 <div class="progress skill-bar ">
                                                                     <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                                                                 </div>
@@ -279,6 +429,7 @@
                                     </div>
                                 </div>
                             </div>
+                                        
                             <form action="FeedbackController" method="POST">
                                 <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
                                     <input name="idFreelancer" value="${contract.idPartner}" hidden=""/>
@@ -286,7 +437,7 @@
                                     <input name="idJob" value="${contract.contract_job_id}" hidden=""/>
                                 </c:if>
                                 <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal${count.count}">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg feedbackk">
                                         <div class="modal-content">
                                             <div class="card text-center">
                                                 <div class="circle-image">
@@ -300,34 +451,35 @@
                                                               placeholder="Typing...." required=""></textarea>
                                                 </div>
                                                 <div class="rate bg-success text-white mt-3">
-                                                    <h6 class="m-4">Rate your Freelancer</h6>
-                                                    <div class="rating-wrapper row justify-content-center m-3">
-                                                        <!-- star 1 -->
-                                                        <input type="radio" id="1-star-rating" name="star-rating" value="5" />
-                                                        <label for="1-star-rating" class="star-rating star">
-                                                            <i class="fas fa-star d-inline-block"></i>
+                                                    <h6 class="mt-4">Rate your Freelancer</h6>
+                                                    <span id="ratingText_${count.count}" style="font-size: 17px; font-weight: 600;">rating</span>
+                                                    <div class="rating-wrapper row justify-content-center mb-3 mt-3">
+                                                        <!-- star 5 -->
+                                                        <input type="radio" id="1-star-rating_${count.count}" name="star-rating" value="5" />
+                                                        <label for="1-star-rating_${count.count}" class="star-rating star">
+                                                            <i class="fas fa-star" onclick="renderRating(5, ${count.count})"></i>
                                                         </label>
 
-                                                        <!-- star 2 -->
-                                                        <input type="radio" id="2-star-rating" name="star-rating" value="4" />
-                                                        <label for="2-star-rating" class="star-rating star">
-                                                            <i class="fas fa-star"></i>
+                                                        <!-- star 4 -->
+                                                        <input type="radio" id="2-star-rating_${count.count}" name="star-rating" value="4" />
+                                                        <label for="2-star-rating_${count.count}" class="star-rating star">
+                                                            <i class="fas fa-star" onclick="renderRating(4, ${count.count})"></i>
                                                         </label>
                                                         <!-- star 3 -->
-                                                        <input type="radio" id="3-star-rating" name="star-rating" value="3" />
-                                                        <label for="3-star-rating" class="star-rating star">
-                                                            <i class="fas fa-star"></i>
+                                                        <input type="radio" id="3-star-rating_${count.count}" name="star-rating" value="3" />
+                                                        <label for="3-star-rating_${count.count}" class="star-rating star">
+                                                            <i class="fas fa-star" onclick="renderRating(3, ${count.count})"></i>
                                                         </label>
-                                                        <!-- star 4 -->
-                                                        <input type="radio" id="4-star-rating" name="star-rating" value="2" />
-                                                        <label for="4-star-rating" class="star-rating star">
-                                                            <i class="fas fa-star"></i>
+                                                        <!-- star 2 -->
+                                                        <input type="radio" id="4-star-rating_${count.count}" name="star-rating" value="2" />
+                                                        <label for="4-star-rating_${count.count}" class="star-rating star">
+                                                            <i class="fas fa-star" onclick="renderRating(2, ${count.count})"></i>
                                                         </label>
 
-                                                        <!-- star 5 -->
-                                                        <input type="radio" id="5-star-rating" name="star-rating" value="1" />
-                                                        <label for="5-star-rating" class="star-rating">
-                                                            <i class="fas fa-star"></i>
+                                                        <!-- star 1 -->
+                                                        <input type="radio" id="5-star-rating_${count.count}" name="star-rating" value="1" />
+                                                        <label for="5-star-rating_${count.count}" class="star-rating">
+                                                            <i class="fas fa-star" onclick="renderRating(1, ${count.count})"></i>
                                                         </label>
                                                     </div>
                                                     <div class="buttons mt-0">
@@ -341,19 +493,90 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <div class="modal fade" id="milestoneModal${count.count}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 700px !important">
+                                    <div class="modal-content">
+                                        <div class="timeline">
+                                            <div class="row mb-3 justify-content-between">
+                                                <h1 class="col-6 justify-content-center align-self-center">Milestone</h1>
+                                                <button class="col-4" style="background-color: transparent; border: none; font-size: 35px; cursor: pointer;" onclick="addMilestone(${count.count}, '${contract.contract_job_start_date}', '${contract.contract_job_end_date}')"><i class="far fa-plus-square mr-3"></i><span class="align-self-center" style="font-size: 14px; transform: translateY(-8px);">Add new one</span> </button>
+                                            </div>
+                                            <form action="AddMilestoneController" method="POST">
+                                                <ul id="addMilestoneId${count.count}">
+                                                    <li class="countMilestone">
+                                                        <strong>From </strong> <span class="ml-3"><input name="startDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
+                                                        <strong class="ml-3">To </strong> <span class="ml-3"><input name="endDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
+                                                        <span class="ml-5 bg-danger"><i class="fas fa-minus"></i></span>
+                                                        <div class="content">
+                                                            <h3>Milestone Tittle <input name="tittle1" required="" style="border-radius: 5px; margin-left: 15px; padding: 10px; width: 65%"/></h3>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <div class="text-right">
+                                                    <button style="background-color: #1685b8; color: white; padding: 15px 25px; font-size: 20px; border-radius: 10px; cursor: pointer; ">Create <i class="fas fa-feather-alt ml-3"></i></button>
+                                                </div>
+                                                <input type="hidden" name="idJob" value="${contract.contract_job_id}"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </c:forEach>
-                    </div>
-                    <!-- end row -->
-                    <div class="row column4 graph">
+                        </div>
+                        <!-- end row -->
+                        <div class="row column4 graph">
                         <c:forEach var="contractDetail" items="${requestScope.LIST_CONTRACT_DETAIL_FREELANCER}" varStatus="count">
                             <c:if test="${count.count == 1}">
-                                <div style="display: block; height: 480px" class="col-md-12 mt-5 mb-5" id="contractCard${count.count}">
-                                </c:if>
-                                <c:if test="${count.count != 1}">
-                                    <div style="display: none; height: 480px" class="col-md-12 mt-5 mb-5" id="contractCard${count.count}">
-                                    </c:if>
-                                    <div class="row">
-                                        <div class="col-lg-6 mx-auto">
+                            <!--<div style="display: block;" class="col-md-12 mt-5 mb-5" id="contractCard${count.count}">-->
+                            </c:if>
+                            <c:if test="${count.count != 1}">
+                            <div style="display: none;" class="col-md-12 mt-5 mb-5" id="contractCard${count.count}">
+                            </c:if>
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-5" role="milestone">
+                                            <div class="timeline">
+                                                <ul>
+                                                    <li>
+                                                        <span>3rd January 2020</span>
+                                                        <div class="content">
+                                                            <h3>What Is Lorem Ipsum?</h3>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    <li class="overtime">
+                                                        <span>21st Jun 2019</span> <label class="ml-3 text-danger"><strong>Overtime</strong></label>
+                                                        <div class="content">
+                                                            <h3>What Is Lorem Ipsum?</h3>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span>15th April 2018</span>
+                                                        <div class="content">
+                                                            <h3>What Is Lorem Ipsum?</h3>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span>22nd Mars 2017</span>
+                                                        <div class="content">
+                                                            <h3>What Is Lorem Ipsum?</h3>
+                                                            <p>
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" role="detail">
                                             <blockquote style="position: relative;" class="blockquote blockquote-custom bg-white p-5 shadow-lg rounded">
                                                 <div style="width: 50px; height: 50px; position: absolute; top: -25px; left: 50px; line-height: 50px; text-align: center" class="blockquote-custom-icon bg-info shadow-sm rounded-circle justify-content-center">
                                                     <i class="fa fa-quote-left text-white"></i>
@@ -391,9 +614,10 @@
                                             </blockquote>
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-                            <div class="row column4 graph">
+                            </div>
+                        </c:forEach>
+                        </div>
+                        <div class="row column4 graph">
                                 <div class="col-md-4">
                                     <div class="white_shd full margin_bottom_30">
                                         <div class="full graph_head">
@@ -535,13 +759,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                        </div>
                             <!-- footer -->
                             <!-- end dashboard inner -->
-                        </div>
                     </div>
-                    <jsp:include page="component/footer.jsp"></jsp:include>
                 </div>
+
+                    <jsp:include page="component/footer.jsp"></jsp:include>
+        </div>
                 <script src="./work-space/js/render_job_detail.js"></script>
                 <!-- jQuery -->
                 <script src="work-space/js/jquery.min.js"></script>
@@ -561,7 +786,7 @@
                 <!-- nice scrollbar -->
                 <script src="work-space/js/perfect-scrollbar.min.js"></script>
                 <script>
-                                                var ps = new PerfectScrollbar('#sidebar');
+                                                        var ps = new PerfectScrollbar('#sidebar');
                 </script>
                 <!-- custom js -->
                 <script src="work-space/js/custom.js"></script>
@@ -569,11 +794,11 @@
                 <script src="work-space/js/semantic.min.js"></script>
                 <script></script>
                 <script>
-                                                window.setTimeout(function () {
-                                                    $(".alert").fadeTo(400, 0).slideUp(400, function () {
-                                                        $(this).remove();
-                                                    });
-                                                }, 3000)
+                                                        window.setTimeout(function () {
+                                                            $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                                                                $(this).remove();
+                                                            });
+                                                        }, 3000)
                 </script> 
                 <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
                 <!-- Jquery, Popper, Bootstrap -->
@@ -613,7 +838,7 @@
                     crossorigin="anonymous"
                 ></script>
                 <script>
-                                                $('.dropdown-toggle').dropdown()
+                                                        $('.dropdown-toggle').dropdown()
                 </script>
                 </body>
                 </html>

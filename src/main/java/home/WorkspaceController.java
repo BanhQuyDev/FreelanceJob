@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import milestones.MilestoneDAO;
+import milestones.MilestoneDTO;
 import users.UserDTO;
 
 /**
@@ -33,11 +35,15 @@ public class WorkspaceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            MilestoneDAO milestoneDao = new MilestoneDAO();
+            milestoneDao.autoSetStatusByDay();
+            List<MilestoneDTO> listMilestone = new ArrayList<>();
+
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String mode = (String) session.getAttribute("MODE");
-            ContractDAO contractDao = new ContractDAO();
 
+            ContractDAO contractDao = new ContractDAO();
             List<ContractDTO> listContract = new ArrayList<>();
             if (mode.equals("FREELANCER")) {
                 listContract = contractDao.getContractForWorkspace(loginUser.getId());
@@ -52,10 +58,13 @@ public class WorkspaceController extends HttpServlet {
                 } else if (mode.equals("EMPLOYER")) {
                     listContractDetail.add(contractDao.getContractDetailForWorkspaceForEmployer(loginUser.getId(), contractDTO.getContract_job_id()));
                 }
+                listMilestone = milestoneDao.getAllMilestoneByIdJob(contractDTO.getContract_job_id());
             }
+
             request.setAttribute("LIST_CONTRACT_FREELANCER", listContract);
             request.setAttribute("LIST_CONTRACT_DETAIL_FREELANCER", listContractDetail);
             request.setAttribute("CONTRACT_DETAIL_SIZE", listContractDetail.size());
+            request.setAttribute("LIST_MILESTONE", listMilestone);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at WorkspaceController : " + e.toString());

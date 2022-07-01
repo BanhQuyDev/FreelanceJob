@@ -96,6 +96,16 @@
                     </div>
                 </form>
             </div>
+            <c:if test="${requestScope.LIST_CONTRACT.size() == 0}">
+                <div class="item item_done left">
+                    <div class="date"></div>
+                    <i class="icon fas fa-pencil-alt"></i>
+                    <div class="content">
+                        <h2 style="font-size: 20px"><strong>Nothing to show yet</strong><i class="fas fa-sad-tear ml-2"></i></h2>
+                        <p style="font-size: 18px">Do some Jobs to get your own Contracts</p>
+                    </div>
+                </div> 
+            </c:if>
             <c:forEach var="contract" items="${requestScope.LIST_CONTRACT}" varStatus="counting">
                 <c:if test="${counting.count % 2 != 0}">
                     <c:if test="${contract.contract_status == 1}">                
@@ -148,7 +158,7 @@
                     <c:if test="${contract.contract_status == 1}">
                         <div class="item item_done right">
                             <div class="date">Start at : ${contract.contract_create_date}</div>
-                             <i class="icon fa fa-award"></i>
+                            <i class="icon fa fa-award"></i>
                             <div class="content">
                                 <h2><strong>${contract.contract_job_tittle} <i class="fa-solid fa-bookmark i-done" style="color: #006E51"></i></strong></h2>
                                 <p>

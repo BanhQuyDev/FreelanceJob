@@ -33,7 +33,6 @@
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
-        <jsp:include page="component/header.jsp"></jsp:include>
             <section class="site-section" style="background-image: url('assets/img/hero/Background_Update_Job.jpg'); background-repeat: no-repeat; background-size: cover; padding: 50px 0px; font-family: 'The Girl Next Door', cursive">
                 <div class="container">
                     <div class="row mb-5 mt-5">
@@ -144,8 +143,6 @@
             </div>
         </div>
     </section>
-
-    <jsp:include page="component/footer.jsp"></jsp:include>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script>

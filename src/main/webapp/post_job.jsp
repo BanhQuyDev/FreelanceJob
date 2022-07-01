@@ -34,61 +34,60 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="mutile/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css" />
-        <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+        <script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
-        <jsp:include page="component/header.jsp"></jsp:include>
-        <section class="site-section" style="background-image: url('assets/img/hero/Background_Post_Job.jpg'); background-repeat: no-repeat; background-size: cover; padding: 50px 0px; font-family: 'The Girl Next Door', cursive">
-                <div class="container">
-                    <div class="row mb-5">
-                        <div class="col-lg-12" style="border: 3px solid white; border-radius: 15px; background-color: #ffffff73">
-                            <form id="form" action="PostJobController" class="p-4 p-md-5" method="post" >
-                                <h3 class="text-black mb-5 pb-3 text-center" style="border-bottom: 2px solid #000000b0; font-weight: 600; font-family: 'The Girl Next Door', cursive">POST JOB FORM</h3>
-                                <div class="form-group">
-                                    <label for="job-title"><strong>Job Title</strong></label>
-                                    <input type="text"
-                                           name="title"
-                                           class="form-control"
-                                           id="tile"
-                                           placeholder="Title"
+        <section class="site-section" style="background-color: #ccc; padding: 50px 0px;">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-12" style="border: 3px solid white; border-radius: 15px; background-color: #ffffff9c">
+                        <form id="form" action="PostJobController" class="p-4 p-md-5" method="post" >
+                            <h3 class="text-black mb-5 pb-3 text-center" style="border-bottom: 2px solid #000000b0; font-weight: 600;">POST JOB FORM</h3>
+                            <div class="form-group">
+                                <label for="job-title"><strong>Job Title</strong></label>
+                                <input type="text"
+                                       name="title"
+                                       class="form-control"
+                                       id="tile"
+                                       placeholder="Title"
+                                       required=""
+                                       />
+                            </div>
+
+                            <div class="form-row" style="margin-bottom: 15px">
+                                <div class="col">
+                                    <label><strong>Price</strong></label>
+                                    <input type="text" 
+                                           id="amount"
+                                           name="salary" 
+                                           class="form-control" 
+                                           title="The price of project must be greater than 100.000 VNĐ?"
                                            required=""
+                                           maxlength="15"
+                                           minlength="7"
+                                           placeholder="Price"
                                            />
                                 </div>
-
-                                <div class="form-row" style="margin-bottom: 15px">
-                                    <div class="col">
-                                        <label><strong>Price</strong></label>
-                                        <input type="text" 
-                                               id="amount"
-                                               name="salary" 
-                                               class="form-control" 
-                                               title="The price of project must be greater than 100.000 VNĐ?"
-                                               required=""
-                                               maxlength="15"
-                                               minlength="7"
-                                               placeholder="Price"
-                                               />
-                                    </div>
-                                    <div class="col">
-                                        <label><strong>Duration (by day)</strong></label>
-                                        <input 
-                                            type="number"
-                                            name="duration"
-                                            class="form-control" 
-                                            placeholder="Duration"
-                                            required="Duration must be greater than 1 day"
-                                            min="1"
-                                            />
-                                    </div>
+                                <div class="col">
+                                    <label><strong>Duration (by day)</strong></label>
+                                    <input 
+                                        type="number"
+                                        name="duration"
+                                        class="form-control" 
+                                        placeholder="Duration"
+                                        required="Duration must be greater than 1 day"
+                                        min="1"
+                                        />
                                 </div>
+                            </div>
 
-                                <div class="form-group">
+                            <div class="form-group">
 
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label><strong>Major</strong></label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label><strong>Major</strong></label>
                                     <c:set var="major" value="${sessionScope.MAJOR}"/>
                                     <select
                                         class="form-select border rounded"
@@ -109,21 +108,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="description"><strong>Job Description</strong></label>
-                                <textarea id="description" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="description"><strong>Skill-Job</strong></label>
+                                <label><strong>Skill-Job</strong></label>
                                 <div>
-                                    <select style="width: 50%" class="js-select2" multiple="multiple" name="skillJob">
+                                    <select class="js-select2 w-100" multiple="multiple" name="skillJob">
                                         <c:forEach var="s" items="${requestScope.LIST_SKILL_POST}">
                                             <option value="${s.skillId}" data-badge="">${s.name}</option>
                                         </c:forEach>                                      
                                     </select>
                                 </div>
-                            </div>                                                    
-                            <div style="margin-top: 20px" class="row align-items-center">
+                            </div> 
+                            <div class="form-group">
+                                <label><strong>Job Description</strong></label>
+                                <textarea id="description" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <div style="margin-top: 20px" class="row align-items-center mt-5">
                                 <div class="col-lg-4 ml-auto">
                                     <div class="row">
                                         <div class="col-6">
@@ -147,8 +145,6 @@
             </div>
         </div>
     </section>
-
-    <jsp:include page="component/footer.jsp"></jsp:include>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script>

@@ -6022,9 +6022,9 @@ form.search-box .search-form a {
   }
 }
 .job-listing-area .count-job {
-  display: flex;
+/*  display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap;*/
 }
 .job-listing-area .count-job span {
   padding-right: 15px;

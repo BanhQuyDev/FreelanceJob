@@ -6,59 +6,45 @@ package home;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import jobs.JobDAO;
-import jobs.JobDTO;
-import notifications.NotificationDAO;
-import users.UserDTO;
+import milestones.MilestoneDAO;
+import milestones.MilestoneDTO;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ApplyJobController", urlPatterns = {"/ApplyJobController"})
-public class ApplyJobController extends HttpServlet {
+@WebServlet(name = "AddMilestoneController", urlPatterns = {"/AddMilestoneController"})
+public class AddMilestoneController extends HttpServlet {
 
-    private static final String ERROR = "job_details.jsp";
-    private static final String SUCCESS = "job_details.jsp";
+    private static final String ERROR = "eror.jsp";
+    private static final String SUCCESS = "WorkspaceController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-            String jobId = request.getParameter("jobId");
-            String note = "";
-            if (request.getParameter("note") != null) {
-                note = request.getParameter("note");
+            String idJob = request.getParameter("idJob");
+            List<MilestoneDTO> listMilestone = new ArrayList<>();
+            for (int i = 1; i <= 5; i++) {
+                String startDate = request.getParameter("startDate" + i);
+                String endDate = request.getParameter("endDate" + i);
+                String tittle = request.getParameter("tittle" + i);
+                listMilestone.add(new MilestoneDTO(0, tittle, startDate, endDate, 1, Integer.parseInt(idJob)));
             }
-            JobDAO jobDao = new JobDAO();
-            if (jobDao.insertJobApplication(user.getId(), Integer.parseInt(jobId), note)) {
-                int countFreelancer = jobDao.countFreelancerIn1Job(Integer.parseInt(jobId));
-                request.setAttribute("COUNTING_FREELANCER", countFreelancer);
-                request.setAttribute("APPLY_SUCCESS", "Waiting for employer approval...");
-
-                JobDTO jobDetail = jobDao.getDetailJob(Integer.parseInt(jobId));
-                List<String> listSkill = jobDao.getSkillJob(Integer.parseInt(jobId));
-                request.setAttribute("JOB_DETAIL", jobDetail);
-                request.setAttribute("SKILL_JOB", listSkill);
-                JobDTO job = jobDao.getAJobByIDV2(Integer.parseInt(jobId));
-                boolean checkAddNotification = new NotificationDAO().addANotificationApply(user.getId(), job.getTitle(), job.getIdEmployer());
-                if (checkAddNotification) {
-                    url = SUCCESS;
-                }
+            MilestoneDAO milestoneDao = new MilestoneDAO();
+            if (milestoneDao.insertListMilestone(listMilestone)) {
+                url = SUCCESS;
             }
-
         } catch (Exception e) {
-            log("Error at ApplyJobController : " + e.toString());
+            log("Error at WorkspaceController : " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
