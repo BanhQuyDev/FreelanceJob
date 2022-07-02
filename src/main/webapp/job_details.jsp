@@ -32,6 +32,98 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+
+        <style>
+            .form__label {
+                font-family: 'Roboto', sans-serif;
+                font-size: 1.2rem;
+                margin-left: 3rem;
+                margin-top: 0.7rem;
+                /*display: block;*/
+                transition: all 0.3s;
+                transform: translateY(0rem);
+            }
+
+            .form__input {
+                font-family: 'Roboto', sans-serif;
+                color: #333;
+                font-size: 1.2rem;
+                margin: 0 auto;
+                padding: 1rem;
+                border-radius: 0.2rem;
+                background-color: rgb(255, 255, 255);
+                width: 90%;
+                display: block;
+                transition: all 0.3s;
+            }
+
+            .form__input:placeholder-shown + .form__label {
+                opacity: 0;
+                visibility: hidden;
+                -webkit-transform: translateY(-4rem);
+                transform: translateY(-4rem);
+            }
+
+            /*==================*/
+            .modal-content{
+                /*border: 3px solid black;*/
+                border-radius: 2rem;
+                transition: 0.2s linear;
+                position: relative;
+                box-shadow: 0px 0px 70px #f272298f;
+            }
+            .modal-dialog{
+                width: 550px;
+            }
+
+            /*            .modal-content:hover{
+                            box-shadow: 0px 0px 20px white;
+                            transition: 0.2s linear;
+                        }*/
+
+            .bell{
+                position: absolute;
+                color: white;
+                font-size: 90px;
+                top: -55px;
+                left: 38.5%;
+                background-color: #f27229;
+                border-radius: 50%;
+                padding: 18px;
+                box-shadow: 0px 0px 30px #f272298f;
+            }
+
+            .b1{
+                background-color: #f27229;
+                border: none;
+                font-size: 17px;
+                font-weight: 700;
+                border-radius: 15px;
+                width: 130px;
+                text-align: center;
+                padding: 12px;
+                transition: 0.3s linear;
+                cursor: pointer;
+            }
+
+            .b1:hover{
+                width: 150px;
+                font-size: 20px;
+                transition: 0.3s linear;
+            }
+
+            .apply_button{
+                /*background-color: #f27229;*/
+            }
+
+            /*fix-modal*/
+            body.modal-open {
+                overflow: auto !important;
+            }
+            body.modal-open[style] {
+                padding-right: 0px !important;
+            }
+        </style>
     </head>
 
     <body>
@@ -185,7 +277,8 @@
                                         <c:when test="${requestScope.APPLY_SUCCESS == null && sessionScope.MODE != 'EMPLOYER' && requestScope.JOB_APPLICATION_ID == 0}">                
                                             <div class="row">
                                                 <div class="col-sm-4">
-                                                    <a class="btn rounded" style="padding-left:25px;padding-right:25px;" href="ApplyJobController?jobId=${job.idJob}">Apply Now</a>
+                                                    <!--<a class="btn rounded" style="padding-left:25px;padding-right:25px;" href="ApplyJobController?jobId=${job.idJob}">Apply Now</a>-->
+                                                    <a class="btn rounded" style="padding-left:25px; padding-right:25px; color: white" data-toggle="modal" data-target="#modalDetail">Apply Now</a>
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
@@ -203,7 +296,7 @@
                                             </div>
                                         </c:when>
                                         <c:when test="${job.nameEmployer == sessionScope.LOGIN_USER.name && sessionScope.MODE == 'EMPLOYER'}">
-                                           <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
+                                            <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                         </c:when>
                                         <c:when test="${requestScope.JOB_APPLICATION_ID != 0}">
                                             <div class="row">
@@ -211,7 +304,7 @@
                                                     <button class="btn" style="padding-left:25px;padding-right:25px; background-color: #f2722970;">Processsing...</button>
                                                 </div>
                                                 <div class="col-sm-8">
-                                                   <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
+                                                    <a href="JobListingController" class="btn" style="margin-left: 60px;">Previous</a>
                                                 </div>
                                             </div>
                                         </c:when>
@@ -219,6 +312,24 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalDetail">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <form action="ApplyJobController" method="POST">
+                            <input name="jobId" value="${job.idJob}" hidden=""/>
+                            <i class="fa fa-bell bell text-center align-self-center"></i>
+                            <h2 class="text-center text-light" style="padding: 70px 0px 20px 0px; border-bottom: 2px solid black !important; margin-bottom: 20px; border-top-right-radius: 27px; border-top-left-radius: 27px; background-color: #f27229">Note</h2>
+                            <p style="margin-left: 25px; margin-bottom: 0px; font-size: 20px; color: black">Dealing with your employer</p>
+                            <textarea name="note" rows="3" class="form__input mt-3" id="note" placeholder="Noting..." required=""></textarea>
+                            <label for="note" class="form__label mb-3">Noting...</label>
+                            <label style="margin-left: 23%">Take more advantage for you <i class="fas fa-heart text-danger"></i></label>
+                            <div class="text-center" style="height: 100px"> 
+                                <button class="rounded-pill b1 mb-4 apply_button">Apply</button> 
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

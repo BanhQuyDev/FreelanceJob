@@ -71,7 +71,7 @@ function setMessage(msg) {
                       <div class="font-weight-bold mb-1">You</div>
         ` + msg.message + `
                      </div>
-                </div>`
+                </div>`;
     } else {
         document.getElementById('status').innerHTML = "Online";
         newElem = `<div class="chat-message-left pb-4">
@@ -83,7 +83,7 @@ function setMessage(msg) {
                                                 <div class="font-weight-bold mb-1">` + msg.username + `</div>
                                                 ` + msg.message + `
                                             </div>
-                                        </div>`
+                                        </div>`;
     }
 
     document.getElementById('scrolling-messages').innerHTML = currentHTML

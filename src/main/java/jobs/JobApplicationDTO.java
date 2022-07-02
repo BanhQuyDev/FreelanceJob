@@ -12,17 +12,18 @@ package jobs;
 public class JobApplicationDTO {
 
     private int id_application;
-    private int id_freelancer; 
+    private int id_freelancer;
     private int id_job;
     private String fullName;
     private String email;
     private String picture;
     private String title;
+    private String note;
 
     public JobApplicationDTO() {
     }
 
-    public JobApplicationDTO( int id_freelancer, int id_job) {
+    public JobApplicationDTO(int id_freelancer, int id_job) {
         this.id_freelancer = id_freelancer;
         this.id_job = id_job;
     }
@@ -101,6 +102,13 @@ public class JobApplicationDTO {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-    
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
 }

@@ -60,15 +60,15 @@
                 <div class="container">
                     <div class="row">
                         <!-- Left content -->
-                        <div class="col-xl-12 col-lg-12 col-md-4">
-                            <button class="btn" style="padding: 18px 20px; border-radius: 5px" onclick="history.back()">Previous</button>
-                            <div class="row mb-3" style="display: flex; flex-direction: row; justify-content: left; align-items: center">
+                        <button class="btn mb-3" style="padding: 20px; border-radius: 5px" onclick="history.back()">Previous</button>
+                        <div class="col-xl-12 col-lg-12 col-md-4 mt-4 mb-4">
+                            <div class="row justify-content-between mb-3">
                                 <!-- Job Category Listing start -->
                                 <!-- single one -->
-                                <div class="count-job font-weight-bold text-monospace">
-                                    <span>List Freelancers:</span>
+                                <div class="col-6 count-job font-weight-bold text-right">
+                                    <h2>List Freelancers</span>
                                 </div>
-                                <form action="FilterFreelancerApplyController" method="GET">                                         
+                                <form class="col-2 text-left" action="FilterFreelancerApplyController" method="GET">                                         
                                     <!-- Select job items start -->
                                     <select name="selectedJob" onchange="this.form.submit()">
                                         <option value="0">All Job</option>                   
@@ -76,10 +76,8 @@
                                             <option ${job.idJob == requestScope.JOB_SELECTED ? "selected":""} value="${job.idJob}">${job.title}</option>
                                         </c:forEach>
                                     </select>
-
                                     <!--  Select job items End-->   
                                 </form>
-
                                 <!-- Job Category Listing End -->
                             </div>
                         </div>
@@ -120,7 +118,7 @@
                                                             <div class="freelancer d-flex border-bottom" style="gap: 10px; padding-bottom: 10px;">
                                                                 <div class="freelancer_img ">
                                                                     <img class="border rounded-circle" style="object-fit: cover; flex-shrink: 0" src="${LF.picture != null ? LF.picture : 
-                                                                                               'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="${LF.fullName}"/>
+                                                                                                                                                        'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="${LF.fullName}"/>
                                                                 </div>
                                                                 <div class="freelancer_info d-flex flex-column" style="row-gap: 20px;">
                                                                     <div class="freelancer_info_name font-weight-bold text-primary">

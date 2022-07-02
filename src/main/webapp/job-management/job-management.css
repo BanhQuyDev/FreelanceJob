@@ -153,7 +153,7 @@
 }
 
 .news-item:hover .news-content.news-done:after {
-    border-left-color: #0fc696;
+    border-left-color: #21b48d;
 }
 
 .news-item:hover .news-content.news-doing:after {

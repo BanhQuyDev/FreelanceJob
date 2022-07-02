@@ -63,6 +63,14 @@
                                     <span>Timeline</span>
                                 </div>
                                 <div class="row">
+                                <c:if test="${requestScope.LIST_APPLIED_JOB.size() == 0}">
+                                    <div class="col-sm-6 news-item">
+                                        <div class="news-content news-done" style="padding-left: 50px;">
+                                            <h2 style="font-family:none!important;" class="news-title">You have not applied for any job yet</h2>
+                                            <h5><i class="far fa-lightbulb"></i> Apply some Jobs to see their Details here</h5>
+                                        </div>
+                                    </div>
+                                </c:if>
                                 <c:forEach var="job" items="${requestScope.LIST_APPLIED_JOB}" varStatus="counting">
                                     <c:set var="date" value="${fn:split(job.createDateJobApplication, '-')}"/>
                                     <c:if test="${counting.count % 2 != 0}">
