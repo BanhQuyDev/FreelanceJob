@@ -310,7 +310,7 @@
             .btn_milestone:hover:before {
                 left: 100%;
             }
-            
+
             .timeline:hover h2 i{
                 transform: rotate(360deg);
                 transition: 0.8s linear;
