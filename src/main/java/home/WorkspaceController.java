@@ -33,6 +33,8 @@ public class WorkspaceController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
             MilestoneDAO milestoneDao = new MilestoneDAO();
@@ -58,13 +60,11 @@ public class WorkspaceController extends HttpServlet {
                 } else if (mode.equals("EMPLOYER")) {
                     listContractDetail.add(contractDao.getContractDetailForWorkspaceForEmployer(loginUser.getId(), contractDTO.getContract_job_id()));
                 }
-                listMilestone = milestoneDao.getAllMilestoneByIdJob(contractDTO.getContract_job_id());
             }
 
             request.setAttribute("LIST_CONTRACT_FREELANCER", listContract);
             request.setAttribute("LIST_CONTRACT_DETAIL_FREELANCER", listContractDetail);
             request.setAttribute("CONTRACT_DETAIL_SIZE", listContractDetail.size());
-            request.setAttribute("LIST_MILESTONE", listMilestone);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at WorkspaceController : " + e.toString());

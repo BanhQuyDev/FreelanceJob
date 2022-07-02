@@ -4,6 +4,8 @@
  */
 package contracts;
 
+import java.util.List;
+import milestones.MilestoneDTO;
 import utils.Utils;
 
 /**
@@ -27,6 +29,7 @@ public class ContractDTO {
     private int contract_job_id;
     private int idPartner;
     private String contract_job_end_date;
+    private List<MilestoneDTO> contract_list_milestone;
 
     public ContractDTO() {
     }
@@ -75,7 +78,7 @@ public class ContractDTO {
         this.contract_job_end_date = contract_job_end_date;
     }
 
-    public ContractDTO(String contract_job_tittle, double contract_job_price, String contract_job_description, String contract_job_start_date, String contract_job_end_date, String contract_freelancer_name, String contract_employer_name, int contract_job_id) {
+    public ContractDTO(String contract_job_tittle, double contract_job_price, String contract_job_description, String contract_job_start_date, String contract_job_end_date, String contract_freelancer_name, String contract_employer_name, int contract_job_id, List<MilestoneDTO> contract_list_milestone) {
         this.contract_job_tittle = contract_job_tittle;
         this.contract_job_price = contract_job_price;
         this.contract_job_description = contract_job_description;
@@ -84,6 +87,7 @@ public class ContractDTO {
         this.contract_freelancer_name = contract_freelancer_name;
         this.contract_employer_name = contract_employer_name;
         this.contract_job_id = contract_job_id;
+        this.contract_list_milestone = contract_list_milestone;
     }
 
     public int getId_contract() {
@@ -212,6 +216,14 @@ public class ContractDTO {
 
     public void setIdPartner(int idPartner) {
         this.idPartner = idPartner;
+    }
+
+    public List<MilestoneDTO> getContract_list_milestone() {
+        return contract_list_milestone;
+    }
+
+    public void setContract_list_milestone(List<MilestoneDTO> contract_list_milestone) {
+        this.contract_list_milestone = contract_list_milestone;
     }
 
 }

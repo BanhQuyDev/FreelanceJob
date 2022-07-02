@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import milestones.MilestoneDAO;
+import milestones.MilestoneDTO;
 import utils.DBUtils;
 
 /**
@@ -53,6 +55,8 @@ public class ContractDAO {
             + "(SELECT U.fullname FROM tblContract C, tblEmployer E, tblUser U WHERE E.id_employer = C.id_employer AND E.id_employer = U.id_user AND C.id_contract = Cc.id_contract ) employerName\n"
             + "FROM tblContract Cc, tblJob J, tblFreelancer F, tblUser U WHERE Cc.id_job = J.id_job AND Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.id_employer = ? AND Cc.id_job = ?";
     private final String UPDATE_CONTRACT_AFTER_FEEDBACK = "UPDATE tblContract SET status = 1 WHERE id_job = ?";
+
+    MilestoneDAO milestoneDao = new MilestoneDAO();
 
     public List<ContractDTO> getAllContractForHistory(int id_user) throws SQLException {
         List<ContractDTO> list = new ArrayList<>();
@@ -321,7 +325,8 @@ public class ContractDAO {
                     String end_date = rs.getString("end_date");
                     String fullname = rs.getString("fullname");
                     String employerName = rs.getString("employerName");
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job);
+                    List<MilestoneDTO> listMilestone = milestoneDao.getAllMilestoneByIdJob(id_job);
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone);
                 }
             }
         } catch (Exception e) {
@@ -352,7 +357,8 @@ public class ContractDAO {
                     String end_date = rs.getString("end_date");
                     String fullname = rs.getString("fullname");
                     String employerName = rs.getString("employerName");
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job);
+                    List<MilestoneDTO> listMilestone = milestoneDao.getAllMilestoneByIdJob(id_job);
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone);
                 }
             }
         } catch (Exception e) {

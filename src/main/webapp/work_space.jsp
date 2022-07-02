@@ -244,7 +244,7 @@
                 background-color: #071f2a7f;
             }
             .timeline ul li:hover span{
-                margin-left: 10px;
+                margin: 0px 10px;
                 transition: 0.3s linear;
             }
             .timeline ul li:hover:before {
@@ -309,6 +309,14 @@
             }
             .btn_milestone:hover:before {
                 left: 100%;
+            }
+            
+            .timeline:hover h2 i{
+                transform: rotate(360deg);
+                transition: 0.8s linear;
+            }
+            .timeline>h2 i{
+                transition: 0.5s linear;
             }
         </style>
     </head>
@@ -416,7 +424,7 @@
                                                                 </div>
                                                             </c:if>
                                                             <c:if test="${Math.floor(100-((contract.contract_remaining_time/(contract.contract_job_duration*24))*100)) > 100}">
-                                                                <span class="skill" style="width: 100%;"><span class="info_valume text-danger">Overtime (end)</span></span>                
+                                                                <span class="skill" style="width: 100%;"><span class="info_valume text-danger">Overdue (end)</span></span>                
                                                                 <div class="progress skill-bar ">
                                                                     <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
                                                                 </div>
@@ -429,14 +437,14 @@
                                     </div>
                                 </div>
                             </div>
-                                        
+
                             <form action="FeedbackController" method="POST">
                                 <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
                                     <input name="idFreelancer" value="${contract.idPartner}" hidden=""/>
                                     <input name="idEmployer" value="${sessionScope.LOGIN_USER.id}" hidden=""/>
                                     <input name="idJob" value="${contract.contract_job_id}" hidden=""/>
                                 </c:if>
-                                <div style="font-family: 'The Girl Next Door', cursive" class="modal fade" id="feedbackModal${count.count}">
+                                <div class="modal fade" id="feedbackModal${count.count}" style="font-family: 'The Girl Next Door', cursive">
                                     <div class="modal-dialog modal-dialog-centered modal-lg feedbackk">
                                         <div class="modal-content">
                                             <div class="card text-center">
@@ -507,7 +515,7 @@
                                                     <li class="countMilestone">
                                                         <strong>From </strong> <span class="ml-3"><input name="startDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
                                                         <strong class="ml-3">To </strong> <span class="ml-3"><input name="endDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
-                                                        <span class="ml-5 bg-danger"><i class="fas fa-minus"></i></span>
+                                                        <span class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>
                                                         <div class="content">
                                                             <h3>Milestone Tittle <input name="tittle1" required="" style="border-radius: 5px; margin-left: 15px; padding: 10px; width: 65%"/></h3>
                                                         </div>
@@ -523,60 +531,59 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        </div>
-                        <!-- end row -->
-                        <div class="row column4 graph">
-                        <c:forEach var="contractDetail" items="${requestScope.LIST_CONTRACT_DETAIL_FREELANCER}" varStatus="count">
+                    </div>
+                    <!-- end row -->
+                    <c:forEach var="contractDetail" items="${requestScope.LIST_CONTRACT_DETAIL_FREELANCER}" varStatus="count">
+                        <div class="row column4 graph justify-content-center">
                             <c:if test="${count.count == 1}">
-                            <!--<div style="display: block;" class="col-md-12 mt-5 mb-5" id="contractCard${count.count}">-->
-                            </c:if>
-                            <c:if test="${count.count != 1}">
-                            <div style="display: none;" class="col-md-12 mt-5 mb-5" id="contractCard${count.count}">
-                            </c:if>
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-5" role="milestone">
-                                            <div class="timeline">
-                                                <ul>
-                                                    <li>
-                                                        <span>3rd January 2020</span>
+                                <div style="display: block" class="col-lg-4 align-self-center" role="milestone" id="milestoneCard${count.count}">
+                                </c:if>
+                                <c:if test="${count.count != 1}">
+                                    <div style="display: none" class="col-lg-4 align-self-center" role="milestone" id="milestoneCard${count.count}">
+                                    </c:if>
+                                    <div role="milestone">
+                                        <div class="timeline">
+                                            <h2 class="mb-4">Milestone <i class="fas fa-hourglass ml-3"></i></h2>
+                                            <ul>
+                                                <c:forEach var="milestone" items="${contractDetail.contract_list_milestone}">
+                                                    <c:if test="${milestone.status == 1}">
+                                                        <li>
+                                                        </c:if>
+                                                        <c:if test="${milestone.status == 0}">
+                                                        <li class="overtime">
+                                                        </c:if>
+                                                        <label style="font-size: 20px; margin-right: 10px">Period </label>
+                                                        <span>${milestone.startDate}</span>
+                                                        <i class="fas fa-long-arrow-alt-right ml-2 mr-2" style="font-size: 20px;"></i>
+                                                        <span>${milestone.endDate}</span>
                                                         <div class="content">
-                                                            <h3>What Is Lorem Ipsum?</h3>
-                                                            <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                                            </p>
+                                                            <p style="font-size: 20px; margin: 8px 0px">Tittle</p>
+                                                            <h3 style="background-color: #1685b8; border-radius: 15px; color: white; padding: 15px; font-size: 17px; font-weight: 400;">${milestone.tittle}</h3>
                                                         </div>
                                                     </li>
-                                                    <li class="overtime">
-                                                        <span>21st Jun 2019</span> <label class="ml-3 text-danger"><strong>Overtime</strong></label>
-                                                        <div class="content">
-                                                            <h3>What Is Lorem Ipsum?</h3>
-                                                            <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span>15th April 2018</span>
-                                                        <div class="content">
-                                                            <h3>What Is Lorem Ipsum?</h3>
-                                                            <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span>22nd Mars 2017</span>
-                                                        <div class="content">
-                                                            <h3>What Is Lorem Ipsum?</h3>
-                                                            <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                    <c:if test="${contractDetail.contract_list_milestone.size() == 0}">
+                                                        <li>
+                                                            <span>${contractDetail.contract_job_start_date}</span>
+                                                            <i class="fas fa-long-arrow-alt-right"></i>
+                                                            <span>${contractDetail.contract_job_end_date}</span>
+                                                            <div class="content">
+                                                                <h3>No milestones have been added yet !!</h3>
+                                                            </div>
+                                                        </li>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </ul>
                                         </div>
-                                        <div class="col-lg-6" role="detail">
+                                    </div>
+                                </div>
+
+                                <c:if test="${count.count == 1}">
+                                    <div style="display: block;" class="col-md-7 align-self-center" id="contractCard${count.count}">
+                                    </c:if>
+                                    <c:if test="${count.count != 1}">
+                                        <div style="display: none;" class="col-md-7 align-self-center" id="contractCard${count.count}">
+                                        </c:if>
+                                        <div role="detail">
                                             <blockquote style="position: relative;" class="blockquote blockquote-custom bg-white p-5 shadow-lg rounded">
                                                 <div style="width: 50px; height: 50px; position: absolute; top: -25px; left: 50px; line-height: 50px; text-align: center" class="blockquote-custom-icon bg-info shadow-sm rounded-circle justify-content-center">
                                                     <i class="fa fa-quote-left text-white"></i>
@@ -614,10 +621,11 @@
                                             </blockquote>
                                         </div>
                                     </div>
-                            </div>
-                        </c:forEach>
-                        </div>
-                        <div class="row column4 graph">
+
+                                </div>
+                            </c:forEach>
+
+                            <div class="row column4 graph mt-5">
                                 <div class="col-md-4">
                                     <div class="white_shd full margin_bottom_30">
                                         <div class="full graph_head">
@@ -759,14 +767,14 @@
                                         </div>
                                     </div>
                                 </div>
-                        </div>
+                            </div>
                             <!-- footer -->
                             <!-- end dashboard inner -->
+                        </div>
                     </div>
-                </div>
 
                     <jsp:include page="component/footer.jsp"></jsp:include>
-        </div>
+                </div>
                 <script src="./work-space/js/render_job_detail.js"></script>
                 <!-- jQuery -->
                 <script src="work-space/js/jquery.min.js"></script>
@@ -786,7 +794,7 @@
                 <!-- nice scrollbar -->
                 <script src="work-space/js/perfect-scrollbar.min.js"></script>
                 <script>
-                                                        var ps = new PerfectScrollbar('#sidebar');
+                                                    var ps = new PerfectScrollbar('#sidebar');
                 </script>
                 <!-- custom js -->
                 <script src="work-space/js/custom.js"></script>
@@ -794,11 +802,11 @@
                 <script src="work-space/js/semantic.min.js"></script>
                 <script></script>
                 <script>
-                                                        window.setTimeout(function () {
-                                                            $(".alert").fadeTo(400, 0).slideUp(400, function () {
-                                                                $(this).remove();
-                                                            });
-                                                        }, 3000)
+                                                    window.setTimeout(function () {
+                                                        $(".alert").fadeTo(400, 0).slideUp(400, function () {
+                                                            $(this).remove();
+                                                        });
+                                                    }, 3000)
                 </script> 
                 <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
                 <!-- Jquery, Popper, Bootstrap -->
@@ -838,7 +846,7 @@
                     crossorigin="anonymous"
                 ></script>
                 <script>
-                                                        $('.dropdown-toggle').dropdown()
+                                                    $('.dropdown-toggle').dropdown()
                 </script>
                 </body>
                 </html>

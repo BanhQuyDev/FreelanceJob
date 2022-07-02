@@ -1,11 +1,16 @@
 function showJobDetail(totalDetail, idCard) {
     for (var i = 1; i <= totalDetail; i++) {
-        var generateIdCard = "contractCard";
-        generateIdCard += i;
+        var generateDetailCard = "contractCard";
+        generateDetailCard += i;
+        var milestoneCard = "milestoneCard";
+        milestoneCard += i;
+        console.log(milestoneCard);
         if (idCard === i) {
-            document.getElementById(generateIdCard).style.display = "block";
+            document.getElementById(generateDetailCard).style.display = "block";
+            document.getElementById(milestoneCard).style.display = "block";
         } else {
-            document.getElementById(generateIdCard).style.display = "none";
+            document.getElementById(generateDetailCard).style.display = "none";
+            document.getElementById(milestoneCard).style.display = "none";
         }
     }
 }
@@ -52,9 +57,9 @@ function addMilestone(index, startDateJob, endDateJob) {
         return;
     } else {
         newElem = `
-            <strong>From </strong> <span class="ml-3"><input name="startDate1" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
-            <strong class="ml-3">To </strong> <span class="ml-3"><input name="endDate1" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
-            <span class="ml-5 bg-danger"><i class="fas fa-minus"></i></span>
+            <strong>From </strong> <span class="ml-3"><input name="${startDate}" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
+            <strong class="ml-3">To </strong> <span class="ml-3"><input name="${endDate}" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
+            <span class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>
             <div class="content">
                 <h3>Milestone Tittle <input name="${tittle}" required="" style="border-radius: 5px; margin-left: 15px; padding: 10px; width: 65%"/></h3>
             </div>

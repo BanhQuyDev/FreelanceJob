@@ -18,12 +18,13 @@ import utils.DBUtils;
  * @author Admin
  */
 public class MilestoneDAO {
-    
+
     private final String INSERT_MILESTONE = "INSERT INTO tblMilestone(tittle, start_date, end_date, status, id_job) VALUES(?,?,?,1,?)";
     private final String GET_ALL_ID_MILESTONE = "SELECT M.id_milestone FROM tblMilestone M ";
     private final String CHECK_AUTO_STATUS = "{call Check_Milestone_Status(?)}";
-    private String GET_ALL_MILESTONE_BY_ID_JOB = "SELECT M.id_milestone, M.tittle, M.start_date, M.end_date, M.status FROM tblJob J, tblMilestone M WHERE J.id_job = M.id_job AND M.id_job = ?";
-    
+    private String GET_ALL_MILESTONE_BY_ID_JOB = "SELECT M.id_milestone, M.tittle, M.start_date, M.end_date, M.status FROM tblJob J, tblMilestone M WHERE J.id_job = M.id_job AND M.id_job = ? "
+            + "ORDER BY start_date ASC";
+
     public boolean insertListMilestone(List<MilestoneDTO> listMilestone) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -54,7 +55,7 @@ public class MilestoneDAO {
         }
         return check;
     }
-    
+
     public void autoSetStatusByDay() throws SQLException {
         Connection conn = null;
         CallableStatement cs = null;
@@ -81,9 +82,9 @@ public class MilestoneDAO {
             }
         }
     }
-    
+
     public List<MilestoneDTO> getAllMilestoneByIdJob(int idJob) throws SQLException {
-        List<MilestoneDTO> list = null;
+        List<MilestoneDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
