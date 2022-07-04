@@ -32,6 +32,27 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+
+        <style>
+            .social-link {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #ddd;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #666;
+                border-radius: 50%;
+                transition: all 0.3s;
+                font-size: 0.9rem;
+            }
+
+            .social-link:hover, .social-link:focus {
+                background: #ddd;
+                text-decoration: none;
+                color: #555;
+            }
+        </style>
     </head>
 
     <body>
@@ -65,7 +86,7 @@
                             <div class="row justify-content-between mb-3">
                                 <!-- Job Category Listing start -->
                                 <!-- single one -->
-                                <div class="col-6 count-job font-weight-bold text-right">
+                                <div class="col-7 count-job font-weight-bold text-right">
                                     <h2>List Freelancers</span>
                                 </div>
                                 <form class="col-2 text-left" action="FilterFreelancerApplyController" method="GET">                                         
@@ -111,36 +132,36 @@
                                                     </center>
                                                 </div>
                                             </c:if>
-                                            <div  style="display: grid; grid-template-columns:repeat(3, 1fr); gap: 10px">
-                                                <c:forEach items="${requestScope.LIST_FREELANCER_APPLY}" var="LF">
-                                                    <form action="ApproveFreelancerController" method="POST">
-                                                        <div class="w-100 h-100 p-3" style="border-radius: 8px; border: 1px solid #007bff">
-                                                            <div class="freelancer d-flex border-bottom" style="gap: 10px; padding-bottom: 10px;">
-                                                                <div class="freelancer_img ">
-                                                                    <img class="border rounded-circle" style="object-fit: cover; flex-shrink: 0" src="${LF.picture != null ? LF.picture : 
-                                                                                                                                                        'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="${LF.fullName}"/>
+                                            <div class="row">
+                                                <c:forEach items="${requestScope.LIST_FREELANCER_APPLY}" var="LF" varStatus="counting">
+                                                    <form class="col-4" style="position: relative; margin-bottom: 35px" action="ApproveFreelancerController" method="POST">
+                                                        <div class="p-4 h-100 w-100" style="border-radius: 14px; border: 2px solid #007bff">
+
+                                                            <div class="row freelancer border-bottom" style="padding-bottom: 30px; height: 150px">
+                                                                <div class="freelancer_img col-4 align-self-center">
+                                                                    <img class="border rounded-circle w-100" src="${LF.picture != null ? LF.picture : 'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="${LF.fullName}"/>
                                                                 </div>
-                                                                <div class="freelancer_info d-flex flex-column" style="row-gap: 20px;">
-                                                                    <div class="freelancer_info_name font-weight-bold text-primary">
-                                                                        <span>${LF.fullName}</span>
+                                                                <div class="freelancer_info col-8">
+                                                                    <div class="freelancer_info_name font-weight-bold text-primary mt-2 mb-1">
+                                                                        <span><i class="fas fa-user mr-2"></i>${LF.fullName}</span>
                                                                     </div>
-                                                                    <div class="freelancer_info_email font-weight-bold" style="color: #FAC213">
-                                                                        <span>${LF.email}</span>
+                                                                    <div class="freelancer_info_email font-weight-bold">
+                                                                        <span>Apply for Job : </span><br/><span class="text-center text-success"><i class="fas fa-caret-right mr-2"></i>${LF.title}</span>
                                                                     </div>
-                                                                    <div class="freelancer_info_email font-weight-normal font-weight-bold d-flex flex-column">
-                                                                        <span style="outline-color: #0063FF">Apply for Job:</span>
-                                                                        <a class="text-center text-success" href="#">${LF.title}</a>
-                                                                    </div>
+
                                                                 </div>
                                                             </div>
-                                                            <div class="d-flex">
-                                                                <div class="text-center mt-4">
-                                                                    <a class="btn btn-outline-primary mb-2 p-4 border" style="border-radius: 16px" href="FreeLancerDetailController?id_freelancer=${LF.id_freelancer}">View Profile</a>
+                                                            <div class="row text-center mt-4">
+                                                                <div class="col-6">
+                                                                    <a href="FreeLancerDetailController?id_freelancer=${LF.id_freelancer}">
+                                                                        <button type="button" class="bg-info text-light border-0 p-3" style="cursor: pointer; border-radius: 15px; font-size: 17px; font-weight: 600;">
+                                                                            <i class="fas fa-address-card mr-2"></i> Profile
+                                                                        </button>
+                                                                    </a>
                                                                 </div>
-                                                                <div class="text-center mt-4 mx-auto" >
-                                                                    <button type="submit"  class="btn-outline-success mb-2 border" style="padding: 10px;border-radius: 16px;display: flex;justify-content: center; cursor: pointer; align-items: center">
-                                                                        <img style="width: 30px; height: 30px; border-radius: 100rem; object-fit: cover; margin-right: 10px" src="https://icon-library.com/images/check-image-icon/check-image-icon-5.jpg" alt="alt"/>
-                                                                        Approve
+                                                                <div class="col-6" >
+                                                                    <button type="submit" class="bg-success text-light border-0 p-3" style="cursor: pointer; border-radius: 15px; font-weight: 600;">
+                                                                        <i class="fas fa-check-circle mr-2"></i> Approve
                                                                     </button>
                                                                 </div> 
                                                             </div>
@@ -148,7 +169,31 @@
                                                         </div>
                                                         <input name="id_freelancer" value="${LF.id_freelancer}" type="hidden">
                                                         <input name="id_job" value="${LF.id_job}" type="hidden">
+                                                        <%--<c:if test="${LF.note != null}">--%>
+                                                        <a class="bg-info text-light border-0" style="position: absolute; top: -6.5%; right: 13%; border: 2px solid black; padding: 8px 20px; border-radius: 8px; cursor: pointer" data-toggle="modal" data-target="#noteModal${counting.count}">
+                                                            <i class="fas fa-envelope font-weight-bold"></i>
+                                                        </a>
+                                                        <%--</c:if>--%>
                                                     </form>
+
+                                                    <div class="modal fade" id="noteModal${counting.count}">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="mb-5 text-center">
+                                                                    <div class="bg-white rounded py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-team/teacher-4.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                                                                        <h5 class="mb-0">Tên freelancer</h5><span class="small text-uppercase text-muted">Send you a message</span>
+                                                                        <ul class="social mb-0 list-inline mt-3">
+                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
+                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
+                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                                                                        </ul>
+                                                                        <p class="text-left border rounded mx-5 mb-0 mt-4 p-2">messagee ở đâyyy</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </c:forEach>
 
                                             </div>

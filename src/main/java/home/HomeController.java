@@ -4,6 +4,8 @@
  */
 package home;
 
+import feedbacks.FeedbackDAO;
+import feedbacks.FeedbackDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -41,6 +43,7 @@ public class HomeController extends HttpServlet {
             List<MajorDTO> listMajor = majorDao.getAllMajorList();
             request.setAttribute("LIST_MAJOR", listMajor);
             JobDAO jobDao = new JobDAO();
+            FeedbackDAO feedbackDao = new FeedbackDAO();
             if (loginUser != null) {
                 String mode = (String) session.getAttribute("MODE");
                 if (mode.equals("FREELANCER")) {
@@ -57,10 +60,14 @@ public class HomeController extends HttpServlet {
                 }
                 List<JobDTO> listJob = jobDao.getTop4LatestJob(loginUser.getId());
                 request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
+                List<FeedbackDTO> listFeedbackFreelancer = feedbackDao.getTop4Freelancer();
+                request.setAttribute("LIST_TOP_4_FREELACER", listFeedbackFreelancer);
                 url = SUCCESS;
             } else {
                 List<JobDTO> listJob = jobDao.getTop4LatestJob();
                 request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
+                List<FeedbackDTO> listFeedbackFreelancer = feedbackDao.getTop4Freelancer();
+                request.setAttribute("LIST_TOP_4_FREELACER", listFeedbackFreelancer);
                 url = SUCCESS;
             }
         } catch (Exception e) {
