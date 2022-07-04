@@ -55,6 +55,8 @@ public class ContractDAO {
             + "(SELECT U.fullname FROM tblContract C, tblEmployer E, tblUser U WHERE E.id_employer = C.id_employer AND E.id_employer = U.id_user AND C.id_contract = Cc.id_contract ) employerName\n"
             + "FROM tblContract Cc, tblJob J, tblFreelancer F, tblUser U WHERE Cc.id_job = J.id_job AND Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.id_employer = ? AND Cc.id_job = ?";
     private final String UPDATE_CONTRACT_AFTER_FEEDBACK = "UPDATE tblContract SET status = 1 WHERE id_job = ?";
+    private final String COUNT_JOB_DONE = "SELECT COUNT(F.id_freelancer) jobDone FROM tblContract C, tblFreelancer F\n"
+            + "WHERE C.id_freelancer = F.id_freelancer AND C.status = 1 AND F.id_freelancer = ? GROUP BY F.id_freelancer";
 
     MilestoneDAO milestoneDao = new MilestoneDAO();
 
@@ -386,5 +388,28 @@ public class ContractDAO {
             DBUtils.closeConnection(conn, ptm);
         }
         return check;
+    }
+
+    public int countJobDone(int id_freelancer) throws SQLException {
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(COUNT_JOB_DONE);
+                ptm.setInt(1, id_freelancer);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("jobDone");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return count;
     }
 }

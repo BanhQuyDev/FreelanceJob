@@ -43,22 +43,6 @@
         </c:if>
         <jsp:include page="component/header.jsp"></jsp:include>
             <main>
-                <!-- slider Area Start-->
-                <!--                <div class="slider-area">
-                                     Mobile Menu 
-                                    <div class="slider-active">
-                                        <div
-                                            class="single-slider slider-height d-flex align-items-center"
-                                            style="
-                                            background-image: url(assets/img/logo/remote-work-part-2.png);
-                                            background-position: initial;
-                                            background-repeat: no-repeat;
-                                            background-size: cover;
-                                            min-height: 500px;
-                                            "
-                                            ></div>
-                                    </div>
-                                </div>-->
                 <div style="width: 100%">
                     <div>
                         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
@@ -367,44 +351,77 @@
                     <div class="row reveal fade-right" style="margin-bottom: 60px">
                         <div class="col-lg-12">
                             <div class="section-tittle text-center">
-                                <span style="color: #fb246a; font-size: 37px; font-family: 700">OUR AWESOME TEAM</span>
-                                <span style="color: black; font-size: 15px; margin: auto; width: 50%">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-                                    in some form.</span>
+                                <span style="color: #fb246a; font-size: 37px; font-family: 700">TOP 4 FREELANCER</span>
+                                <span style="color: black; font-size: 15px; margin: auto; width: 50%">Freelancer of month</span>
                             </div>
                         </div>
                     </div>
-                    <div class="row reveal fade-right">
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div style="width: 200px; margin:auto">
-                                <!-- Image -->
-                                <div class="shapes position-relative">
-                                    <div class="image">
-                                        <img style="border-radius: 999rem" src="http://wpthemesgrid.com/themes/polio/assets/images/team/t1.jpg" alt="#">
-                                        <img class="shape1 position-absolute" style="width: 50px; height: 50px; top: 25%; left: 5%" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape1.svg" alt="#">
-                                        <img class="shape2 position-absolute" style="width: 35px; height: 35px; bottom: 0; right: 0" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape2.svg" alt="#">
+
+                    <div class="row reveal fade-right" style="column-gap: 20px">
+                        <c:forEach var="feedbackTop4" items="${requestScope.LIST_TOP_4_FREELACER}">
+                            <div class="col-lg-3 col-md-6 col-12" style="box-shadow: 0 0rem 20px rgba(0,0,0,.175); border-radius: 15px">
+                                <div style="padding: 25px">
+                                    <!-- Image -->
+                                    <div class="shapes position-relative">
+                                        <div class="image text-center">
+                                            <img style="border-radius: 50%" src="${feedbackTop4.feedback_freelancer_avatar}" alt="#">
+                                            <!--<img class="shape1 position-absolute" style="width: 50px; height: 50px; top: 25%; left: 5%" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape1.svg" alt="#">-->
+                                            <!--<img class="shape2 position-absolute" style="width: 35px; height: 35px; bottom: 0; right: 0" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape2.svg" alt="#">-->
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- End Image -->
-                                <div class="info-head" style="text-align: center">
-                                    <!-- User Box -->
-                                    <div class="info-box">
-                                        <h4 class="name"><a class="section-honorable__name" href="#">Dahlia Moore</a></h4>
-                                        <span class="designation">Senior Manager</span>
-                                    </div>
-                                    <!-- End Info Box -->
-                                    <!-- Review -->
-                                    <div class="social-links">
-                                        <ul class="social">
-                                            <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
-                                            <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
-                                            <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
-                                            <li><a href="#"><i class="lni lni-behance-original"></i></a></li>
+                                    <!-- End Image -->
+                                    <div class="rating">
+                                        <ul class="row justify-content-center mt-3">
+                                            <c:if test="${feedbackTop4.feedback_avg_rating == 5}">
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center ml-1" style="color: #ffee05; text-shadow: 0px 0px 8px #0008ffad; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
+                                            </c:if>
+                                            <c:if test="${feedbackTop4.feedback_avg_rating == 4}">
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
+                                            </c:if>
+                                            <c:if test="${feedbackTop4.feedback_avg_rating == 3}">
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
+                                            </c:if>
+                                            <c:if test="${feedbackTop4.feedback_avg_rating == 2}">
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
+                                            </c:if>
+                                            <c:if test="${feedbackTop4.feedback_avg_rating == 1}">
+                                                <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
+                                                <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
+                                            </c:if>
                                         </ul>
                                     </div>
-                                    <!-- End Social -->
+                                    <div class="info-head mt-3 text-center" style="height: 70px">
+                                        <div class="info-box">
+                                            <h4 class="name"><a class="section-honorable__name" href="#">${feedbackTop4.feedback_freelancer_name}</a></h4>
+                                            <span class="designation"></span>
+                                        </div>
+                                    </div>
+                                    <div class="text-center" style="color: #4e2a84">
+                                        <h2 class="mb-0 font-weight-bold counter">${feedbackTop4.feedback_job_done}</h2>
+                                        <p>jobs done</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </section>
@@ -460,6 +477,15 @@
             crossorigin="anonymous"
         ></script>
         <script src="./assets/js/animation.js"></script>
+
+        <!--Countup-->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script src="./assets/js/jquery.countup.js"></script>
+        <script>
+            $('.counter').countUp();
+        </script>
+        <!--End Countup-->
         <script>
             $(function () {
                 $('[data-toggle="popover"]').popover(),

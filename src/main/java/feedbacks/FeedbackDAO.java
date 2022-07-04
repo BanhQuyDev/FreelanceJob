@@ -4,9 +4,13 @@
  */
 package feedbacks;
 
+import contracts.ContractDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
 
 /**
@@ -16,6 +20,8 @@ import utils.DBUtils;
 public class FeedbackDAO {
 
     private final String INSERT_FEEDBACK = "INSERT INTO tblFeedback(content, rating, id_freelancer, id_employer, status) VALUES(?, ?, ?, ?, 1)";
+    private final String GET_TOP_4_FREELANCER = "SELECT TOP 4 U.id_user, U.fullname, U.avatar, (SUM(F.rating)/COUNT(F.rating)) avgRating FROM tblFeedback F, tblFreelancer Fe, tblUser U \n"
+            + "WHERE Fe.id_freelancer = F.id_freelancer AND Fe.id_freelancer = U.id_user GROUP BY U.id_user, U.fullname, U.avatar ORDER BY SUM(F.rating) / COUNT(F.rating) DESC";
 
     public boolean createFeedback(String content, int rating, int id_freelancer, int id_employer) throws SQLException {
         boolean check = false;
@@ -37,5 +43,33 @@ public class FeedbackDAO {
             DBUtils.closeConnection(conn, ptm);
         }
         return check;
+    }
+
+    public List<FeedbackDTO> getTop4Freelancer() throws SQLException {
+        List<FeedbackDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        ContractDAO contractDao = new ContractDAO();
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_TOP_4_FREELANCER);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int id_user = rs.getInt("id_user");
+                    String fullname = rs.getString("fullname");
+                    String avatar = rs.getString("avatar");
+                    int avgRating = rs.getInt("avgRating");
+                    int countJobDone = contractDao.countJobDone(id_user);
+                    list.add(new FeedbackDTO(avgRating, fullname, avatar, countJobDone));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return list;
     }
 }
