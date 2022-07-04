@@ -139,7 +139,7 @@
 
                                                             <div class="row freelancer border-bottom" style="padding-bottom: 30px; height: 150px">
                                                                 <div class="freelancer_img col-4 align-self-center">
-                                                                    <img class="border rounded-circle w-100" src="${LF.picture != null ? LF.picture : 'https://png.pngtree.com/png-vector/20190803/ourlarge/pngtree-avatar-user-basic-abstract-circle-background-flat-color-icon-png-image_1647265.jpg'}" alt="${LF.fullName}"/>
+                                                                    <img class="border rounded-circle w-100" src="${LF.picture}" alt="${LF.fullName}"/>
                                                                 </div>
                                                                 <div class="freelancer_info col-8">
                                                                     <div class="freelancer_info_name font-weight-bold text-primary mt-2 mb-1">
@@ -172,6 +172,10 @@
                                                         <%--<c:if test="${LF.note != null}">--%>
                                                         <a class="bg-info text-light border-0" style="position: absolute; top: -6.5%; right: 13%; border: 2px solid black; padding: 8px 20px; border-radius: 8px; cursor: pointer" data-toggle="modal" data-target="#noteModal${counting.count}">
                                                             <i class="fas fa-envelope font-weight-bold"></i>
+                                                            <c:if test="${LF.note != null || LF.note.size() > 0}">
+                                                                <div class="freelancer_noti"></div>
+                                                            </c:if>
+                                                            
                                                         </a>
                                                         <%--</c:if>--%>
                                                     </form>
@@ -180,15 +184,9 @@
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="mb-5 text-center">
-                                                                    <div class="bg-white rounded py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-team/teacher-4.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-                                                                        <h5 class="mb-0">Tên freelancer</h5><span class="small text-uppercase text-muted">Send you a message</span>
-                                                                        <ul class="social mb-0 list-inline mt-3">
-                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-                                                                            <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-                                                                        </ul>
-                                                                        <p class="text-left border rounded mx-5 mb-0 mt-4 p-2">messagee ở đâyyy</p>
+                                                                    <div class="bg-white rounded py-5 px-4"><img src="${LF.picture}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                                                                        <h5 class="mb-0">${LF.fullName}</h5><span class="small text-uppercase text-muted">Send you a message</span>
+                                                                        <p class="text-left border rounded mx-5 mb-0 mt-4 p-2">${LF.note}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
