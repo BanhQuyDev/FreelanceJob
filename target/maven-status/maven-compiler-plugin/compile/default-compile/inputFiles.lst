@@ -6,6 +6,7 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\PostJobControll
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\notifications\NotificationDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\RenderSkillPostJob.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\chat\ChatDTO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllFileOfJob.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\SearchJob.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\contracts\ContractDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UnappropriatedJobController.java
@@ -14,11 +15,13 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\jobs\JobDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\UserDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\DBUtils.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\FreeLancerDetailController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\S3Util.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\FilterFreelancerApplyController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\feedbacks\FeedbackDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllUser.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\status\StatusDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\users\GoogleUserDTO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UploadFileS3.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobDetailController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\ApplyJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\majors\MajorDTO.java
@@ -31,6 +34,7 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\utils\Utils.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllReport.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\contracts\ContractDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\chat\ChatDAO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\file\FileDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\ReportController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\notifications\NotificationDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\feedbacks\FeedbackDTO.java
@@ -51,6 +55,7 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LoginGoogleCont
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\UpdateUserSkillController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\websocket\Constants.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\GetAllFreelancerApplyController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\file\FileDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\majors\MajorDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\sendemail\SendEmail.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\status\StatusDAO.java

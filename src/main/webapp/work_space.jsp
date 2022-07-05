@@ -361,7 +361,7 @@
                                             <p class="p_status"><strong>Duration :</strong> ${contract.showDuration(contract.contract_job_duration)} day(s)</p>
                                         </div>
                                         <div class="info_button pt-3">
-                                            <button class="buttonVip border-0" onclick="showJobDetail(${requestScope.CONTRACT_DETAIL_SIZE}, ${count.count})"><a href="#contractCard${count.count}" style="color: white">View Detail</a></button> <a class="buttonVip border-0 ml-4" href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}">Chat</a>
+                                            <button class="buttonVip border-0" onclick="showJobDetail(${requestScope.CONTRACT_DETAIL_SIZE}, ${count.count})"><a href="#contractCard${count.count}" style="color: white">View Detail</a></button> <a class="buttonVip border-0 ml-4" href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}" target="_blank">Chat</a>
                                         </div>
 
                                         <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
@@ -602,15 +602,35 @@
                                                     </span>
                                                 </p>
                                                 <c:if test="${sessionScope.MODE == 'FREELANCER'}">
-                                                    <h5 style="font-family: serif; margin-top: 10px">
-                                                        <strong>File Submission :</strong>
-                                                        <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4"><i class="fas fa-file-upload text-light"></i></button>
-                                                    </h5>
+                                                    <c:choose>
+                                                        <c:when test="${contractDetail.totalFile != 0}">
+                                                            <h5 style="font-family: serif; margin-top: 10px">  
+                                                                <strong>File Submission :</strong>
+                                                                <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4"><i class="fas fa-file-upload text-light"></i></button>
+                                                                <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}"><a href="GetAllFileOfJob?idJob=${contractDetail.contract_job_id}" target="_blank">${contractDetail.totalFile} file(s)</a></span>
+
+                                                            </h5>
+                                                        </c:when>
+                                                        <c:when test="${contractDetail.totalFile == 0}">
+                                                            <h5 style="font-family: serif; margin-top: 10px">  
+                                                                <form action="UploadFileS3" method="post" enctype="multipart/form-data">
+                                                                    <strong>File Submission :</strong>
+                                                                    <input type="hidden" name="idJob" value="${contractDetail.contract_job_id}">
+                                                                    <input type="file" name="file" id="file${count.count}" multiple required style="display: none" onchange="changeFile('file${count.count}', 'file-chosen${count.count}', 'myBtn${count.count}')"/>
+                                                                    <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4" onclick="thisFileUpload('file${count.count}')"><i class="fas fa-file-upload text-light"></i></button>
+                                                                    <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}">No file chosen</span>
+                                                                    <button class="btn btn-primary d-block container mt-2" style="width: 13%;" id="myBtn${count.count}" type="submit">Upload</button>
+                                                                </form> 
+                                                            </h5>
+                                                        </c:when>
+                                                    </c:choose>                     
                                                 </c:if>
                                                 <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
-                                                    <h5 style="font-family: serif; margin-top: 20px">
+                                                    <h5 style="font-family: serif; margin-top: 10px">  
                                                         <strong>File Submission :</strong>
                                                         <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4"><i class="fas fa-file-upload text-light"></i></button>
+                                                        <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}"><a href="https://freelancejob2022.s3.us-west-1.amazonaws.com/IMG_3049.JPG" target="_blank">${contractDetail.totalFile} file(s)</a></span>
+
                                                     </h5>
                                                     <h5 style="font-family: serif; margin-top: 15px">
                                                         <strong class="self-align-center">Ready to Finish :</strong>
@@ -775,6 +795,7 @@
 
                     <jsp:include page="component/footer.jsp"></jsp:include>
                 </div>
+                <script src="./upload-file/app.js"></script>
                 <script src="./work-space/js/render_job_detail.js"></script>
                 <!-- jQuery -->
                 <script src="work-space/js/jquery.min.js"></script>
@@ -786,30 +807,11 @@
                 <script src="work-space/js/bootstrap-select.js"></script>
                 <!-- owl carousel -->
                 <script src="work-space/js/owl.carousel.js"></script> 
-                <!-- chart js -->
-                <script src="work-space/js/Chart.min.js"></script>
-                <script src="work-space/js/Chart.bundle.min.js"></script>
-                <script src="work-space/js/utils.js"></script>
-                <script src="work-space/js/analyser.js"></script>
                 <!-- nice scrollbar -->
                 <script src="work-space/js/perfect-scrollbar.min.js"></script>
                 <script>
-                                                    var ps = new PerfectScrollbar('#sidebar');
+                                                                        var ps = new PerfectScrollbar('#sidebar');
                 </script>
-                <!-- custom js -->
-                <script src="work-space/js/custom.js"></script>
-                <!-- calendar file css -->    
-                <script src="work-space/js/semantic.min.js"></script>
-                <script></script>
-                <script>
-                                                    window.setTimeout(function () {
-                                                        $(".alert").fadeTo(400, 0).slideUp(400, function () {
-                                                            $(this).remove();
-                                                        });
-                                                    }, 3000)
-                </script> 
-                <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-                <!-- Jquery, Popper, Bootstrap -->
                 <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
                 <script src="./assets/js/popper.min.js"></script>
                 <script src="./assets/js/bootstrap.min.js"></script>
@@ -846,7 +848,7 @@
                     crossorigin="anonymous"
                 ></script>
                 <script>
-                                                    $('.dropdown-toggle').dropdown()
+                                                                        $('.dropdown-toggle').dropdown()
                 </script>
                 </body>
                 </html>
