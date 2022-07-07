@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-        <link rel="stylesheet" href="assets/css/header_notification.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <!--assets/img/hero/Background_Report.jpg-->
     <body style="background-image: url('https://i.pinimg.com/originals/2f/a6/7e/2fa67e0eddd0bfa7f51a336dc6bff35c.jpg'); background-repeat: no-repeat; background-size: cover">

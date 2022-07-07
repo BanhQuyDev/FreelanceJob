@@ -442,3 +442,12 @@
     opacity: 0.6;
     color: #fb246a; 
 }
+.freelancer_noti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 999rem;
+    top: 8px;
+    right: 16px;
+}

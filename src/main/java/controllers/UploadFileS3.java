@@ -1,62 +1,70 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package home;
+package controllers;
 
-import contracts.ContractDAO;
-import feedbacks.FeedbackDAO;
 import file.FileDAO;
-import file.FileDTO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import utils.S3Util;
 
-/**
- *
- * @author Admin
- */
-@WebServlet(name = "FeedbackController", urlPatterns = {"/FeedbackController"})
-public class FeedbackController extends HttpServlet {
+@WebServlet(name = "UploadFileS3", urlPatterns = {"/UploadFileS3"})
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 20, // 20MB
+        maxRequestSize = 1024 * 1024 * 21 // 21MB
+)
+public class UploadFileS3 extends HttpServlet {
 
+    private static final long serialVersionUID = 1L;
+
+    public UploadFileS3() {
+        super();
+    }
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "WorkspaceController";
+    private static final String WORK_SPACE = "WorkspaceController";
+    private static final String FILE_MANAGEMENT = "GetAllFileOfJob";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String contentFeedback = request.getParameter("contentFeedback");
-            int starRating = 0;
-            if (request.getParameter("star-rating") != null) {
-                starRating = Integer.parseInt(request.getParameter("star-rating"));
-            }
-            int idFreelancer = Integer.parseInt(request.getParameter("idFreelancer"));
-            int idEmployer = Integer.parseInt(request.getParameter("idEmployer"));
+            Collection<Part> parts = request.getParts();
             int idJob = Integer.parseInt(request.getParameter("idJob"));
-
-            FeedbackDAO feedbackDao = new FeedbackDAO();
-            ContractDAO contractDao = new ContractDAO();
-            if (feedbackDao.createFeedback(contentFeedback, starRating, idFreelancer, idEmployer)) {
-                if (contractDao.updateContractAfterFeedback(idJob)) {
-                    List<FileDTO>listFile = new FileDAO().getListFileOfJob(idJob);
-                    for (FileDTO file : listFile) {
-                        new FileDAO().deleteFile(file.getId());
-                        String keyName = S3Util.getKeyName(file.getUrlS3());
-                        S3Util.deleteFile(keyName);
+            String position = request.getParameter("position");
+            FileDAO fileDao = new FileDAO();
+            for (Part filePart : parts) {
+                String fileName = getFileName(filePart);
+                if (fileName != null) {
+                    if (fileName.contains("idJob")||fileName.contains("position")) {
+                    } else {
+                        S3Util.uploadFile(fileName, filePart.getInputStream());
+                        String urlFile = S3Util.getURL(fileName);
+                        fileDao.uploadFile(urlFile, idJob);
                     }
-                    request.setAttribute("SUCCESS_MESSAGE", "Your job has been finish !!");
-                    url = SUCCESS;
                 }
             }
-        } catch (Exception e) {
-            log("Error at WorkspaceController : " + e.toString());
+            if (position.equals("workSpace")) {
+                url = WORK_SPACE;
+            }else{
+                 url = FILE_MANAGEMENT;
+            }
+            request.setAttribute("SUCCESS_MESSAGE", "Upload SuccessFully !!!");
+        } catch (Exception ex) {
+            log("Error uploading file:" + ex.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
@@ -101,4 +109,11 @@ public class FeedbackController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        int beginIndex = contentDisposition.indexOf("filename=") + 10;
+        int endIndex = contentDisposition.length() - 1;
+
+        return contentDisposition.substring(beginIndex, endIndex);
+    }
 }

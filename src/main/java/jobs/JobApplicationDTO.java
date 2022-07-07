@@ -35,6 +35,16 @@ public class JobApplicationDTO {
         this.title = title;
         this.picture = picture;
         this.id_job = id_job;
+       
+    }
+    public JobApplicationDTO(int id_freelancer, String fullName, String email, String title, String picture, int id_job, String note) {
+        this.id_freelancer = id_freelancer;
+        this.fullName = fullName;
+        this.email = email;
+        this.title = title;
+        this.picture = picture;
+        this.id_job = id_job;
+        this.note = note;
     }
 
     public JobApplicationDTO(int id_application, int id_freelancer, int id_job, String fullName, String email, String title, String picture) {

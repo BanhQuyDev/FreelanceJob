@@ -1,62 +1,44 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package home;
+package controllers;
 
-import contracts.ContractDAO;
-import feedbacks.FeedbackDAO;
 import file.FileDAO;
 import file.FileDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.S3Util;
 
 /**
  *
- * @author Admin
+ * @author QUANG HUY
  */
-@WebServlet(name = "FeedbackController", urlPatterns = {"/FeedbackController"})
-public class FeedbackController extends HttpServlet {
+@WebServlet(name = "GetAllFileOfJob", urlPatterns = {"/GetAllFileOfJob"})
+public class GetAllFileOfJob extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "WorkspaceController";
+    private static final String SUCCESS = "file_management.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String contentFeedback = request.getParameter("contentFeedback");
-            int starRating = 0;
-            if (request.getParameter("star-rating") != null) {
-                starRating = Integer.parseInt(request.getParameter("star-rating"));
-            }
-            int idFreelancer = Integer.parseInt(request.getParameter("idFreelancer"));
-            int idEmployer = Integer.parseInt(request.getParameter("idEmployer"));
             int idJob = Integer.parseInt(request.getParameter("idJob"));
-
-            FeedbackDAO feedbackDao = new FeedbackDAO();
-            ContractDAO contractDao = new ContractDAO();
-            if (feedbackDao.createFeedback(contentFeedback, starRating, idFreelancer, idEmployer)) {
-                if (contractDao.updateContractAfterFeedback(idJob)) {
-                    List<FileDTO>listFile = new FileDAO().getListFileOfJob(idJob);
-                    for (FileDTO file : listFile) {
-                        new FileDAO().deleteFile(file.getId());
-                        String keyName = S3Util.getKeyName(file.getUrlS3());
-                        S3Util.deleteFile(keyName);
-                    }
-                    request.setAttribute("SUCCESS_MESSAGE", "Your job has been finish !!");
-                    url = SUCCESS;
-                }
-            }
+            FileDAO file = new FileDAO();
+            List<FileDTO>listFile = file.getListFileOfJob(idJob);
+            request.setAttribute("LIST_FILE", listFile);
+            request.setAttribute("ID_JOB", idJob);
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at WorkspaceController : " + e.toString());
+            log("Error at GetAllFileOfJob : " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

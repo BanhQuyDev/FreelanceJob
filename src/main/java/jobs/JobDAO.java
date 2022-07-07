@@ -700,7 +700,7 @@ public class JobDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        String sql = "SELECT [tblJobApplication].[id_freelancer], [tblUser].[fullname], [tblUser].[email], [tblJob].[title], [tblUser].[avatar], [tblJob].[id_job]\n"
+        String sql = "SELECT [tblJobApplication].[id_freelancer], [tblUser].[fullname], [tblUser].[email], [tblJob].[title], [tblUser].[avatar], [tblJob].[id_job], [tblJobApplication].[note]\n"
                 + "  FROM ([tblUser] INNER JOIN [tblFreelancer] ON [tblUser].id_user = [tblFreelancer].[id_freelancer]\n"
                 + "  INNER JOIN [tblJobApplication] ON [tblJobApplication].[id_freelancer] = [tblFreelancer].[id_freelancer] \n"
                 + "  INNER JOIN [tblJob] ON [tblJob].[id_job] = [tblJobApplication].[id_job]) WHERE [tblJob].[id_employer] = ? AND [tblJobApplication].[status] IS NULL AND [tblJob].[id_status] = 2";
@@ -717,7 +717,8 @@ public class JobDAO {
                     String title_job = rs.getString("title");
                     String picture = rs.getString("avatar");
                     int id_job = rs.getInt("id_job");
-                    listUser.add(new JobApplicationDTO(id_freelancer, fullName, email, title_job, picture, id_job));
+                    String note = rs.getString("note");
+                    listUser.add(new JobApplicationDTO(id_freelancer, fullName, email, title_job, picture, id_job, note));
                 }
             }
         } catch (Exception e) {
