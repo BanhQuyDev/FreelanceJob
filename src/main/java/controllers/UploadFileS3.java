@@ -34,7 +34,8 @@ public class UploadFileS3 extends HttpServlet {
         super();
     }
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "WorkspaceController";
+    private static final String WORK_SPACE = "WorkspaceController";
+    private static final String FILE_MANAGEMENT = "GetAllFileOfJob";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,11 +44,12 @@ public class UploadFileS3 extends HttpServlet {
         try {
             Collection<Part> parts = request.getParts();
             int idJob = Integer.parseInt(request.getParameter("idJob"));
+            String position = request.getParameter("position");
             FileDAO fileDao = new FileDAO();
             for (Part filePart : parts) {
                 String fileName = getFileName(filePart);
                 if (fileName != null) {
-                    if (fileName.contains("idJob")) {                      
+                    if (fileName.contains("idJob")||fileName.contains("position")) {
                     } else {
                         S3Util.uploadFile(fileName, filePart.getInputStream());
                         String urlFile = S3Util.getURL(fileName);
@@ -55,7 +57,11 @@ public class UploadFileS3 extends HttpServlet {
                     }
                 }
             }
-            url = SUCCESS;
+            if (position.equals("workSpace")) {
+                url = WORK_SPACE;
+            }else{
+                 url = FILE_MANAGEMENT;
+            }
             request.setAttribute("SUCCESS_MESSAGE", "Upload SuccessFully !!!");
         } catch (Exception ex) {
             log("Error uploading file:" + ex.getMessage());

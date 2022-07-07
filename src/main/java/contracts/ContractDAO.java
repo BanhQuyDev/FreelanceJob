@@ -4,6 +4,7 @@
  */
 package contracts;
 
+import Payment.PaymentDAO;
 import file.FileDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -316,6 +317,7 @@ public class ContractDAO {
         try {
             conn = DBUtils.getConnection();
             FileDAO file = new FileDAO();
+            PaymentDAO payment = new PaymentDAO();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_CONTRACT_DETAIL_FOR_WORKSPACE);
                 ptm.setInt(1, id_user);
@@ -331,7 +333,8 @@ public class ContractDAO {
                     String employerName = rs.getString("employerName");
                     List<MilestoneDTO> listMilestone = milestoneDao.getAllMilestoneByIdJob(id_job);
                     int totalFile = file.countFile(id_job);
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile);
+                    int statusPayment = payment.checkStatusPayment(id_job) ;
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment);
                 }
             }
         } catch (Exception e) {
@@ -350,6 +353,7 @@ public class ContractDAO {
         try {
             conn = DBUtils.getConnection();
             FileDAO file = new FileDAO();
+            PaymentDAO payment = new PaymentDAO();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_ALL_CONTRACT_DETAIL_FOR_WORKSPACE_FOR_EMPLOYER);
                 ptm.setInt(1, id_user);
@@ -365,7 +369,8 @@ public class ContractDAO {
                     String employerName = rs.getString("employerName");
                     List<MilestoneDTO> listMilestone = milestoneDao.getAllMilestoneByIdJob(id_job);
                     int totalFile = file.countFile(id_job);
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile);
+                    int statusPayment = payment.checkStatusPayment(id_job) ;
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment);
                 }
             }
         } catch (Exception e) {

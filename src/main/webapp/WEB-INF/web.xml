@@ -32,6 +32,14 @@
         <servlet-name>GetAllReport</servlet-name>
         <url-pattern>/GetAllReport</url-pattern>
     </servlet-mapping>
+    <context-param>
+        <param-name>stripePublicKey</param-name>
+        <param-value>pk_test_51KvhiHAUs7R0PnXNvCHgUh3k8JkoyEMQXzuAXlYBeffg4shb5TAXOs5a7csCoRwnGX069mXlQaCBh3yrdkPlbR0O00mhJKOh4O</param-value>
+    </context-param>
+    <context-param>
+        <param-name>stripeSecretKey</param-name>
+        <param-value>sk_test_51KvhiHAUs7R0PnXN3oBNV0Korkkdp54ta3rJZcsQA9L4xxoVsiAWUQFecAViSCEMI5PzKamTn0FKm4UdsivFAMxA00pQ4lleEl</param-value>
+    </context-param>
     <session-config>
         <session-timeout>
             30

@@ -29,14 +29,13 @@ public class GetAllFileOfJob extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
             int idJob = Integer.parseInt(request.getParameter("idJob"));
             FileDAO file = new FileDAO();
             List<FileDTO>listFile = file.getListFileOfJob(idJob);
             request.setAttribute("LIST_FILE", listFile);
+            request.setAttribute("ID_JOB", idJob);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at GetAllFileOfJob : " + e.toString());

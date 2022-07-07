@@ -1,5 +1,6 @@
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillFreelancerDTO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\PaymentController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\reports\JobReportDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\DenyJobController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\PostJobController.java
@@ -38,12 +39,14 @@ D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\file\FileDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\ReportController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\notifications\NotificationDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\feedbacks\FeedbackDTO.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\DeleteFile.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobApplyController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\JobListingController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\websocket\Message.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\skills\SkillDTO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\HomeController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\LogoutController.java
+D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\Payment\PaymentDAO.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\home\HistoryController.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\SearchUser.java
 D:\kì 5\SWP\Freelance-Job\FreelanceJob\src\main\java\controllers\ApproveFreelancerController.java

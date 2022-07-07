@@ -616,6 +616,7 @@
                                                                 <form action="UploadFileS3" method="post" enctype="multipart/form-data">
                                                                     <strong>File Submission :</strong>
                                                                     <input type="hidden" name="idJob" value="${contractDetail.contract_job_id}">
+                                                                    <input type="hidden" name="position" value="workSpace">
                                                                     <input type="file" name="file" id="file${count.count}" multiple required style="display: none" onchange="changeFile('file${count.count}', 'file-chosen${count.count}', 'myBtn${count.count}')"/>
                                                                     <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4" onclick="thisFileUpload('file${count.count}')"><i class="fas fa-file-upload text-light"></i></button>
                                                                     <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}">No file chosen</span>
@@ -629,8 +630,29 @@
                                                     <h5 style="font-family: serif; margin-top: 10px">  
                                                         <strong>File Submission :</strong>
                                                         <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4"><i class="fas fa-file-upload text-light"></i></button>
-                                                        <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}"><a href="https://freelancejob2022.s3.us-west-1.amazonaws.com/IMG_3049.JPG" target="_blank">${contractDetail.totalFile} file(s)</a></span>
+                                                            <c:choose>
+                                                                <c:when test="${contractDetail.statusPayment == 0}">
+                                                                <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}">${contractDetail.totalFile} file(s)</span><i class="fa-solid fa-lock"></i>
+                                                                <form action="PaymentController" method="POST">
+                                                                    <input type="hidden" name="idJob" value="${contractDetail.contract_job_id}">
+                                                                    <input type="hidden" name="price" value="${contractDetail.contract_job_price}">
+                                                                    <script
+                                                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                                                        data-key="pk_test_51KvhiHAUs7R0PnXNvCHgUh3k8JkoyEMQXzuAXlYBeffg4shb5TAXOs5a7csCoRwnGX069mXlQaCBh3yrdkPlbR0O00mhJKOh4O"
+                                                                        data-amount="${contractDetail.contract_job_price}"
+                                                                        data-name="FPT Freelance Job"
+                                                                        data-description="Pay to receive post"
+                                                                        data-image="https://lh3.googleusercontent.com/E8HoUv0hytIpPEsL_xql7moKlJtVbH8Iyy6KgfYdRqY4kR0umwVu8_cIduYp968YgEh6DV2ro3os7Y1EgAjseXWHq5ZWI8ai9wjWUNSg2cZLe06U6er6ckv2kq-OOP8E15OA_EJ2kcHwIrCxsK-7LtYq61sbq4Ed_j1FgwiAi0MvObeAUvfvDC1_rus-Y15fNOhVUSn7nnqW6_g_CW3koEcGH-UPKdBU1zlv_NNI8XUBank8HDVaFf534Hm5h90H2dC4ujpWnOZnQmrZPDjRXPlgp4m8ryTUcRGi84g2bbvz1vSX1RokRLGgAtLQ5mVnTdc6f7WCotfR4yHQ_JKbBC-w8MpFt9AtQFTgR02uTzL0KCC6GLzHZ-LWArRmViI641ahneX0jTAmG5lY5DjElQzDe-Fj_yclc_x1X43xnHsCoWu0djQ3hSo7DegJvJBnQjL_RnaBeVYErYcKCvGTCxec52ehNbez3q97emSWNAkTWb28WWjf8pXyBnHX_07kYauIHQ_im2W6g0cWMyfa7zwANfjSDa_liO2iTqqjAlSpf18dGFE6tQneQxCBxSAMIjBP25IxlgvlOMZpZI9TwpUyhb4hJhHTSr9IbMFrdUoRlUR9Wrvko3pufhZ03OpBSrfAaH9zrCr2lVKmLITptviI1n0AsUJ6j2LHO6US8x9xzCa-aGMDpuPiaZEeiPdorCBRyVJjkpcDYU4nGMQZP7YGAsTIArB102xfQOgZ6iwgXPM8uWEpQuuCdWrFkQzOvZivb5sPh2oMGZ3yXSzjMHUfkVzDzKJvAUkAeGeabCJLfYl5WLSVs5PzkflR3-75coBQHmdGCpDzHgfpfkkGLMvkCAHbr-fWLYxlLKJs1vX-Zxiggji4OIdOkZnz1in41N7pFl0UelaDEJO5aHX9rXE405VyDxg8wwZUJY9wfQLC0Z6dM0UKlLWZ_xgP6pzCqP0cy8MBV-TONTFyh2mYEg=w378-h215-no?authuser=3"
+                                                                        data-locale="auto"
+                                                                        data-currency="vnd">
+                                                                    </script>
 
+                                                                </form>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}"><a href="GetAllFileOfJob?idJob=${contractDetail.contract_job_id}" target="_blank">${contractDetail.totalFile} file(s)</a></span><i class="fa-solid fa-lock-open"></i>
+                                                            </c:otherwise>
+                                                        </c:choose>                                                      
                                                     </h5>
                                                     <h5 style="font-family: serif; margin-top: 15px">
                                                         <strong class="self-align-center">Ready to Finish :</strong>
@@ -795,7 +817,7 @@
 
                     <jsp:include page="component/footer.jsp"></jsp:include>
                 </div>
-                <script src="./upload-file/app.js"></script>
+                <script src="./upload-file/work_space.js"></script>
                 <script src="./work-space/js/render_job_detail.js"></script>
                 <!-- jQuery -->
                 <script src="work-space/js/jquery.min.js"></script>
@@ -848,7 +870,7 @@
                     crossorigin="anonymous"
                 ></script>
                 <script>
-                                                                        $('.dropdown-toggle').dropdown()
+                                                                        $('.dropdown-toggle').dropdown();
                 </script>
                 </body>
                 </html>

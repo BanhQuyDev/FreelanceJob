@@ -20,7 +20,8 @@ import utils.DBUtils;
 public class FileDAO {
     private final String UPLOAD = "INSERT INTO tblStorage(urlS3,id_job) VALUES(?, ?)";
     private final String COUNTFILE = "SELECT COUNT(id_job) AS numOfFile FROM tblStorage WHERE id_job = ? GROUP BY id_job";
-    private final String GETALLFILEBYIDJOB = "  SELECT s.id_file, s.urlS3,j.title FROM tblStorage S , tblJob J WHERE s.id_job = j.id_job AND s.id_job = ?";
+    private final String GET_ALL_FILE_BY_ID_JOB = "  SELECT s.id_file, s.urlS3,j.title FROM tblStorage S , tblJob J WHERE s.id_job = j.id_job AND s.id_job = ?";
+    private final String DELETE_FILE = "DELETE tblStorage WHERE id_file = ?";
     public boolean uploadFile(String urlS3, int id_job) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -73,14 +74,14 @@ public class FileDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(GETALLFILEBYIDJOB);
+                ptm = conn.prepareStatement(GET_ALL_FILE_BY_ID_JOB);
                 ptm.setInt(1, idJob);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int idFile = rs.getInt("id_file");
                     String urlS3 = rs.getString("urlS3");
-                    String titleJob = rs.getString("title");
-                    list.add(new FileDTO(idFile, urlS3, titleJob));
+//                    String titleJob = rs.getString("title");
+                    list.add(new FileDTO(idFile, urlS3, idJob));
                 }
             }
         } catch (Exception e) {
@@ -89,5 +90,24 @@ public class FileDAO {
             DBUtils.closeConnection(conn, ptm, rs);
         }
         return list;
+    }
+     public boolean deleteFile(int idFile) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_FILE);
+                ptm.setInt(1, idFile);
+                int value = ptm.executeUpdate();
+                result = value > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return result;
     }
 }
