@@ -40,7 +40,7 @@
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
         <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'FREELANCER' }">
-            <c:redirect url="index.jsp"></c:redirect>
+            <c:redirect url="HomeController"></c:redirect>
         </c:if>
         <div class="container">
             <div class="main-body p-2 border border-danger mt-5 mb-5" style="border-radius: 8px">

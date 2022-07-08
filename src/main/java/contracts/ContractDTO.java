@@ -32,6 +32,7 @@ public class ContractDTO {
     private List<MilestoneDTO> contract_list_milestone;
     private int totalFile;
     private int statusPayment;
+    private int size;
 
     public ContractDTO() {
     }
@@ -80,7 +81,7 @@ public class ContractDTO {
         this.contract_job_end_date = contract_job_end_date;
     }
 
-    public ContractDTO(String contract_job_tittle, double contract_job_price, String contract_job_description, String contract_job_start_date, String contract_job_end_date, String contract_freelancer_name, String contract_employer_name, int contract_job_id, List<MilestoneDTO> contract_list_milestone,int totalFile,int statusPayment) {
+    public ContractDTO(String contract_job_tittle, double contract_job_price, String contract_job_description, String contract_job_start_date, String contract_job_end_date, String contract_freelancer_name, String contract_employer_name, int contract_job_id, List<MilestoneDTO> contract_list_milestone,int totalFile,int statusPayment,int size) {
         this.contract_job_tittle = contract_job_tittle;
         this.contract_job_price = contract_job_price;
         this.contract_job_description = contract_job_description;
@@ -92,6 +93,7 @@ public class ContractDTO {
         this.contract_list_milestone = contract_list_milestone;
         this.totalFile = totalFile;
         this.statusPayment = statusPayment;
+        this.size = size;
     }
 
     public int getStatusPayment() {
@@ -234,6 +236,14 @@ public class ContractDTO {
         return contract_list_milestone;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+   
     public void setContract_list_milestone(List<MilestoneDTO> contract_list_milestone) {
         this.contract_list_milestone = contract_list_milestone;
     }

@@ -561,17 +561,17 @@
                                                             <h3 style="background-color: #1685b8; border-radius: 15px; color: white; padding: 15px; font-size: 17px; font-weight: 400;">${milestone.tittle}</h3>
                                                         </div>
                                                     </li>
-                                                    <c:if test="${contractDetail.contract_list_milestone.size() == 0}">
-                                                        <li>
-                                                            <span>${contractDetail.contract_job_start_date}</span>
-                                                            <i class="fas fa-long-arrow-alt-right"></i>
-                                                            <span>${contractDetail.contract_job_end_date}</span>
-                                                            <div class="content">
-                                                                <h3>No milestones have been added yet !!</h3>
-                                                            </div>
-                                                        </li>
-                                                    </c:if>
                                                 </c:forEach>
+                                                <c:if test="${contractDetail.size == 0}">
+                                                    <li>
+                                                        <span>${contractDetail.contract_job_start_date}</span>
+                                                        <i class="fas fa-long-arrow-alt-right"></i>
+                                                        <span>${contractDetail.contract_job_end_date}</span>
+                                                        <div class="content">
+                                                            <h3>No milestones have been added yet !!</h3>
+                                                        </div>
+                                                    </li>
+                                                </c:if>
                                             </ul>
                                         </div>
                                     </div>
