@@ -604,23 +604,26 @@
                                                 <c:if test="${sessionScope.MODE == 'FREELANCER'}">
                                                     <c:choose>
                                                         <c:when test="${contractDetail.totalFile != 0}">
-                                                            <h5 style="font-family: serif; margin-top: 10px">  
-                                                                <strong>File Submission :</strong>
-                                                                <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4"><i class="fas fa-file-upload text-light"></i></button>
-                                                                <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}"><a href="GetAllFileOfJob?idJob=${contractDetail.contract_job_id}" target="_blank">${contractDetail.totalFile} file(s)</a></span>
-
+                                                            <h5 class="my-4" style="font-family: serif;">
+                                                                <button class="border-0 bg-success p-3 rounded font-weight-bold" style="cursor: pointer"><a class="text-light" href="GetAllFileOfJob?idJob=${contractDetail.contract_job_id}" target="_blank">Submit file <i class="fas fa-file-upload text-light ml-2"></i></a></button>
+                                                                <span class="ml-3" style="font-family: sans-serif;" id="file-chosen${count.count}">${contractDetail.totalFile} file(s)</span>
                                                             </h5>
                                                         </c:when>
                                                         <c:when test="${contractDetail.totalFile == 0}">
                                                             <h5 style="font-family: serif; margin-top: 10px">  
                                                                 <form action="UploadFileS3" method="post" enctype="multipart/form-data">
-                                                                    <strong>File Submission :</strong>
                                                                     <input type="hidden" name="idJob" value="${contractDetail.contract_job_id}">
                                                                     <input type="hidden" name="position" value="workSpace">
                                                                     <input type="file" name="file" id="file${count.count}" multiple required style="display: none" onchange="changeFile('file${count.count}', 'file-chosen${count.count}', 'myBtn${count.count}')"/>
-                                                                    <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4" onclick="thisFileUpload('file${count.count}')"><i class="fas fa-file-upload text-light"></i></button>
-                                                                    <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}">No file chosen</span>
-                                                                    <button class="btn btn-primary d-block container mt-2" style="width: 13%;" id="myBtn${count.count}" type="submit">Upload</button>
+                                                                    <div class="row my-4">
+                                                                        <div class="col-5">
+                                                                            <button class="border-0 bg-success p-3 rounded font-weight-bold" style="cursor: pointer" onclick="thisFileUpload('file${count.count}')">Submit file <i class="fas fa-file-upload text-light ml-2"></i></button>
+                                                                            <span class="align-self-center ml-3" style="font-family: sans-serif;" id="file-chosen${count.count}">No file chosen</span>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <button class="btn btn-primary h-100 pr-5 pl-5 font-weight-bold" id="myBtn${count.count}" type="submit">Save</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </form> 
                                                             </h5>
                                                         </c:when>
@@ -832,7 +835,7 @@
                 <!-- nice scrollbar -->
                 <script src="work-space/js/perfect-scrollbar.min.js"></script>
                 <script>
-                                                                        var ps = new PerfectScrollbar('#sidebar');
+                                                                                var ps = new PerfectScrollbar('#sidebar');
                 </script>
                 <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
                 <script src="./assets/js/popper.min.js"></script>
@@ -870,7 +873,7 @@
                     crossorigin="anonymous"
                 ></script>
                 <script>
-                                                                        $('.dropdown-toggle').dropdown();
+                                                                                $('.dropdown-toggle').dropdown();
                 </script>
                 </body>
                 </html>

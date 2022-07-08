@@ -357,16 +357,32 @@
                         </div>
                     </div>
 
-                    <div class="row reveal fade-right" style="column-gap: 20px">
-                        <c:forEach var="feedbackTop4" items="${requestScope.LIST_TOP_4_FREELACER}">
-                            <div class="col-lg-3 col-md-6 col-12" style="box-shadow: 0 0rem 20px rgba(0,0,0,.175); border-radius: 15px">
-                                <div style="padding: 25px">
+                    <div class="row reveal fade-right">
+                        <c:forEach var="feedbackTop4" items="${requestScope.LIST_TOP_4_FREELACER}" varStatus="count">
+                            <div class="col-lg-3 col-md-6 col-12" style="padding: 0 20px">
+                                <div style="padding: 25px; box-shadow: 0 0rem 20px rgba(0,0,0,20%); border-radius: 15px;">
                                     <!-- Image -->
                                     <div class="shapes position-relative">
                                         <div class="image text-center">
                                             <img style="border-radius: 50%" src="${feedbackTop4.feedback_freelancer_avatar}" alt="#">
-                                            <!--<img class="shape1 position-absolute" style="width: 50px; height: 50px; top: 25%; left: 5%" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape1.svg" alt="#">-->
-                                            <!--<img class="shape2 position-absolute" style="width: 35px; height: 35px; bottom: 0; right: 0" src="http://wpthemesgrid.com/themes/polio/assets/images/team/team-shape2.svg" alt="#">-->
+                                            <c:choose>
+                                                <c:when test="${count.count == 1}">
+                                                    <span class="shape1 position-absolute" style="top: 6%; left: 6%; font-size: 18px; font-weight: 900; border: 2px solid; border-radius: 10px; padding: 4px; color: white; background-color: #ffdd86; box-shadow: 0 0 10px #ffdd86;">Top ${count.count}</span>
+                                                    <span class="shape2 position-absolute" style="bottom: 65%; right: 0; font-size: 30px; color: #ffdd86;"><i class="fas fa-medal"></i></span>
+                                                </c:when>
+                                                <c:when test="${count.count == 2}">
+                                                    <span class="shape1 position-absolute" style="top: 6%; left: 6%; font-size: 18px; font-weight: 900; border: 2px solid; border-radius: 10px; padding: 4px; color: white; background-color: #98999f; box-shadow: 0 0 10px #98999f;">Top ${count.count}</span>
+                                                    <span class="shape2 position-absolute" style="bottom: 65%; right: 0; font-size: 30px; color: #98999f"><i class="fas fa-medal"></i></span>
+                                                    </c:when>
+                                                    <c:when test="${count.count == 3}">
+                                                    <span class="shape1 position-absolute" style="top: 6%; left: 6%; font-size: 18px; font-weight: 900; border: 2px solid; border-radius: 10px; padding: 4px; color: white; background-color: #893917; box-shadow: 0 0 10px #893917;">Top ${count.count}</span>
+                                                    <span class="shape2 position-absolute" style="bottom: 65%; right: 0; font-size: 30px; color: #893917"><i class="fas fa-medal"></i></span>
+                                                    </c:when>    
+                                                    <c:when test="${count.count == 4}">
+                                                    <span class="shape1 position-absolute" style="top: 6%; left: 6%; font-size: 18px; font-weight: 900; border: 2px solid; border-radius: 10px; padding: 4px; color: white; background-color: black; box-shadow: 0 0 10px black;">Top ${count.count}</span>
+                                                    <span class="shape2 position-absolute" style="bottom: 65%; right: 0; font-size: 30px;"><i class="fas fa-medal"></i></span>
+                                                    </c:when>
+                                                </c:choose> 
                                         </div>
                                     </div>
                                     <!-- End Image -->
@@ -378,35 +394,35 @@
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center ml-1" style="color: #ffee05; text-shadow: 0px 0px 8px #0008ffad; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
-                                            </c:if>
-                                            <c:if test="${feedbackTop4.feedback_avg_rating == 4}">
+                                                </c:if>
+                                                <c:if test="${feedbackTop4.feedback_avg_rating == 4}">
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
-                                            </c:if>
-                                            <c:if test="${feedbackTop4.feedback_avg_rating == 3}">
+                                                </c:if>
+                                                <c:if test="${feedbackTop4.feedback_avg_rating == 3}">
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
-                                            </c:if>
-                                            <c:if test="${feedbackTop4.feedback_avg_rating == 2}">
+                                                </c:if>
+                                                <c:if test="${feedbackTop4.feedback_avg_rating == 2}">
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
-                                            </c:if>
-                                            <c:if test="${feedbackTop4.feedback_avg_rating == 1}">
+                                                </c:if>
+                                                <c:if test="${feedbackTop4.feedback_avg_rating == 1}">
                                                 <li class="align-self-center" style="color: #ffee05; text-shadow: 0px 0px 5px #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center" style="color: #000; opacity: 0.7"><i class="fas fa-star"></i></li>
                                                 <li class="align-self-center ml-1" style="color: #000; opacity: 1"><i class="fas fa-star" style="font-size: 30px;"></i></li>
-                                            </c:if>
+                                                </c:if>
                                         </ul>
                                     </div>
                                     <div class="info-head mt-3 text-center" style="height: 70px">
@@ -415,8 +431,8 @@
                                             <span class="designation"></span>
                                         </div>
                                     </div>
-                                    <div class="text-center" style="color: #4e2a84">
-                                        <h2 class="mb-0 font-weight-bold counter">${feedbackTop4.feedback_job_done}</h2>
+                                    <div class="text-center">
+                                        <h2 class="mb-0 font-weight-bold counter" style="color: #4d12a6">${feedbackTop4.feedback_job_done}</h2>
                                         <p>jobs done</p>
                                     </div>
                                 </div>
