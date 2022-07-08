@@ -333,8 +333,9 @@ public class ContractDAO {
                     String employerName = rs.getString("employerName");
                     List<MilestoneDTO> listMilestone = milestoneDao.getAllMilestoneByIdJob(id_job);
                     int totalFile = file.countFile(id_job);
-                    int statusPayment = payment.checkStatusPayment(id_job) ;
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment);
+                    int statusPayment = payment.checkStatusPayment(id_job);
+                    int size = listMilestone.size();
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment,size);
                 }
             }
         } catch (Exception e) {
@@ -370,7 +371,8 @@ public class ContractDAO {
                     List<MilestoneDTO> listMilestone = milestoneDao.getAllMilestoneByIdJob(id_job);
                     int totalFile = file.countFile(id_job);
                     int statusPayment = payment.checkStatusPayment(id_job) ;
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment);
+                    int size = listMilestone.size();
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment,size);
                 }
             }
         } catch (Exception e) {
