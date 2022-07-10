@@ -125,7 +125,7 @@
                                 <div class="col-lg-4 ml-auto">
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="HomeController" class="btn btn-block btn-dark btn-md rounded" style="padding: 20px 44px"
+                                            <a onclick="history.back()" class="btn btn-block btn-md rounded" style="padding: 20px 44px"
                                                ><span class="icon-open_in_new"></span><i class="fas fa-arrow-alt-circle-left"></i> Back</a
                                             >
                                         </div>
