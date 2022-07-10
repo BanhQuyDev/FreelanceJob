@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utils.S3Util;
+import utils.Utils;
 
 /**
  *
@@ -40,7 +41,7 @@ public class FeedbackController extends HttpServlet {
             int idFreelancer = Integer.parseInt(request.getParameter("idFreelancer"));
             int idEmployer = Integer.parseInt(request.getParameter("idEmployer"));
             int idJob = Integer.parseInt(request.getParameter("idJob"));
-
+            double price = Double.parseDouble(Utils.convertPrice(request.getParameter("price")));
             FeedbackDAO feedbackDao = new FeedbackDAO();
             ContractDAO contractDao = new ContractDAO();
             if (feedbackDao.createFeedback(contentFeedback, starRating, idFreelancer, idEmployer)) {
@@ -51,6 +52,7 @@ public class FeedbackController extends HttpServlet {
                         String keyName = S3Util.getKeyName(file.getUrlS3());
                         S3Util.deleteFile(keyName);
                     }
+                    feedbackDao.tranferMoneyForFreelancer(idFreelancer, price);
                     request.setAttribute("SUCCESS_MESSAGE", "Your job has been finish !!");
                     url = SUCCESS;
                 }

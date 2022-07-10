@@ -5,11 +5,14 @@
  */
 package users;
 
+import utils.Utils;
+
 /**
  *
  * @author QUANG HUY
  */
 public class UserDTO {
+
     private int id;
     private String name;
     private String email;
@@ -19,10 +22,11 @@ public class UserDTO {
     private String phone;
     private String picture;
     private int numOfSpam;
+    private double balance;
 
     public UserDTO() {
     }
-    
+
     public UserDTO(int id, String name, String email, String dob, String address, String bio, String phone, String picture) {
         this.id = id;
         this.name = name;
@@ -32,6 +36,18 @@ public class UserDTO {
         this.bio = bio;
         this.phone = phone;
         this.picture = picture;
+    }
+
+    public UserDTO(int id, String name, String email, String dob, String address, String bio, String phone, String picture, double balance) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.address = address;
+        this.bio = bio;
+        this.phone = phone;
+        this.picture = picture;
+        this.balance = balance;
     }
 
     public UserDTO(int id, String name, String email, String dob, String address, String bio, String phone, String picture, int numOfSpam) {
@@ -51,6 +67,7 @@ public class UserDTO {
         this.email = email;
         this.picture = picture;
     }
+
     public UserDTO(String name, String email) {
         this.name = name;
         this.email = email;
@@ -128,18 +145,30 @@ public class UserDTO {
         this.numOfSpam = numOfSpam;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public String showPrice(double price) {
+        return Utils.convertPrice(price);
+    }
+
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", dob='" + dob + '\'' +
-                ", address='" + address + '\'' +
-                ", bio='" + bio + '\'' +
-                ", phone='" + phone + '\'' +
-                ", picture='" + picture + '\'' +
-                ", numOfSpam=" + numOfSpam +
-                '}';
+        return "UserDTO{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", email='" + email + '\''
+                + ", dob='" + dob + '\''
+                + ", address='" + address + '\''
+                + ", bio='" + bio + '\''
+                + ", phone='" + phone + '\''
+                + ", picture='" + picture + '\''
+                + ", numOfSpam=" + numOfSpam
+                + '}';
     }
 }

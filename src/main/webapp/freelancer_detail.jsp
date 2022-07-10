@@ -71,6 +71,7 @@
                                         />
                                     <div class="mt-3">
                                         <h4>${sessionScope.LOGIN_USER.name}</h4>
+                                        <p class="text-muted font-size-lg"><strong>Balance: </strong>${sessionScope.LOGIN_USER.showPrice(sessionScope.LOGIN_USER.balance)} VNĐ</p>
                                         <p class="text-muted font-size-lg"><strong>Bio: </strong> ${sessionScope.LOGIN_USER.bio}</p>
                                         <div class="text-left">
                                             <span class="font-weight-bold">Skills: </span>

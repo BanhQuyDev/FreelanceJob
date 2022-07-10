@@ -437,70 +437,70 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <form action="FeedbackController" method="POST">
-                                <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
+                            <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
+                                <form action="FeedbackController" method="POST">
                                     <input name="idFreelancer" value="${contract.idPartner}" hidden=""/>
                                     <input name="idEmployer" value="${sessionScope.LOGIN_USER.id}" hidden=""/>
                                     <input name="idJob" value="${contract.contract_job_id}" hidden=""/>
-                                </c:if>
-                                <div class="modal fade" id="feedbackModal${count.count}" style="font-family: 'The Girl Next Door', cursive">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg feedbackk">
-                                        <div class="modal-content">
-                                            <div class="card text-center">
-                                                <div class="circle-image">
-                                                    <img src="${contract.contract_user_avatar}" width="40" />
-                                                </div>
-                                                <span class="dot"></span>
-                                                <span class="name mb-1"><strong>Feedback</strong></span>
-                                                <div class="mt-4">
-                                                    <h5 class="mb-3">Write feedback to ${contract.contract_freelancer_name} : </h5>
-                                                    <textarea style="width: 70%; border-radius: 6px; padding: 10px;" class="" name="contentFeedback" rows="3"
-                                                              placeholder="Typing...." required=""></textarea>
-                                                </div>
-                                                <div class="rate bg-success text-white mt-3">
-                                                    <h6 class="mt-4">Rate your Freelancer</h6>
-                                                    <span id="ratingText_${count.count}" style="font-size: 17px; font-weight: 600;">rating</span>
-                                                    <div class="rating-wrapper row justify-content-center mb-3 mt-3">
-                                                        <!-- star 5 -->
-                                                        <input type="radio" id="1-star-rating_${count.count}" name="star-rating" value="5" />
-                                                        <label for="1-star-rating_${count.count}" class="star-rating star">
-                                                            <i class="fas fa-star" onclick="renderRating(5, ${count.count})"></i>
-                                                        </label>
-
-                                                        <!-- star 4 -->
-                                                        <input type="radio" id="2-star-rating_${count.count}" name="star-rating" value="4" />
-                                                        <label for="2-star-rating_${count.count}" class="star-rating star">
-                                                            <i class="fas fa-star" onclick="renderRating(4, ${count.count})"></i>
-                                                        </label>
-                                                        <!-- star 3 -->
-                                                        <input type="radio" id="3-star-rating_${count.count}" name="star-rating" value="3" />
-                                                        <label for="3-star-rating_${count.count}" class="star-rating star">
-                                                            <i class="fas fa-star" onclick="renderRating(3, ${count.count})"></i>
-                                                        </label>
-                                                        <!-- star 2 -->
-                                                        <input type="radio" id="4-star-rating_${count.count}" name="star-rating" value="2" />
-                                                        <label for="4-star-rating_${count.count}" class="star-rating star">
-                                                            <i class="fas fa-star" onclick="renderRating(2, ${count.count})"></i>
-                                                        </label>
-
-                                                        <!-- star 1 -->
-                                                        <input type="radio" id="5-star-rating_${count.count}" name="star-rating" value="1" />
-                                                        <label for="5-star-rating_${count.count}" class="star-rating">
-                                                            <i class="fas fa-star" onclick="renderRating(1, ${count.count})"></i>
-                                                        </label>
+                                    <input name="price" value="${contract.contract_job_price}" hidden=""/>
+                                    <div class="modal fade" id="feedbackModal${count.count}" style="font-family: 'The Girl Next Door', cursive">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg feedbackk">
+                                            <div class="modal-content">
+                                                <div class="card text-center">
+                                                    <div class="circle-image">
+                                                        <img src="${contract.contract_user_avatar}" width="40" />
                                                     </div>
-                                                    <div class="buttons mt-0">
-                                                        <button class="btn-warning btn-block rating-submit">
-                                                            Finish
-                                                        </button>
+                                                    <span class="dot"></span>
+                                                    <span class="name mb-1"><strong>Feedback</strong></span>
+                                                    <div class="mt-4">
+                                                        <h5 class="mb-3">Write feedback to ${contract.contract_freelancer_name} : </h5>
+                                                        <textarea style="width: 70%; border-radius: 6px; padding: 10px;" class="" name="contentFeedback" rows="3"
+                                                                  placeholder="Typing...." required=""></textarea>
+                                                    </div>
+                                                    <div class="rate bg-success text-white mt-3">
+                                                        <h6 class="mt-4">Rate your Freelancer</h6>
+                                                        <span id="ratingText_${count.count}" style="font-size: 17px; font-weight: 600;">rating</span>
+                                                        <div class="rating-wrapper row justify-content-center mb-3 mt-3">
+                                                            <!-- star 5 -->
+                                                            <input type="radio" id="1-star-rating_${count.count}" name="star-rating" value="5" />
+                                                            <label for="1-star-rating_${count.count}" class="star-rating star">
+                                                                <i class="fas fa-star" onclick="renderRating(5, ${count.count})"></i>
+                                                            </label>
+
+                                                            <!-- star 4 -->
+                                                            <input type="radio" id="2-star-rating_${count.count}" name="star-rating" value="4" />
+                                                            <label for="2-star-rating_${count.count}" class="star-rating star">
+                                                                <i class="fas fa-star" onclick="renderRating(4, ${count.count})"></i>
+                                                            </label>
+                                                            <!-- star 3 -->
+                                                            <input type="radio" id="3-star-rating_${count.count}" name="star-rating" value="3" />
+                                                            <label for="3-star-rating_${count.count}" class="star-rating star">
+                                                                <i class="fas fa-star" onclick="renderRating(3, ${count.count})"></i>
+                                                            </label>
+                                                            <!-- star 2 -->
+                                                            <input type="radio" id="4-star-rating_${count.count}" name="star-rating" value="2" />
+                                                            <label for="4-star-rating_${count.count}" class="star-rating star">
+                                                                <i class="fas fa-star" onclick="renderRating(2, ${count.count})"></i>
+                                                            </label>
+
+                                                            <!-- star 1 -->
+                                                            <input type="radio" id="5-star-rating_${count.count}" name="star-rating" value="1" />
+                                                            <label for="5-star-rating_${count.count}" class="star-rating">
+                                                                <i class="fas fa-star" onclick="renderRating(1, ${count.count})"></i>
+                                                            </label>
+                                                        </div>
+                                                        <div class="buttons mt-0">
+                                                            <button class="btn-warning btn-block rating-submit">
+                                                                Finish
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </c:if>
 
                             <div class="modal fade" id="milestoneModal${count.count}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 700px !important">
@@ -669,150 +669,6 @@
 
                                 </div>
                             </c:forEach>
-
-                            <div class="row column4 graph mt-5">
-                                <div class="col-md-4">
-                                    <div class="white_shd full margin_bottom_30">
-                                        <div class="full graph_head">
-                                            <div class="heading1 margin_0">
-                                                <h2>Update</h2>
-                                            </div>
-                                        </div>
-                                        <div class="full progress_bar_inner">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="msg_list_main">
-                                                        <ul class="msg_list">
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">Herman Beck</span>
-                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">On the other hand, we denounce.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">On the other hand, we denounce.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="white_shd full margin_bottom_30">
-                                        <div class="full graph_head">
-                                            <div class="heading1 margin_0">
-                                                <h2>Daily feed</h2>
-                                            </div>
-                                        </div>
-                                        <div class="full progress_bar_inner">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="msg_list_main">
-                                                        <ul class="msg_list">
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">Herman Beck</span>
-                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">On the other hand, we denounce.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">Sales</span>
-                                                                    <span class="msg_user">On the other hand, we denounce.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="white_shd full margin_bottom_30">
-                                        <div class="full graph_head">
-                                            <div class="heading1 margin_0">
-                                                <h2>Last Comments</h2>
-                                            </div>
-                                        </div>
-                                        <div class="full progress_bar_inner">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="msg_list_main">
-                                                        <ul class="msg_list">
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">Herman Beck</span>
-                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">On the other hand, we denounce.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">Sed ut perspiciatis unde omnis.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <span>
-                                                                    <span class="name_user">John Smith</span>
-                                                                    <span class="msg_user">On the other hand, we denounce.</span>
-                                                                    <span class="time_ago">12 min ago</span>
-                                                                </span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- footer -->
                             <!-- end dashboard inner -->
                         </div>
