@@ -35,6 +35,33 @@
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/editlogin.css" />
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+
+        <style>
+            .shape1 {
+                margin-left: -25px;
+                opacity: 0;
+                visibility: hidden;
+            }
+            .shape2{
+                opacity: 0;
+                visibility: hidden;
+            }
+            .ranking:hover .shape1 {
+                opacity: 1;
+                visibility: visible;
+                transition: transform 500ms ease;
+                transform: scale(1) translateY(-20px);
+                z-index: 999
+            }
+            .ranking:hover .shape2 {
+                opacity: 1;
+                visibility: visible;
+                transition: transform 500ms ease;
+                transform: scale(1.4) translate(0);
+                z-index: 999
+            }
+        </style>
+
     </head>
 
     <body> 
@@ -359,7 +386,7 @@
 
                     <div class="row reveal fade-right">
                         <c:forEach var="feedbackTop4" items="${requestScope.LIST_TOP_4_FREELACER}" varStatus="count">
-                            <div class="col-lg-3 col-md-6 col-12" style="padding: 0 20px">
+                            <div class="col-lg-3 col-md-6 col-12 ranking" style="padding: 0 20px">
                                 <div style="padding: 25px; box-shadow: 0 0rem 20px rgba(0,0,0,20%); border-radius: 15px;">
                                     <!-- Image -->
                                     <div class="shapes position-relative">  
@@ -369,8 +396,8 @@
                                                 <c:when test="${count.count == 1}">
                                                     <span class="shape1 position-absolute" style="top: 6%; left: 6%; font-size: 18px; font-weight: 900; border: 2px solid; border-radius: 10px; padding: 4px; color: white; background-color: #ffdd86; box-shadow: 0 0 10px #ffdd86;">Top ${count.count}</span>
                                                     <span class="shape2 position-absolute" style="bottom: 65%; right: 0; font-size: 30px; color: #ffdd86;"><i class="fas fa-medal"></i></span>
-                                                </c:when>
-                                                <c:when test="${count.count == 2}">
+                                                    </c:when>
+                                                    <c:when test="${count.count == 2}">
                                                     <span class="shape1 position-absolute" style="top: 6%; left: 6%; font-size: 18px; font-weight: 900; border: 2px solid; border-radius: 10px; padding: 4px; color: white; background-color: #98999f; box-shadow: 0 0 10px #98999f;">Top ${count.count}</span>
                                                     <span class="shape2 position-absolute" style="bottom: 65%; right: 0; font-size: 30px; color: #98999f"><i class="fas fa-medal"></i></span>
                                                     </c:when>
