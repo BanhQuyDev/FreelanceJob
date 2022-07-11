@@ -50,7 +50,7 @@ function addMilestone(index, startDateJob, endDateJob) {
     var endDate = "endDate" + count;
     var tittle = "tittle" + count;
     if (count === 6) {
-        newElem = `<h2 class="text-danger">You can only create 5 times in a row !!</h2>`;
+        newElem = `<h3 class="text-danger">You can only create 5 times in a row !!</h2>`;
         li.innerHTML = newElem;
     } else if (count > 6) {
         li.remove();
@@ -67,3 +67,4 @@ function addMilestone(index, startDateJob, endDateJob) {
         li.innerHTML = newElem;
     }
 }
+

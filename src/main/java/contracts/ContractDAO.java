@@ -40,7 +40,7 @@ public class ContractDAO {
             + "	(SELECT U.fullname FROM tblContract C, tblFreelancer F, tblUser U WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = Cc.id_contract) as freelancer_name,\n"
             + "    (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
             + "FROM tblContract Cc, tblEmployer E, tblUser U WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND Cc.status = ? AND U.id_user = ? ORDER BY Cc.create_date DESC";
-    private final String GET_ALL_CONTRACT_FOR_WORKSPACE = "SELECT U.fullname, J.title, J.start_date, J.duration,,J.salary,Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime, DATEADD(day,J.duration, J.start_date) end_date,\n"
+    private final String GET_ALL_CONTRACT_FOR_WORKSPACE = "SELECT U.fullname, J.title, J.start_date, J.duration,J.salary,Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime, DATEADD(day,J.duration, J.start_date) end_date,\n"
             + "(SELECT U.fullname FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerName,\n"
             + "(SELECT U.id_user FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as idEmployer,\n"
             + "(SELECT U.avatar FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerAvatar\n"
