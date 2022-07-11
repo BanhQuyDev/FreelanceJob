@@ -362,7 +362,7 @@
                             <div class="col-lg-3 col-md-6 col-12" style="padding: 0 20px">
                                 <div style="padding: 25px; box-shadow: 0 0rem 20px rgba(0,0,0,20%); border-radius: 15px;">
                                     <!-- Image -->
-                                    <div class="shapes position-relative">
+                                    <div class="shapes position-relative">  
                                         <div class="image text-center">
                                             <img style="border-radius: 50%" src="${feedbackTop4.feedback_freelancer_avatar}" alt="#">
                                             <c:choose>
