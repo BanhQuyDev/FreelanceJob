@@ -21,7 +21,7 @@ import utils.DBUtils;
 public class UserDAO {
 
     private static final String CHECK_DUPLICATE = "SELECT email FROM tblUser WHERE email=?";
-    private static final String CHECK_EMAIL_LOGIN = "SELECT id_user, email, fullname, address, dob, bio, phone, avatar "
+    private static final String CHECK_EMAIL_LOGIN = "SELECT id_user, email, fullname, address, dob, bio, phone, avatar, balance "
             + "FROM tblUser "
             + "WHERE email = ? AND status = 1";
     private static final String CREATE_USER = "INSERT INTO tblUser(fullname,email,avatar,status) VALUES(?,?,?,?)";
@@ -90,7 +90,8 @@ public class UserDAO {
                     String bio = rs.getString("bio");
                     String phone = rs.getString("phone");
                     String avatar = rs.getString("avatar");
-                    user = new UserDTO(id, fullName, email, dob, address, bio, phone, avatar);
+                    double balance = rs.getDouble("balance");
+                    user = new UserDTO(id, fullName, email, dob, address, bio, phone, avatar, balance);
                 }
             }
         } catch (Exception e) {
@@ -100,6 +101,7 @@ public class UserDAO {
         }
         return user;
     }
+
     public List<UserDTO> getAllUser() throws SQLException {
         List<UserDTO> listUser = new ArrayList<>();
         Connection conn = null;

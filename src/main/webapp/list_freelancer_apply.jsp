@@ -58,7 +58,7 @@
     <body>
         <jsp:include page="component/header.jsp"></jsp:include>
         <c:if test="${sessionScope.LOGIN_USER == NULL || sessionScope.MODE eq 'FREELANCER' }">
-            <c:redirect url="index.jsp"></c:redirect>
+            <c:redirect url="HomeController"></c:redirect>
         </c:if>
         <main>
             <!-- Hero Area Start-->

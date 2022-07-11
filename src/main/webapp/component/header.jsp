@@ -257,6 +257,7 @@
                                                             <a class="dropdown-item" href="ChangeModeController?type=employer"><i class="ft-power"></i> Employer</a>
                                                         </c:otherwise>
                                                     </c:choose>
+                                                            <a>Balance <i class="fa-solid fa-money-bill"></i>: ${sessionScope.LOGIN_USER.showPrice(sessionScope.LOGIN_USER.balance)} VNĐ</a>
                                                     <a class="dropdown-item " href="freelancer_detail.jsp">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 24px;
                                                              height: 21px;

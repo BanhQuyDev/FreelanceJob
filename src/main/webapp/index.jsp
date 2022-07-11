@@ -46,14 +46,14 @@
                 opacity: 0;
                 visibility: hidden;
             }
-            .shapes:hover .shape1 {
+            .ranking:hover .shape1 {
                 opacity: 1;
                 visibility: visible;
                 transition: transform 500ms ease;
                 transform: scale(1) translateY(-20px);
                 z-index: 999
             }
-            .shapes:hover .shape2 {
+            .ranking:hover .shape2 {
                 opacity: 1;
                 visibility: visible;
                 transition: transform 500ms ease;
@@ -386,7 +386,7 @@
 
                     <div class="row reveal fade-right">
                         <c:forEach var="feedbackTop4" items="${requestScope.LIST_TOP_4_FREELACER}" varStatus="count">
-                            <div class="col-lg-3 col-md-6 col-12" style="padding: 0 20px">
+                            <div class="col-lg-3 col-md-6 col-12 ranking" style="padding: 0 20px">
                                 <div style="padding: 25px; box-shadow: 0 0rem 20px rgba(0,0,0,20%); border-radius: 15px;">
                                     <!-- Image -->
                                     <div class="shapes position-relative">
