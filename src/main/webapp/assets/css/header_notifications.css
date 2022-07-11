@@ -412,7 +412,7 @@
     top: 0;
     transform: skewX(20deg);
 }
-.shape1 {
+/*.shape1 {
     margin-left: -25px;
     opacity: 0;
     visibility: hidden;
@@ -421,20 +421,20 @@
     opacity: 0;
     visibility: hidden;
 }
-.shapes:hover > .shape1 {
+.image:hover .shape1 {
     opacity: 1;
     visibility: visible;
     transition: transform 500ms ease;
     transform: scale(1) translateY(-20px);
     z-index: 999
 }
-.shapes:hover > .shape2 {
+.image:hover .shape2 {
     opacity: 1;
     visibility: visible;
     transition: transform 500ms ease;
     transform: scale(1.4) translate(0);
     z-index: 999
-}
+}*/
 .section-honorable__name {
     color: #fb246a;
 }
