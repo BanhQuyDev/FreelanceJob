@@ -20,8 +20,18 @@ public class FeedbackDTO {
     private String feedback_freelancer_name;
     private String feedback_freelancer_avatar;
     private int feedback_job_done;
+    private String feedback_employer_avatar;
+    private String feedback_employer_name;
+
+    
 
     public FeedbackDTO() {
+    }
+     public FeedbackDTO(String content, String feedback_employer_avatar, String feedback_employer_name, int feedback_rating) {
+         this.feedback_content = content;
+         this.feedback_employer_avatar = feedback_employer_avatar;
+         this.feedback_employer_name = feedback_employer_name;
+         this.feedback_rating = feedback_rating;
     }
 
     public FeedbackDTO(int id_feedback, String feedback_content, int feedback_rating, String feedback_id_freelancer, String feedback_id_employer, int feedback_status) {
@@ -119,5 +129,20 @@ public class FeedbackDTO {
     public void setFeedback_job_done(int feedback_job_done) {
         this.feedback_job_done = feedback_job_done;
     }
+    
+    public String getFeedback_employer_avatar() {
+        return feedback_employer_avatar;
+    }
 
+    public void setFeedback_employer_avatar(String feedback_employer_avatar) {
+        this.feedback_employer_avatar = feedback_employer_avatar;
+    }
+
+    public String getFeedback_employer_name() {
+        return feedback_employer_name;
+    }
+
+    public void setFeedback_employer_name(String feedback_employer_name) {
+        this.feedback_employer_name = feedback_employer_name;
+    }
 }

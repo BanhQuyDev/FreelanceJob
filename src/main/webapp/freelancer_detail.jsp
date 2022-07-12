@@ -59,7 +59,7 @@
                 <!-- /Breadcrumb -->
 
                 <div class="row gutters-sm">
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
@@ -107,9 +107,60 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="card mt-3">
+                            <ul class="list-group list-group-flush">
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                                    >
+                                    <div style="display: flex; gap: 20px; justify-content: space-between; align-items: center; width: 100%">
+                                        <div style="display: flex; flex-direction: column">
+                                            <div style="font-weight: 700">
+                                                <span>Total Star: </span>
+                                                <i style="color: #E59819" class="fas fa-star">
+                                                    ${sessionScope.TOTAl_STAR}
+                                                </i>
+                                            </div>
+                                            <div style="font-weight: 700">
+                                                <span>Total Job: </span>
+                                                ${sessionScope.TOTAl_JOB}
+                                            </div>
+                                        </div>
+                                        <a class="bg-info text-light border-0" style="border: 2px solid black; padding: 8px 20px; border-radius: 8px; cursor: pointer" data-toggle="modal" data-target="#noteModal">
+                                            View all feedback
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal fade" id="noteModal">
+                            <div class="modal-dialog modal-dialog-centered">
+
+                                <div class="modal-content dropdown-notification"  style="width: 600px">
+                                    <div class="text-center arrow_box_right notification--header">
+                                        <div style="width: 100%; text-align: center; color: #117A8B">
+                                            <span>View All Feedback</span>
+                                        </div>                                              
+                                    </div>
+                                    <c:forEach items="${sessionScope.ALL_FEEDBACK}" var="F">
+                                        <div class="" style="padding: 10px; border: 1px solid #ccc; margin-bottom: 10px; border-radius: 8px">
+                                            <div class="notification--list">
+                                                <div class="notification-list_img">
+                                                    <img class="notification--img" src="${F.feedback_employer_avatar}" alt="user">
+                                                </div>
+                                                <div class="notification-list_detail">
+                                                    <p class="notification--font" style="margin-bottom: 0;"><b style="color: #fb246a">${F.feedback_employer_name}</b> <strong>${F.feedback_content}</strong></p>
+
+                                                    <i style="color: #E59819" class="fas fa-star"></i>${F.feedback_rating}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="card mb-3">
+                        <div class="card mb-3" style="height: 100%">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">

@@ -43,8 +43,11 @@ public class HomeController extends HttpServlet {
             List<MajorDTO> listMajor = majorDao.getAllMajorList();
             request.setAttribute("LIST_MAJOR", listMajor);
             JobDAO jobDao = new JobDAO();
-            FeedbackDAO feedbackDao = new FeedbackDAO();
+            FeedbackDAO feedbackDao = new FeedbackDAO();     
             if (loginUser != null) {
+                int totalStar = feedbackDao.getTotalStar(loginUser.getId());
+                int totalJob = feedbackDao.getTotalJob(loginUser.getId());
+                List<FeedbackDTO> listAllFeedback = feedbackDao.getAllFeedbackByUser(loginUser.getId());
                 String mode = (String) session.getAttribute("MODE");
                 if (mode.equals("FREELANCER")) {
                     List<NotificationDTO> listNotificationsFreelancerUnread = new NotificationDAO().showAllNotificationFreelancerUnread(loginUser.getId());
@@ -62,6 +65,9 @@ public class HomeController extends HttpServlet {
                 request.setAttribute("LIST_TOP_4_LATEST_JOB", listJob);
                 List<FeedbackDTO> listFeedbackFreelancer = feedbackDao.getTop4Freelancer();
                 request.setAttribute("LIST_TOP_4_FREELACER", listFeedbackFreelancer);
+                session.setAttribute("TOTAl_STAR", totalStar);
+                session.setAttribute("TOTAl_JOB", totalJob);
+                session.setAttribute("ALL_FEEDBACK", listAllFeedback);
                 url = SUCCESS;
             } else {
                 List<JobDTO> listJob = jobDao.getTop4LatestJob();
