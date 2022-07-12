@@ -3,7 +3,18 @@
     Created on : May 28, 2022, 10:37:55 AM
     Author     : QUANG HUY
 --%>
-
+<style>
+    ::-webkit-scrollbar{
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track{
+        box-shadow: inset 0 0 10px #0000004c;
+    }
+    ::-webkit-scrollbar-thumb{
+        border-radius: 5px;
+        background-color: #fb246a;
+    }
+</style>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

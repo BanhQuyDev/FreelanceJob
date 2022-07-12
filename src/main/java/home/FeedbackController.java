@@ -51,7 +51,7 @@ public class FeedbackController extends HttpServlet {
                         new FileDAO().deleteFile(file.getId());
                         String keyName = S3Util.getKeyName(file.getUrlS3());
                         S3Util.deleteFile(keyName);
-                    }
+                   }                   
                     feedbackDao.tranferMoneyForFreelancer(idFreelancer, price);
                     request.setAttribute("SUCCESS_MESSAGE", "Your job has been finish !!");
                     url = SUCCESS;
