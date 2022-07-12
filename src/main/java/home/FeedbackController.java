@@ -15,6 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import jobs.JobDAO;
+import jobs.JobDTO;
+import notifications.NotificationDAO;
+import users.UserDTO;
 import utils.S3Util;
 import utils.Utils;
 
@@ -44,6 +49,12 @@ public class FeedbackController extends HttpServlet {
             double price = Double.parseDouble(Utils.convertPrice(request.getParameter("price")));
             FeedbackDAO feedbackDao = new FeedbackDAO();
             ContractDAO contractDao = new ContractDAO();
+            JobDAO dao = new JobDAO();
+            JobDTO job = dao.getAJobByIDV2(idJob);
+            String content = "notify you that a job " + job.getTitle() + " has been completed";
+            String content_price = " has been added " + showPrice(price) + " in your balance";
+            boolean check_noti = new NotificationDAO().createNotificationV2(idFreelancer, content,3,idEmployer, 1);
+            boolean check_noti_price = new NotificationDAO().createNotificationV2(idFreelancer, content_price,3,idEmployer, 1);
             if (feedbackDao.createFeedback(contentFeedback, starRating, idFreelancer, idEmployer)) {
                 if (contractDao.updateContractAfterFeedback(idJob)) {
                     List<FileDTO>listFile = new FileDAO().getListFileOfJob(idJob);
@@ -53,8 +64,10 @@ public class FeedbackController extends HttpServlet {
                         S3Util.deleteFile(keyName);
                    }                   
                     feedbackDao.tranferMoneyForFreelancer(idFreelancer, price);
+                    if (check_noti && check_noti_price) {
                     request.setAttribute("SUCCESS_MESSAGE", "Your job has been finish !!");
                     url = SUCCESS;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -63,7 +76,9 @@ public class FeedbackController extends HttpServlet {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-
+    public String showPrice(double price) {
+        return Utils.convertPrice(price);
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
