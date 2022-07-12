@@ -42,29 +42,35 @@ function renderRating(idStar, index) {
 function addMilestone(index, startDateJob, endDateJob) {
     var ul = document.getElementById("addMilestoneId" + index);
     var li = document.createElement("li");
-    li.className = "countMilestone";
+    var count = document.querySelectorAll(`#addMilestoneId${index} li`).length;
+    li.id = "countMilestone" + count;
     ul.appendChild(li);
-
-    var count = document.querySelectorAll(`#addMilestoneId${index} .countMilestone`).length;
     var startDate = "startDate" + count;
     var endDate = "endDate" + count;
     var tittle = "tittle" + count;
-    if (count === 6) {
+    if (count === 5) {
         newElem = `<h3 class="text-danger">You can only create 5 times in a row !!</h2>`;
         li.innerHTML = newElem;
-    } else if (count > 6) {
+    } else if (count > 5) {
         li.remove();
         return;
     } else {
         newElem = `
             <strong>From </strong> <span class="ml-3"><input name="${startDate}" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
             <strong class="ml-3">To </strong> <span class="ml-3"><input name="${endDate}" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
-            <span class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>
+            <span onclick="removeMilestones('${li.id}','addMilestoneId${index}')" class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>
             <div class="content">
                 <h3>Milestone Tittle <input name="${tittle}" required="" style="border-radius: 5px; margin-left: 15px; padding: 10px; width: 65%"/></h3>
             </div>
         `;
         li.innerHTML = newElem;
     }
+}
+
+function removeMilestones(child, parent) {
+    var ul = document.getElementById(parent);
+    var li = document.getElementById(child);
+    ul.removeChild(li);
+    $('#countMilestone5').remove();
 }
 

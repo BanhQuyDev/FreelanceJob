@@ -511,8 +511,8 @@
                                                 <button class="col-4" style="background-color: transparent; border: none; font-size: 35px; cursor: pointer;" onclick="addMilestone(${count.count}, '${contract.contract_job_start_date}', '${contract.contract_job_end_date}')"><i class="far fa-plus-square mr-3"></i><span class="align-self-center" style="font-size: 14px; transform: translateY(-8px);">Add new one</span> </button>
                                             </div>
                                             <form action="AddMilestoneController" method="POST">
-                                                <ul id="addMilestoneId${count.count}">
-                                                    <li class="countMilestone">
+                                                <ul class="addMilestoneId${count.count}" id="addMilestoneId${count.count}">
+                                                    <li id="countMilestone">
                                                         <strong>From </strong> <span class="ml-3"><input name="startDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
                                                         <strong class="ml-3">To </strong> <span class="ml-3"><input name="endDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
                                                         <span class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>

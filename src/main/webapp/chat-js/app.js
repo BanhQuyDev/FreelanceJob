@@ -37,7 +37,7 @@ function init(userName1, picture1) {
 function sendMessage() {
     var messageContent = document.getElementById("msg").value;
     var today = new Date();
-    var time = today.getHours() + ":" + today.getMinutes()
+    var time = today.getHours() + ":" + today.getMinutes();
     var message = buildMessage(userName, messageContent, time, picture);
 
     document.getElementById("msg").value = '';

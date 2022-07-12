@@ -87,10 +87,10 @@ public class FeedbackDAO {
                 ptm.setInt(1, id_freelancer);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                   priceCurrent = rs.getDouble("balance");
+                    priceCurrent = rs.getDouble("balance");
                 }
                 double newBalance = priceCurrent + priceProject;
-                if(updateBalance(id_freelancer, newBalance)){
+                if (updateBalance(id_freelancer, newBalance)) {
                     check = true;
                 }
             }
@@ -123,5 +123,86 @@ public class FeedbackDAO {
             DBUtils.closeConnection(conn, ptm);
         }
         return check;
+    }
+
+    public int getTotalStar(int id) throws SQLException {
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT SUM([rating]) AS total_star\n"
+                + "FROM [FPTFreelanceJob].[dbo].[tblFeedback]\n"
+                + "WHERE [id_freelancer] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setDouble(1, id);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("total_star");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return count;
+    }
+
+    public List<FeedbackDTO> getAllFeedbackByUser(int id) throws SQLException {
+        List<FeedbackDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT  U.fullname, U.avatar, F.content, F.rating FROM tblFeedback F, tblEmployer E, tblUser U\n"
+                + "         WHERE E.id_employer = F.id_employer AND id_freelancer = ? AND E.id_employer = U.id_user";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setInt(1, id);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    String content = rs.getString("content");
+                    String employer_name = rs.getString("fullname");
+                    String employer_avatar = rs.getString("avatar");
+                    int rating = rs.getInt("rating");
+                    list.add(new FeedbackDTO(content, employer_avatar, employer_name, rating));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm, rs);
+        }
+        return list;
+    }
+
+    public int getTotalJob(int id) throws SQLException {
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String sql = "SELECT count(id_feedback) AS total_job\n"
+                + "FROM [FPTFreelanceJob].[dbo].[tblFeedback]\n"
+                + "WHERE [id_freelancer] = ?";
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(sql);
+                ptm.setDouble(1, id);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt("total_job");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return count;
     }
 }

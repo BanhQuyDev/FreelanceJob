@@ -39,7 +39,6 @@ public class WorkspaceController extends HttpServlet {
         try {
             MilestoneDAO milestoneDao = new MilestoneDAO();
             milestoneDao.autoSetStatusByDay();
-            List<MilestoneDTO> listMilestone = new ArrayList<>();
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String mode = (String) session.getAttribute("MODE");
