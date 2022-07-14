@@ -6,7 +6,8 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +26,7 @@ import users.UserDTO;
 @WebServlet(name = "UnappropriatedJobController", urlPatterns = {"/UnappropriatedJobController"})
 public class UnappropriatedJobController extends HttpServlet {
 
-   
-   private static final String ERROR = "admin.jsp";
+    private static final String ERROR = "admin.jsp";
     private static final String SUCCESS = "GetAllJob";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -42,11 +42,14 @@ public class UnappropriatedJobController extends HttpServlet {
             JobDTO job = dao.getAJobByID(idJob);
             UserDTO user = userDao.getUserByIDJob(idJob);
             boolean checkAccept = dao.unappropriatedJob(idJob);
+            long start = System.currentTimeMillis();
             boolean checkSendEmail = SendEmail.sendEmailSpam(job, user);
-            if(checkAccept == true && checkSendEmail == true){
+            long end = System.currentTimeMillis();
+            System.out.println("Execution time is " + ((end - start) / 1000) % 60 + " seconds");
+            if (checkAccept == true && checkSendEmail == true) {
                 request.setAttribute("SUCCESS", "Report Successfully!!");
                 url = SUCCESS;
-            }else{
+            } else {
                 request.setAttribute("FAIL", "Report Failed!!");
                 url = SUCCESS;
             }
