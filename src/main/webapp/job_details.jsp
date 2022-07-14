@@ -66,11 +66,9 @@
 
             /*==================*/
             .modal-content{
-                /*border: 3px solid black;*/
                 border-radius: 2rem;
                 transition: 0.2s linear;
                 position: relative;
-                box-shadow: 0px 0px 70px #f272298f;
             }
             .modal-dialog{
                 width: 550px;

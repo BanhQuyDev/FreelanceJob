@@ -13,7 +13,7 @@ public class Key {
     public static final String GOOGLE_LINK_GET_TOKEN = "https://accounts.google.com/o/oauth2/token";
     public static final String GOOGLE_LINK_GET_USER_INFO = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=";
     public static final String GOOGLE_GRANT_TYPE = "authorization_code";
-    public static final String SEND_EMAIL_USER = "vuntnse151234@fpt.edu.vn";
-    public static final String SEND_EMAIL_PASSWORD = "cutkhoiacctao";
+    public static final String EMAIL_SENDER = "fptfreelancejob@gmail.com";
+    public static final String SENDGRID_API_KEY = "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";
 
 }
