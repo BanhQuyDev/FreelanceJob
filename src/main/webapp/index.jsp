@@ -529,7 +529,7 @@
             $('.counter').countUp();
         </script>
         <!--End Countup-->
-        <script>
+      <script>
             $(function () {
                 $('[data-toggle="popover"]').popover(),
                         $('.popover-dismiss').popover({

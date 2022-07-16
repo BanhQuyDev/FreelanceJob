@@ -105,7 +105,7 @@
             border-top: 1px solid #dee2e6!important;
         }
     </style>
-    <body onload="init('${sessionScope.LOGIN_USER.name}', '${sessionScope.LOGIN_USER.picture}'), makeCall('${requestScope.CHAT_PATNER.name}')">
+    <body onload="init('${sessionScope.LOGIN_USER.name}', '${sessionScope.LOGIN_USER.picture}', '${sessionScope.ID_CONTRACT}'), makeCall('${sessionScope.CHAT_PATNER.name}${sessionScope.ID_CONTRACT}')">
         <main class="content">
             <div style="height: 929px; width: 100%" class="row">
                 <div class="col-9">
@@ -126,10 +126,10 @@
                             <div class="py-2 px-4 border-bottom d-lg-block">
                                 <div class="d-flex align-items-center py-1">
                                     <div class="position-relative">
-                                        <img src="${requestScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" width="40" height="40">
+                                        <img src="${sessionScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" width="40" height="40">
                                     </div>
                                     <div class="flex-grow-1 pl-3">
-                                        <strong id="patner">${requestScope.CHAT_PATNER.name}</strong>
+                                        <strong id="patner">${sessionScope.CHAT_PATNER.name}</strong>
                                         <div class="text-muted small"><em id="status">Offline</em></div>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                                                 <c:otherwise>
                                                     <div class="chat-message-left pb-4">
                                                         <div>
-                                                            <img src="${requestScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" width="40" height="40">
+                                                            <img src="${sessionScope.CHAT_PATNER.picture}" class="rounded-circle mr-1" width="40" height="40">
                                                             <div class="text-muted small text-nowrap mt-2">${mess.showTime(mess.time)}</div>
                                                         </div>
                                                         <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
@@ -187,16 +187,16 @@
             </div>
         </main>
     </body>
+    <script>
+        var input = document.getElementById("msg");
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("send").click();
+            }
+        });
+    </script>
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script src="chat-js/app.js"></script>
-    <script>
-                                            var input = document.getElementById("msg");
-                                            input.addEventListener("keypress", function (event) {
-                                                if (event.key === "Enter") {
-                                                    event.preventDefault();
-                                                    document.getElementById("send").click();
-                                                }
-                                            });
-    </script>
     <script src="https://kit.fontawesome.com/b36bcbb61e.js" crossorigin="anonymous"></script>
 </html>

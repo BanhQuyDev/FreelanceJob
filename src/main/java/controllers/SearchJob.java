@@ -6,14 +6,19 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
 import jobs.JobDTO;
+import notifications.NotificationDAO;
+import notifications.NotificationDTO;
+import users.UserDTO;
 
 /**
  *
@@ -34,10 +39,26 @@ public class SearchJob extends HttpServlet {
         try {
             String search = request.getParameter("search");
             JobDAO dao = new JobDAO();
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             List<JobDTO> listJob = dao.getListJobByEmail(search);
             List<JobDTO> listJobSpam = dao.getListJobSpamByEmail(search);
+            List<JobDTO> listJobUnappropriatedDetail = new ArrayList<>();
+            List<JobDTO> listJobAcceptedDetail = new ArrayList<>();
+            List<NotificationDTO> listNotificationsAdminUnread = new NotificationDAO().showAllNotificationAdminUnread(loginUser.getId());
+            List<NotificationDTO> listNotificationsAdminRead = new NotificationDAO().showAllNotificationAdminRead(loginUser.getId());
+            for (JobDTO jobUnappropriated : listJobSpam) {
+                listJobUnappropriatedDetail.add(dao.getAJobByID(jobUnappropriated.getIdJob()));
+            }
+            for (JobDTO jobAccepted : listJob) {
+                listJobAcceptedDetail.add(dao.getAJobByID(jobAccepted.getIdJob()));
+            }
             request.setAttribute("LIST_JOB_ACCEPTED", listJob);
             request.setAttribute("LIST_JOB_UNAPPROPRIATED", listJobSpam);
+            request.setAttribute("JOB_ACCEPTED_DETAIL", listJobAcceptedDetail);
+            request.setAttribute("JOB_UNAPPROPRIATED_DETAIL", listJobUnappropriatedDetail);
+            session.setAttribute("LIST_NOTIFICATIONS_ADMIN_UNREAD", listNotificationsAdminUnread);
+            session.setAttribute("LIST_NOTIFICATIONS_ADMIN_READ", listNotificationsAdminRead);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at SearchUser" + e.toString());
