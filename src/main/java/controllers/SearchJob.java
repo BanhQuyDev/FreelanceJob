@@ -6,6 +6,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,9 +36,19 @@ public class SearchJob extends HttpServlet {
             String search = request.getParameter("search");
             JobDAO dao = new JobDAO();
             List<JobDTO> listJob = dao.getListJobByEmail(search);
+            List<JobDTO> listJobAcceptedDetail = new ArrayList<>();
             List<JobDTO> listJobSpam = dao.getListJobSpamByEmail(search);
+            List<JobDTO> listJobSpamDetail = new ArrayList<>();
+            for (JobDTO jobAccepted : listJob) {
+                listJobAcceptedDetail.add(dao.getAJobByID(jobAccepted.getIdJob()));
+            }
+            for (JobDTO jobUnappropriated : listJobSpam) {
+                listJobSpamDetail.add(dao.getAJobByID(jobUnappropriated.getIdJob()));
+            }
             request.setAttribute("LIST_JOB_ACCEPTED", listJob);
+            request.setAttribute("JOB_ACCEPTED_DETAIL", listJobAcceptedDetail);
             request.setAttribute("LIST_JOB_UNAPPROPRIATED", listJobSpam);
+            request.setAttribute("JOB_UNAPPROPRIATED_DETAIL", listJobSpamDetail);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at SearchUser" + e.toString());
