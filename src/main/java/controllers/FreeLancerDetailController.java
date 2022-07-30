@@ -35,8 +35,6 @@ public class FreeLancerDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             FeedbackDAO feedbackDao = new FeedbackDAO();
             int id_freelancer = Integer.parseInt(request.getParameter("id_freelancer"));
             UserDTO freelancer = new UserDAO().getUserByID(id_freelancer);

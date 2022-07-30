@@ -68,7 +68,7 @@ public class ContractDTO {
         this.contract_job_duration = contract_job_duration;
     }
 
-    public ContractDTO(String contract_freelancer_name, String contract_employer_name, String contract_job_tittle, double contract_job_duration, String contract_job_start_date, String contract_user_avatar, double contract_remaining_time, int contract_job_id, int idPartner, String contract_job_end_date,double contract_job_price) {
+    public ContractDTO(String contract_freelancer_name, String contract_employer_name, String contract_job_tittle, double contract_job_duration, String contract_job_start_date, String contract_user_avatar, double contract_remaining_time, int contract_job_id, int idPartner, String contract_job_end_date,double contract_job_price, int id_contract) {
         this.contract_freelancer_name = contract_freelancer_name;
         this.contract_employer_name = contract_employer_name;
         this.contract_job_tittle = contract_job_tittle;
@@ -80,6 +80,7 @@ public class ContractDTO {
         this.idPartner = idPartner;
         this.contract_job_end_date = contract_job_end_date;
         this.contract_job_price = contract_job_price;
+        this.id_contract = id_contract;
     }
 
     public ContractDTO(String contract_job_tittle, double contract_job_price, String contract_job_description, String contract_job_start_date, String contract_job_end_date, String contract_freelancer_name, String contract_employer_name, int contract_job_id, List<MilestoneDTO> contract_list_milestone,int totalFile,int statusPayment,int size) {

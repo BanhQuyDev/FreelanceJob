@@ -480,7 +480,7 @@
                 $(".alert").fadeTo(400, 0).slideUp(400, function () {
                     $(this).remove();
                 });
-            }, 3000)
+            }, 3000);
         </script> 
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->
@@ -489,7 +489,6 @@
         <script src="./assets/js/bootstrap.min.js"></script>
         <!-- Jquery Mobile Menu -->
         <script src="./assets/js/jquery.slicknav.min.js"></script>
-
         <!-- Jquery Slick , Owl-Carousel Plugins -->
         <script src="./assets/js/owl.carousel.min.js"></script>
         <script src="./assets/js/slick.min.js"></script>
@@ -519,24 +518,23 @@
             src="https://kit.fontawesome.com/b36bcbb61e.js"
             crossorigin="anonymous"
         ></script>
+        <script>
+           $(function () {
+               $('[data-toggle="popover"]').popover(),
+                       $('.popover-dismiss').popover({
+                   trigger: 'focus'
+               })
+           })
+        </script>
         <script src="./assets/js/animation.js"></script>
-
-        <!--Countup-->
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <!--        Countup-->
+        <!--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
         <script src="./assets/js/jquery.countup.js"></script>
         <script>
             $('.counter').countUp();
         </script>
-        <!--End Countup-->
-        <script>
-            $(function () {
-                $('[data-toggle="popover"]').popover(),
-                        $('.popover-dismiss').popover({
-                    trigger: 'focus'
-                })
-            })
-        </script>
+        <!--        End Countup-->
 
     </body>
 </html>

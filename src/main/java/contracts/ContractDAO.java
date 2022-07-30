@@ -40,12 +40,12 @@ public class ContractDAO {
             + "	(SELECT U.fullname FROM tblContract C, tblFreelancer F, tblUser U WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = Cc.id_contract) as freelancer_name,\n"
             + "    (SELECT J.title FROM tblContract C, tblJob J WHERE C.id_job = J.id_job AND C.id_contract = Cc.id_contract) as job_title\n"
             + "FROM tblContract Cc, tblEmployer E, tblUser U WHERE Cc.id_employer = E.id_employer AND E.id_employer = U.id_user AND Cc.status = ? AND U.id_user = ? ORDER BY Cc.create_date DESC";
-    private final String GET_ALL_CONTRACT_FOR_WORKSPACE = "SELECT U.fullname, J.title, J.start_date, J.duration,J.salary,Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime, DATEADD(day,J.duration, J.start_date) end_date,\n"
+    private final String GET_ALL_CONTRACT_FOR_WORKSPACE = "SELECT CC.id_contract, U.fullname, J.title, J.start_date, J.duration,J.salary,Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime, DATEADD(day,J.duration, J.start_date) end_date,\n"
             + "(SELECT U.fullname FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerName,\n"
             + "(SELECT U.id_user FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as idEmployer,\n"
             + "(SELECT U.avatar FROM tblEmployer E, tblUser U, tblContract C WHERE C.id_employer = E.id_employer AND E.id_employer = U.id_user AND C.id_contract = CC.id_contract) as employerAvatar\n"
             + "FROM tblContract Cc, tblJob J, tblFreelancer F, tblUser U WHERE Cc.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND Cc.id_job = J.id_job AND Cc.status = 0 AND F.id_freelancer = ?";
-    private final String GET_ALL_CONTRACT_FOR_WORKSPACE_FOR_EMPLOYER = "SELECT U.fullname, J.title, J.start_date, J.duration,J.salary, Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime, DATEADD(day,J.duration, J.start_date) end_date,\n"
+    private final String GET_ALL_CONTRACT_FOR_WORKSPACE_FOR_EMPLOYER = "SELECT CC.id_contract, U.fullname, J.title, J.start_date, J.duration,J.salary, Cc.id_job, DATEDIFF(HOUR, GETDATE(), DATEADD(day,J.duration, J.start_date)) remainingTime, DATEADD(day,J.duration, J.start_date) end_date,\n"
             + "(SELECT U.fullname FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as freelancerName,\n"
             + "(SELECT U.id_user FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as idFreelancer,\n"
             + "(SELECT U.avatar FROM tblFreelancer F, tblUser U, tblContract C WHERE C.id_freelancer = F.id_freelancer AND F.id_freelancer = U.id_user AND C.id_contract = CC.id_contract) as freelancerAvatar\n"
@@ -264,9 +264,10 @@ public class ContractDAO {
                     Double remainingtime = Double.valueOf(rs.getInt("remainingtime"));
                     int id_job = rs.getInt("id_job");
                     int idPartner = rs.getInt("idEmployer");
+                    int idContract = rs.getInt("id_contract");
                     String end_date = rs.getString("end_date");
                     Double salary = rs.getDouble("salary");
-                    list.add(new ContractDTO(fullname, employerName, title, duration, start_date, employerAvatar, remainingtime, id_job, idPartner, end_date,salary));
+                    list.add(new ContractDTO(fullname, employerName, title, duration, start_date, employerAvatar, remainingtime, id_job, idPartner, end_date, salary,idContract));
                 }
             }
         } catch (Exception e) {
@@ -297,10 +298,11 @@ public class ContractDAO {
                     String freelancerAvatar = rs.getString("freelancerAvatar");
                     Double remainingtime = Double.valueOf(rs.getInt("remainingtime"));
                     int id_job = rs.getInt("id_job");
+                    int idContract = rs.getInt("id_contract");
                     int idPartner = rs.getInt("idFreelancer");
                     String end_date = rs.getString("end_date");
                     Double salary = rs.getDouble("salary");
-                    list.add(new ContractDTO(freelancerName, fullname, title, duration, start_date, freelancerAvatar, remainingtime, id_job, idPartner, end_date,salary));
+                    list.add(new ContractDTO(freelancerName, fullname, title, duration, start_date, freelancerAvatar, remainingtime, id_job, idPartner, end_date, salary,idContract));
                 }
             }
         } catch (Exception e) {
@@ -337,7 +339,7 @@ public class ContractDAO {
                     int totalFile = file.countFile(id_job);
                     int statusPayment = payment.checkStatusPayment(id_job);
                     int size = listMilestone.size();
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment,size);
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone, totalFile, statusPayment, size);
                 }
             }
         } catch (Exception e) {
@@ -372,9 +374,9 @@ public class ContractDAO {
                     String employerName = rs.getString("employerName");
                     List<MilestoneDTO> listMilestone = milestoneDao.getAllMilestoneByIdJob(id_job);
                     int totalFile = file.countFile(id_job);
-                    int statusPayment = payment.checkStatusPayment(id_job) ;
+                    int statusPayment = payment.checkStatusPayment(id_job);
                     int size = listMilestone.size();
-                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone,totalFile,statusPayment,size);
+                    contract = new ContractDTO(title, salary, description, start_date, end_date, fullname, employerName, id_job, listMilestone, totalFile, statusPayment, size);
                 }
             }
         } catch (Exception e) {

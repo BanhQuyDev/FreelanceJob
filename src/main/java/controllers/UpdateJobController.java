@@ -98,7 +98,7 @@ public class UpdateJobController extends HttpServlet {
                         if(check_update) {
                             boolean check_delete_old_skill = jDao.deleteJobSkill(id_job);
                             boolean check_new_skill = jDao.createSkillJob(skillList, id_job);
-                            String content = "Job " + title + " was updated by " + user.getName();
+                            String content = "<strong>" + title + "</strong> was updated by " + user.getName();
                             NotificationDAO notiDao = new NotificationDAO();
                             boolean check_noti = notiDao.createNotification(8, content,3, user.getId());
                             if (check_delete_old_skill == true && check_new_skill == true && check_noti == true) {

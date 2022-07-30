@@ -111,6 +111,20 @@
 
                                     <!-- Count of Job list End -->
                                     <!-- single-job-content -->
+                                    <c:if test="${requestScope.SUCCESS_MESSAGE_APPROVE != NULL}">
+                                        <div class="alert alert-success">
+                                            <center>
+                                                <strong>Success!</strong> ${requestScope.SUCCESS_MESSAGE_APPROVE}
+                                            </center>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${requestScope.SUCCESS_MESSAGE_DENY != NULL}">
+                                        <div class="alert alert-danger">
+                                            <center>
+                                                <strong>Not Success!</strong> ${requestScope.SUCCESS_MESSAGE_DENY}
+                                            </center>
+                                        </div>
+                                    </c:if>
                                     <c:choose>
                                         <c:when test="${requestScope.LIST_FREELANCER_APPLY.size() == 0}">
                                             <div class="text-center">
@@ -118,20 +132,6 @@
                                             </div>
                                         </c:when>
                                         <c:when test="${requestScope.LIST_FREELANCER_APPLY != NULL}">
-                                            <c:if test="${requestScope.SUCCESS_MESSAGE_APPROVE != NULL}">
-                                                <div class="alert alert-success">
-                                                    <center>
-                                                        <strong>Success!</strong> ${requestScope.SUCCESS_MESSAGE_APPROVE}
-                                                    </center>
-                                                </div>
-                                            </c:if>
-                                            <c:if test="${requestScope.SUCCESS_MESSAGE_DENY != NULL}">
-                                                <div class="alert alert-danger">
-                                                    <center>
-                                                        <strong>Not Success!</strong> ${requestScope.SUCCESS_MESSAGE_DENY}
-                                                    </center>
-                                                </div>
-                                            </c:if>
                                             <div class="row">
                                                 <c:forEach items="${requestScope.LIST_FREELANCER_APPLY}" var="LF" varStatus="counting">
                                                     <form class="col-4" style="position: relative; margin-bottom: 35px" action="ApproveFreelancerController" method="POST">
@@ -175,7 +175,7 @@
                                                             <c:if test="${LF.note != null || LF.note.size() > 0}">
                                                                 <div class="freelancer_noti"></div>
                                                             </c:if>
-                                                            
+
                                                         </a>
                                                         <%--</c:if>--%>
                                                     </form>

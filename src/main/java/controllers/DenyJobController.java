@@ -33,6 +33,9 @@ public class DenyJobController extends HttpServlet {
              dao.deleteContractJob(idJob);
              dao.deleteJobSkill(idJob);
              dao.deleteJobApplication(idJob);
+             dao.deleteJobMileStone(idJob);
+             dao.deleteJobReport(idJob);
+             dao.deleteJobStorage(idJob);
             boolean checkDeleteJob = dao.deleteJob(idJob);
             if (checkDeleteJob) {
                 request.setAttribute("SUCCESS", "Delete Successfully!!");

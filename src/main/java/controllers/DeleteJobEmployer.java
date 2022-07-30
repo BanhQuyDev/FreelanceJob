@@ -6,63 +6,47 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import jobs.JobDAO;
-import jobs.JobDTO;
-import notifications.NotificationDAO;
-import notifications.NotificationDTO;
-import users.UserDTO;
 
 /**
  *
  * @author QUANG HUY
  */
-@WebServlet(name = "SearchJob", urlPatterns = {"/SearchJob"})
-public class SearchJob extends HttpServlet {
+@WebServlet(name = "DeleteJobEmployer", urlPatterns = {"/DeleteJobEmployer"})
+public class DeleteJobEmployer extends HttpServlet {
 
-    private static final String ERROR = "admin.jsp";
-    private static final String SUCCESS = "admin.jsp";
+    private static final String ERROR = "RenderJobPostController";
+    private static final String SUCCESS = "RenderJobPostController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
-            String search = request.getParameter("search");
+            int idJob = Integer.parseInt(request.getParameter("idJob"));
             JobDAO dao = new JobDAO();
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            List<JobDTO> listJob = dao.getListJobByEmail(search);
-            List<JobDTO> listJobAcceptedDetail = new ArrayList<>();
-            List<JobDTO> listJobSpam = dao.getListJobSpamByEmail(search);
-            List<JobDTO> listJobUnappropriatedDetail = new ArrayList<>();
-            List<NotificationDTO> listNotificationsAdminUnread = new NotificationDAO().showAllNotificationAdminUnread(loginUser.getId());
-            List<NotificationDTO> listNotificationsAdminRead = new NotificationDAO().showAllNotificationAdminRead(loginUser.getId());
-            for (JobDTO jobUnappropriated : listJobSpam) {
-                listJobUnappropriatedDetail.add(dao.getAJobByID(jobUnappropriated.getIdJob()));
+            dao.deleteContractJob(idJob);
+             dao.deleteJobSkill(idJob);
+             dao.deleteJobApplication(idJob);
+             dao.deleteJobMileStone(idJob);
+             dao.deleteJobReport(idJob);
+             dao.deleteJobStorage(idJob);
+            boolean checkDeleteJob = dao.deleteJob(idJob);
+            if (checkDeleteJob) {
+                request.setAttribute("SUCCESS_MESSAGE", "Delete Successfully!!");
+                url = SUCCESS;
+            } else {
+                request.setAttribute("ERROR_MESSAGE", "Delete Failed!!");
+                url = SUCCESS;
             }
-            for (JobDTO jobAccepted : listJob) {
-                listJobAcceptedDetail.add(dao.getAJobByID(jobAccepted.getIdJob()));
-            }
-            request.setAttribute("LIST_JOB_ACCEPTED", listJob);
-            request.setAttribute("JOB_ACCEPTED_DETAIL", listJobAcceptedDetail);
-            request.setAttribute("LIST_JOB_UNAPPROPRIATED", listJobSpam);
-            request.setAttribute("JOB_ACCEPTED_DETAIL", listJobAcceptedDetail);
-            request.setAttribute("JOB_UNAPPROPRIATED_DETAIL", listJobUnappropriatedDetail);
-            session.setAttribute("LIST_NOTIFICATIONS_ADMIN_UNREAD", listNotificationsAdminUnread);
-            session.setAttribute("LIST_NOTIFICATIONS_ADMIN_READ", listNotificationsAdminRead);
-            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at SearchUser" + e.toString());
+            log("Error at AcceptJobController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

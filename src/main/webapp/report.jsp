@@ -12,13 +12,12 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Content Report</title>
+        <title>Report Detail</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="report/styles.css" rel="stylesheet">
-        <script src="//cdn.ckeditor.com/4.19.0/basic/ckeditor.js"></script>
         <!-- CSS here -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -37,7 +36,7 @@
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <!--assets/img/hero/Background_Report.jpg-->
-    <body style="background-image: url('https://i.pinimg.com/originals/2f/a6/7e/2fa67e0eddd0bfa7f51a336dc6bff35c.jpg'); background-repeat: no-repeat; background-size: cover">
+    <body style="background-color: #ccc;">
         <div class="container">
             <div class="be-comment-block" style="background-color: #f8f9fa45; height: 650px; position: relative">
                 <c:set var="r" value="${requestScope.THIS_JOB}"/>

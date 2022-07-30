@@ -40,6 +40,12 @@ public class JobDAO {
     private static final String DELETE_JOB_SKILL = "DELETE tblJobSkill WHERE id_job = ?";
     
     private static final String DELETE_JOB_APPLICATION = "DELETE tblJobApplication WHERE id_job = ?";
+    
+    private static final String DELETE_JOB_REPORT = "DELETE tblJobReport WHERE id_job = ?";
+    
+    private static final String DELETE_JOB_MILESTONE = "DELETE tblMilestone WHERE id_job = ?";
+    
+    private static final String DELETE_JOB_STORAGE = "DELETE tblStorage WHERE id_job = ?";
     /////////////////////////////////////////////////
 
     private static final String INSERT_JOB = "INSERT INTO tblJob(title, salary, description, duration, start_date, id_status, id_employer, id_major)\n"
@@ -65,7 +71,7 @@ public class JobDAO {
             + "WHERE E.id_employer = U.id_user AND E.id_employer = J.id_employer AND J.id_major = M.id_major AND J.id_status = 2 AND J.id_job = ?";
     private static final String SEARCH_JOB = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
-            + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 2 AND U.email like ?";
+            + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status != 1 AND U.email like ?";
     private static final String SEARCH_JOB_SPAM = "SELECT j.id_job,j.title,j.salary,j.description,j.duration,j.start_date,s.status_name,u.fullname,j.id_major,j.create_date\n"
             + "  FROM tblJob j,tblJobStatus s,tblEmployer e,tblUser u\n"
             + "  WHERE j.id_status = s.id_status AND j.id_employer = e.id_employer AND e.id_employer = u.id_user AND j.id_status = 1 AND U.email like ?";
@@ -369,7 +375,63 @@ public class JobDAO {
         }
         return result;
     }
-    
+    public boolean deleteJobReport(int idJob) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_JOB_REPORT);
+                ptm.setInt(1, idJob);
+                int value = ptm.executeUpdate();
+                result = value > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return result;
+    }
+    public boolean deleteJobMileStone(int idJob) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_JOB_MILESTONE);
+                ptm.setInt(1, idJob);
+                int value = ptm.executeUpdate();
+                result = value > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return result;
+    }
+    public boolean deleteJobStorage(int idJob) throws SQLException {
+        boolean result = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_JOB_STORAGE);
+                ptm.setInt(1, idJob);
+                int value = ptm.executeUpdate();
+                result = value > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
+        return result;
+    }
     public boolean createJob(JobDTO job) throws SQLException {
         boolean result = false;
         Connection conn = null;

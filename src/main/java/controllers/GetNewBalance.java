@@ -5,51 +5,35 @@
  */
 package controllers;
 
-import chat.ChatDAO;
-import chat.ChatDTO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import users.UserDAO;
-import users.UserDTO;
 
 /**
  *
  * @author QUANG HUY
  */
-@WebServlet(name = "ShowMessage", urlPatterns = {"/ShowMessage"})
-public class ShowMessage extends HttpServlet {
+@WebServlet(name = "GetNewBalance", urlPatterns = {"/GetNewBalance"})
+public class GetNewBalance extends HttpServlet {
 
-    private static final String ERROR = "chat.jsp";
-    private static final String SUCCESS = "chat.jsp";
+   private static final String ERROR = "index.jsp";
+    private static final String SUCCESS = "freelancer_detail.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         String url = ERROR;
         try {
-            int idSend = Integer.parseInt(request.getParameter("idSend"));
-            int idReceive = Integer.parseInt(request.getParameter("idReceive"));
-            int idContract = Integer.parseInt(request.getParameter("idContract"));
-            HttpSession session = request.getSession();
-            UserDTO user = new UserDAO().getUserByID(idReceive);   
-            ChatDAO dao = new ChatDAO();
-            List<ChatDTO> listMessage = dao.getAllMessage(idSend, idReceive);
-            if (listMessage != null) {
-                request.setAttribute("LIST_MESSAGE", listMessage);
-                session.setAttribute("CHAT_PATNER", user);
-                session.setAttribute("ID_CONTRACT", idContract);
-                url = SUCCESS;
-            }
+            int id_freelancer = Integer.parseInt(request.getParameter("id_freelancer"));
+            double balance = new UserDAO().getBalance(id_freelancer);
+            request.setAttribute("BALANCE", balance);
+            url = SUCCESS;
         } catch (Exception e) {
-            log("Error at AcceptJobController:" + e.toString());
+            log("Error at GetAllJob:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

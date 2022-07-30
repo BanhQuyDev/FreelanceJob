@@ -361,7 +361,7 @@
                                             <p class="p_status"><strong>Duration :</strong> ${contract.showDuration(contract.contract_job_duration)} day(s)</p>
                                         </div>
                                         <div class="info_button pt-3">
-                                            <button class="buttonVip border-0" onclick="showJobDetail(${requestScope.CONTRACT_DETAIL_SIZE}, ${count.count})"><a href="#contractCard${count.count}" style="color: white">View Detail</a></button> <a class="buttonVip border-0 ml-4" href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}" target="_blank">Chat</a>
+                                            <button class="buttonVip border-0" onclick="showJobDetail(${requestScope.CONTRACT_DETAIL_SIZE}, ${count.count})"><a href="#contractCard${count.count}" style="color: white">View Detail</a></button> <a class="buttonVip border-0 ml-4" href="ShowMessage?idSend=${sessionScope.LOGIN_USER.id}&idReceive=${contract.idPartner}&idContract=${contract.id_contract}" target="_blank">Chat</a>
                                         </div>
 
                                         <c:if test="${sessionScope.MODE == 'EMPLOYER'}">
@@ -513,8 +513,8 @@
                                             <form action="AddMilestoneController" method="POST">
                                                 <ul class="addMilestoneId${count.count}" id="addMilestoneId${count.count}">
                                                     <li id="countMilestone">
-                                                        <strong>From </strong> <span class="ml-3"><input name="startDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
-                                                        <strong class="ml-3">To </strong> <span class="ml-3"><input name="endDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
+                                                        <strong>From </strong> <span class="ml-3"><input id="start${count.count}1" name="startDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px" required/></span>
+                                                        <strong class="ml-3">To </strong> <span class="ml-3"><input id="end${count.count}1" name="endDate1" type="date" min="${contract.contract_job_start_date}" max="${contract.contract_job_end_date}" style="background-color: transparent; color: white; border: none; font-size: 18px"required/></span>
                                                         <span class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>
                                                         <div class="content">
                                                             <h3>Milestone Tittle <input name="tittle1" required="" style="border-radius: 5px; margin-left: 15px; padding: 10px; width: 65%"/></h3>

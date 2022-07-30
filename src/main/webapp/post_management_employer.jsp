@@ -180,34 +180,39 @@
                                                             <a href="UpdateJobController?id_job=${p.idJob}&action=render">
                                                                 <h5 class="heading"><strong>${p.title}</strong></h5>
                                                             </a>
-                                                            <c:choose>
-                                                                <c:when test="${status eq 'Applied'}">
-                                                                    <div class="mt-5">
-                                                                        <a style="color: #1a8df4;" href="HistoryController?selectedContractStatus=2">
-                                                                            <span class="text1 font-weight-bold">Go Contract</span>
-                                                                        </a>
-                                                                    </div>
-                                                                </c:when>
-                                                                <c:when test="${status eq 'Spam'}">
-                                                                    <div class="mt-5">
-                                                                        <a class="text-danger" href="UpdateJobController?id_job=${p.idJob}&action=render">
-                                                                            <span class="text1 font-weight-bold">Update Your Post</span>
-                                                                        </a>
-                                                                    </div>
-                                                                </c:when>
-                                                                <c:when test="${status eq 'Updated'}">
-                                                                    <div class="mt-5">
+                                                            <div class="row">
+                                                                <c:choose>
+                                                                    <c:when test="${status eq 'Applied'}">
+                                                                        <div class="mt-5 col-6">
+                                                                            <a style="color: #1a8df4;" href="HistoryController?selectedContractStatus=2">
+                                                                                <span class="text1 font-weight-bold">Go Contract</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </c:when>
+                                                                    <c:when test="${status eq 'Spam'}">
+                                                                        <div class="mt-5 col-6">
+                                                                            <a class="text-danger" href="UpdateJobController?id_job=${p.idJob}&action=render">
+                                                                                <span class="text1 font-weight-bold">Update Your Post</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </c:when>
+                                                                    <c:when test="${status eq 'Updated'}">
+                                                                        <div class="mt-5 col-6">
                                                                             <span style="color: #cecd4a" class="text1 font-weight-bold">Waiting admin to approve</span>
-                                                                    </div>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <div class="mt-5">
-                                                                        <a class="text-success" href="FilterFreelancerApplyController?selectedJob=${p.idJob}">
-                                                                            <span class="text1 font-weight-bold">${p.freelancerQuantity} Applied</span>
-                                                                        </a>
-                                                                    </div>
-                                                                </c:otherwise>
-                                                            </c:choose>
+                                                                        </div>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <div class="mt-5 col-6">
+                                                                            <a class="text-success" href="FilterFreelancerApplyController?selectedJob=${p.idJob}">
+                                                                                <span class="text1 font-weight-bold">${p.freelancerQuantity} Applied</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <div class="pl-45 mt-5 col-6">
+                                                                    <a href="DeleteJobEmployer?idJob=${p.idJob}" class="text-danger font-weight-bold text-center"">Delete</a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

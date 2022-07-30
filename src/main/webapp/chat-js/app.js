@@ -4,14 +4,15 @@ var picture = null;
 var peer = new Peer();
 var myStream;
 var peerList = [];
-function init(userName1, picture1) {
+function init(userName1, picture1,idContract) {
     if ("WebSocket" in window) {
         userName = userName1;
+        contract = userName1+idContract;
         picture = picture1;
         websocket = new WebSocket('ws://localhost:8080/FreelanceJob/' + userName);
         websocket.onopen = function (data) {
         };
-        peer = new Peer(userName1);
+        peer = new Peer(contract);
         peer.on('open', (id) => {
             console.log(id + " connected");
         });
@@ -112,6 +113,7 @@ function listenToCall() {
 }
 
 function makeCall(receiverId) {
+    console.log(receiverId);
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true

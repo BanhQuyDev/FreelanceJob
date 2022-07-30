@@ -40,30 +40,73 @@ function renderRating(idStar, index) {
 }
 
 function addMilestone(index, startDateJob, endDateJob) {
-    var ul = document.getElementById("addMilestoneId" + index);
-    var li = document.createElement("li");
+    var endDateUserInput = document.getElementById("end" + index + 1).value;
+    var startDateUserInput = document.getElementById("start" + index + 1).value;
     var count = document.querySelectorAll(`#addMilestoneId${index} li`).length;
-    li.id = "countMilestone" + count;
-    ul.appendChild(li);
-    var startDate = "startDate" + count;
-    var endDate = "endDate" + count;
-    var tittle = "tittle" + count;
-    if (count === 5) {
-        newElem = `<h3 class="text-danger">You can only create 5 times in a row !!</h2>`;
-        li.innerHTML = newElem;
-    } else if (count > 5) {
-        li.remove();
-        return;
-    } else {
-        newElem = `
-            <strong>From </strong> <span class="ml-3"><input name="${startDate}" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
-            <strong class="ml-3">To </strong> <span class="ml-3"><input name="${endDate}" type="date" min="${startDateJob}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px"/></span>
+    console.log(count);
+    if (count === 1) {
+        if (endDateUserInput !== "" && startDateUserInput !== "") {
+            var ul = document.getElementById("addMilestoneId" + index);
+            var li = document.createElement("li");
+            li.id = "countMilestone" + count;
+            ul.appendChild(li);
+            var startDate = "startDate" + (count + 1);
+            var endDate = "endDate" + (count + 1);
+            var tittle = "tittle" + (count + 1);
+            if (count === 5) {
+                newElem = `<h3 class="text-danger">You can only create 5 times in a row !!</h2>`;
+                li.innerHTML = newElem;
+            } else if (count > 5) {
+                li.remove();
+                return;
+            } else {
+                var newNumber = count + 1;
+                newElem = `
+            <strong>From </strong> <span class="ml-3"><input id="start${index}${newNumber}"  name="${startDate}" type="date" min="${endDateUserInput}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px" required/></span>
+            <strong class="ml-3">To </strong> <span class="ml-3"><input id="end${index}${newNumber}" name="${endDate}" type="date" min="${endDateUserInput}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px" required/></span>
             <span onclick="removeMilestones('${li.id}','addMilestoneId${index}')" class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>
             <div class="content">
                 <h3>Milestone Tittle <input name="${tittle}" required="" style="border-radius: 5px; margin-left: 15px; padding: 10px; width: 65%"/></h3>
             </div>
         `;
-        li.innerHTML = newElem;
+                li.innerHTML = newElem;
+            }
+        } else {
+            alert("Must Input Date First");
+        }
+
+    } else {
+        var endDateUserInput1 = document.getElementById("end" + index + count).value;
+        var startDateUserInput1 = document.getElementById("start" + index + count).value;
+        if (endDateUserInput1 !== "" && startDateUserInput1 !== "") {
+            var ul = document.getElementById("addMilestoneId" + index);
+            var li = document.createElement("li");
+            li.id = "countMilestone" + count;
+            ul.appendChild(li);
+            var startDate = "startDate" + count;
+            var endDate = "endDate" + count;
+            var tittle = "tittle" + count;
+            if (count === 5) {
+                newElem = `<h3 class="text-danger">You can only create 5 times in a row !!</h2>`;
+                li.innerHTML = newElem;
+            } else if (count > 5) {
+                li.remove();
+                return;
+            } else {
+                var newNumber = count + 1;
+                newElem = `
+            <strong>From </strong> <span class="ml-3"><input id="start${index}${newNumber}"  name="${startDate}" type="date" min="${endDateUserInput1}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px" required/></span>
+            <strong class="ml-3">To </strong> <span class="ml-3"><input id="end${index}${newNumber}" name="${endDate}" type="date" min="${endDateUserInput1}" max="${endDateJob}" style="background-color: transparent; color: white; border: none; font-size: 18px" required/></span>
+            <span onclick="removeMilestones('${li.id}','addMilestoneId${index}')" class="ml-3 bg-danger"><i class="fas fa-minus"></i></span>
+            <div class="content">
+                <h3>Milestone Tittle <input name="${tittle}" required="" style="border-radius: 5px; margin-left: 15px; padding: 10px; width: 65%"/></h3>
+            </div>
+        `;
+                li.innerHTML = newElem;
+            }
+        } else {
+            alert("Must Input Date First");
+        }
     }
 }
 
