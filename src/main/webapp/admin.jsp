@@ -394,7 +394,7 @@
                                                                                             <div class="form-group">
                                                                                                 <label for="description">Job Description</label>
                                                                                                 <textarea id="${counting.count}" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
-                                                                                                <script>CKEDITOR.replace('${counting.count}')</script>
+                                                                                                <script>CKEDITOR.replace('${counting.count}');</script>
                                                                                             </div>
                                                                                             <div class="d-flex justify-content-end">
                                                                                                 <c:choose>
@@ -463,12 +463,14 @@
                                                                 <th>${job.startDate}</th>
                                                                 <th>${job.createDate}</th>
                                                                 <th>${job.idMajor}</th>
-                                                                    <c:if test="${job.status == 'Spam'}">
-                                                                    <th style="color: red">${job.status}</th>
-                                                                    </c:if>
-                                                                    <c:if test="${job.status == 'Updated'}">
-                                                                    <th style="color: #eded00c2">${job.status}</th>
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${job.status == 'Spam'}">
+                                                                        <th style="color: red">${job.status}</th>
+                                                                        </c:when>
+                                                                        <c:when test="${job.status == 'Updated'}">
+                                                                        <th style="color: #eded00c2">${job.status}</th>
+                                                                        </c:when>
+                                                                    </c:choose>
                                                                 <th>
                                                                     <a href="AcceptJobController?idJob=${job.idJob}">
                                                                         <button class="btn btn-success">Recovery</button>
@@ -481,8 +483,8 @@
                                                                 </th>
                                                             </tr>
                                                         </c:forEach>
-                                                        <c:forEach var="job" items="${requestScope.JOB_UNAPPROPRIATED_DETAIL}" varStatus="counting">    
-                                                        <div class="modal fade" id="job_unappropriated_detail${counting.count}">
+                                                        <c:forEach var="job" items="${requestScope.JOB_UNAPPROPRIATED_DETAIL}" varStatus="counting_detail">    
+                                                        <div class="modal fade" id="job_unappropriated_detail${counting_detail.count}">
                                                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                                                 <div class="modal-content ">
                                                                     <section class="site-section">
@@ -562,8 +564,8 @@
                                                                                         </div>
                                                                                         <div class="form-group">
                                                                                             <label for="job_description">Job Description</label>
-                                                                                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1 ${counting.count}" rows="3" readonly="">${job.description}</textarea>
-                                                                                            <script>CKEDITOR.replace('${counting.count}')</script>
+                                                                                            <textarea id="${counting_detail.count}" name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="">${job.description}</textarea>
+                                                                                            <script>CKEDITOR.replace('${counting_detail.count}');</script>
                                                                                         </div>
                                                                                         <div class="d-flex justify-content-end">
                                                                                             <c:choose>
@@ -848,7 +850,7 @@
                                                                 <th>${user.numOfSpam}</th>
                                                                 <th>
                                                                     <a href="UnbanUserController?idUser=${user.id}&fullName=${user.name}&email=${user.email}">
-                                                                        <button class="btn btn-success">Unban</button>
+                                                                        <button class="btn btn-success">Active</button>
                                                                     </a>
                                                                 </th>
                                                             </tr>
@@ -875,20 +877,6 @@
                     </script> &copy; Copyright
                     <a class="text-bold-800 grey darken-2" href="https://themeselection.com"
                        target="_blank">Group 4</a></span>
-                <ul class="list-inline float-md-right d-block d-md-inline-blockd-none d-lg-block mb-0">
-                    <li class="list-inline-item">
-                        <a class="my-1" href="https://themeselection.com/" target="_blank">More themes</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="my-1" href="https://themeselection.com/support" target="_blank">Support</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="my-1"
-                           href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/"
-                           target="_blank">
-                            Purchase</a>
-                    </li>
-                </ul>
             </div>
         </footer>
         <script>

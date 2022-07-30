@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
-            <section class="site-section" style="background-image: url('assets/img/hero/Background_Update_Job.jpg'); background-repeat: no-repeat; background-size: cover; padding: 50px 0px; font-family: 'The Girl Next Door', cursive">
+            <section class="site-section" style="background-color: #ccc; padding: 50px 0px;">
                 <div class="container">
                     <div class="row mb-5 mt-5">
                         <div class="col-lg-12" style="border: 3px solid white; border-radius: 15px; background-color: #ffffff73">

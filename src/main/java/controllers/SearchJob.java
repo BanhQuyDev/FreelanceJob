@@ -42,9 +42,9 @@ public class SearchJob extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             List<JobDTO> listJob = dao.getListJobByEmail(search);
+            List<JobDTO> listJobAcceptedDetail = new ArrayList<>();
             List<JobDTO> listJobSpam = dao.getListJobSpamByEmail(search);
             List<JobDTO> listJobUnappropriatedDetail = new ArrayList<>();
-            List<JobDTO> listJobAcceptedDetail = new ArrayList<>();
             List<NotificationDTO> listNotificationsAdminUnread = new NotificationDAO().showAllNotificationAdminUnread(loginUser.getId());
             List<NotificationDTO> listNotificationsAdminRead = new NotificationDAO().showAllNotificationAdminRead(loginUser.getId());
             for (JobDTO jobUnappropriated : listJobSpam) {
@@ -54,6 +54,7 @@ public class SearchJob extends HttpServlet {
                 listJobAcceptedDetail.add(dao.getAJobByID(jobAccepted.getIdJob()));
             }
             request.setAttribute("LIST_JOB_ACCEPTED", listJob);
+            request.setAttribute("JOB_ACCEPTED_DETAIL", listJobAcceptedDetail);
             request.setAttribute("LIST_JOB_UNAPPROPRIATED", listJobSpam);
             request.setAttribute("JOB_ACCEPTED_DETAIL", listJobAcceptedDetail);
             request.setAttribute("JOB_UNAPPROPRIATED_DETAIL", listJobUnappropriatedDetail);
