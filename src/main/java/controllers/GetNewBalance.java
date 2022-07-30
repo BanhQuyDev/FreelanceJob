@@ -5,48 +5,32 @@
  */
 package controllers;
 
-import feedbacks.FeedbackDAO;
-import feedbacks.FeedbackDTO;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import skills.SkillDAO;
-import skills.SkillDTO;
 import users.UserDAO;
-import users.UserDTO;
 
 /**
  *
- * @author Thiep Ngo
+ * @author QUANG HUY
  */
-@WebServlet(name = "FreeLancerDetailController", urlPatterns = {"/FreeLancerDetailController"})
-public class FreeLancerDetailController extends HttpServlet {
+@WebServlet(name = "GetNewBalance", urlPatterns = {"/GetNewBalance"})
+public class GetNewBalance extends HttpServlet {
 
-    private static final String ERROR = "index.jsp";
-    private static final String SUCCESS = "freelancer_apply_detail.jsp";
+   private static final String ERROR = "index.jsp";
+    private static final String SUCCESS = "freelancer_detail.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            FeedbackDAO feedbackDao = new FeedbackDAO();
             int id_freelancer = Integer.parseInt(request.getParameter("id_freelancer"));
-            UserDTO freelancer = new UserDAO().getUserByID(id_freelancer);
-            request.setAttribute("FREELANCER_DETAIL", freelancer);
-            List<SkillDTO> listSkill = new SkillDAO().getAllSkillByUser(id_freelancer);
-            request.setAttribute("LIST_SKILL", listSkill);
-            int totalStar = feedbackDao.getTotalStar(id_freelancer);
-            int totalJob = feedbackDao.getTotalJob(id_freelancer);
-            List<FeedbackDTO> listAllFeedback = feedbackDao.getAllFeedbackByUser(id_freelancer);
-            request.setAttribute("TOTAl_STAR_FREELANCER", totalStar);
-            request.setAttribute("TOTAl_JOB_FREELANCER", totalJob);
-            request.setAttribute("ALL_FEEDBACK_FREELANCER", listAllFeedback);
+            double balance = new UserDAO().getBalance(id_freelancer);
+            request.setAttribute("BALANCE", balance);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at GetAllJob:" + e.toString());

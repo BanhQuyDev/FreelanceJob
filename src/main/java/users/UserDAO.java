@@ -46,7 +46,32 @@ public class UserDAO {
     private final String GET_USER_BY_ID_JOB = "SELECT U.email, U.fullname\n"
             + "FROM tblUser U, tblEmployer E, tblJob J\n"
             + "WHERE U.id_user = E.id_employer AND E.id_employer = J.id_employer AND J.id_job = ?";
+    private final String GET_BALANCE = "SELECT[balance]FROM [FPTFreelanceJob].[dbo].[tblUser] WHERE id_user = ?";
+    
+    public double getBalance(int id_user) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs;
+        double balance = 0;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_BALANCE);
+                ptm.setInt(1, id_user);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    balance = rs.getDouble("balance");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtils.closeConnection(conn, ptm);
+        }
 
+        return balance;
+    }
+    
     public boolean checkDuplicate(String email) throws SQLException {
         boolean check = false;
         Connection conn = null;
