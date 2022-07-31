@@ -9,8 +9,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>Chat</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>FreeLance Job</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="site.webmanifest" />
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -105,7 +114,7 @@
             border-top: 1px solid #dee2e6!important;
         }
     </style>
-    <body onload="init('${sessionScope.LOGIN_USER.name}', '${sessionScope.LOGIN_USER.picture}', '${sessionScope.ID_CONTRACT}'), makeCall('${sessionScope.CHAT_PATNER.name}${sessionScope.ID_CONTRACT}')">
+    <body style="font-family:'Muli', sans-serif;font-weight: normal;font-style: normal;" onload="init('${sessionScope.LOGIN_USER.name}', '${sessionScope.LOGIN_USER.picture}', '${sessionScope.ID_CONTRACT}'), makeCall('${sessionScope.CHAT_PATNER.name}${sessionScope.ID_CONTRACT}')">
         <main class="content">
             <div style="height: 929px; width: 100%" class="row">
                 <div class="col-9">

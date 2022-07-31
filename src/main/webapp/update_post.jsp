@@ -5,11 +5,15 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Update Post Job</title>
+        <title>Freelance Job</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="site.webmanifest" />
-
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
@@ -33,15 +37,18 @@
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
-            <section class="site-section" style="background-color: #ccc; padding: 50px 0px;">
-                <div class="container">
-                    <div class="row mb-5 mt-5">
-                        <div class="col-lg-12" style="border: 3px solid white; border-radius: 15px; background-color: #ffffff73">
-                            <form action="UpdateJobController" class="p-4 p-md-5" method="POST">
+        <section class="site-section" style="background-color: #ccc; padding: 50px 0px;">
+            <c:if test="${sessionScope.MODE != 'EMPLOYER'}">
+                <c:redirect url="HomeController"></c:redirect>
+            </c:if>
+            <div class="container">
+                <div class="row mb-5 mt-5">
+                    <div class="col-lg-12" style="border: 3px solid white; border-radius: 15px; background-color: #ffffff73">
+                        <form action="UpdateJobController" class="p-4 p-md-5" method="POST">
                             <c:set var="job" value="${requestScope.JOB_UPDATE}"/>
                             <input type="hidden" name="id_job" value="${job.idJob}"/>
                             <input type="hidden" name="status" value="${job.status}"/>
-                            <h3 class="text-black text-center" style="font-family: 'The Girl Next Door', cursive; font-weight: 600; background-color: whitesmoke; margin: 0 24% 50px 24%; padding: 20px; box-shadow: 0px 0px 30px black; border-radius: 10px;">WHAT DO YOU WANT TO UPDATE</h3>
+                            <h3 class="text-black text-center" style="font-weight: 600; background-color: whitesmoke; margin: 0 24% 50px 24%; padding: 20px; box-shadow: 0px 0px 30px black; border-radius: 10px;">WHAT DO YOU WANT TO UPDATE</h3>
                             <div class="form-group">
                                 <label><strong>Job Title</strong></label>
                                 <input type="text"
@@ -122,7 +129,7 @@
                                 <div class="col-lg-4 ml-auto">
                                     <div class="row">
                                         <div class="col-6">
-                                            <a href="RenderJobPostController" class="btn btn-block btn-dark btn-md rounded" style="padding: 20px 44px"
+                                            <a onclick="history.back()" class="btn btn-block btn-md rounded" style="padding: 20px 44px;color: #fff"
                                                ><span class="icon-open_in_new"></span><i class="fas fa-arrow-alt-circle-left"></i> Back</a
                                             >
                                         </div>
@@ -130,7 +137,7 @@
                                             <input 
                                                 type="submit" 
                                                 name="action"
-                                                class="btn btn-primary rounded" 
+                                                class="btn rounded" 
                                                 value="Update Post"
                                                 />
                                         </div>
@@ -146,7 +153,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script>
-        CKEDITOR.replace('description');
+                                                CKEDITOR.replace('description');
     </script>
     <script>
         window.setTimeout(function () {

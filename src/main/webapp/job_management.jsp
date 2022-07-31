@@ -17,7 +17,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
 
         <link rel="stylesheet" href="./job-management/job-management.css"/>
 

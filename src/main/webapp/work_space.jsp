@@ -42,7 +42,7 @@
         <link
             rel="shortcut icon"
             type="image/x-icon"
-            href="assets/img/favicon.ico"
+            href="assets/img/logo/logo_freelancer.png"
             />
         <link rel="stylesheet" href="./home/home.css"/>
         <!-- CSS here -->
@@ -188,7 +188,7 @@
             /* =============================== */
             .timeline {
                 /*width: 800px;*/
-                background-color: #072736;
+                background-image: linear-gradient(to right,#BFF098,#6FD6FF);
                 color: #fff;
                 padding: 30px 60px;
                 box-shadow: 0px 0px 20px rgba(0, 0, 0, .5);
@@ -218,7 +218,7 @@
             }
 
             .timeline ul li .content h3 {
-                color: #34ace0;
+                color: #054966;;
                 font-size: 18px;
                 padding-top: 18px;
             }
@@ -242,6 +242,9 @@
 
             .timeline ul li:hover {
                 background-color: #071f2a7f;
+            }
+            .timeline ul li:hover .content h3{
+                color: #34ace0;
             }
             .timeline ul li:hover span{
                 margin: 0px 10px;
@@ -320,7 +323,10 @@
             }
         </style>
     </head>
-    <body class="" style="padding-right: 0 !important">
+    <body  style="padding-right: 0 !important;font-family: 'Muli', sans-serif;font-weight: normal;font-style: normal;">
+        <c:if test="${sessionScope.LOGIN_USER == NULL}">
+            <c:redirect url="HomeController"></c:redirect>
+        </c:if>
         <div class="full_container">
             <jsp:include page="component/header.jsp"></jsp:include>
                 <div class="slider-area">
@@ -635,7 +641,7 @@
                                                         <button style="width: 40px; height: 40px; line-height: 40px;" class="rounded-circle border-0 bg-success ml-4"><i class="fas fa-file-upload text-light"></i></button>
                                                             <c:choose>
                                                                 <c:when test="${contractDetail.statusPayment == 0}">
-                                                                <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}">${contractDetail.totalFile} file(s)</span><i class="fa-solid fa-lock"></i>
+                                                                <span style="margin-left: 0.3rem;margin-right: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}">${contractDetail.totalFile} file(s)</span><i class="fa-solid fa-lock"></i>
                                                                 <form action="PaymentController" method="POST">
                                                                     <input type="hidden" name="idJob" value="${contractDetail.contract_job_id}">
                                                                     <input type="hidden" name="price" value="${contractDetail.contract_job_price}">
@@ -645,7 +651,7 @@
                                                                         data-amount="${contractDetail.contract_job_price}"
                                                                         data-name="FPT Freelance Job"
                                                                         data-description="Pay to receive post"
-                                                                        data-image="https://lh3.googleusercontent.com/E8HoUv0hytIpPEsL_xql7moKlJtVbH8Iyy6KgfYdRqY4kR0umwVu8_cIduYp968YgEh6DV2ro3os7Y1EgAjseXWHq5ZWI8ai9wjWUNSg2cZLe06U6er6ckv2kq-OOP8E15OA_EJ2kcHwIrCxsK-7LtYq61sbq4Ed_j1FgwiAi0MvObeAUvfvDC1_rus-Y15fNOhVUSn7nnqW6_g_CW3koEcGH-UPKdBU1zlv_NNI8XUBank8HDVaFf534Hm5h90H2dC4ujpWnOZnQmrZPDjRXPlgp4m8ryTUcRGi84g2bbvz1vSX1RokRLGgAtLQ5mVnTdc6f7WCotfR4yHQ_JKbBC-w8MpFt9AtQFTgR02uTzL0KCC6GLzHZ-LWArRmViI641ahneX0jTAmG5lY5DjElQzDe-Fj_yclc_x1X43xnHsCoWu0djQ3hSo7DegJvJBnQjL_RnaBeVYErYcKCvGTCxec52ehNbez3q97emSWNAkTWb28WWjf8pXyBnHX_07kYauIHQ_im2W6g0cWMyfa7zwANfjSDa_liO2iTqqjAlSpf18dGFE6tQneQxCBxSAMIjBP25IxlgvlOMZpZI9TwpUyhb4hJhHTSr9IbMFrdUoRlUR9Wrvko3pufhZ03OpBSrfAaH9zrCr2lVKmLITptviI1n0AsUJ6j2LHO6US8x9xzCa-aGMDpuPiaZEeiPdorCBRyVJjkpcDYU4nGMQZP7YGAsTIArB102xfQOgZ6iwgXPM8uWEpQuuCdWrFkQzOvZivb5sPh2oMGZ3yXSzjMHUfkVzDzKJvAUkAeGeabCJLfYl5WLSVs5PzkflR3-75coBQHmdGCpDzHgfpfkkGLMvkCAHbr-fWLYxlLKJs1vX-Zxiggji4OIdOkZnz1in41N7pFl0UelaDEJO5aHX9rXE405VyDxg8wwZUJY9wfQLC0Z6dM0UKlLWZ_xgP6pzCqP0cy8MBV-TONTFyh2mYEg=w378-h215-no?authuser=3"
+                                                                        data-image="https://lh3.googleusercontent.com/5ax_kRPVsPnBVT1EwXypV6BmZZq1llK5VSfjBKnhpmVc4sR_1auTjL_I28dNYYdB8lW-4B8sWgY9smohFKco-Fo3xFXWQCn2rVV22ijdVPvEQej7wsL7SvNKuLGlxdGDP_FivwD2G3LPYUAJzuEL2iFhp4rrTIGWr52FBtdPYCV5Eao9SbDZ1ku8bxKrRo6wFEeYmjN9w1hLCcTrPg8_boQfJNI7CxbYjYXpdHrf5HUm3AafC03MTC3dMPq-Lm1JojajhoHqRH0owAJOaKC7yqQ49uCA5v9-KKaX8tfM-kifIz9iYFZTng6eUqu6pAVlfLm3qaRSlOTvgvGzKk0RzPaAGsgcwjmZ4xuuDq4seCDg8jMAYMChqsxCdKOTeXPJEY1iS70VVin-i5Xe6ZFE1LQOHY00Euzj8oqtxZw2UFcXLkQkciKxHEI9EyOorvsGNrzT99UEOjMlDoxYHKID4Xqfmd9UcU3vyeCgfx52gMeyoLjL_d7BJxFBr6S7vUPaIkSq3MRltbSO1V_RpSZFcExLXZTO9xX1OsPrfzIRlrYbFXcl2_22g9rHuZdo2gjgkvsbu-nLNVfs9-dXv141HOJ-mMjpi2mMXNySAT6grA4bGec9z5a4bhd6RcgzBXuZSK79PSoWINqtimyejraoy9RIBGwKQufe25gc5V2GhDwRadEIKIzTpbBMjkIUriHrm-aZmuEmw_aiq_66rLJ5P09cgRrOcQ0JTAm8wdY69LxvYgg-A4XKQutrXP7smzox6Uvo17f2HQFyvgjVhQaDm6JpZkAcN1de6QQ5oyraTz54EEmXj2FBRFarIFoUzt3soUgOioa-HYYhHnifnSCg-mltwzABhzrIa5LGNV39bS_cYIxLmwb77sUwtVJMBntM9_76gQV9MPSg9yC6kJfnOLB51WOFki4sz1kAfdL-YcAa6w=w378-h215-no?authuser=1"
                                                                         data-locale="auto"
                                                                         data-currency="vnd">
                                                                     </script>
@@ -653,7 +659,7 @@
                                                                 </form>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <span style="margin-left: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}"><a href="GetAllFileOfJob?idJob=${contractDetail.contract_job_id}" target="_blank">${contractDetail.totalFile} file(s)</a></span><i class="fa-solid fa-lock-open"></i>
+                                                                <span style="margin-left: 0.3rem;margin-right: 0.3rem;font-family: sans-serif;" id="file-chosen${count.count}"><a href="GetAllFileOfJob?idJob=${contractDetail.contract_job_id}" target="_blank">${contractDetail.totalFile} file(s)</a></span><i class="fa-solid fa-lock-open"></i>
                                                             </c:otherwise>
                                                         </c:choose>                                                      
                                                     </h5>

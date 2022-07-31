@@ -12,7 +12,7 @@
         <link
             rel="shortcut icon"
             type="image/x-icon"
-            href="assets/img/favicon.ico"
+            href="assets/img/logo/logo_freelancer.png"
             />
 
         <!-- CSS here -->
@@ -38,6 +38,9 @@
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
     <body>
+        <c:if test="${sessionScope.MODE != 'EMPLOYER'}">
+            <c:redirect url="HomeController"></c:redirect>
+        </c:if>
         <section class="site-section" style="background-color: #ccc; padding: 50px 0px;">
             <div class="container">
                 <div class="row mb-5">
@@ -125,14 +128,14 @@
                                 <div class="col-lg-4 ml-auto">
                                     <div class="row">
                                         <div class="col-6">
-                                            <a onclick="history.back()" class="btn btn-block btn-md rounded" style="padding: 20px 44px"
+                                            <a onclick="history.back()" class="btn btn-block btn-md rounded" style="padding: 20px 44px; color: #fff"
                                                ><span class="icon-open_in_new"></span><i class="fas fa-arrow-alt-circle-left"></i> Back</a
                                             >
                                         </div>
                                         <div class="col-6">
                                             <input 
                                                 type="submit" 
-                                                class="btn btn-block btn-primary btn-md rounded" 
+                                                class="btn btn-block btn-md rounded" 
                                                 value="Save Job"
                                                 />
                                         </div>
@@ -148,7 +151,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script>
-        CKEDITOR.replace('description');
+                                                CKEDITOR.replace('description');
     </script>
     <script language="javascript">
         var today = new Date();
