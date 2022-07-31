@@ -10,7 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>File Management</title>
+        <title>Freelance Job</title>
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
@@ -18,7 +23,7 @@
             body {
                 background: -webkit-linear-gradient(left, #25c481, #25b7c4);
                 background: linear-gradient(to right, #25c481, #25b7c4);
-                font-family: 'Roboto', sans-serif;
+                font-family: 'Muli', sans-serif;
             }
 
             section {
@@ -112,58 +117,58 @@
         </style>
     </head>
     <body>
-<!--        <div class="container mt-5" style="background-color: #ffffff8a; border-radius: 15px; padding: 30px">
-            <c:if test="${sessionScope.MODE == 'FREELANCER'}">
-                <div>  
-                    <h1 class="text-center my-3" style="font-weight: 700; background-color: white; margin: 0 25%; border-radius: 15px; padding: 8px 0">
-                        File Submission Management
-                    </h1>
-                    <form class="my-4" action="UploadFileS3" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="idJob" value="${requestScope.ID_JOB}">
-                        <input type="hidden" name="position" value="fileManagement">
-                        <input type="file" name="file" id="file" multiple required style="display: none"/>
-                        <div class="row">
-                            <div class="col-3">
-                                <button class="border-0 bg-success rounded text-light py-2 px-3" style="font-weight: 700" onclick="thisFileUpload()">Add files <i class="fa-solid fa-file-circle-plus" style="margin-left: 10px"></i></button>
-                                <span id="file-chosen" style="margin-left: 10px; font-size: 16px; font-weight: 600">No file chosen</span>
-                            </div>
-                            <div class="col-3">
-                                <button class="btn btn-primary py-2 px-3" style="font-weight: 700" id="myBtn" type="submit">Upload</button>
-                            </div>
+        <!--        <div class="container mt-5" style="background-color: #ffffff8a; border-radius: 15px; padding: 30px">
+        <c:if test="${sessionScope.MODE == 'FREELANCER'}">
+            <div>  
+                <h1 class="text-center my-3" style="font-weight: 700; background-color: white; margin: 0 25%; border-radius: 15px; padding: 8px 0">
+                    File Submission Management
+                </h1>
+                <form class="my-4" action="UploadFileS3" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="idJob" value="${requestScope.ID_JOB}">
+                    <input type="hidden" name="position" value="fileManagement">
+                    <input type="file" name="file" id="file" multiple required style="display: none"/>
+                    <div class="row">
+                        <div class="col-3">
+                            <button class="border-0 bg-success rounded text-light py-2 px-3" style="font-weight: 700" onclick="thisFileUpload()">Add files <i class="fa-solid fa-file-circle-plus" style="margin-left: 10px"></i></button>
+                            <span id="file-chosen" style="margin-left: 10px; font-size: 16px; font-weight: 600">No file chosen</span>
                         </div>
-                    </form> 
-                </div>
+                        <div class="col-3">
+                            <button class="btn btn-primary py-2 px-3" style="font-weight: 700" id="myBtn" type="submit">Upload</button>
+                        </div>
+                    </div>
+                </form> 
+            </div>
+        </c:if>
+        <table class="table border borde-black">
+            <thead>
+                <tr>
+                    <th class=" text-center" scope="col">SERIAL</th>
+                    <th class=" text-center" scope="col">FILE URL</th>
+                    <th class=" text-center" scope="col">DOWNLOAD</th>
+        <c:if test="${sessionScope.MODE == 'FREELANCER'}">
+        <th class=" text-center" scope="col">DELETE</th>
+        </c:if>
+</tr>
+</thead>
+<tbody>
+        <c:forEach var="file" items="${requestScope.LIST_FILE}" varStatus="count">
+            <tr>
+                <th class=" text-center"scope="row">${count.count}</th>
+                <td class=" text-center">${file.urlS3}</td>
+                <td class=" text-center" ><a class="btn btn-primary" href="${file.urlS3}" target="_blank">Download</a></td>
+            <c:if test="${sessionScope.MODE == 'FREELANCER'}">
+                <td class=" text-center"><a class="btn btn-danger" href="DeleteFile?idFile=${file.id}&urlS3=${file.urlS3}&idJob=${file.idJob}">Delete</a></td>
             </c:if>
-            <table class="table border borde-black">
-                <thead>
-                    <tr>
-                        <th class=" text-center" scope="col">SERIAL</th>
-                        <th class=" text-center" scope="col">FILE URL</th>
-                        <th class=" text-center" scope="col">DOWNLOAD</th>
-                            <c:if test="${sessionScope.MODE == 'FREELANCER'}">
-                            <th class=" text-center" scope="col">DELETE</th>
-                            </c:if>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="file" items="${requestScope.LIST_FILE}" varStatus="count">
-                        <tr>
-                            <th class=" text-center"scope="row">${count.count}</th>
-                            <td class=" text-center">${file.urlS3}</td>
-                            <td class=" text-center" ><a class="btn btn-primary" href="${file.urlS3}" target="_blank">Download</a></td>
-                            <c:if test="${sessionScope.MODE == 'FREELANCER'}">
-                                <td class=" text-center"><a class="btn btn-danger" href="DeleteFile?idFile=${file.id}&urlS3=${file.urlS3}&idJob=${file.idJob}">Delete</a></td>
-                            </c:if>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>-->
+        </tr>
+        </c:forEach>
+    </tbody>
+</table>
+</div>-->
 
 
         <section class="container">
             <h1 class="table_header">File Submission Management</h1>
-            
+
             <c:if test="${sessionScope.MODE == 'FREELANCER'}">
                 <div style="background-color: rgba(255, 255, 255, 0.3); padding: 10px 25px; margin-bottom: 20px; border-radius: 6px">  
                     <form class="my-4" action="UploadFileS3" method="post" enctype="multipart/form-data">
@@ -182,7 +187,7 @@
                     </form> 
                 </div>
             </c:if>
-            
+
             <div class="tbl-header">
                 <table style="background-color: rgba(255, 255, 255, 0.3);">
                     <thead>

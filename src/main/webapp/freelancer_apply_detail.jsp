@@ -18,7 +18,7 @@
         <link
             rel="shortcut icon"
             type="image/x-icon"
-            href="assets/img/favicon.ico"
+            href="assets/img/logo/logo_freelancer.png"
             />
 
         <!-- CSS here -->

@@ -17,7 +17,7 @@
         <link
             rel="shortcut icon"
             type="image/x-icon"
-            href="assets/img/favicon.ico"
+            href="assets/img/logo/logo_freelancer.png"
             />
         <link rel="stylesheet" href="./home/home.css"/>
         <!-- CSS here -->
@@ -379,7 +379,7 @@
                         <div class="col-lg-12">
                             <div class="section-tittle text-center">
                                 <span style="color: #fb246a; font-size: 37px; font-family: 700">TOP 4 FREELANCER</span>
-                                <span style="color: black; font-size: 15px; margin: auto; width: 50%">Freelancer of month</span>
+                                <span style="color: black; font-size: 15px; margin: auto; width: 50%">Best Freelancer Performance</span>
                             </div>
                         </div>
                     </div>

@@ -11,11 +11,15 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Post Job Management</title>
+        <title>Freelancer Job</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
 
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -35,6 +39,9 @@
     </head>
 
     <body>
+        <c:if test="${sessionScope.MODE != 'EMPLOYER'}">
+            <c:redirect url="HomeController"></c:redirect>
+        </c:if>
         <jsp:include page="component/header.jsp"></jsp:include>
             <main>
                 <!-- Hero Area Start-->
@@ -45,7 +52,7 @@
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="hero-cap text-center">
-                                        <h2>Post Job Management</h2>
+                                        <h2>Job Posted Management</h2>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +205,7 @@
                                                                     </c:when>
                                                                     <c:when test="${status eq 'Updated'}">
                                                                         <div class="mt-5 col-6">
-                                                                            <span style="color: #cecd4a" class="text1 font-weight-bold">Waiting admin to approve</span>
+                                                                            <span style="color: #cecd4a" class="text1 font-weight-bold">Waiting process</span>
                                                                         </div>
                                                                     </c:when>
                                                                     <c:otherwise>

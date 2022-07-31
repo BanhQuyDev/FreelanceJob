@@ -15,7 +15,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
 
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -31,7 +35,7 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
-       <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+        <link rel="stylesheet" href="assets/css/header_notifications.css"/>
     </head>
 
     <body>
@@ -140,7 +144,7 @@
                                                 <div class="job-tittle">
                                                     <a href="JobDetailController?jobId=${job.idJob}"><h4>${job.title}</h4></a>
                                                     <ul>
-                                                        <li style="margin-right: 40px!important;">${job.nameEmployer}</li>
+                                                        <li style="margin-right: 25px!important;flex-wrap: wrap;">${job.nameEmployer}</li>
                                                         <li><i class="fa-solid fa-business-time"></i>${job.showDuration(job.duration)} day(s)</li>
                                                             <c:set var="salary" value="${job.salary}"/>
                                                         <li>${job.showPrice(salary)} VNĐ</li>
@@ -180,27 +184,6 @@
                 </div>
             </div>
             <!-- Job List Area End -->
-            <!--Pagination Start  -->
-            <div class="pagination-area pb-115 text-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="single-wrap d-flex justify-content-center">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-start">
-                                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Pagination End  -->
         </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
 

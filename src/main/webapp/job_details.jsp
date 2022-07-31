@@ -15,7 +15,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
 
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -235,7 +239,7 @@
                                     <div style="column-gap: 10%; row-gap: 28px" class="row justify-content-between text-center p-4">
                                         <c:forEach var="skillName" items="${requestScope.SKILL_JOB}">
                                             <!--<button type="button" class="btn col-3"></button>-->
-                                            <p class="col-3 shadow-lg rounded text-success font-weight-bold p-2">${skillName}</p>
+                                            <p style="align-self: center" class="col-3 shadow-lg rounded text-success font-weight-bold p-2">${skillName}</p>
                                         </c:forEach>                                      
                                     </div>
                                 </div>

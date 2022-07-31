@@ -12,7 +12,12 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Report Detail</title>
+        <title>Freelance Job</title>
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +50,7 @@
                 <c:if test="${r.numOfReport > 0}">
                     <h1 class="comments-title mt-5 mb-5" style="font-size: 20px">Total <strong class="text-danger">${r.numOfReport}</strong> Report(s) <i class="far fa-flag text-danger ml-3"></i></h1>
                     </c:if>
-                <c:if test="${r.numOfReport == 0}">
+                    <c:if test="${r.numOfReport == 0}">
                     <h1 class="comments-title mt-5 mb-5" style="font-size: 20px">Total <strong class="text-success">${r.numOfReport}</strong> Report <i class="far fa-thumbs-up text-success ml-3"></i></h1>
                     </c:if>
                     <c:forEach var="report" items="${requestScope.LIST_REPORT}">

@@ -15,7 +15,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link
+            rel="shortcut icon"
+            type="image/x-icon"
+            href="assets/img/logo/logo_freelancer.png"
+            />
 
         <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -128,7 +132,7 @@
                         <h2>&nbsp;</h2>
                         <h2>4. Cam kết của FPTFreelanceJob</h2>
                         <p>FPTFreelanceJob đảm bảo quyền lợi thanh toán cho khách hàng và freelancer một cách công bằng, ngay cả khi xảy ra tranh chấp. Đó là cách chúng tôi thể hiện sự tôn trọng đối với các dự án được thực hiện trên FPTFreelanceJob.</p>
-                      
+
                         <h2>5. Thanh toán</h2>
                         <p>Khách hàng hoặc Freelancer có thể mua các gói dịch vụ liên quan để sử dụng các tính năng kết nối làm việc trên FPTFreelanceJob.vn</p>
                         <h2>&nbsp;</h2>
@@ -148,7 +152,7 @@
                         <h2><span style="font-size:20px">7.</span>&nbsp;Lưu ý dành cho Khách hàng</h2>
                         <p>(1) Chúng tôi có quyền khóa tài khoản của bạn bất cứ khi nào phát hiện vi phạm mà không cần thông báo trước.</p>
                         <p>(2) Nội dung các điều khoản sẽ được thay đổi, bổ sung và cập nhật thường xuyên để phù hợp với yêu cầu thực tế.</p> </div>
-                     <p>&nbsp</p>
+                    <p>&nbsp</p>
                 </div>
             </div>
             <main>
