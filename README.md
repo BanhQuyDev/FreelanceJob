@@ -41,4 +41,4 @@ Group project for `Software Development Project (SWP391)` subject at FPT Univers
 
 ## License & copyright
 
-© Group 4 | Licensed under the [MIT LICENSE](LICENSE).
+© Group 4 - SE1632 | Licensed under the [MIT LICENSE](LICENSE).
