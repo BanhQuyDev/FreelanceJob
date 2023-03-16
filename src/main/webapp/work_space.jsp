@@ -60,6 +60,8 @@
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/editlogin.css" />
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+        <link rel="stylesheet" href="component/css/chat.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -323,9 +325,18 @@
             }
         </style>
     </head>
+
     <body  style="padding-right: 0 !important;font-family: 'Muli', sans-serif;font-weight: normal;font-style: normal;">
         <c:if test="${sessionScope.LOGIN_USER == NULL}">
             <c:redirect url="HomeController"></c:redirect>
+        </c:if>
+        <c:if test="${requestScope.FORM != NULL}">
+            <a id="form-khao-sat" href="${requestScope.FORM}" target="_blank"></a>
+            <script>
+                window.onload = function () {
+                    document.getElementById('form-khao-sat').click();
+                }
+            </script>
         </c:if>
         <div class="full_container">
             <jsp:include page="component/header.jsp"></jsp:include>
@@ -678,7 +689,8 @@
                             <!-- footer -->
                             <!-- end dashboard inner -->
                         </div>
-                    </div>
+                        <jsp:include page="component/chatbot.jsp"></jsp:include>
+                        </div>
 
                     <jsp:include page="component/footer.jsp"></jsp:include>
                 </div>
@@ -737,6 +749,9 @@
                 <script>
                                                                                 $('.dropdown-toggle').dropdown();
                 </script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script src="component/scripts/responses.js"></script>
+                <script src="component/scripts/chat.js"></script>
                 </body>
                 </html>
 

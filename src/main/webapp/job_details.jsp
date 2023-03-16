@@ -36,7 +36,8 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
-
+        <link rel="stylesheet" href="component/css/chat.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
             .form__label {
                 font-family: 'Roboto', sans-serif;
@@ -336,8 +337,8 @@
                 </div>
             </div>
             <!-- job post company End -->
-
-        </main>
+            <jsp:include page="component/chatbot.jsp"></jsp:include>
+            </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
@@ -383,6 +384,7 @@
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
         <script src="https://kit.fontawesome.com/b36bcbb61e.js" crossorigin="anonymous"></script>
-
+        <script src="component/scripts/responses.js"></script>
+        <script src="component/scripts/chat.js"></script>
     </body>
 </html>

@@ -23,7 +23,7 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 
 public class S3Util {
 
-    private static final String BUCKET = "***";
+    private static final String BUCKET = "fpt-freelancer";
     public static void uploadFile(String fileName, InputStream inputStream)
             throws S3Exception, AwsServiceException, SdkClientException, IOException {
 

@@ -57,15 +57,16 @@ public class FeedbackController extends HttpServlet {
             boolean check_noti_price = new NotificationDAO().createNotificationV2(idFreelancer, content_price, 3, idEmployer, 1);
             if (feedbackDao.createFeedback(contentFeedback, starRating, idFreelancer, idEmployer)) {
                 if (contractDao.updateContractAfterFeedback(idJob)) {
-                    List<FileDTO> listFile = new FileDAO().getListFileOfJob(idJob);
-                    for (FileDTO file : listFile) {
-                        new FileDAO().deleteFile(file.getId());
-                        String keyName = S3Util.getKeyName(file.getUrlS3());
-                        S3Util.deleteFile(keyName);
-                    }
+//                    List<FileDTO> listFile = new FileDAO().getListFileOfJob(idJob);
+//                    for (FileDTO file : listFile) {
+//                        new FileDAO().deleteFile(file.getId());
+//                        String keyName = S3Util.getKeyName(file.getUrlS3());
+//                        S3Util.deleteFile(keyName);
+//                    }
                     feedbackDao.tranferMoneyForFreelancer(idFreelancer, price);
                     if (check_noti && check_noti_price) {
                         request.setAttribute("SUCCESS_MESSAGE", "Your job has been finish !!");
+                        request.setAttribute("FORM", "https://docs.google.com/forms/d/e/1FAIpQLScwXxmE-4k9A0OpngF4Ia-I_BPsIWb3-WIwHvHIvIQWsO2fPA/viewform");
                         url = SUCCESS;
                     }
                 }

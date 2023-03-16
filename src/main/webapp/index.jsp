@@ -35,7 +35,8 @@
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/editlogin.css" />
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
-
+        <link rel="stylesheet" href="component/css/chat.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
             .shape1 {
                 margin-left: -25px;
@@ -468,8 +469,9 @@
                     </div>
                 </div>
             </section>
-            <!-- Featured_job_end -->
-        </main>
+            <jsp:include page="component/chatbot.jsp"></jsp:include>
+                <!-- Featured_job_end -->
+            </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
 
         <!-- JS here -->
@@ -519,12 +521,12 @@
             crossorigin="anonymous"
         ></script>
         <script>
-           $(function () {
-               $('[data-toggle="popover"]').popover(),
-                       $('.popover-dismiss').popover({
-                   trigger: 'focus'
-               })
-           })
+            $(function () {
+                $('[data-toggle="popover"]').popover(),
+                        $('.popover-dismiss').popover({
+                    trigger: 'focus'
+                })
+            })
         </script>
         <script src="./assets/js/animation.js"></script>
         <!--        Countup-->
@@ -534,6 +536,9 @@
         <script>
             $('.counter').countUp();
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="component/scripts/responses.js"></script>
+        <script src="component/scripts/chat.js"></script>
         <!--        End Countup-->
 
     </body>
