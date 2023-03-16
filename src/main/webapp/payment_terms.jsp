@@ -36,6 +36,8 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/editlogin.css">
         <link rel="stylesheet" href="assets/css/header_notifications.css"/>
+        <link rel="stylesheet" href="component/css/chat.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
@@ -88,6 +90,7 @@
                             <p style="font-size: 18px;"><strong>7. Chấm dứt tư cách thành viên</strong></p>
                             <p>FPTFreeLancerJob có thể chấm dứt tư cách thành viên, xóa hồ sơ cá nhân của Bạn hay bất kỳ nội dung hoặc thông tin nào mà Bạn đã đăng ký trong quá trình sử dụng dịch vụ vì bất kì lí do nào, hoặc không vì lý do nào, ở bất kỳ thời điểm nào theo quyết định của công ty, có hoặc không thông báo trước.</p> </div>
                     </div>
+                <jsp:include page="component/chatbot.jsp"></jsp:include>
                 </div>
             </main>
         <jsp:include page="component/footer.jsp"></jsp:include>
@@ -134,5 +137,8 @@
                 });
             }, 3000);
         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="component/scripts/responses.js"></script>
+        <script src="component/scripts/chat.js"></script>
     </body>
 </html>
